@@ -187,43 +187,39 @@
     .rp-link:hover { border-color:var(--ink); }
     .rp-link.dis { opacity:.4; pointer-events:none; }
 
-    /* ══════════ GRID VIEW — printed search page ══════════ */
-    .gv-pg { position:relative; overflow:hidden; background:var(--page);
-             padding:2.9rem 2.4rem 2.6rem 3rem;
-             display:flex; flex-direction:column; }
-    .gv-top { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; flex-shrink:0; }
-    .gv-search { flex:1; display:flex; align-items:center; gap:.55rem;
-                 border:1px solid rgba(21,17,14,.2); border-radius:0;
-                 padding:.5rem 1rem; font-family:var(--sans); font-size:.68rem;
-                 color:rgba(21,17,14,.6); }
-    .gv-search svg { width:10px; height:10px; opacity:.5; flex-shrink:0; }
-    .gv-chip { font-family:var(--sans); font-size:.6rem; font-weight:500;
-               letter-spacing:.02em; color:rgba(21,17,14,.6);
-               border:1px solid rgba(21,17,14,.16); border-radius:0;
-               padding:.45rem .85rem; cursor:none; background:none;
-               transition:all .2s; }
-    .gv-chip:hover { background:var(--ink); color:var(--page); border-color:var(--ink); }
-    .gv-grid { columns:2; column-gap:1.1rem; margin-top:1.5rem; flex:1; min-height:0; }
-    .gv-tile { break-inside:avoid; margin-bottom:1.15rem; cursor:none; }
-    .gv-tile img { width:100%; border-radius:0; object-fit:cover; display:block;
-                   max-height:30vh;
-                   filter:saturate(.92) contrast(.98); transition:filter .2s; }
-    .gv-tile:hover img { filter:saturate(1.06) contrast(1); }
-    .gv-tile b { display:block; margin-top:.45rem; font-family:var(--sans);
-                 font-weight:500; font-size:.66rem; line-height:1.35; color:var(--ink); }
-    .gv-tile span { display:block; margin-top:.1rem; font-family:var(--sans);
-                    font-size:.56rem; color:rgba(21,17,14,.6); }
-    .t43 img { aspect-ratio:4/3; }
-    .t11 img { aspect-ratio:1/1; }
-    .t34 img { aspect-ratio:3/4; }
+    /* ══════════ GRID VIEW — loose photos on the table ══════════ */
+    #gv { background:var(--table); }
+    .fl { position:absolute; width:clamp(150px,16vw,230px); cursor:none;
+          touch-action:none; user-select:none; -webkit-user-select:none;
+          animation:bob 7s ease-in-out infinite alternate;
+          transition:scale .25s; }
+    .fl:hover { scale:1.05; animation-play-state:paused; }
+    .fl.grab { animation:none; scale:1.07;
+               filter:drop-shadow(0 18px 30px rgba(0,0,0,.5)); }
+    .fl img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+              pointer-events:none; box-shadow:0 14px 34px rgba(0,0,0,.45);
+              filter:saturate(.95); }
+    .fl figcaption { position:absolute; left:0; right:0; top:100%; padding-top:.5rem;
+              opacity:0; transform:translateY(-4px); transition:all .22s;
+              font-family:var(--sans); pointer-events:none; }
+    .fl:hover figcaption, .fl.grab figcaption { opacity:1; transform:none; }
+    .fl b { display:block; font-size:.66rem; font-weight:600; color:#FEFEFB; }
+    .fl span { display:block; font-size:.54rem; color:rgba(254,254,251,.6); margin-top:.12rem; }
+    .fl:nth-child(2n) { animation-delay:-2.3s; animation-duration:8s; }
+    .fl:nth-child(3n) { animation-delay:-4.1s; }
+    .fl:nth-child(5n) { animation-delay:-5.6s; animation-duration:9s; }
+    @keyframes bob { from { translate:0 -7px; } to { translate:0 9px; } }
+    .gv-hint { position:absolute; left:50%; bottom:4.2rem; transform:translateX(-50%);
+               font-family:var(--hand); font-weight:600; font-size:1.2rem;
+               color:rgba(254,254,251,.55); pointer-events:none;
+               transform:translateX(-50%) rotate(-2deg); }
 
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
               grid-template-rows:1fr 1fr; }
       .gut { display:none; }
       .rp-body { columns:1; }
-      .gv-grid { columns:2; }
-      .gv-tile img { max-height:12vh; }
+      .fl { width:clamp(110px,22vw,160px); }
     }
     @media(max-width:580px){
       html { scroll-snap-type:none; }
@@ -472,79 +468,43 @@
 
   </div>
 
-  <!-- ═══ GRID VIEW · THE INDEX ═══ -->
+  <!-- ═══ GRID VIEW · LOOSE PHOTOS ═══ -->
   <section class="pg" id="gv" style="display:none;">
-    <span class="tcap">v / v — the index, everything at once</span>
-    <div class="book">
-      <div class="gut"></div>
-      <div class="gv-pg">
-        <span class="run" style="left:3rem;">Early Winter — Index</span>
-        <div class="gv-top">
-          <div class="gv-search">
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="5" cy="5" r="3.6"/><path d="M7.8 7.8 L11 11"/></svg>
-            early winter — selected work
-          </div>
-        </div>
-        <div class="gv-grid">
-          <figure class="gv-tile t43" data-t="w1">
-            <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — film camera by a window">
-            <b>Uphold — mentorship, held steady</b>
-            <span>ed tech · nº 01 · 2025</span>
-          </figure>
-          <figure class="gv-tile t34" data-t="w1">
-            <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — film boxes">
-            <b>Uphold — research &amp; flows</b>
-            <span>earlywinter.studio</span>
-          </figure>
-          <figure class="gv-tile t11" data-t="w2">
-            <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — footprints in fog">
-            <b>Revibe — worn again, loved harder</b>
-            <span>thrift &amp; AI · nº 02 · 2025</span>
-          </figure>
-          <figure class="gv-tile t43" data-t="w2">
-            <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — film canister in hand">
-            <b>Revibe — brand &amp; commerce</b>
-            <span>earlywinter.studio</span>
-          </figure>
-        </div>
-        <span class="pno">114 — 117</span>
-      </div>
-      <div class="gv-pg">
-        <span class="run" style="right:3rem;">
-          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
-        </span>
-        <div class="gv-top">
-          <button class="gv-chip" data-t="w1">uphold</button>
-          <button class="gv-chip" data-t="w2">revibe</button>
-          <button class="gv-chip" data-t="w3">insight</button>
-          <button class="gv-chip" data-t="w4">vejeez!</button>
-          <button class="gv-chip" onclick="location.href='about.html'">about</button>
-        </div>
-        <div class="gv-grid">
-          <figure class="gv-tile t43" data-t="w3">
-            <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — foggy town">
-            <b>Insight — the right people, found</b>
-            <span>b2b saas · nº 03 · 2025</span>
-          </figure>
-          <figure class="gv-tile t34" data-t="w3">
-            <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — kodak film roll">
-            <b>Insight — research ops</b>
-            <span>earlywinter.studio</span>
-          </figure>
-          <figure class="gv-tile t11" data-t="w4">
-            <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez — snowy path">
-            <b>Vejeez! — every vegan's dream</b>
-            <span>marketplace · nº 04 · 2024</span>
-          </figure>
-          <figure class="gv-tile t43" data-t="w4">
-            <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez — camera on a table">
-            <b>Vejeez! — brand &amp; voice</b>
-            <span>earlywinter.studio</span>
-          </figure>
-        </div>
-        <span class="pno">118 — 121</span>
-      </div>
-    </div>
+    <span class="tcap">v / v — the index, spilled on the table</span>
+    <span class="run" style="left:6vmin; color:rgba(254,254,251,.5);">Early Winter — Index</span>
+    <figure class="fl" data-t="w1" style="left:5%;  top:11%; rotate:-3deg;">
+      <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship, held steady" draggable="false">
+      <figcaption><b>Uphold — mentorship, held steady</b><span>ed tech · nº 01 · 2025</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w1" style="left:23%; top:46%; rotate:2deg;">
+      <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research & flows" draggable="false">
+      <figcaption><b>Uphold — research & flows</b><span>earlywinter.studio</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w2" style="left:42%; top:9%;  rotate:-1.5deg;">
+      <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — worn again, loved harder" draggable="false">
+      <figcaption><b>Revibe — worn again, loved harder</b><span>thrift & ai · nº 02 · 2025</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w2" style="left:60%; top:40%; rotate:3deg;">
+      <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — brand & commerce" draggable="false">
+      <figcaption><b>Revibe — brand & commerce</b><span>earlywinter.studio</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w3" style="left:78%; top:12%; rotate:-2deg;">
+      <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — the right people, found" draggable="false">
+      <figcaption><b>Insight — the right people, found</b><span>b2b saas · nº 03 · 2025</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w3" style="left:9%;  top:58%; rotate:1.5deg;">
+      <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research ops" draggable="false">
+      <figcaption><b>Insight — research ops</b><span>earlywinter.studio</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w4" style="left:45%; top:56%; rotate:-2.5deg;">
+      <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — every vegan’s dream" draggable="false">
+      <figcaption><b>Vejeez! — every vegan’s dream</b><span>marketplace · nº 04 · 2024</span></figcaption>
+    </figure>
+    <figure class="fl" data-t="w4" style="left:79%; top:54%; rotate:2deg;">
+      <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand & voice" draggable="false">
+      <figcaption><b>Vejeez! — brand & voice</b><span>earlywinter.studio</span></figcaption>
+    </figure>
+    <span class="gv-hint">drag them around · tap to open</span>
   </section>
 
   <script>
@@ -576,12 +536,33 @@
     }
     bS.addEventListener('click',()=>setMode(false));
     bG.addEventListener('click',()=>setMode(true));
-    document.querySelectorAll('.gv-tile,.gv-chip[data-t]').forEach(t=>
-      t.addEventListener('click',()=>{
-        setMode(false);
-        document.getElementById(t.dataset.t)?.scrollIntoView();
-      })
-    );
+    /* floating photos: drag to move, tap to open */
+    let topZ=20, drag=null;
+    document.querySelectorAll('.fl').forEach(el=>{
+      el.addEventListener('pointerdown',e=>{
+        e.preventDefault();
+        drag={el, sx:e.clientX, sy:e.clientY,
+              ox:el.offsetLeft, oy:el.offsetTop, moved:false};
+        el.setPointerCapture(e.pointerId);
+        el.classList.add('grab');
+        el.style.zIndex=++topZ;
+      });
+      el.addEventListener('pointermove',e=>{
+        if(!drag||drag.el!==el) return;
+        const dx=e.clientX-drag.sx, dy=e.clientY-drag.sy;
+        if(Math.abs(dx)+Math.abs(dy)>6) drag.moved=true;
+        el.style.left=drag.ox+dx+'px';
+        el.style.top=drag.oy+dy+'px';
+      });
+      el.addEventListener('pointerup',()=>{
+        el.classList.remove('grab');
+        if(drag && !drag.moved){
+          setMode(false);
+          document.getElementById(el.dataset.t)?.scrollIntoView();
+        }
+        drag=null;
+      });
+    });
   </script>
 </body>
 </html>
