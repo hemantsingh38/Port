@@ -47,7 +47,7 @@
     .tab { font-family:var(--sans); font-size:.48rem; font-weight:500;
            letter-spacing:.18em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
-           border-radius:7px 7px 0 0; transform:translateY(46%);
+           border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
@@ -67,7 +67,7 @@
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
       font-family:var(--sans); font-size:.46rem; font-weight:500;
       letter-spacing:.2em; text-transform:uppercase;
-      color:rgba(252,250,246,.28);
+      color:rgba(252,250,246,.55);
     }
 
     /* ── the book frame ── */
@@ -100,10 +100,10 @@
     }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.45); }
+           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.68); }
     .run { position:absolute; top:1.1rem; z-index:6;
            font-family:var(--sans); font-size:.44rem; font-weight:500;
-           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.32); }
+           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.56); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
@@ -117,14 +117,14 @@
 
     /* photo cuts — clean, frameless */
     .cut { position:absolute; }
-    .cut img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:7px;
+    .cut img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:0;
                box-shadow:0 16px 34px rgba(21,17,14,.22);
                filter:saturate(.9) contrast(.97); }
     .cut.tall img { aspect-ratio:3/4; }
     .cut figcaption { margin-top:.45rem; text-align:left;
       font-family:var(--sans); font-weight:500; font-size:.46rem;
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); }
+      color:rgba(21,17,14,.72); }
 
     /* generic page paddings */
     .pp { position:relative; overflow:hidden; }
@@ -132,7 +132,7 @@
 
     .runtop {
       text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.3);
+      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.52);
       padding-bottom:.75rem; margin-bottom:1.8rem;
       border-bottom:1px solid rgba(21,17,14,.14);
     }
@@ -141,7 +141,7 @@
       font-size:clamp(1.5rem,2.7vw,2.5rem); line-height:1.08;
       letter-spacing:-1px; color:var(--ink);
     }
-    .hed em { font-style:normal; color:rgba(21,17,14,.5); }
+    .hed em { font-style:normal; color:rgba(21,17,14,.72); }
     .dek {
       font-family:var(--book); font-size:clamp(.8rem,1.05vw,.95rem);
       line-height:1.78; color:rgba(21,17,14,.72); margin-top:1.3rem;
@@ -185,7 +185,7 @@
                border-bottom:1px solid rgba(21,17,14,.12); }
     .wkb-row b { flex:0 0 7.2rem; font-family:var(--sans); font-weight:500;
       font-size:.44rem; letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(21,17,14,.35); padding-top:.25rem; }
+      color:rgba(21,17,14,.58); padding-top:.25rem; }
     .wkb-row span { font-family:var(--book); font-size:.82rem;
       line-height:1.6; color:rgba(21,17,14,.78); }
 
@@ -212,11 +212,11 @@
            gap:1.5rem 1.3rem; align-content:center; height:100%;
            padding:3rem 2.8rem; }
     .inv figure { text-align:center; }
-    .inv img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px;
+    .inv img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:0;
                max-height:20vh; filter:saturate(.8) contrast(.98); }
     .inv figcaption { margin-top:.5rem; font-family:var(--sans); font-weight:500;
       font-size:.44rem; letter-spacing:.18em; text-transform:uppercase;
-      color:rgba(21,17,14,.45); }
+      color:rgba(21,17,14,.68); }
 
     /* ══════════ BACK ══════════ */
     #a-bk { background:var(--table); }
@@ -347,10 +347,10 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="aph-l">
-        <span class="run" style="left:3rem; color:rgba(21,17,14,.45);">Philosophy</span>
+        <span class="run" style="left:3rem; color:rgba(21,17,14,.68);">Philosophy</span>
         <h2 class="hed">Design should feel like the first cold morning of the season.</h2>
         <span class="scrib" style="left:3rem; bottom:2.6rem; font-size:1.15rem; color:#15110E;">— the whole philosophy, honestly</span>
-        <span class="pno" style="color:rgba(21,17,14,.5);">128</span>
+        <span class="pno" style="color:rgba(21,17,14,.72);">128</span>
       </div>
       <div class="pp pp-pad">
         <div class="runtop">Three rules</div>
@@ -433,7 +433,7 @@
         <span class="pno">132</span>
       </div>
       <div class="pp" style="background:#C9B8FF;">
-        <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <span class="run" style="right:3rem; color:rgba(21,17,14,.68);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <figure class="cut" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/11092278/pexels-photo-11092278.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage film projector">
           <figcaption>the machine</figcaption>
@@ -443,7 +443,7 @@
           <figcaption>the weather</figcaption>
         </figure>
         <span class="scrib" style="left:14%; bottom:10%; font-size:1.2rem;">watch more films ↑</span>
-        <span class="pno" style="color:rgba(21,17,14,.5);">133</span>
+        <span class="pno" style="color:rgba(21,17,14,.72);">133</span>
       </div>
     </div>
   </section>
@@ -468,7 +468,7 @@
         <span class="pno">134</span>
       </div>
       <div class="ata-r">
-        <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <span class="run" style="right:3rem; color:rgba(21,17,14,.68);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <figure class="cut" style="left:8%; top:10%; width:40%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stack of vintage film boxes">
           <figcaption>the archive</figcaption>
@@ -485,7 +485,7 @@
           <img src="img/gym-grain.jpg" alt="Grainy gym mirror photo">
           <figcaption>film grain (accidental)</figcaption>
         </figure>
-        <span class="pno" style="color:rgba(21,17,14,.5);">135</span>
+        <span class="pno" style="color:rgba(21,17,14,.72);">135</span>
       </div>
     </div>
   </section>
