@@ -161,6 +161,33 @@
       color:rgba(21,17,14,.42);
     }
 
+    /* ══════════ WORK TEASER ══════════ */
+    #wk .book { --spine:#A8CFFF; }
+    .wk-l { position:relative; display:flex; flex-direction:column;
+            padding:2.6rem 2.8rem 2.2rem 3rem; overflow:hidden; }
+    .wk-cap { text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
+              letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.3);
+              padding-bottom:.75rem; margin-bottom:1.6rem;
+              border-bottom:1px solid rgba(21,17,14,.14); }
+    .wk-hed { font-family:var(--serif); font-weight:400;
+              font-size:clamp(1.6rem,2.8vw,2.6rem); line-height:1.06;
+              letter-spacing:-1px; margin-bottom:1.2rem; }
+    .wk-hed em { font-style:normal; color:rgba(21,17,14,.5); }
+    .wk-list { list-style:none; }
+    .wk-list li { border-bottom:1px solid rgba(21,17,14,.12); }
+    .wk-list li:last-child { border-bottom:none; }
+    .wk-list a { display:flex; align-items:baseline; gap:.9rem;
+                 padding:.72rem 0; text-decoration:none; transition:opacity .2s; }
+    .wk-list a:hover { opacity:.55; }
+    .wk-list b { font-family:var(--serif); font-weight:400; letter-spacing:-.5px;
+                 font-size:1.05rem; color:var(--ink); white-space:nowrap; }
+    .wk-list span { font-family:var(--book); font-style:italic; font-size:.72rem;
+                    color:rgba(21,17,14,.55); }
+    .wk-r { position:relative; overflow:hidden; background:var(--page); }
+    .co { position:absolute; bottom:-6px; pointer-events:none;
+          filter:saturate(.96) contrast(.99)
+                 drop-shadow(0 8px 16px rgba(21,17,14,.16)); }
+
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
     .fq {
@@ -285,7 +312,7 @@
 
   <!-- ═══ COVER ═══ -->
   <section class="pg" id="cv">
-    <span class="tcap">i / v — cover</span>
+    <span class="tcap">i / vi — cover</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: editorial title page -->
@@ -315,9 +342,37 @@
   </section>
 
 
+  <!-- ═══ WORK TEASER ═══ -->
+  <section class="pg" id="wk">
+    <span class="tcap">ii / vi — the work, briefly</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="wk-l">
+        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <div class="wk-cap">Selected work</div>
+        <h2 class="wk-hed">Four projects,<br>one <em>studio.</em></h2>
+        <ul class="wk-list">
+          <li><a href="work.html#w1"><b>Uphold</b><span>mentorship, held steady — ed tech · 2025</span></a></li>
+          <li><a href="work.html#w2"><b>Revibe</b><span>worn again, loved harder — thrift &amp; AI · 2025</span></a></li>
+          <li><a href="work.html#w3"><b>Insight</b><span>the right people, found — B2B SaaS · 2025</span></a></li>
+          <li><a href="work.html#w4"><b>Vejeez!</b><span>every vegan's dream — marketplace · 2024</span></a></li>
+        </ul>
+        <a class="scrib" href="work.html" style="position:static; display:inline-block; margin-top:1.1rem; font-size:1.4rem; transform:rotate(-2deg); align-self:flex-start;">open the work page →</a>
+        <span class="pno">2</span>
+      </div>
+      <div class="wk-r">
+        <span class="run" style="right:3rem;"><a href="work.html">All work</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="about.html">About</a></span>
+        <span class="scrib" style="left:9%; top:13%; font-size:1.15rem;">me, presenting it loudly ↓</span>
+        <img class="co" src="img/co-moon.png" style="left:2%; height:60%; z-index:2;" alt="Hemant presenting the MOON concept">
+        <img class="co" src="img/co-stage.png" style="right:-3%; height:46%; z-index:3;" alt="Hemant on stage with a microphone">
+        <span class="pno">3</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ FILLER 1 · pink / blue ═══ -->
   <section class="pg" id="f1">
-    <span class="tcap">ii / v — a note before the work</span>
+    <span class="tcap">iii / vi — a note before the work</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="fq-page" style="background:var(--pink);">
@@ -331,7 +386,7 @@
           things people actually use, made to feel like things people
           actually keep.
         </div>
-        <span class="pno">2</span>
+        <span class="pno">4</span>
       </div>
       <div class="fq-page" style="background:#3BAADC;">
         <div class="fq" style="right:14%; top:28%;">
@@ -343,14 +398,14 @@
         <div class="fq thru" style="left:12%; bottom:18%; width:48%;">
           good designs fit our needs so well that the design is invisible.
         </div>
-        <span class="pno">3</span>
+        <span class="pno">5</span>
       </div>
     </div>
   </section>
 
   <!-- ═══ FILLER 2 · sage / warm ═══ -->
   <section class="pg" id="f2">
-    <span class="tcap">iii / v — a pause</span>
+    <span class="tcap">iv / vi — a pause</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="fq-page" style="background:#FF8C69;">
@@ -363,7 +418,7 @@
         <div class="fq thru" style="left:28%; bottom:14%; width:44%;">
           less, but better — but warmer.
         </div>
-        <span class="pno">4</span>
+        <span class="pno">6</span>
       </div>
       <div class="fq-page" style="background:#4A9FE8;">
         <div class="fq" style="right:16%; top:52%;">
@@ -374,14 +429,14 @@
         <div class="fq thru" style="left:14%; top:20%; width:46%;">
           good design is as little design as possible.
         </div>
-        <span class="pno">5</span>
+        <span class="pno">7</span>
       </div>
     </div>
   </section>
 
   <!-- ═══ ABOUT ═══ -->
   <section class="pg" id="ab">
-    <span class="tcap">iv / v — about the designer</span>
+    <span class="tcap">v / vi — about the designer</span>
     <div class="book rv">
       <div class="gut"></div>
 
@@ -427,7 +482,7 @@
       </div>
     </div>
     <div class="cn-wrap">
-      <div class="cn-eyebrow rv">v / v — let's work together</div>
+      <div class="cn-eyebrow rv">vi / vi — let's work together</div>
       <h2 class="cn-hed rv" style="transition-delay:.08s">Let's<br><em>talk up.</em></h2>
       <a href="mailto:hgusain307@gmail.com" class="cn-mail rv" style="transition-delay:.16s">
         hgusain307@gmail.com — or just a friendly hello.
