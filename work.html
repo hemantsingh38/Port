@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Early Winter — UX Design Studio</title>
+  <title>Work — Early Winter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -16,13 +16,10 @@
       --ink:   #15110E;
       --mu:    #978D7C;
       --green: #2DF952;
-      --pink:  #F4E3DE;   /* filler tints */
-      --blue:  #DCE8EF;
-      --sage:  #E4EAE0;
-      --warm:  #F2EADC;
       --serif: 'Outfit',system-ui,sans-serif;
       --book:  'EB Garamond',Georgia,serif;
       --sans:  'Inter',system-ui,sans-serif;
+      --hand:  'Caveat',cursive;
     }
 
     html { scroll-snap-type:y mandatory; overflow-y:scroll; scroll-behavior:smooth; }
@@ -44,10 +41,7 @@
     }
     #paw.click { transform:translate(-10px,-8px) scale(.78) rotate(-14deg); }
 
-    /* floating nav */
-    .fnav,.fn,.fd,.fl,.fline { display:none; }
-
-    /* ── page index tabs (bottom centre, like physical book tabs) ── */
+    /* ── page index tabs ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
     .tab { font-family:var(--sans); font-size:.48rem; font-weight:500;
@@ -62,6 +56,19 @@
     .tab-work  { background:#A8CFFF; }
     .tab-about { background:#FF8C69; }
 
+    /* ── view toggle (single / grid) ── */
+    .vt { position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
+          z-index:960; display:flex; gap:2px;
+          border:1px solid rgba(252,250,246,.18); border-radius:7px; overflow:hidden;
+          background:rgba(20,16,12,.72); backdrop-filter:blur(12px);
+          -webkit-backdrop-filter:blur(12px); }
+    .vt button { background:transparent; color:rgba(252,250,246,.45); border:0;
+                 padding:.5rem .7rem; cursor:none; display:flex; align-items:center;
+                 transition:all .22s; }
+    .vt button:hover { color:rgba(252,250,246,.85); }
+    .vt button.on { background:var(--green); color:#0B0908; }
+    .vt svg { width:11px; height:11px; }
+
     .pg { scroll-snap-align:start; height:100vh; position:relative; overflow:hidden; }
 
     .rv { opacity:0; transform:translateY(.7rem);
@@ -72,7 +79,7 @@
     .v { writing-mode:vertical-rl; transform:rotate(180deg); }
 
     /* handwritten pen notes */
-    .scrib { position:absolute; z-index:40; font-family:'Caveat',cursive;
+    .scrib { position:absolute; z-index:40; font-family:var(--hand);
              font-weight:600; color:#C8385A; line-height:1.05;
              transform:rotate(-3.5deg); pointer-events:none; }
     a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
@@ -88,7 +95,7 @@
 
     /* ── the book frame ── */
     .book {
-      position:absolute; top:4.5vmin; bottom:4.5vmin; left:6vmin; right:6vmin;
+      position:absolute; top:max(4.5vmin, 3.4rem); bottom:4.5vmin; left:6vmin; right:6vmin;
       background:var(--page);
       display:grid; grid-template-columns:1fr 1fr;
       box-shadow:0 40px 90px rgba(0,0,0,.55), 0 6px 22px rgba(0,0,0,.45);
@@ -98,11 +105,11 @@
       background:var(--spine, var(--green)); z-index:-1;
       box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
-    /* per-section spine colours */
-    #f1 .book { --spine: #3BAADC; }
-    #f2 .book { --spine: #FF8C69; }
-    #ab .book { --spine: #F5E10A; }
-    #cn .book { --spine: var(--green); }
+    #w1 .book { --spine: #A8CFFF; }
+    #w2 .book { --spine: #FFB347; }
+    #w3 .book { --spine: #98D4A3; }
+    #w4 .book { --spine: #C9B8FF; }
+    #gv .book { --spine: var(--green); }
     .book::after {
       content:''; position:absolute; left:-4px; top:2px; bottom:-3px; width:4px;
       background:repeating-linear-gradient(to right, #E9E4DA 0 1px, #FCFAF6 1px 2px);
@@ -121,61 +128,7 @@
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
-    /* ══════════ COVER SPREAD ══════════ */
-    .cv-l {
-      position:relative; display:flex; flex-direction:column;
-      padding:2.8rem 2.6rem 2.4rem 3rem; overflow:hidden;
-    }
-    .cv-l-top {
-      font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.26em; text-transform:uppercase;
-      color:rgba(21,17,14,.3); display:flex; justify-content:space-between;
-      align-items:center; border-bottom:1px solid rgba(21,17,14,.12); padding-bottom:.7rem;
-    }
-    .cv-l h1 {
-      font-family:var(--serif); font-weight:400;
-      font-size:clamp(3.4rem,6.2vw,6.8rem); line-height:.92;
-      letter-spacing:-1px; flex:1; display:flex;
-      flex-direction:column; justify-content:center;
-    }
-    .cv-l h1 em { font-style:normal; font-weight:400; display:block; }
-    .cv-l-foot {
-      font-family:var(--book); font-style:italic; font-size:.74rem;
-      line-height:1.65; color:rgba(21,17,14,.38);
-      border-top:1px solid rgba(21,17,14,.1); padding-top:.8rem;
-    }
-    /* right page: video fills the half */
-    .cv-r { position:relative; overflow:hidden; }
-    .cv-plate {
-      position:absolute; top:2.6rem; right:2.4rem; bottom:2.6rem; left:2rem;
-      display:flex; flex-direction:column;
-      overflow:hidden;
-    }
-    .cv-plate video {
-      width:100%; flex:1; min-height:0; object-fit:cover;
-      filter:saturate(.9) contrast(.97);
-    }
-    .cv-plate figcaption {
-      margin-top:.5rem; flex-shrink:0; text-align:center;
-      font-family:var(--book); font-style:italic; font-size:.68rem;
-      color:rgba(21,17,14,.42);
-    }
-
-    /* ══════════ FILLER QUOTE SPREADS ══════════ */
-    .fq-page { position:relative; overflow:hidden; }
-    .fq {
-      position:absolute; width:min(58%,17.5rem);
-      font-family:var(--book); font-weight:500; font-size:.74rem;
-      line-height:1.62; text-align:justify; color:rgba(21,17,14,.78);
-    }
-    .fq small { display:block; margin-top:.7rem; text-align:left;
-      font-family:var(--sans); font-weight:500; font-size:.44rem;
-      letter-spacing:.14em; text-transform:uppercase; color:rgba(21,17,14,.4); }
-    /* print-through from the reverse side */
-    .fq.thru { transform:scaleX(-1) rotate(.6deg); opacity:.12;
-               filter:blur(.4px); pointer-events:none; user-select:none; }
-
-    /* ══════════ PROJECT SPREADS ══════════ */
+    /* ══════════ PROJECT SPREADS — the magazine way ══════════ */
     .lp, .rp { position:relative; overflow:hidden; }
     .lp { padding:3.2rem 2.4rem 2.6rem 3rem; }
     .lp-head { position:absolute; top:5rem; left:3rem; right:2.4rem;
@@ -185,7 +138,6 @@
     .lp-title h2 em { display:block; font-style:normal; font-weight:400;
                       color:rgba(21,17,14,.55); font-size:.88em; }
     .lp-crs { display:flex; gap:1.6rem; padding-top:.15rem; flex-wrap:wrap; }
-    /* all project-spread text is horizontal */
     .lp-title.v,.lp-ct.v,.lp-cat.v,.lp-cr.v,.rp-sub.v {
       writing-mode:horizontal-tb; transform:none;
     }
@@ -194,25 +146,16 @@
     .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
                font-size:.42rem; letter-spacing:.12em; text-transform:uppercase;
                color:rgba(21,17,14,.32); margin-bottom:.2rem; }
-    /* project media: printed phone screenshots, glued in */
-    .lp-media { position:absolute; left:3rem; right:2.4rem; top:42%; bottom:3rem;
-                display:flex; align-items:center; justify-content:center; gap:1.2rem; }
-    .m1,.m2 { position:relative; width:37%; max-width:min(12.6rem, 25vh);
-              background:#fff; padding:6px 6px 22px;
-              box-shadow:0 10px 24px rgba(21,17,14,.2); }
-    .m1 { transform:rotate(-2.6deg); z-index:1; }
-    .m2 { transform:rotate(2deg); z-index:2; }
-    .m1::before { content:''; position:absolute; top:-9px; left:50%;
-      transform:translateX(-50%) rotate(-4deg); width:56px; height:17px;
-      background:rgba(238,224,178,.9); box-shadow:0 1px 3px rgba(21,17,14,.18); }
-    .m1::after { content:'fig. 01'; }
-    .m2::after { content:'fig. 02'; }
-    .m1::after,.m2::after { position:absolute; bottom:5px; left:0; right:0;
-      text-align:center; font-family:var(--sans); font-size:.4rem;
-      letter-spacing:.16em; text-transform:uppercase; color:rgba(21,17,14,.4); }
-    .ph { width:100%; aspect-ratio:9/16; object-fit:cover;
+    .lp-media { position:absolute; left:0; right:2.4rem; top:46%; bottom:2.6rem;
+                display:flex; flex-direction:column; justify-content:flex-end; }
+    .m1 { width:86%; margin-left:auto; position:relative; z-index:1;
+          box-shadow:0 8px 22px rgba(21,17,14,.14); }
+    .m2 { width:93%; margin-top:-7.5%; position:relative; z-index:2;
+          box-shadow:0 14px 34px rgba(21,17,14,.22); }
+    .m1,.m2 { min-height:0; overflow:hidden; }
+    .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
           background:#E8E2D5; filter:saturate(.92) contrast(.97); }
-    .lp-cat { position:absolute; left:3rem; bottom:2.6rem;
+    .lp-cat { position:absolute; left:3rem; bottom:2.6rem; z-index:3;
               font-family:var(--book); font-style:italic; font-size:.56rem;
               color:rgba(21,17,14,.4); }
     .lp-ct { position:absolute; left:3rem; top:3rem;
@@ -239,99 +182,38 @@
     .rp-link:hover { border-color:var(--ink); }
     .rp-link.dis { opacity:.4; pointer-events:none; }
 
-    /* ══════════ ABOUT SPREAD ══════════ */
-    .ab-lp {
-      position:relative; display:flex; flex-direction:column;
-      padding:2.6rem 2.8rem 2rem 3rem; overflow:hidden;
-    }
-    .ab-runtop {
-      text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.3);
-      padding-bottom:.75rem; margin-bottom:2rem;
-      border-bottom:1px solid rgba(21,17,14,.14);
-    }
-    .ab-hed {
-      font-family:var(--serif); font-weight:400;
-      font-size:clamp(1.5rem,2.7vw,2.5rem); line-height:1.06;
-      letter-spacing:-1px; color:var(--ink); margin-bottom:1.6rem;
-    }
-    .ab-hed em { font-style:normal; font-weight:400; color:rgba(21,17,14,.55); }
-    .ab-dek {
-      font-family:var(--book); font-size:clamp(.84rem,1.1vw,1rem);
-      line-height:1.78; color:rgba(21,17,14,.68);
-    }
-    .ab-dek em { font-style:italic; }
-    /* right: bold flat colour with inset photo */
-    .ab-rp { position:relative; background:#F5E10A; overflow:hidden; }
-    .ab-runtop-r {
-      position:absolute; top:1.1rem; left:50%; transform:translateX(-50%);
-      font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); white-space:nowrap;
-    }
-    .ab-inset {
-      position:absolute; top:2.6rem; right:2.2rem; bottom:2.4rem; left:2.2rem;
-      overflow:hidden;
-    }
-    .ab-inset img {
-      width:100%; height:100%; object-fit:cover;
-      filter:saturate(.9) contrast(.97);
-    }
-    .ab-pno {
-      position:absolute; bottom:1rem; right:2.2rem;
-      font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.55);
-    }
-
-    /* ══════════ CONNECT — BACK COVER ══════════ */
-    #cn { background:var(--table); }
-    .ribbon { position:absolute; top:0; left:16%;
-              width:13px; height:128px; background:var(--green); z-index:5;
-              clip-path:polygon(0 0,100% 0,100% 100%,50% 88%,0 100%);
-              box-shadow:0 8px 20px rgba(0,0,0,.4); }
-    .cn-wrap { position:absolute; inset:0;
-               display:flex; flex-direction:column; justify-content:flex-end;
-               padding:4rem 5rem 4.4rem 6vmin; }
-    .cn-rule { position:absolute; top:1.6rem; left:6vmin; right:6vmin;
-               display:flex; justify-content:space-between;
-               border-top:1px solid rgba(252,250,246,.3); padding-top:.5rem; }
-    .cn-rule span,.cn-rule a {
-      font-family:var(--sans); font-size:.48rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
-      color:rgba(252,250,246,.32); text-decoration:none; }
-    .cn-rule a:hover { color:var(--green); }
-    .cn-rule div { display:flex; gap:1.7rem; }
-    .cn-eyebrow { font-family:var(--sans); font-size:.48rem; font-weight:500;
-      letter-spacing:.28em; text-transform:uppercase;
-      color:rgba(252,250,246,.22); margin-bottom:1.3rem; }
-    .cn-hed { font-family:var(--serif); font-weight:400;
-      font-size:clamp(3.8rem,10vw,11rem); line-height:.84;
-      letter-spacing:-1px; color:var(--page); margin-bottom:2.4rem; }
-    .cn-hed em { font-style:normal; font-weight:400; opacity:.4; }
-    .cn-mail { font-family:var(--book); font-style:italic; font-size:1.08rem;
-      color:rgba(252,250,246,.5); text-decoration:none;
-      border-bottom:1px solid rgba(252,250,246,.16); padding-bottom:.18rem;
-      transition:all .28s; width:fit-content; }
-    .cn-mail:hover { color:var(--green); border-color:var(--green); }
-    .cn-foot { position:absolute; bottom:1.2rem; left:6vmin; right:6vmin;
-               display:flex; justify-content:space-between; }
-    .cn-foot span { font-family:var(--book); font-style:italic; font-size:.66rem;
-                    color:rgba(252,250,246,.25); }
+    /* ══════════ GRID VIEW — the shelf ══════════ */
+    .gv-pg { position:relative; overflow:hidden; background:#0F0E0C;
+             padding:3.2rem 2.4rem 2.8rem 3rem;
+             display:flex; flex-direction:column; justify-content:center; }
+    .gv-pg .run { color:rgba(252,250,246,.3); }
+    .gv-pg .run a { color:inherit; }
+    .gv-pg .run a:hover { color:var(--green); }
+    .gv-pg .pno { color:rgba(252,250,246,.35); }
+    .gv-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .gv-tile { background:#FCFAF6; padding:5px 5px 17px; position:relative;
+               cursor:none; transform:rotate(-1.2deg);
+               box-shadow:0 8px 20px rgba(0,0,0,.45);
+               transition:transform .22s; }
+    .gv-tile:nth-child(2n) { transform:rotate(1.3deg); }
+    .gv-tile:hover { transform:rotate(0) scale(1.025); z-index:3; }
+    .gv-tile img { width:100%; aspect-ratio:4/5; max-height:24vh; object-fit:cover;
+                   filter:saturate(.9) contrast(.97); }
+    .gv-tile figcaption { position:absolute; bottom:3px; left:0; right:0;
+      text-align:center; font-family:var(--sans); font-size:.4rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase; color:rgba(21,17,14,.55); }
 
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
               grid-template-rows:1fr 1fr; }
       .gut { display:none; }
       .rp-body { columns:1; }
-      .m1,.m2 { max-width:11vh; }
+      .gv-tile img { max-height:11vh; }
     }
     @media(max-width:580px){
       html { scroll-snap-type:none; }
-      .fnav { display:none; }
       .lp-crs,.rp-crs { display:none; }
-      .cn-wrap { padding:3rem 1.6rem; }
-      .cn-rule,.cn-foot { left:1.6rem; right:1.6rem; }
-      .cn-hed { font-size:clamp(3rem,14vw,4.6rem); }
-      .ribbon { left:10%; }
+      .scrib { display:none; }
     }
   </style>
 </head>
@@ -341,175 +223,299 @@
     <img src="data:image/png;base64,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" width="46" height="47" alt="">
   </div>
 
+  <div class="vt" role="group" aria-label="View mode">
+    <button id="bt-single" class="on" aria-label="Single view" title="One by one">
+      <svg viewBox="0 0 12 12" fill="currentColor"><rect x="1.5" y="1" width="9" height="10" rx="1"/></svg>
+    </button>
+    <button id="bt-grid" aria-label="Grid view" title="The shelf">
+      <svg viewBox="0 0 12 12" fill="currentColor"><rect x="1" y="1" width="4.4" height="4.4" rx=".8"/><rect x="6.6" y="1" width="4.4" height="4.4" rx=".8"/><rect x="1" y="6.6" width="4.4" height="4.4" rx=".8"/><rect x="6.6" y="6.6" width="4.4" height="4.4" rx=".8"/></svg>
+    </button>
+  </div>
+
   <nav class="tabs" aria-label="Pages">
-    <a class="tab tab-home on" href="index.html">Home</a>
-    <a class="tab tab-work" href="work.html">Work</a>
+    <a class="tab tab-home" href="index.html">Home</a>
+    <a class="tab tab-work on" href="work.html">Work</a>
     <a class="tab tab-about" href="about.html">About</a>
   </nav>
 
-  <!-- ═══ COVER ═══ -->
-  <section class="pg" id="cv">
-    <span class="tcap">i / v — cover</span>
+  <div id="view-single">
+  <!-- ═══ PROJECT 01 · UPHOLD ═══ -->
+  <section class="pg" id="w1">
+    <span class="tcap">i / v — selected work, nº 01</span>
     <div class="book rv">
       <div class="gut"></div>
-      <!-- left: editorial title page -->
-      <div class="cv-l">
-        <div class="cv-l-top">
-          <span>Early Winter</span>
-          <span>Issue Nº 01</span>
+      <div class="lp">
+        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="lp-ct v">01 / 04</span>
+        <div class="lp-head">
+          <div class="lp-title v">
+            <h2>Uphold<em>mentorship, held steady</em></h2>
+          </div>
+          <div class="lp-crs">
+            <div class="lp-cr v"><b>Strategy</b>User research<br>Ed tech</div>
+            <div class="lp-cr v"><b>Craft</b>Flows &amp; interface<br>Figma</div>
+            <div class="lp-cr v"><b>Nº 01</b>Selected work<br>2025</div>
+          </div>
         </div>
-        <h1>Early<em>Winter.</em></h1>
-        <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.2rem; transform:rotate(5deg);">est. one cold<br>morning ❅</span>
-        <p class="cv-l-foot">
-          A UX design studio.<br>
-          Selected work, 2022 — 2025.<br>
-          New Delhi, India.
-        </p>
+        <div class="lp-media">
+          <div class="m1"><img class="ph"
+            src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Film camera resting by a bright misty window"></div>
+          <div class="m2"><img class="ph"
+            src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Stack of vintage film boxes on books"></div>
+        </div>
+        <span class="lp-cat v">Ed Tech / Education</span>
+        <span class="scrib" style="right:1.8rem; top:36%; font-size:1.05rem; transform:rotate(4deg);">begin here ↓</span>
+        <span class="pno">114</span>
       </div>
-      <!-- right: video fills the half -->
-      <div class="cv-r">
-        <figure class="cv-plate">
-          <video autoplay muted loop playsinline>
-            <source src="https://videos.pexels.com/video-files/4211165/4211165-hd_1920_1080_30fps.mp4" type="video/mp4">
-          </video>
-          <figcaption>a feeling, looped · 2025</figcaption>
-        </figure>
+      <div class="rp">
+        <span class="run" style="right:3rem;">
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
+        </span>
+        <div class="rp-crs">
+          <div class="lp-cr v"><b>Year</b>2025</div>
+          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        </div>
+        <div class="rp-sub v">mentorship, held steady</div>
+        <div class="rp-body">
+          <p>Some careers begin with a portfolio; most begin with a person who
+          says <em>keep going.</em> Uphold connects aspiring designers with
+          mentors from the industry — working professionals who review, advise,
+          and hold the ladder steady while you climb.</p>
+          <p>Designed end-to-end as a UX case study — research, flows,
+          interface — it asks one question of every screen: <em>does this make
+          the next step feel possible?</em></p>
+        </div>
+        <a class="rp-link" target="_blank" rel="noopener"
+           href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">
+           View on Behance ↗</a>
+        <span class="pno">115</span>
       </div>
     </div>
   </section>
 
-
-  <!-- ═══ FILLER 1 · pink / blue ═══ -->
-  <section class="pg" id="f1">
-    <span class="tcap">ii / v — a note before the work</span>
+  <!-- ═══ PROJECT 02 · REVIBE ═══ -->
+  <section class="pg" id="w2">
+    <span class="tcap">ii / v — selected work, nº 02</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--pink);">
-        <div class="fq" style="left:18%; top:46%;">
-          Good design is actually a lot harder to notice than poor design,
-          in part because good designs fit our needs so well that the
-          design is invisible.
-          <small>Don Norman / The Design of Everyday Things</small>
+      <div class="lp">
+        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="lp-ct v">02 / 04</span>
+        <div class="lp-head">
+          <div class="lp-title v">
+            <h2>Revibe<em>worn again, loved harder</em></h2>
+          </div>
+          <div class="lp-crs">
+            <div class="lp-cr v"><b>Strategy</b>Gen Z, India<br>Thrift &amp; AI</div>
+            <div class="lp-cr v"><b>Craft</b>E-commerce UX<br>Brand</div>
+            <div class="lp-cr v"><b>Nº 02</b>Selected work<br>2025</div>
+          </div>
         </div>
-        <div class="fq thru" style="left:30%; top:64%; width:46%;">
-          things people actually use, made to feel like things people
-          actually keep.
+        <div class="lp-media">
+          <div class="m1"><img class="ph"
+            src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Footprints disappearing into winter fog"></div>
+          <div class="m2"><img class="ph"
+            src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Hand holding a film canister in warm light with dried flowers"></div>
         </div>
-        <span class="pno">2</span>
+        <span class="lp-cat v">Fashion / Commerce</span>
+        <span class="pno">116</span>
       </div>
-      <div class="fq-page" style="background:#3BAADC;">
-        <div class="fq" style="right:14%; top:28%;">
-          As for what this studio believes: audiences neither know nor care
-          who we are. The work has to feel like something instead — calm,
-          present, a little nostalgic. A cold morning, indoors.
-          <small>Early Winter / studio notes</small>
+      <div class="rp">
+        <span class="run" style="right:3rem;">
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
+        </span>
+        <div class="rp-crs">
+          <div class="lp-cr v"><b>Year</b>2025</div>
+          <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="fq thru" style="left:12%; bottom:18%; width:48%;">
-          good designs fit our needs so well that the design is invisible.
+        <div class="rp-sub v">worn again, loved harder</div>
+        <div class="rp-body">
+          <p>India's wardrobes are full of clothes worn once. Revibe is a
+          Gen Z-first, AI-powered platform for thrifted and upcycled fashion —
+          shop it, sell it, remake it. <em>Save the planet, dress like nobody
+          else.</em></p>
+          <p>The interface borrows from the thrift store itself: warm, tactile,
+          a little serendipitous — designed from discovery to checkout.</p>
         </div>
-        <span class="pno">3</span>
+        <a class="rp-link" target="_blank" rel="noopener"
+           href="https://findingyouhemant.framer.website/page">View case study ↗</a>
+        <span class="pno">117</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FILLER 2 · sage / warm ═══ -->
-  <section class="pg" id="f2">
-    <span class="tcap">iii / v — a pause</span>
+  <!-- ═══ PROJECT 03 · INSIGHT ═══ -->
+  <section class="pg" id="w3">
+    <span class="tcap">iii / v — selected work, nº 03</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:#FF8C69;">
-        <div class="fq" style="left:20%; top:40%;">
-          Good design is as little design as possible. Less, but better —
-          for it concentrates on the essential aspects, and the products
-          are not burdened with non-essentials.
-          <small>Dieter Rams / Ten Principles</small>
+      <div class="lp">
+        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="lp-ct v">03 / 04</span>
+        <div class="lp-head">
+          <div class="lp-title v">
+            <h2>Insight<em>the right people, found</em></h2>
+          </div>
+          <div class="lp-crs">
+            <div class="lp-cr v"><b>Strategy</b>Research ops<br>B2B SaaS</div>
+            <div class="lp-cr v"><b>Craft</b>Product design<br>Figma · Miro</div>
+            <div class="lp-cr v"><b>Nº 03</b>Selected work<br>2025</div>
+          </div>
         </div>
-        <div class="fq thru" style="left:28%; bottom:14%; width:44%;">
-          less, but better — but warmer.
+        <div class="lp-media">
+          <div class="m1"><img class="ph"
+            src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Foggy town with distant warm lights through trees"></div>
+          <div class="m2"><img class="ph"
+            src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Hand holding a Kodak film roll in warm low light"></div>
         </div>
-        <span class="pno">4</span>
+        <span class="lp-cat v">SaaS / Research</span>
+        <span class="pno">118</span>
       </div>
-      <div class="fq-page" style="background:#4A9FE8;">
-        <div class="fq" style="right:16%; top:52%;">
-          Less, but better — <em>but warmer.</em> Made to be used on a
-          Tuesday, remembered on a Sunday.
-          <small>Early Winter / studio notes</small>
+      <div class="rp">
+        <span class="run" style="right:3rem;">
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
+        </span>
+        <div class="rp-crs">
+          <div class="lp-cr v"><b>Year</b>2025</div>
+          <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="fq thru" style="left:14%; top:20%; width:46%;">
-          good design is as little design as possible.
+        <div class="rp-sub v">the right people, found</div>
+        <div class="rp-body">
+          <p>Every researcher knows the hardest part isn't the questions —
+          it's finding the people. Insight streamlines participant recruitment
+          for UX research: affordable, global, built for teams without
+          enterprise budgets.</p>
+          <p>A B2B SaaS product designed in Figma and Miro, from problem
+          mapping to prototype. The craft is in the calm — <em>dense data,
+          quiet screens.</em></p>
         </div>
-        <span class="pno">5</span>
+        <a class="rp-link" target="_blank" rel="noopener"
+           href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
+        <span class="pno">119</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══ ABOUT ═══ -->
-  <section class="pg" id="ab">
-    <span class="tcap">iv / v — about the designer</span>
+  <!-- ═══ PROJECT 04 · VEJEEZ! ═══ -->
+  <section class="pg" id="w4">
+    <span class="tcap">iv / v — selected work, nº 04</span>
     <div class="book rv">
       <div class="gut"></div>
-
-      <!-- left: headline + body text -->
-      <div class="ab-lp">
-        <div class="ab-runtop">About</div>
-        <h2 class="ab-hed rv">He was always<br>an <em>artist.</em><br>Now he builds<br>things that feel<br>like <em>memories.</em></h2>
-        <p class="ab-dek rv" style="transition-delay:.1s">
-          Hemant Singh is a UX designer with 3.5 years across ed tech,
-          fintech, e-commerce and B2B SaaS. Based in New Delhi, he founded
-          Early Winter as a small, slow, intentional studio. His work is
-          shaped by Don Norman, by cinema, and by the belief that good design
-          should feel like the first cold morning of the season — present,
-          calm, and a little nostalgic.
-          <em>Currently open to new work and collaborations.</em>
-        </p>
-        <a class="scrib rv" href="about.html" style="position:static; display:inline-block; margin-top:1.4rem; font-size:1.55rem; transform:rotate(-2deg); align-self:flex-start;">read the whole story →</a>
-        <span class="pno" style="left:3rem;transform:none;">122</span>
-      </div>
-
-      <!-- right: neon green page with inset photo -->
-      <div class="ab-rp">
-        <span class="ab-runtop-r">About</span>
-        <div class="ab-inset">
-          <img src="img/bar-look.jpg"
-               alt="Hemant in a dim wood-panelled bar, looking at the camera">
+      <div class="lp">
+        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="lp-ct v">04 / 04</span>
+        <div class="lp-head">
+          <div class="lp-title v">
+            <h2>Vejeez!<em>every vegan's dream</em></h2>
+          </div>
+          <div class="lp-crs">
+            <div class="lp-cr v"><b>Strategy</b>Marketplace<br>Vegan living</div>
+            <div class="lp-cr v"><b>Craft</b>Brand &amp; UX<br>Illustration</div>
+            <div class="lp-cr v"><b>Nº 04</b>Selected work<br>2024</div>
+          </div>
         </div>
-        <span class="ab-pno">123</span>
+        <div class="lp-media">
+          <div class="m1"><img class="ph"
+            src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Snowy path between large trees in fog"></div>
+          <div class="m2"><img class="ph"
+            src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Vintage camera and glass on a warm wooden table"></div>
+        </div>
+        <span class="lp-cat v">Food / Marketplace</span>
+        <span class="pno">120</span>
       </div>
-
+      <div class="rp">
+        <span class="run" style="right:3rem;">
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
+        </span>
+        <div class="rp-crs">
+          <div class="lp-cr v"><b>Year</b>2024</div>
+          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        </div>
+        <div class="rp-sub v">every vegan's dream</div>
+        <div class="rp-body">
+          <p>Every vegan's dream come true. Vejeez! is a marketplace for
+          conscious consumers — discover, buy, and connect around plant-based
+          living.</p>
+          <p>Brand, voice and interface designed as one piece: <em>green
+          without cliché, joyful without noise.</em> Case study arriving
+          soon.</p>
+        </div>
+        <a class="rp-link dis">Case study soon</a>
+        <span class="scrib" style="left:8.6rem; bottom:2.3rem; font-size:1rem; transform:rotate(-2deg);">— promise.</span>
+        <span class="pno">121</span>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ CONNECT · BACK COVER ═══ -->
-  <section class="pg" id="cn">
-    <div class="ribbon" aria-hidden="true"></div>
-    <div class="cn-rule">
-      <span>Early Winter</span>
-      <div>
-        <a href="https://findingyouhemant.framer.website" target="_blank" rel="noopener">Framer</a>
-        <a href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)" target="_blank" rel="noopener">Behance</a>
-        <a href="mailto:hgusain307@gmail.com">Email</a>
+  </div>
+
+  <!-- ═══ GRID VIEW · THE SHELF ═══ -->
+  <section class="pg" id="gv" style="display:none;">
+    <span class="tcap">v / v — the shelf, everything at once</span>
+    <div class="book">
+      <div class="gut"></div>
+      <div class="gv-pg">
+        <span class="run" style="left:3rem;">Early Winter — Index</span>
+        <div class="gv-grid">
+          <figure class="gv-tile" data-t="w1">
+            <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — film camera by a window">
+            <figcaption>Uphold — nº 01</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w1">
+            <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — film boxes">
+            <figcaption>ed tech · 2025</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w2">
+            <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — footprints in fog">
+            <figcaption>Revibe — nº 02</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w2">
+            <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — film canister in hand">
+            <figcaption>thrift &amp; AI · 2025</figcaption>
+          </figure>
+        </div>
+        <span class="pno">114 — 117</span>
       </div>
-    </div>
-    <div class="cn-wrap">
-      <div class="cn-eyebrow rv">v / v — let's work together</div>
-      <h2 class="cn-hed rv" style="transition-delay:.08s">Let's<br><em>talk up.</em></h2>
-      <a href="mailto:hgusain307@gmail.com" class="cn-mail rv" style="transition-delay:.16s">
-        hgusain307@gmail.com — or just a friendly hello.
-      </a>
-    </div>
-    <div class="cn-foot">
-      <span>Early Winter — 2025</span>
-      <span>New Delhi, India</span>
+      <div class="gv-pg">
+        <span class="run" style="right:3rem;">
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
+        </span>
+        <div class="gv-grid">
+          <figure class="gv-tile" data-t="w3">
+            <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — foggy town">
+            <figcaption>Insight — nº 03</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w3">
+            <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — kodak film roll">
+            <figcaption>b2b saas · 2025</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w4">
+            <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez — snowy path">
+            <figcaption>Vejeez! — nº 04</figcaption>
+          </figure>
+          <figure class="gv-tile" data-t="w4">
+            <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez — camera on a table">
+            <figcaption>marketplace · 2024</figcaption>
+          </figure>
+        </div>
+        <span class="pno">118 — 121</span>
+      </div>
     </div>
   </section>
 
   <script>
     /* paw cursor */
     const paw=document.getElementById('paw');
-    let mx=innerWidth/2, my=innerHeight/2;
     document.addEventListener('mousemove',e=>{
-      mx=e.clientX; my=e.clientY;
-      paw.style.left=mx+'px'; paw.style.top=my+'px';
+      paw.style.left=e.clientX+'px'; paw.style.top=e.clientY+'px';
     });
     document.addEventListener('mousedown',()=>paw.classList.add('click'));
     document.addEventListener('mouseup',()=>paw.classList.remove('click'));
@@ -519,6 +525,27 @@
       es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); }),
       {threshold:.05});
     document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
+
+    /* view toggle */
+    const vs=document.getElementById('view-single'),
+          gv=document.getElementById('gv'),
+          bS=document.getElementById('bt-single'),
+          bG=document.getElementById('bt-grid');
+    function setMode(grid){
+      vs.style.display = grid ? 'none' : '';
+      gv.style.display = grid ? '' : 'none';
+      bS.classList.toggle('on', !grid);
+      bG.classList.toggle('on', grid);
+      window.scrollTo({top:0, behavior:'instant'});
+    }
+    bS.addEventListener('click',()=>setMode(false));
+    bG.addEventListener('click',()=>setMode(true));
+    document.querySelectorAll('.gv-tile').forEach(t=>
+      t.addEventListener('click',()=>{
+        setMode(false);
+        document.getElementById(t.dataset.t)?.scrollIntoView();
+      })
+    );
   </script>
 </body>
 </html>
