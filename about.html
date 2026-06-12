@@ -44,8 +44,8 @@
     /* ── page index tabs ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.48rem; font-weight:500;
-           letter-spacing:.18em; text-transform:uppercase; text-decoration:none;
+    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
@@ -65,8 +65,8 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.46rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.56rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase;
       color:rgba(252,250,246,.55);
     }
 
@@ -100,10 +100,10 @@
     }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.68); }
+           font-family:var(--book); font-size:.7rem; color:rgba(21,17,14,.68); }
     .run { position:absolute; top:1.1rem; z-index:6;
-           font-family:var(--sans); font-size:.44rem; font-weight:500;
-           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.56); }
+           font-family:var(--sans); font-size:.54rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.56); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
@@ -122,8 +122,8 @@
                filter:saturate(.9) contrast(.97); }
     .cut.tall img { aspect-ratio:3/4; }
     .cut figcaption { margin-top:.45rem; text-align:left;
-      font-family:var(--sans); font-weight:500; font-size:.46rem;
-      letter-spacing:.1em; text-transform:uppercase;
+      font-family:var(--sans); font-weight:500; font-size:.56rem;
+      letter-spacing:.02em; text-transform:uppercase;
       color:rgba(21,17,14,.72); }
 
     /* generic page paddings */
@@ -131,19 +131,19 @@
     .pp-pad { padding:3.4rem 2.8rem 2.6rem 3rem; }
 
     .runtop {
-      text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.52);
+      text-align:center; font-family:var(--sans); font-size:.54rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.52);
       padding-bottom:.75rem; margin-bottom:1.8rem;
       border-bottom:1px solid rgba(21,17,14,.14);
     }
     .hed {
       font-family:var(--serif); font-weight:400;
-      font-size:clamp(1.5rem,2.7vw,2.5rem); line-height:1.08;
-      letter-spacing:-1px; color:var(--ink);
+      font-size:clamp(1.75rem,3.1vw,2.9rem); line-height:1.08;
+      letter-spacing:-1.5px; color:var(--ink);
     }
     .hed em { font-style:normal; color:rgba(21,17,14,.72); }
     .dek {
-      font-family:var(--book); font-size:clamp(.8rem,1.05vw,.95rem);
+      font-family:var(--book); font-size:clamp(.92rem,1.2vw,1.08rem);
       line-height:1.78; color:rgba(21,17,14,.72); margin-top:1.3rem;
     }
     .dek em { font-style:italic; }
@@ -153,13 +153,13 @@
     .ctr-pg { position:relative; overflow:hidden; background:var(--page);
               padding:2.4rem 2.6rem 0 3rem; }
     .ctr-hed { text-align:center; font-family:var(--book); font-style:italic;
-               font-weight:500; font-size:1.05rem; letter-spacing:.02em;
+               font-weight:500; font-size:1.2rem; letter-spacing:.02em;
                color:var(--ink); margin:1.2rem 0 1rem; }
     .ctr-txt { columns:2; column-gap:1.3rem; font-family:var(--book);
-               font-size:.53rem; line-height:1.6; text-align:justify;
+               font-size:.62rem; line-height:1.6; text-align:justify;
                color:rgba(21,17,14,.72); }
-    .ctr-txt b { font-family:var(--sans); font-weight:500; font-size:.44rem;
-                 letter-spacing:.04em; color:var(--ink); }
+    .ctr-txt b { font-family:var(--sans); font-weight:500; font-size:.54rem;
+                 letter-spacing:.02em; color:var(--ink); }
     .co { position:absolute; bottom:-6px; pointer-events:none;
           filter:saturate(.96) contrast(.99)
                  drop-shadow(0 8px 16px rgba(21,17,14,.16)); }
@@ -167,7 +167,7 @@
     /* ══════════ PHILOSOPHY ══════════ */
     .aph-l { position:relative; background:#3BAADC; overflow:hidden;
              display:flex; align-items:center; padding:3rem 2.6rem 3rem 3rem; }
-    .aph-l .hed { font-size:clamp(1.7rem,3vw,2.8rem); color:var(--ink); }
+    .aph-l .hed { font-size:clamp(2rem,3.4vw,3.2rem); color:var(--ink); }
     .prn { margin-top:1.5rem; }
     .prn li { list-style:none; display:flex; gap:.9rem; align-items:baseline;
               padding:.85rem 0; border-bottom:1px solid rgba(21,17,14,.12); }
@@ -175,8 +175,8 @@
     .prn .n { font-family:var(--hand); font-weight:600; font-size:1.25rem;
               color:#C8385A; flex-shrink:0; }
     .prn b { display:block; font-family:var(--serif); font-weight:400;
-             letter-spacing:-.5px; font-size:1rem; margin-bottom:.2rem; }
-    .prn p { font-family:var(--book); font-size:.78rem; line-height:1.6;
+             letter-spacing:-1px; font-size:1.15rem; margin-bottom:.2rem; }
+    .prn p { font-family:var(--book); font-size:.88rem; line-height:1.6;
              color:rgba(21,17,14,.65); }
 
     /* ══════════ WORK BRIEF ══════════ */
@@ -184,9 +184,9 @@
     .wkb-row { display:flex; gap:1.4rem; padding:.8rem 0;
                border-bottom:1px solid rgba(21,17,14,.12); }
     .wkb-row b { flex:0 0 7.2rem; font-family:var(--sans); font-weight:500;
-      font-size:.44rem; letter-spacing:.16em; text-transform:uppercase;
+      font-size:.54rem; letter-spacing:.02em; text-transform:uppercase;
       color:rgba(21,17,14,.58); padding-top:.25rem; }
-    .wkb-row span { font-family:var(--book); font-size:.82rem;
+    .wkb-row span { font-family:var(--book); font-size:.92rem;
       line-height:1.6; color:rgba(21,17,14,.78); }
 
     /* ══════════ INSPIRATIONS ══════════ */
@@ -195,8 +195,8 @@
                border-bottom:1px solid rgba(21,17,14,.12); }
     .insp li:last-child { border-bottom:none; }
     .insp b { display:block; font-family:var(--serif); font-weight:400;
-              letter-spacing:-.5px; font-size:1.05rem; margin-bottom:.25rem; }
-    .insp p { font-family:var(--book); font-style:italic; font-size:.78rem;
+              letter-spacing:-1px; font-size:1.2rem; margin-bottom:.25rem; }
+    .insp p { font-family:var(--book); font-style:italic; font-size:.88rem;
               line-height:1.6; color:rgba(21,17,14,.6); }
 
     /* ══════════ TASTE ══════════ */
@@ -204,7 +204,7 @@
               align-items:baseline; border-bottom:1px solid rgba(21,17,14,.12); }
     .tst li:last-child { border-bottom:none; }
     .tst .tick { font-family:var(--hand); font-weight:600; color:#C8385A; }
-    .tst span { font-family:var(--book); font-size:.84rem; color:rgba(21,17,14,.75); }
+    .tst span { font-family:var(--book); font-size:.94rem; color:rgba(21,17,14,.75); }
     .ata-r { position:relative; background:#FF8C69; overflow:hidden; }
 
     /* ══════════ NON-NEGOTIABLES (inventory grid) ══════════ */
@@ -215,7 +215,7 @@
     .inv img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:0;
                max-height:20vh; filter:saturate(.8) contrast(.98); }
     .inv figcaption { margin-top:.5rem; font-family:var(--sans); font-weight:500;
-      font-size:.44rem; letter-spacing:.18em; text-transform:uppercase;
+      font-size:.54rem; letter-spacing:.03em; text-transform:uppercase;
       color:rgba(21,17,14,.68); }
 
     /* ══════════ BACK ══════════ */
@@ -223,11 +223,11 @@
     .abk-wrap { position:absolute; inset:0; display:flex; flex-direction:column;
                 justify-content:flex-end; padding:4rem 5rem 4.4rem 6vmin; }
     .abk-hed { font-family:var(--serif); font-weight:400;
-      font-size:clamp(3.4rem,9vw,9.5rem); line-height:.86;
-      letter-spacing:-1px; color:var(--page); margin-bottom:2.2rem; }
+      font-size:clamp(3.8rem,9.5vw,10.2rem); line-height:.86;
+      letter-spacing:-1.5px; color:var(--page); margin-bottom:2.2rem; }
     .abk-hed em { font-style:normal; opacity:.4; }
     .abk-links { display:flex; flex-direction:column; gap:.9rem; }
-    .abk-links a { font-family:var(--book); font-style:italic; font-size:1.05rem;
+    .abk-links a { font-family:var(--book); font-style:italic; font-size:1.2rem;
       color:rgba(252,250,246,.5); text-decoration:none; width:fit-content;
       border-bottom:1px solid rgba(252,250,246,.16); padding-bottom:.16rem;
       transition:all .28s; }

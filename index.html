@@ -50,8 +50,8 @@
     /* ── page index tabs (bottom centre, like physical book tabs) ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.48rem; font-weight:500;
-           letter-spacing:.18em; text-transform:uppercase; text-decoration:none;
+    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
@@ -81,8 +81,8 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.46rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.56rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase;
       color:rgba(252,250,246,.55);
     }
 
@@ -114,10 +114,10 @@
     }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.68); }
+           font-family:var(--book); font-size:.7rem; color:rgba(21,17,14,.68); }
     .run { position:absolute; top:1.1rem;
-           font-family:var(--sans); font-size:.44rem; font-weight:500;
-           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.56); }
+           font-family:var(--sans); font-size:.54rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.56); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
@@ -127,20 +127,20 @@
       padding:2.8rem 2.6rem 2.4rem 3rem; overflow:hidden;
     }
     .cv-l-top {
-      font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.26em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.54rem; font-weight:500;
+      letter-spacing:.02em; text-transform:uppercase;
       color:rgba(21,17,14,.52); display:flex; justify-content:space-between;
       align-items:center; border-bottom:1px solid rgba(21,17,14,.12); padding-bottom:.7rem;
     }
     .cv-l h1 {
       font-family:var(--serif); font-weight:400;
-      font-size:clamp(3.4rem,6.2vw,6.8rem); line-height:.92;
-      letter-spacing:-1px; flex:1; display:flex;
+      font-size:clamp(3.8rem,6.8vw,7.4rem); line-height:.92;
+      letter-spacing:-1.5px; flex:1; display:flex;
       flex-direction:column; justify-content:center;
     }
     .cv-l h1 em { font-style:normal; font-weight:400; display:block; }
     .cv-l-foot {
-      font-family:var(--book); font-style:italic; font-size:.74rem;
+      font-family:var(--book); font-style:italic; font-size:.84rem;
       line-height:1.65; color:rgba(21,17,14,.6);
       border-top:1px solid rgba(21,17,14,.1); padding-top:.8rem;
     }
@@ -157,7 +157,7 @@
     }
     .cv-plate figcaption {
       margin-top:.5rem; flex-shrink:0; text-align:center;
-      font-family:var(--book); font-style:italic; font-size:.68rem;
+      font-family:var(--book); font-style:italic; font-size:.78rem;
       color:rgba(21,17,14,.42);
     }
 
@@ -171,17 +171,17 @@
     .wk-row a { display:flex; align-items:center; justify-content:flex-end;
                 gap:1.2rem; text-decoration:none; transition:opacity .2s; }
     .wk-num { font-family:var(--serif); font-weight:400;
-              font-size:clamp(2.1rem,3.4vw,3.3rem); letter-spacing:-2px;
+              font-size:clamp(2.5rem,4vw,3.9rem); letter-spacing:-2px;
               line-height:1; color:var(--ink); margin-right:auto; }
     .wk-row a:hover { opacity:.6; }
-    .wk-meta { text-align:right; font-family:var(--sans); font-size:.42rem;
-               font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+    .wk-meta { text-align:right; font-family:var(--sans); font-size:.52rem;
+               font-weight:500; letter-spacing:.05em; text-transform:uppercase;
                color:rgba(21,17,14,.62); line-height:1.8; padding-top:.15rem; }
     .wk-meta b { display:block; font-family:var(--serif); font-weight:400;
-                 text-transform:none; letter-spacing:-.5px; font-size:.95rem;
+                 text-transform:none; letter-spacing:-1px; font-size:1.08rem;
                  color:var(--ink); margin:.1rem 0; }
     .wk-meta i { display:block; font-family:var(--book); font-style:italic;
-                 text-transform:none; letter-spacing:0; font-size:.62rem;
+                 text-transform:none; letter-spacing:0; font-size:.72rem;
                  color:rgba(21,17,14,.72); }
     .wk-row img { width:46%; aspect-ratio:4/3; max-height:18vh;
                   object-fit:cover; border-radius:0;
@@ -191,12 +191,12 @@
     .fq-page { position:relative; overflow:hidden; }
     .fq {
       position:absolute; width:min(58%,17.5rem);
-      font-family:var(--book); font-weight:500; font-size:.74rem;
+      font-family:var(--book); font-weight:500; font-size:.84rem;
       line-height:1.62; text-align:justify; color:rgba(21,17,14,.78);
     }
     .fq small { display:block; margin-top:.7rem; text-align:left;
-      font-family:var(--sans); font-weight:500; font-size:.44rem;
-      letter-spacing:.14em; text-transform:uppercase; color:rgba(21,17,14,.62); }
+      font-family:var(--sans); font-weight:500; font-size:.54rem;
+      letter-spacing:.05em; text-transform:uppercase; color:rgba(21,17,14,.62); }
     /* print-through from the reverse side */
     .fq.thru { transform:scaleX(-1) rotate(.6deg); opacity:.12;
                filter:blur(.4px); pointer-events:none; user-select:none; }
@@ -207,19 +207,19 @@
       padding:2.6rem 2.8rem 2rem 3rem; overflow:hidden;
     }
     .ab-runtop {
-      text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.52);
+      text-align:center; font-family:var(--sans); font-size:.54rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.52);
       padding-bottom:.75rem; margin-bottom:2rem;
       border-bottom:1px solid rgba(21,17,14,.14);
     }
     .ab-hed {
       font-family:var(--serif); font-weight:400;
-      font-size:clamp(1.5rem,2.7vw,2.5rem); line-height:1.06;
-      letter-spacing:-1px; color:var(--ink); margin-bottom:1.6rem;
+      font-size:clamp(1.75rem,3.1vw,2.9rem); line-height:1.06;
+      letter-spacing:-1.5px; color:var(--ink); margin-bottom:1.6rem;
     }
     .ab-hed em { font-style:normal; font-weight:400; color:rgba(21,17,14,.55); }
     .ab-dek {
-      font-family:var(--book); font-size:clamp(.84rem,1.1vw,1rem);
+      font-family:var(--book); font-size:clamp(.95rem,1.25vw,1.1rem);
       line-height:1.78; color:rgba(21,17,14,.68);
     }
     .ab-dek em { font-style:italic; }
@@ -227,8 +227,8 @@
     .ab-rp { position:relative; background:#F5E10A; overflow:hidden; }
     .ab-runtop-r {
       position:absolute; top:1.1rem; left:50%; transform:translateX(-50%);
-      font-family:var(--sans); font-size:.44rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.54rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase;
       color:rgba(21,17,14,.72); white-space:nowrap;
     }
     .ab-inset {
@@ -241,7 +241,7 @@
     }
     .ab-pno {
       position:absolute; bottom:1rem; right:2.2rem;
-      font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.55);
+      font-family:var(--book); font-size:.7rem; color:rgba(21,17,14,.55);
     }
 
     /* ══════════ CONNECT — BACK COVER ══════════ */
@@ -257,26 +257,26 @@
                display:flex; justify-content:space-between;
                border-top:1px solid rgba(252,250,246,.3); padding-top:.5rem; }
     .cn-rule span,.cn-rule a {
-      font-family:var(--sans); font-size:.48rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.58rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase;
       color:rgba(252,250,246,.52); text-decoration:none; }
     .cn-rule a:hover { color:var(--green); }
     .cn-rule div { display:flex; gap:1.7rem; }
-    .cn-eyebrow { font-family:var(--sans); font-size:.48rem; font-weight:500;
+    .cn-eyebrow { font-family:var(--sans); font-size:.58rem; font-weight:500;
       letter-spacing:.28em; text-transform:uppercase;
       color:rgba(252,250,246,.22); margin-bottom:1.3rem; }
     .cn-hed { font-family:var(--serif); font-weight:400;
-      font-size:clamp(3.8rem,10vw,11rem); line-height:.84;
-      letter-spacing:-1px; color:var(--page); margin-bottom:2.4rem; }
+      font-size:clamp(4.2rem,10.5vw,11.6rem); line-height:.84;
+      letter-spacing:-1.5px; color:var(--page); margin-bottom:2.4rem; }
     .cn-hed em { font-style:normal; font-weight:400; opacity:.4; }
-    .cn-mail { font-family:var(--book); font-style:italic; font-size:1.08rem;
+    .cn-mail { font-family:var(--book); font-style:italic; font-size:1.2rem;
       color:rgba(252,250,246,.5); text-decoration:none;
       border-bottom:1px solid rgba(252,250,246,.16); padding-bottom:.18rem;
       transition:all .28s; width:fit-content; }
     .cn-mail:hover { color:var(--green); border-color:var(--green); }
     .cn-foot { position:absolute; bottom:1.2rem; left:6vmin; right:6vmin;
                display:flex; justify-content:space-between; }
-    .cn-foot span { font-family:var(--book); font-style:italic; font-size:.66rem;
+    .cn-foot span { font-family:var(--book); font-style:italic; font-size:.76rem;
                     color:rgba(252,250,246,.25); }
 
     @media(max-width:920px){
@@ -292,7 +292,7 @@
       .lp-crs,.rp-crs { display:none; }
       .cn-wrap { padding:3rem 1.6rem; }
       .cn-rule,.cn-foot { left:1.6rem; right:1.6rem; }
-      .cn-hed { font-size:clamp(3rem,14vw,4.6rem); }
+      .cn-hed { font-size:clamp(3.3rem,15vw,5rem); }
       .ribbon { left:10%; }
     }
   </style>
@@ -374,7 +374,7 @@
         </a></div>
         <div class="wk-row"><a href="work.html">
           <span class="wk-num">+</span>
-          <div class="wk-meta">from the studio<b style="font-size:.8rem;">earlywinter.studio</b><i>details &amp; outtakes</i></div>
+          <div class="wk-meta">from the studio<b style="font-size:.9rem;">earlywinter.studio</b><i>details &amp; outtakes</i></div>
           <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Film canister held in warm light">
         </a></div>
         <a class="scrib" href="work.html" style="position:static; display:inline-block; align-self:flex-end; font-size:1.35rem; transform:rotate(-2deg);">the full shelf →</a>

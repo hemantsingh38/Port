@@ -44,8 +44,8 @@
     /* ── page index tabs ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.48rem; font-weight:500;
-           letter-spacing:.18em; text-transform:uppercase; text-decoration:none;
+    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
@@ -88,8 +88,8 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.46rem; font-weight:500;
-      letter-spacing:.2em; text-transform:uppercase;
+      font-family:var(--sans); font-size:.56rem; font-weight:500;
+      letter-spacing:.03em; text-transform:uppercase;
       color:rgba(252,250,246,.55);
     }
 
@@ -121,10 +121,10 @@
     }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.68); }
+           font-family:var(--book); font-size:.7rem; color:rgba(21,17,14,.68); }
     .run { position:absolute; top:1.1rem;
-           font-family:var(--sans); font-size:.44rem; font-weight:500;
-           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.56); }
+           font-family:var(--sans); font-size:.54rem; font-weight:500;
+           letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.56); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
@@ -133,18 +133,18 @@
     .lp { padding:3.2rem 2.4rem 2.6rem 3rem; }
     .lp-head { position:absolute; top:5rem; left:3rem; right:2.4rem;
                display:flex; flex-direction:column; gap:.7rem; align-items:flex-start; }
-    .lp-title h2 { font-family:var(--serif); font-weight:400; font-size:1.3rem;
-                   letter-spacing:-1px; line-height:1.1; }
+    .lp-title h2 { font-family:var(--serif); font-weight:400; font-size:1.6rem;
+                   letter-spacing:-1.5px; line-height:1.1; }
     .lp-title h2 em { display:block; font-style:normal; font-weight:400;
                       color:rgba(21,17,14,.55); font-size:.88em; }
     .lp-crs { display:flex; gap:1.6rem; padding-top:.15rem; flex-wrap:wrap; }
     .lp-title.v,.lp-ct.v,.lp-cat.v,.lp-cr.v,.rp-sub.v {
       writing-mode:horizontal-tb; transform:none;
     }
-    .lp-cr { font-family:var(--book); font-size:.56rem; line-height:1.5;
+    .lp-cr { font-family:var(--book); font-size:.66rem; line-height:1.5;
              color:rgba(21,17,14,.55); white-space:nowrap; }
     .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
-               font-size:.42rem; letter-spacing:.12em; text-transform:uppercase;
+               font-size:.52rem; letter-spacing:.02em; text-transform:uppercase;
                color:rgba(21,17,14,.56); margin-bottom:.2rem; }
     .lp-media { position:absolute; left:0; right:2.4rem; top:46%; bottom:2.6rem;
                 display:flex; flex-direction:column; justify-content:flex-end; }
@@ -156,26 +156,26 @@
     .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
           background:#EFECE6; filter:saturate(.92) contrast(.97); }
     .lp-cat { position:absolute; left:3rem; bottom:2.6rem; z-index:3;
-              font-family:var(--book); font-style:italic; font-size:.56rem;
+              font-family:var(--book); font-style:italic; font-size:.66rem;
               color:rgba(21,17,14,.62); }
     .lp-ct { position:absolute; left:3rem; top:3rem;
-             font-family:var(--sans); font-size:.44rem; font-weight:500;
-             letter-spacing:.18em; color:rgba(21,17,14,.58); }
+             font-family:var(--sans); font-size:.54rem; font-weight:500;
+             letter-spacing:.03em; color:rgba(21,17,14,.58); }
 
     .rp { padding:3.2rem 3rem 2.6rem 2.8rem; }
     .rp-sub { position:absolute; top:5.4rem; left:2.8rem; right:3rem;
-              font-family:var(--book); font-style:italic; font-size:.78rem;
+              font-family:var(--book); font-style:italic; font-size:.88rem;
               color:rgba(21,17,14,.72); }
     .rp-crs { position:absolute; top:3.2rem; left:2.8rem; display:flex; gap:1.05rem; }
     .rp-body { position:absolute; left:2.8rem; right:3rem; bottom:5.4rem;
                columns:2; column-gap:1.7rem;
-               font-family:var(--book); font-size:.78rem; line-height:1.72;
+               font-family:var(--book); font-size:.88rem; line-height:1.72;
                color:rgba(21,17,14,.78); }
     .rp-body p + p { margin-top:.7rem; }
     .rp-body em { font-style:italic; }
     .rp-link { position:absolute; left:2.8rem; bottom:2.7rem;
-               font-family:var(--sans); font-size:.5rem; font-weight:500;
-               letter-spacing:.16em; text-transform:uppercase;
+               font-family:var(--sans); font-size:.6rem; font-weight:500;
+               letter-spacing:.02em; text-transform:uppercase;
                color:var(--ink); text-decoration:none;
                border-bottom:1px solid rgba(21,17,14,.52); padding-bottom:.16rem;
                transition:border-color .22s; }
@@ -189,11 +189,11 @@
     .gv-top { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; flex-shrink:0; }
     .gv-search { flex:1; display:flex; align-items:center; gap:.55rem;
                  border:1px solid rgba(21,17,14,.2); border-radius:0;
-                 padding:.5rem 1rem; font-family:var(--sans); font-size:.58rem;
+                 padding:.5rem 1rem; font-family:var(--sans); font-size:.68rem;
                  color:rgba(21,17,14,.6); }
     .gv-search svg { width:10px; height:10px; opacity:.5; flex-shrink:0; }
-    .gv-chip { font-family:var(--sans); font-size:.5rem; font-weight:500;
-               letter-spacing:.04em; color:rgba(21,17,14,.6);
+    .gv-chip { font-family:var(--sans); font-size:.6rem; font-weight:500;
+               letter-spacing:.02em; color:rgba(21,17,14,.6);
                border:1px solid rgba(21,17,14,.16); border-radius:0;
                padding:.45rem .85rem; cursor:none; background:none;
                transition:all .2s; }
@@ -205,9 +205,9 @@
                    filter:saturate(.92) contrast(.98); transition:filter .2s; }
     .gv-tile:hover img { filter:saturate(1.06) contrast(1); }
     .gv-tile b { display:block; margin-top:.45rem; font-family:var(--sans);
-                 font-weight:500; font-size:.56rem; line-height:1.35; color:var(--ink); }
+                 font-weight:500; font-size:.66rem; line-height:1.35; color:var(--ink); }
     .gv-tile span { display:block; margin-top:.1rem; font-family:var(--sans);
-                    font-size:.46rem; color:rgba(21,17,14,.6); }
+                    font-size:.56rem; color:rgba(21,17,14,.6); }
     .t43 img { aspect-ratio:4/3; }
     .t11 img { aspect-ratio:1/1; }
     .t34 img { aspect-ratio:3/4; }
@@ -276,7 +276,7 @@
             alt="Stack of vintage film boxes on books"></div>
         </div>
         <span class="lp-cat v">Ed Tech / Education</span>
-        <span class="scrib" style="right:1.8rem; top:36%; font-size:1.05rem; transform:rotate(4deg);">begin here ↓</span>
+        <span class="scrib" style="right:1.8rem; top:36%; font-size:1.2rem; transform:rotate(4deg);">begin here ↓</span>
         <span class="pno">114</span>
       </div>
       <div class="rp">
@@ -459,7 +459,7 @@
           soon.</p>
         </div>
         <a class="rp-link dis">Case study soon</a>
-        <span class="scrib" style="left:8.6rem; bottom:2.3rem; font-size:1rem; transform:rotate(-2deg);">— promise.</span>
+        <span class="scrib" style="left:8.6rem; bottom:2.3rem; font-size:1.15rem; transform:rotate(-2deg);">— promise.</span>
         <span class="pno">121</span>
       </div>
     </div>
