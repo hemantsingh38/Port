@@ -12,7 +12,7 @@
 
     :root {
       --table: #0B0908;
-      --page:  #FCFAF6;
+      --page:  #FEFEFB;
       --ink:   #15110E;
       --mu:    #978D7C;
       --green: #2DF952;
@@ -31,7 +31,7 @@
     img,video { display:block; }
 
     .grain {
-      position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.06;
+      position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.08;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size:256px 256px;
     }
@@ -105,7 +105,7 @@
     #cn .book { --spine: var(--green); }
     .book::after {
       content:''; position:absolute; left:-4px; top:2px; bottom:-3px; width:4px;
-      background:repeating-linear-gradient(to right, #E9E4DA 0 1px, #FCFAF6 1px 2px);
+      background:repeating-linear-gradient(to right, #ECEAE3 0 1px, #FEFEFB 1px 2px);
     }
     .gut {
       position:absolute; left:50%; top:0; bottom:0; width:1px;
