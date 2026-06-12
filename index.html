@@ -203,6 +203,13 @@
       font-family:var(--sans); font-weight:500; font-size:.54rem;
       letter-spacing:.05em; text-transform:uppercase; color:rgba(21,17,14,.62); }
     .fq-light, .fq-light small { color:rgba(254,254,251,.92); }
+    .fp-img { position:absolute; inset:0; width:100%; height:100%;
+              object-fit:cover; filter:saturate(1.05) contrast(1.02); }
+    .fp-cap { position:absolute; left:2.2rem; right:2.2rem; bottom:1.6rem; z-index:2;
+              font-family:var(--sans); font-size:.56rem; line-height:1.55;
+              color:#FEFEFB; background:rgba(11,9,8,.72);
+              padding:.55rem .8rem; }
+    .fp-cap b { font-weight:600; }
     /* print-through from the reverse side */
     .fq.thru { transform:scaleX(-1) rotate(.6deg); opacity:.12;
                filter:blur(.4px); pointer-events:none; user-select:none; }
@@ -439,16 +446,12 @@
         </div>
         <span class="pno">6</span>
       </div>
-      <div class="fq-page" style="background:#2B5BFF;">
-        <div class="fq fq-light" style="right:16%; top:52%;">
-          Less, but better — <em>but warmer.</em> Made to be used on a
-          Tuesday, remembered on a Sunday.
-          <small>Early Winter / studio notes</small>
-        </div>
-        <div class="fq thru fq-light" style="left:14%; top:20%; width:46%;">
-          good design is as little design as possible.
-        </div>
-        <span class="pno">7</span>
+      <div class="fq-page">
+        <img class="fp-img" src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway after rain">
+        <div class="fp-cap"><b>■ After the rain</b> — hydrangeas on the hill path.
+          Less, but better — <em>but warmer.</em> Made to be used on a Tuesday,
+          remembered on a Sunday.</div>
+        <span class="pno" style="color:rgba(254,254,251,.85); z-index:3;">7</span>
       </div>
     </div>
   </section>
