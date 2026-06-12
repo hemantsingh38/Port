@@ -23,7 +23,7 @@
     }
 
     html { scroll-snap-type:y mandatory; overflow-y:scroll; scroll-behavior:smooth; }
-    body { background:var(--table); color:var(--ink); font-family:var(--book);
+    body { background:var(--table); color:var(--ink); font-family:var(--sans);
            cursor:none; overflow-x:hidden; }
     img,video { display:block; }
 
@@ -53,8 +53,8 @@
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
     .tab-home  { background:#F5E10A; }
-    .tab-work  { background:#A8CFFF; }
-    .tab-about { background:#FF8C69; }
+    .tab-work  { background:#5B8CFF; }
+    .tab-about { background:#FF4B1F; }
 
     /* ── view toggle (single / grid) ── */
     .vt { position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
@@ -98,21 +98,26 @@
       position:absolute; top:max(4.5vmin, 3.4rem); bottom:4.5vmin; left:6vmin; right:6vmin;
       background:var(--page);
       display:grid; grid-template-columns:1fr 1fr;
-      box-shadow:0 40px 90px rgba(0,0,0,.55), 0 6px 22px rgba(0,0,0,.45);
+      box-shadow:0 40px 90px rgba(0,0,0,.55), 0 6px 22px rgba(0,0,0,.45),
+                 4px 4px 0 -1px #FEFEFB, 6px 6px 0 -1px #E9E5DC,
+                 9px 8px 0 -1px #FEFEFB, 11px 10px 0 -1px #DFDACE;
     }
     .book::before {
       content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
       background:var(--spine, var(--green)); z-index:-1;
       box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
-    #w1 .book { --spine: #A8CFFF; }
-    #w2 .book { --spine: #FFB347; }
-    #w3 .book { --spine: #98D4A3; }
-    #w4 .book { --spine: #C9B8FF; }
+    #w1 .book { --spine: #5B8CFF; }
+    #w2 .book { --spine: #FF9E00; }
+    #w3 .book { --spine: #2FC97B; }
+    #w4 .book { --spine: #9D7BFF; }
     #gv .book { --spine: var(--green); }
     .book::after {
-      content:''; position:absolute; left:-4px; top:2px; bottom:-3px; width:4px;
-      background:repeating-linear-gradient(to right, #ECEAE3 0 1px, #FEFEFB 1px 2px);
+      content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
+      background:repeating-linear-gradient(to right,
+        #FEFEFB 0 1.6px, #FF4B1F 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, #F5E10A 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, #2B5BFF 6.8px 8px);
     }
     .gut {
       position:absolute; left:50%; top:0; bottom:0; width:1px;
@@ -121,7 +126,7 @@
     }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--book); font-size:.7rem; color:rgba(21,17,14,.68); }
+           font-family:var(--sans); font-size:.7rem; color:rgba(21,17,14,.68); }
     .run { position:absolute; top:1.1rem;
            font-family:var(--sans); font-size:.54rem; font-weight:500;
            letter-spacing:.03em; text-transform:uppercase; color:rgba(21,17,14,.56); }
@@ -141,7 +146,7 @@
     .lp-title.v,.lp-ct.v,.lp-cat.v,.lp-cr.v,.rp-sub.v {
       writing-mode:horizontal-tb; transform:none;
     }
-    .lp-cr { font-family:var(--book); font-size:.66rem; line-height:1.5;
+    .lp-cr { font-family:var(--sans); font-size:.66rem; line-height:1.5;
              color:rgba(21,17,14,.55); white-space:nowrap; }
     .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
                font-size:.52rem; letter-spacing:.02em; text-transform:uppercase;
@@ -156,7 +161,7 @@
     .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
           background:#EFECE6; filter:saturate(.92) contrast(.97); }
     .lp-cat { position:absolute; left:3rem; bottom:2.6rem; z-index:3;
-              font-family:var(--book); font-style:italic; font-size:.66rem;
+              font-family:var(--sans); font-style:italic; font-size:.66rem;
               color:rgba(21,17,14,.62); }
     .lp-ct { position:absolute; left:3rem; top:3rem;
              font-family:var(--sans); font-size:.54rem; font-weight:500;
@@ -164,12 +169,12 @@
 
     .rp { padding:3.2rem 3rem 2.6rem 2.8rem; }
     .rp-sub { position:absolute; top:5.4rem; left:2.8rem; right:3rem;
-              font-family:var(--book); font-style:italic; font-size:.88rem;
+              font-family:var(--sans); font-style:italic; font-size:.88rem;
               color:rgba(21,17,14,.72); }
     .rp-crs { position:absolute; top:3.2rem; left:2.8rem; display:flex; gap:1.05rem; }
     .rp-body { position:absolute; left:2.8rem; right:3rem; bottom:5.4rem;
                columns:2; column-gap:1.7rem;
-               font-family:var(--book); font-size:.88rem; line-height:1.72;
+               font-family:var(--sans); font-size:.88rem; line-height:1.72;
                color:rgba(21,17,14,.78); }
     .rp-body p + p { margin-top:.7rem; }
     .rp-body em { font-style:italic; }
