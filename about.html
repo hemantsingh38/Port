@@ -115,19 +115,16 @@
               border-bottom:2px solid rgba(200,56,90,.35); }
     a.scrib:hover { border-color:#C8385A; }
 
-    /* glued photo prints (cut-outs) */
-    .cut { position:absolute; background:#fff; padding:6px 6px 20px;
-           box-shadow:0 10px 22px rgba(21,17,14,.24); }
-    .cut img { width:100%; aspect-ratio:4/3; object-fit:cover;
-               filter:saturate(.88) contrast(.97); }
+    /* photo cuts — clean, frameless */
+    .cut { position:absolute; }
+    .cut img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:7px;
+               box-shadow:0 16px 34px rgba(21,17,14,.22);
+               filter:saturate(.9) contrast(.97); }
     .cut.tall img { aspect-ratio:3/4; }
-    .cut figcaption { position:absolute; bottom:1px; left:0; right:0;
-      text-align:center; font-family:var(--hand); font-size:.82rem;
-      color:rgba(21,17,14,.55); }
-    .cut.tape::before { content:''; position:absolute; top:-9px; left:50%;
-      transform:translateX(-50%) rotate(-4deg); width:54px; height:16px;
-      background:rgba(238,224,178,.9); box-shadow:0 1px 3px rgba(21,17,14,.18);
-      z-index:2; }
+    .cut figcaption { margin-top:.45rem; text-align:left;
+      font-family:var(--sans); font-weight:500; font-size:.46rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:rgba(21,17,14,.5); }
 
     /* generic page paddings */
     .pp { position:relative; overflow:hidden; }
@@ -212,7 +209,7 @@
            gap:1.5rem 1.3rem; align-content:center; height:100%;
            padding:3rem 2.8rem; }
     .inv figure { text-align:center; }
-    .inv img { width:100%; aspect-ratio:1; object-fit:cover;
+    .inv img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px;
                max-height:20vh; filter:saturate(.8) contrast(.98); }
     .inv figcaption { margin-top:.5rem; font-family:var(--sans); font-weight:500;
       font-size:.44rem; letter-spacing:.18em; text-transform:uppercase;
@@ -279,7 +276,7 @@
       </div>
       <div class="acv-r">
         <span class="run" style="left:50%; transform:translateX(-50%); color:rgba(21,17,14,.45);">About</span>
-        <figure class="cut tape" style="left:7%; top:9%; width:38%; transform:rotate(-5deg);">
+        <figure class="cut" style="left:7%; top:9%; width:38%; transform:rotate(-5deg);">
           <img src="img/moodboard.jpg" alt="Hemant presenting a moodboard on a big screen">
           <figcaption>work, out loud</figcaption>
         </figure>
@@ -291,7 +288,7 @@
           <img src="https://images.pexels.com/photos/2697931/pexels-photo-2697931.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glass of spiced chai with biscuits">
           <figcaption>fuel</figcaption>
         </figure>
-        <figure class="cut tape" style="right:9%; bottom:9%; width:36%; transform:rotate(-3deg); z-index:3;">
+        <figure class="cut" style="right:9%; bottom:9%; width:36%; transform:rotate(-3deg); z-index:3;">
           <img src="https://images.pexels.com/photos/2718571/pexels-photo-2718571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage cassette tapes">
           <figcaption>side A</figcaption>
         </figure>
@@ -310,7 +307,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp" style="display:flex; align-items:center; justify-content:center;">
-        <figure class="cut tall tape" style="position:relative; width:56%; transform:rotate(-2.5deg);">
+        <figure class="cut tall" style="position:relative; width:56%; transform:rotate(-2.5deg);">
           <img src="img/bar-glass.jpg" alt="Hemant studying a martini glass in a dim wood-panelled bar">
           <figcaption>me, probably.</figcaption>
         </figure>
@@ -388,7 +385,7 @@
           <div class="wkb-row"><b>Tools</b><span>Figma, Miro, pen &amp; paper — usually in that order, reversed.</span></div>
           <div class="wkb-row"><b>Now</b><span>Open to new work and collaborations.</span></div>
         </div>
-        <figure class="cut tape" style="right:2.6rem; bottom:3rem; width:30%; transform:rotate(2.5deg);">
+        <figure class="cut" style="right:2.6rem; bottom:3rem; width:30%; transform:rotate(2.5deg);">
           <img src="img/moon-talk.jpg" alt="Hemant presenting the MOON concept to a room">
           <figcaption>out loud</figcaption>
         </figure>
@@ -429,7 +426,7 @@
       </div>
       <div class="pp" style="background:#C9B8FF;">
         <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <figure class="cut tape" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
+        <figure class="cut" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/11092278/pexels-photo-11092278.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage film projector">
           <figcaption>the machine</figcaption>
         </figure>
@@ -464,7 +461,7 @@
       </div>
       <div class="ata-r">
         <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <figure class="cut tape" style="left:8%; top:10%; width:40%; transform:rotate(-4deg);">
+        <figure class="cut" style="left:8%; top:10%; width:40%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stack of vintage film boxes">
           <figcaption>the archive</figcaption>
         </figure>
@@ -472,7 +469,7 @@
           <img src="https://images.pexels.com/photos/5764288/pexels-photo-5764288.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vinyl record on a turntable">
           <figcaption>33 rpm</figcaption>
         </figure>
-        <figure class="cut tape" style="left:16%; bottom:10%; width:38%; transform:rotate(2deg); z-index:3;">
+        <figure class="cut" style="left:16%; bottom:10%; width:38%; transform:rotate(2deg); z-index:3;">
           <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hand holding a Kodak film roll">
           <figcaption>36 exposures</figcaption>
         </figure>
