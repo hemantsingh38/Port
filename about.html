@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Early Winter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+
+    :root {
+      --table: #0B0908;
+      --page:  #FCFAF6;
+      --ink:   #15110E;
+      --mu:    #978D7C;
+      --green: #2DF952;
+      --serif: 'Outfit',system-ui,sans-serif;
+      --book:  'EB Garamond',Georgia,serif;
+      --sans:  'Inter',system-ui,sans-serif;
+      --hand:  'Caveat',cursive;
+    }
+
+    html { scroll-snap-type:y mandatory; overflow-y:scroll; scroll-behavior:smooth; }
+    body { background:var(--table); color:var(--ink); font-family:var(--book);
+           cursor:none; overflow-x:hidden; }
+    img,video { display:block; }
+
+    .grain {
+      position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.06;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:256px 256px;
+    }
+
+    #paw {
+      position:fixed; pointer-events:none; z-index:9999;
+      transform:translate(-10px,-8px);
+      filter:drop-shadow(0 2px 6px rgba(0,0,0,.24));
+      transition:transform .12s cubic-bezier(.34,1.56,.64,1);
+    }
+    #paw.click { transform:translate(-10px,-8px) scale(.78) rotate(-14deg); }
+
+    .pg { scroll-snap-align:start; height:100vh; position:relative; overflow:hidden; }
+
+    .rv { opacity:0; transform:translateY(.7rem);
+          transition:opacity 1s cubic-bezier(.22,1,.36,1),
+                     transform 1s cubic-bezier(.22,1,.36,1); }
+    .rv.on { opacity:1; transform:none; }
+
+    .tcap {
+      position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
+      font-family:var(--sans); font-size:.46rem; font-weight:500;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(252,250,246,.28);
+    }
+
+    /* ── the book frame ── */
+    .book {
+      position:absolute; top:4.5vmin; bottom:4.5vmin; left:6vmin; right:6vmin;
+      background:var(--page);
+      display:grid; grid-template-columns:1fr 1fr;
+      box-shadow:0 40px 90px rgba(0,0,0,.55), 0 6px 22px rgba(0,0,0,.45);
+    }
+    .book::before {
+      content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
+      background:var(--spine, var(--green)); z-index:-1;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+    #a-cv .book { --spine: #F5E10A; }
+    #a-me .book { --spine: #A8CFFF; }
+    #a-ph .book { --spine: #3BAADC; }
+    #a-wk .book { --spine: #FFB347; }
+    #a-in .book { --spine: #C9B8FF; }
+    #a-ta .book { --spine: #FF8C69; }
+    #a-nn .book { --spine: #98D4A3; }
+    .book::after {
+      content:''; position:absolute; left:-4px; top:2px; bottom:-3px; width:4px;
+      background:repeating-linear-gradient(to right, #E9E4DA 0 1px, #FCFAF6 1px 2px);
+    }
+    .gut {
+      position:absolute; left:50%; top:0; bottom:0; width:1px;
+      background:rgba(21,17,14,.1); z-index:5;
+      box-shadow:6px 0 14px -6px rgba(21,17,14,.14), -6px 0 14px -6px rgba(21,17,14,.14);
+    }
+
+    .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
+           font-family:var(--book); font-size:.6rem; color:rgba(21,17,14,.45); }
+    .run { position:absolute; top:1.1rem; z-index:6;
+           font-family:var(--sans); font-size:.44rem; font-weight:500;
+           letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.32); }
+    .run a { color:inherit; text-decoration:none; }
+    .run a:hover { color:var(--ink); }
+
+    /* handwritten pen notes */
+    .scrib { position:absolute; z-index:40; font-family:var(--hand);
+             font-weight:600; color:#C8385A; line-height:1.05;
+             transform:rotate(-3.5deg); pointer-events:none; }
+    a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
+              border-bottom:2px solid rgba(200,56,90,.35); }
+    a.scrib:hover { border-color:#C8385A; }
+
+    /* glued photo prints (cut-outs) */
+    .cut { position:absolute; background:#fff; padding:6px 6px 20px;
+           box-shadow:0 10px 22px rgba(21,17,14,.24); }
+    .cut img { width:100%; aspect-ratio:4/3; object-fit:cover;
+               filter:saturate(.88) contrast(.97); }
+    .cut.tall img { aspect-ratio:3/4; }
+    .cut figcaption { position:absolute; bottom:1px; left:0; right:0;
+      text-align:center; font-family:var(--hand); font-size:.82rem;
+      color:rgba(21,17,14,.55); }
+    .cut.tape::before { content:''; position:absolute; top:-9px; left:50%;
+      transform:translateX(-50%) rotate(-4deg); width:54px; height:16px;
+      background:rgba(238,224,178,.9); box-shadow:0 1px 3px rgba(21,17,14,.18);
+      z-index:2; }
+
+    /* generic page paddings */
+    .pp { position:relative; overflow:hidden; }
+    .pp-pad { padding:3.4rem 2.8rem 2.6rem 3rem; }
+
+    .runtop {
+      text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
+      letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.3);
+      padding-bottom:.75rem; margin-bottom:1.8rem;
+      border-bottom:1px solid rgba(21,17,14,.14);
+    }
+    .hed {
+      font-family:var(--serif); font-weight:400;
+      font-size:clamp(1.5rem,2.7vw,2.5rem); line-height:1.08;
+      letter-spacing:-1px; color:var(--ink);
+    }
+    .hed em { font-style:normal; color:rgba(21,17,14,.5); }
+    .dek {
+      font-family:var(--book); font-size:clamp(.8rem,1.05vw,.95rem);
+      line-height:1.78; color:rgba(21,17,14,.72); margin-top:1.3rem;
+    }
+    .dek em { font-style:italic; }
+    .dek p + p { margin-top:.8rem; }
+
+    /* ══════════ COVER ══════════ */
+    .acv-l { position:relative; display:flex; flex-direction:column;
+             padding:2.8rem 2.6rem 2.4rem 3rem; overflow:hidden; }
+    .acv-l h1 {
+      font-family:var(--serif); font-weight:400;
+      font-size:clamp(3.2rem,6vw,6.4rem); line-height:.94;
+      letter-spacing:-1px; flex:1; display:flex;
+      flex-direction:column; justify-content:center;
+    }
+    .acv-l h1 em { font-style:normal; color:rgba(21,17,14,.45); }
+    .acv-r { position:relative; background:#F5E10A; overflow:hidden; }
+
+    /* ══════════ PHILOSOPHY ══════════ */
+    .aph-l { position:relative; background:#3BAADC; overflow:hidden;
+             display:flex; align-items:center; padding:3rem 2.6rem 3rem 3rem; }
+    .aph-l .hed { font-size:clamp(1.7rem,3vw,2.8rem); color:var(--ink); }
+    .prn { margin-top:1.5rem; }
+    .prn li { list-style:none; display:flex; gap:.9rem; align-items:baseline;
+              padding:.85rem 0; border-bottom:1px solid rgba(21,17,14,.12); }
+    .prn li:last-child { border-bottom:none; }
+    .prn .n { font-family:var(--hand); font-weight:600; font-size:1.25rem;
+              color:#C8385A; flex-shrink:0; }
+    .prn b { display:block; font-family:var(--serif); font-weight:400;
+             letter-spacing:-.5px; font-size:1rem; margin-bottom:.2rem; }
+    .prn p { font-family:var(--book); font-size:.78rem; line-height:1.6;
+             color:rgba(21,17,14,.65); }
+
+    /* ══════════ WORK BRIEF ══════════ */
+    .wkb { margin-top:1.6rem; }
+    .wkb-row { display:flex; gap:1.4rem; padding:.8rem 0;
+               border-bottom:1px solid rgba(21,17,14,.12); }
+    .wkb-row b { flex:0 0 7.2rem; font-family:var(--sans); font-weight:500;
+      font-size:.44rem; letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(21,17,14,.35); padding-top:.25rem; }
+    .wkb-row span { font-family:var(--book); font-size:.82rem;
+      line-height:1.6; color:rgba(21,17,14,.78); }
+
+    /* ══════════ INSPIRATIONS ══════════ */
+    .insp { margin-top:.4rem; }
+    .insp li { list-style:none; padding:1rem 0;
+               border-bottom:1px solid rgba(21,17,14,.12); }
+    .insp li:last-child { border-bottom:none; }
+    .insp b { display:block; font-family:var(--serif); font-weight:400;
+              letter-spacing:-.5px; font-size:1.05rem; margin-bottom:.25rem; }
+    .insp p { font-family:var(--book); font-style:italic; font-size:.78rem;
+              line-height:1.6; color:rgba(21,17,14,.6); }
+
+    /* ══════════ TASTE ══════════ */
+    .tst li { list-style:none; padding:.7rem 0; display:flex; gap:.8rem;
+              align-items:baseline; border-bottom:1px solid rgba(21,17,14,.12); }
+    .tst li:last-child { border-bottom:none; }
+    .tst .tick { font-family:var(--hand); font-weight:600; color:#C8385A; }
+    .tst span { font-family:var(--book); font-size:.84rem; color:rgba(21,17,14,.75); }
+    .ata-r { position:relative; background:#FF8C69; overflow:hidden; }
+
+    /* ══════════ NON-NEGOTIABLES (inventory grid) ══════════ */
+    .inv { display:grid; grid-template-columns:repeat(3,1fr);
+           gap:1.5rem 1.3rem; align-content:center; height:100%;
+           padding:3rem 2.8rem; }
+    .inv figure { text-align:center; }
+    .inv img { width:100%; aspect-ratio:1; object-fit:cover;
+               max-height:20vh; filter:saturate(.8) contrast(.98); }
+    .inv figcaption { margin-top:.5rem; font-family:var(--sans); font-weight:500;
+      font-size:.44rem; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(21,17,14,.45); }
+
+    /* ══════════ BACK ══════════ */
+    #a-bk { background:var(--table); }
+    .abk-wrap { position:absolute; inset:0; display:flex; flex-direction:column;
+                justify-content:flex-end; padding:4rem 5rem 4.4rem 6vmin; }
+    .abk-hed { font-family:var(--serif); font-weight:400;
+      font-size:clamp(3.4rem,9vw,9.5rem); line-height:.86;
+      letter-spacing:-1px; color:var(--page); margin-bottom:2.2rem; }
+    .abk-hed em { font-style:normal; opacity:.4; }
+    .abk-links { display:flex; flex-direction:column; gap:.9rem; }
+    .abk-links a { font-family:var(--book); font-style:italic; font-size:1.05rem;
+      color:rgba(252,250,246,.5); text-decoration:none; width:fit-content;
+      border-bottom:1px solid rgba(252,250,246,.16); padding-bottom:.16rem;
+      transition:all .28s; }
+    .abk-links a:hover { color:var(--green); border-color:var(--green); }
+
+    @media(max-width:920px){
+      .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
+              grid-template-rows:1fr 1fr; }
+      .gut { display:none; }
+      .inv { gap:1rem .9rem; padding:1.6rem; }
+      .inv img { max-height:10vh; }
+      .cut { max-width:28%; }
+    }
+    @media(max-width:580px){
+      html { scroll-snap-type:none; }
+      .pp-pad { padding:2.4rem 1.4rem; }
+      .abk-wrap { padding:3rem 1.6rem; }
+      .scrib { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="paw" aria-hidden="true">
+    <img src="data:image/png;base64,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" width="46" height="47" alt="">
+  </div>
+
+  <!-- ═══ ABOUT COVER ═══ -->
+  <section class="pg" id="a-cv">
+    <span class="tcap">i / viii — about, early winter</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="acv-l">
+        <div class="runtop" style="display:flex; justify-content:space-between; text-align:left;">
+          <span>Early Winter</span>
+          <span><a href="index.html" style="color:inherit;text-decoration:none;">← the book</a></span>
+        </div>
+        <h1>The<br>person<br><em>behind it.</em></h1>
+        <span class="scrib" style="right:2.6rem; bottom:8.4rem; font-size:1.25rem; transform:rotate(4deg);">hello, I'm Hemant →</span>
+        <p class="dek" style="border-top:1px solid rgba(21,17,14,.1); padding-top:.8rem; margin-top:0; font-style:italic; color:rgba(21,17,14,.4); font-size:.74rem;">
+          A scrapbook, really. Scroll slowly.
+        </p>
+      </div>
+      <div class="acv-r">
+        <span class="run" style="left:50%; transform:translateX(-50%); color:rgba(21,17,14,.45);">About</span>
+        <figure class="cut tape" style="left:7%; top:9%; width:38%; transform:rotate(-5deg);">
+          <img src="img/moodboard.jpg" alt="Hemant presenting a moodboard on a big screen">
+          <figcaption>work, out loud</figcaption>
+        </figure>
+        <figure class="cut tall" style="right:6%; top:6%; width:30%; transform:rotate(3deg); z-index:2;">
+          <img src="img/gym-bw.jpg" alt="Gym mirror selfie in black and white">
+          <figcaption>the non-negotiable</figcaption>
+        </figure>
+        <figure class="cut" style="left:12%; bottom:11%; width:30%; transform:rotate(2.5deg);">
+          <img src="https://images.pexels.com/photos/2697931/pexels-photo-2697931.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glass of spiced chai with biscuits">
+          <figcaption>fuel</figcaption>
+        </figure>
+        <figure class="cut tape" style="right:9%; bottom:9%; width:36%; transform:rotate(-3deg); z-index:3;">
+          <img src="https://images.pexels.com/photos/2718571/pexels-photo-2718571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage cassette tapes">
+          <figcaption>side A</figcaption>
+        </figure>
+        <figure class="cut" style="left:30%; top:36%; width:32%; transform:rotate(1.5deg); z-index:4;">
+          <img src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway">
+          <figcaption>after the rain</figcaption>
+        </figure>
+        <span class="pno" style="color:rgba(21,17,14,.5);">125</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ME ═══ -->
+  <section class="pg" id="a-me">
+    <span class="tcap">ii / viii — about me</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="pp" style="display:flex; align-items:center; justify-content:center;">
+        <figure class="cut tall tape" style="position:relative; width:56%; transform:rotate(-2.5deg);">
+          <img src="img/bar-glass.jpg" alt="Hemant studying a martini glass in a dim wood-panelled bar">
+          <figcaption>me, probably.</figcaption>
+        </figure>
+        <span class="scrib" style="left:3rem; bottom:3.2rem; font-size:1.1rem;">New Delhi,<br>most days ↓</span>
+        <span class="pno">126</span>
+      </div>
+      <div class="pp pp-pad">
+        <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="runtop">About me</div>
+        <h2 class="hed">He was always an <em>artist.</em><br>Now he builds things that<br>feel like <em>memories.</em></h2>
+        <div class="dek">
+          <p>Hemant Singh is a UX designer with 3.5 years across ed tech, fintech,
+          e-commerce and B2B SaaS. He founded Early Winter as a small, slow,
+          intentional studio — one person, a lot of care.</p>
+          <p>The name is the brief: work that feels like the first cold morning
+          of the season. <em>Present, calm, and a little nostalgic.</em></p>
+          <p>Before the pixels there were sketchbooks, and before the sketchbooks
+          there was a kid who drew on everything. The medium changed; the
+          instinct didn't.</p>
+        </div>
+        <span class="pno">127</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHILOSOPHY ═══ -->
+  <section class="pg" id="a-ph">
+    <span class="tcap">iii / viii — my philosophy</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="aph-l">
+        <span class="run" style="left:3rem; color:rgba(21,17,14,.45);">Philosophy</span>
+        <h2 class="hed">Design should feel like the first cold morning of the season.</h2>
+        <span class="scrib" style="left:3rem; bottom:2.6rem; font-size:1.15rem; color:#15110E;">— the whole philosophy, honestly</span>
+        <span class="pno" style="color:rgba(21,17,14,.5);">128</span>
+      </div>
+      <div class="pp pp-pad">
+        <div class="runtop">Three rules</div>
+        <ul class="prn">
+          <li><span class="n">01.</span>
+            <div><b>Invisible until it matters.</b>
+            <p>Good design disappears into use. If someone notices the interface,
+            it usually means something went wrong.</p></div>
+          </li>
+          <li><span class="n">02.</span>
+            <div><b>Less, but warmer.</b>
+            <p>Rams was right about less. But minimal shouldn't mean cold —
+            restraint and warmth can live on the same screen.</p></div>
+          </li>
+          <li><span class="n">03.</span>
+            <div><b>Made for Tuesdays.</b>
+            <p>Designed to be used on an ordinary Tuesday, and remembered
+            on a slow Sunday. Everyday first, memorable second.</p></div>
+          </li>
+        </ul>
+        <span class="pno">129</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WORK BRIEF ═══ -->
+  <section class="pg" id="a-wk">
+    <span class="tcap">iv / viii — work, briefly</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="pp pp-pad">
+        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <div class="runtop">Work, briefly</div>
+        <h2 class="hed">The formal page.</h2>
+        <span class="scrib" style="right:2.4rem; top:7.6rem; font-size:1.1rem; transform:rotate(3deg);">(skip if you like)</span>
+        <div class="wkb">
+          <div class="wkb-row"><b>What I do</b><span>Research → flows → interface. End-to-end product design, from the first messy question to the final polished screen.</span></div>
+          <div class="wkb-row"><b>Industries</b><span>Ed tech, fintech, e-commerce, B2B SaaS.</span></div>
+          <div class="wkb-row"><b>Years</b><span>3.5 and counting.</span></div>
+          <div class="wkb-row"><b>Tools</b><span>Figma, Miro, pen &amp; paper — usually in that order, reversed.</span></div>
+          <div class="wkb-row"><b>Now</b><span>Open to new work and collaborations.</span></div>
+        </div>
+        <figure class="cut tape" style="right:2.6rem; bottom:3rem; width:30%; transform:rotate(2.5deg);">
+          <img src="img/moon-talk.jpg" alt="Hemant presenting the MOON concept to a room">
+          <figcaption>out loud</figcaption>
+        </figure>
+        <span class="pno">130</span>
+      </div>
+      <div class="pp pp-pad">
+        <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="runtop">Selected work</div>
+        <ul class="insp">
+          <li><b>Uphold</b><p>mentorship, held steady — ed tech, 2025</p></li>
+          <li><b>Revibe</b><p>worn again, loved harder — thrift &amp; AI, 2025</p></li>
+          <li><b>Insight</b><p>the right people, found — B2B SaaS, 2025</p></li>
+          <li><b>Vejeez!</b><p>every vegan's dream — marketplace, 2024</p></li>
+        </ul>
+        <a class="scrib" href="index.html" style="position:static; display:inline-block; margin-top:1.3rem; font-size:1.35rem; transform:rotate(-2deg);">all in the book →</a>
+        <span class="pno">131</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INSPIRATIONS ═══ -->
+  <section class="pg" id="a-in">
+    <span class="tcap">v / viii — inspirations</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="pp pp-pad">
+        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <div class="runtop">Inspirations</div>
+        <h2 class="hed">Borrowed <em>light.</em></h2>
+        <ul class="insp" style="margin-top:1.2rem;">
+          <li><b>Don Norman</b><p>for proving that when a door confuses you, it's the door's fault.</p></li>
+          <li><b>Dieter Rams</b><p>less, but better — the sentence the studio argues with daily.</p></li>
+          <li><b>Cinema</b><p>films that feel like weather. Slow ones. The kind you remember as a temperature.</p></li>
+          <li><b>Print</b><p>magazines, zines, screenshots bound into books — the internet on paper.</p></li>
+          <li><b>Winter itself</b><p>the season that makes everything quieter and more honest.</p></li>
+        </ul>
+        <span class="pno">132</span>
+      </div>
+      <div class="pp" style="background:#C9B8FF;">
+        <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <figure class="cut tape" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
+          <img src="https://images.pexels.com/photos/11092278/pexels-photo-11092278.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage film projector">
+          <figcaption>the machine</figcaption>
+        </figure>
+        <figure class="cut" style="right:10%; bottom:16%; width:46%; transform:rotate(3deg); z-index:2;">
+          <img src="https://images.pexels.com/photos/30503068/pexels-photo-30503068.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bare trees in winter mist">
+          <figcaption>the weather</figcaption>
+        </figure>
+        <span class="scrib" style="left:14%; bottom:10%; font-size:1.2rem;">watch more films ↑</span>
+        <span class="pno" style="color:rgba(21,17,14,.5);">133</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MY TASTE ═══ -->
+  <section class="pg" id="a-ta">
+    <span class="tcap">vi / viii — my taste</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="pp pp-pad">
+        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <div class="runtop">My taste</div>
+        <h2 class="hed">Things that feel<br><em>right.</em></h2>
+        <ul class="tst" style="margin-top:1.2rem;">
+          <li><span class="tick">✓</span><span>film grain over gradients</span></li>
+          <li><span class="tick">✓</span><span>warm paper, cold mornings</span></li>
+          <li><span class="tick">✓</span><span>neon green on near-black</span></li>
+          <li><span class="tick">✓</span><span>handwriting in the margins</span></li>
+          <li><span class="tick">✓</span><span>tapes, reels, anything that clicks</span></li>
+          <li><span class="tick">✓</span><span>interfaces that know when to be quiet</span></li>
+        </ul>
+        <span class="pno">134</span>
+      </div>
+      <div class="ata-r">
+        <span class="run" style="right:3rem; color:rgba(21,17,14,.45);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <figure class="cut tape" style="left:8%; top:10%; width:40%; transform:rotate(-4deg);">
+          <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stack of vintage film boxes">
+          <figcaption>the archive</figcaption>
+        </figure>
+        <figure class="cut" style="right:7%; top:18%; width:36%; transform:rotate(3deg); z-index:2;">
+          <img src="https://images.pexels.com/photos/5764288/pexels-photo-5764288.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vinyl record on a turntable">
+          <figcaption>33 rpm</figcaption>
+        </figure>
+        <figure class="cut tape" style="left:16%; bottom:10%; width:38%; transform:rotate(2deg); z-index:3;">
+          <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hand holding a Kodak film roll">
+          <figcaption>36 exposures</figcaption>
+        </figure>
+        <figure class="cut" style="right:11%; bottom:8%; width:34%; transform:rotate(-2.5deg); z-index:4;">
+          <img src="img/gym-grain.jpg" alt="Grainy gym mirror photo">
+          <figcaption>film grain (accidental)</figcaption>
+        </figure>
+        <span class="pno" style="color:rgba(21,17,14,.5);">135</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NON-NEGOTIABLES ═══ -->
+  <section class="pg" id="a-nn">
+    <span class="tcap">vii / viii — the non-negotiables</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <div class="pp pp-pad">
+        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <div class="runtop">Non-negotiables</div>
+        <h2 class="hed">The things<br>that <em>stay.</em></h2>
+        <div class="dek">
+          <p>Whatever the deadline, whatever the city — these survive.
+          The gym before the inbox. Real food, eaten slowly. A road
+          out of town every few months. And the last show at the
+          nearest cinema, aisle seat.</p>
+        </div>
+        <span class="scrib" style="left:3rem; bottom:4.6rem; font-size:1.2rem;">in no particular order (lies)</span>
+        <span class="pno">136</span>
+      </div>
+      <div class="pp">
+        <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="inv">
+          <figure><img src="img/gym.jpg" alt="Hemant's gym mirror selfie"><figcaption>Gym</figcaption></figure>
+          <figure><img src="https://images.pexels.com/photos/2697931/pexels-photo-2697931.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glass of spiced chai"><figcaption>Chai</figcaption></figure>
+          <figure><img src="img/ramen.jpg" alt="Bowl of ramen on a wooden counter"><figcaption>Food</figcaption></figure>
+          <figure><img src="img/mountains.jpg" alt="Bridge with prayer flags over a Himalayan river"><figcaption>Travel</figcaption></figure>
+          <figure><img src="https://images.pexels.com/photos/3866658/pexels-photo-3866658.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Empty cinema hall"><figcaption>Cinema</figcaption></figure>
+          <figure><img src="https://images.pexels.com/photos/2718571/pexels-photo-2718571.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cassette tapes"><figcaption>Music</figcaption></figure>
+          <figure><img src="img/pickleball.jpg" alt="Hemant on a pickleball court with a paddle"><figcaption>Play</figcaption></figure>
+          <figure><img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Footprints in winter fog"><figcaption>Winter</figcaption></figure>
+          <figure><img src="https://images.pexels.com/photos/5668471/pexels-photo-5668471.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Notebook and laptop on a desk"><figcaption>The craft</figcaption></figure>
+        </div>
+        <span class="pno">137</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BACK ═══ -->
+  <section class="pg" id="a-bk">
+    <div class="abk-wrap">
+      <h2 class="abk-hed rv">Enough<br><em>about me.</em></h2>
+      <div class="abk-links rv" style="transition-delay:.12s">
+        <a href="index.html">← back to the book</a>
+        <a href="index.html#cn">straight to connect →</a>
+        <a href="mailto:hgusain307@gmail.com">hgusain307@gmail.com</a>
+      </div>
+    </div>
+    <span class="tcap">viii / viii — early winter, new delhi</span>
+  </section>
+
+  <script>
+    /* paw cursor */
+    const paw=document.getElementById('paw');
+    document.addEventListener('mousemove',e=>{
+      paw.style.left=e.clientX+'px'; paw.style.top=e.clientY+'px';
+    });
+    document.addEventListener('mousedown',()=>paw.classList.add('click'));
+    document.addEventListener('mouseup',()=>paw.classList.remove('click'));
+
+    /* reveal */
+    const rvIO=new IntersectionObserver(es=>
+      es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); }),
+      {threshold:.05});
+    document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
+  </script>
+</body>
+</html>

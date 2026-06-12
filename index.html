@@ -6,7 +6,7 @@
   <title>Early Winter — UX Design Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -55,6 +55,14 @@
     .rv.on { opacity:1; transform:none; }
 
     .v { writing-mode:vertical-rl; transform:rotate(180deg); }
+
+    /* handwritten pen notes */
+    .scrib { position:absolute; z-index:40; font-family:'Caveat',cursive;
+             font-weight:600; color:#C8385A; line-height:1.05;
+             transform:rotate(-3.5deg); pointer-events:none; }
+    a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
+              border-bottom:2px solid rgba(200,56,90,.35); }
+    a.scrib:hover { border-color:#C8385A; }
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
@@ -175,13 +183,23 @@
     .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
                font-size:.42rem; letter-spacing:.12em; text-transform:uppercase;
                color:rgba(21,17,14,.32); margin-bottom:.2rem; }
-    .lp-media { position:absolute; left:0; right:2.4rem; top:46%; bottom:2.6rem;
-                display:flex; flex-direction:column; justify-content:flex-end; }
-    .m1 { width:86%; margin-left:auto; position:relative; z-index:1;
-          box-shadow:0 8px 22px rgba(21,17,14,.14); }
-    .m2 { width:93%; margin-top:-7.5%; position:relative; z-index:2;
-          box-shadow:0 14px 34px rgba(21,17,14,.22); }
-    .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
+    /* project media: printed phone screenshots, glued in */
+    .lp-media { position:absolute; left:3rem; right:2.4rem; top:42%; bottom:3rem;
+                display:flex; align-items:center; justify-content:center; gap:1.2rem; }
+    .m1,.m2 { position:relative; width:37%; max-width:min(12.6rem, 25vh);
+              background:#fff; padding:6px 6px 22px;
+              box-shadow:0 10px 24px rgba(21,17,14,.2); }
+    .m1 { transform:rotate(-2.6deg); z-index:1; }
+    .m2 { transform:rotate(2deg); z-index:2; }
+    .m1::before { content:''; position:absolute; top:-9px; left:50%;
+      transform:translateX(-50%) rotate(-4deg); width:56px; height:17px;
+      background:rgba(238,224,178,.9); box-shadow:0 1px 3px rgba(21,17,14,.18); }
+    .m1::after { content:'fig. 01'; }
+    .m2::after { content:'fig. 02'; }
+    .m1::after,.m2::after { position:absolute; bottom:5px; left:0; right:0;
+      text-align:center; font-family:var(--sans); font-size:.4rem;
+      letter-spacing:.16em; text-transform:uppercase; color:rgba(21,17,14,.4); }
+    .ph { width:100%; aspect-ratio:9/16; object-fit:cover;
           background:#E8E2D5; filter:saturate(.92) contrast(.97); }
     .lp-cat { position:absolute; left:3rem; bottom:2.6rem;
               font-family:var(--book); font-style:italic; font-size:.56rem;
@@ -293,6 +311,7 @@
               grid-template-rows:1fr 1fr; }
       .gut { display:none; }
       .rp-body { columns:1; }
+      .m1,.m2 { max-width:11vh; }
     }
     @media(max-width:580px){
       html { scroll-snap-type:none; }
@@ -323,6 +342,7 @@
           <span>Issue Nº 01</span>
         </div>
         <h1>Early<em>Winter.</em></h1>
+        <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.2rem; transform:rotate(5deg);">est. one cold<br>morning ❅</span>
         <p class="cv-l-foot">
           A UX design studio.<br>
           Selected work, 2022 — 2025.<br>
@@ -333,9 +353,9 @@
       <div class="cv-r">
         <figure class="cv-plate">
           <video autoplay muted loop playsinline>
-            <source src="https://videos.pexels.com/video-files/4211165/4211165-hd_1920_1080_30fps.mp4" type="video/mp4">
+            <source src="img/cover.mp4" type="video/mp4">
           </video>
-          <figcaption>a feeling, looped · 2025</figcaption>
+          <figcaption>somewhere cold, looped · 2025</figcaption>
         </figure>
       </div>
     </div>
@@ -402,11 +422,12 @@
             alt="Stack of vintage film boxes on books"></div>
         </div>
         <span class="lp-cat v">Ed Tech / Education</span>
+        <span class="scrib" style="right:1.8rem; top:36%; font-size:1.05rem; transform:rotate(4deg);">early screens,<br>printed ↓</span>
         <span class="pno">114</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
-          <a href="#ab">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
         </span>
         <div class="rp-crs">
           <div class="lp-cr v"><b>Year</b>2025</div>
@@ -461,7 +482,7 @@
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
-          <a href="#ab">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
         </span>
         <div class="rp-crs">
           <div class="lp-cr v"><b>Year</b>2025</div>
@@ -545,7 +566,7 @@
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
-          <a href="#ab">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
         </span>
         <div class="rp-crs">
           <div class="lp-cr v"><b>Year</b>2025</div>
@@ -599,7 +620,7 @@
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
-          <a href="#ab">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
+          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#cn">Connect</a>
         </span>
         <div class="rp-crs">
           <div class="lp-cr v"><b>Year</b>2024</div>
@@ -615,6 +636,7 @@
           soon.</p>
         </div>
         <a class="rp-link dis">Case study soon</a>
+        <span class="scrib" style="left:8.6rem; bottom:2.3rem; font-size:1rem; transform:rotate(-2deg);">— promise.</span>
         <span class="pno">121</span>
       </div>
     </div>
@@ -639,6 +661,7 @@
           calm, and a little nostalgic.
           <em>Currently open to new work and collaborations.</em>
         </p>
+        <a class="scrib rv" href="about.html" style="position:static; display:inline-block; margin-top:1.4rem; font-size:1.55rem; transform:rotate(-2deg); align-self:flex-start;">read the whole story →</a>
         <span class="pno" style="left:3rem;transform:none;">122</span>
       </div>
 
@@ -646,8 +669,8 @@
       <div class="ab-rp">
         <span class="ab-runtop-r">About</span>
         <div class="ab-inset">
-          <img src="https://images.pexels.com/photos/30503068/pexels-photo-30503068.jpeg?auto=compress&cs=tinysrgb&w=900"
-               alt="Bare trees in winter mist">
+          <img src="img/bar-look.jpg"
+               alt="Hemant in a dim wood-panelled bar, looking at the camera">
         </div>
         <span class="ab-pno">123</span>
       </div>
