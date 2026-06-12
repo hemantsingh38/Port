@@ -161,32 +161,27 @@
       color:rgba(21,17,14,.42);
     }
 
-    /* ══════════ WORK TEASER ══════════ */
+    /* ══════════ WORK TEASER — photo-book spread ══════════ */
     #wk .book { --spine:#A8CFFF; }
-    .wk-l { position:relative; display:flex; flex-direction:column;
-            padding:2.6rem 2.8rem 2.2rem 3rem; overflow:hidden; }
-    .wk-cap { text-align:center; font-family:var(--sans); font-size:.44rem; font-weight:500;
-              letter-spacing:.2em; text-transform:uppercase; color:rgba(21,17,14,.3);
-              padding-bottom:.75rem; margin-bottom:1.6rem;
-              border-bottom:1px solid rgba(21,17,14,.14); }
-    .wk-hed { font-family:var(--serif); font-weight:400;
-              font-size:clamp(1.6rem,2.8vw,2.6rem); line-height:1.06;
-              letter-spacing:-1px; margin-bottom:1.2rem; }
-    .wk-hed em { font-style:normal; color:rgba(21,17,14,.5); }
-    .wk-list { list-style:none; }
-    .wk-list li { border-bottom:1px solid rgba(21,17,14,.12); }
-    .wk-list li:last-child { border-bottom:none; }
-    .wk-list a { display:flex; align-items:baseline; gap:.9rem;
-                 padding:.72rem 0; text-decoration:none; transition:opacity .2s; }
-    .wk-list a:hover { opacity:.55; }
-    .wk-list b { font-family:var(--serif); font-weight:400; letter-spacing:-.5px;
-                 font-size:1.05rem; color:var(--ink); white-space:nowrap; }
-    .wk-list span { font-family:var(--book); font-style:italic; font-size:.72rem;
-                    color:rgba(21,17,14,.55); }
-    .wk-r { position:relative; overflow:hidden; background:var(--page); }
-    .co { position:absolute; bottom:-6px; pointer-events:none;
-          filter:saturate(.96) contrast(.99)
-                 drop-shadow(0 8px 16px rgba(21,17,14,.16)); }
+    .wkp { position:relative; overflow:hidden;
+           padding:3rem 2.6rem 2.6rem 3rem;
+           display:flex; flex-direction:column; justify-content:center; gap:1.5rem; }
+    .wk-row { width:100%; }
+    .wk-row a { display:flex; align-items:flex-start; justify-content:flex-end;
+                gap:1.1rem; text-decoration:none; transition:opacity .2s; }
+    .wk-row a:hover { opacity:.6; }
+    .wk-meta { text-align:right; font-family:var(--sans); font-size:.42rem;
+               font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+               color:rgba(21,17,14,.4); line-height:1.8; padding-top:.15rem; }
+    .wk-meta b { display:block; font-family:var(--serif); font-weight:400;
+                 text-transform:none; letter-spacing:-.5px; font-size:.95rem;
+                 color:var(--ink); margin:.1rem 0; }
+    .wk-meta i { display:block; font-family:var(--book); font-style:italic;
+                 text-transform:none; letter-spacing:0; font-size:.62rem;
+                 color:rgba(21,17,14,.5); }
+    .wk-row img { width:46%; aspect-ratio:4/3; max-height:18vh;
+                  object-fit:cover; border-radius:3px;
+                  filter:saturate(.9) contrast(.98); }
 
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
@@ -342,29 +337,38 @@
   </section>
 
 
-  <!-- ═══ WORK TEASER ═══ -->
+  <!-- ═══ WORK TEASER · PHOTO BOOK ═══ -->
   <section class="pg" id="wk">
-    <span class="tcap">ii / vi — the work, briefly</span>
+    <span class="tcap">ii / vi — selected work, the short version</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="wk-l">
+      <div class="wkp">
         <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
-        <div class="wk-cap">Selected work</div>
-        <h2 class="wk-hed">Four projects,<br>one <em>studio.</em></h2>
-        <ul class="wk-list">
-          <li><a href="work.html#w1"><b>Uphold</b><span>mentorship, held steady — ed tech · 2025</span></a></li>
-          <li><a href="work.html#w2"><b>Revibe</b><span>worn again, loved harder — thrift &amp; AI · 2025</span></a></li>
-          <li><a href="work.html#w3"><b>Insight</b><span>the right people, found — B2B SaaS · 2025</span></a></li>
-          <li><a href="work.html#w4"><b>Vejeez!</b><span>every vegan's dream — marketplace · 2024</span></a></li>
-        </ul>
-        <a class="scrib" href="work.html" style="position:static; display:inline-block; margin-top:1.1rem; font-size:1.4rem; transform:rotate(-2deg); align-self:flex-start;">open the work page →</a>
+        <div class="wk-row"><a href="work.html#w1">
+          <div class="wk-meta">nº 01 · ed tech · 2025<b>Uphold</b><i>mentorship, held steady</i></div>
+          <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — film camera by a window">
+        </a></div>
+        <div class="wk-row"><a href="work.html#w2">
+          <div class="wk-meta">nº 02 · thrift &amp; ai · 2025<b>Revibe</b><i>worn again, loved harder</i></div>
+          <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — footprints in winter fog">
+        </a></div>
+        <div class="wk-row"><a href="work.html#w3">
+          <div class="wk-meta">nº 03 · b2b saas · 2025<b>Insight</b><i>the right people, found</i></div>
+          <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — foggy town with lights">
+        </a></div>
         <span class="pno">2</span>
       </div>
-      <div class="wk-r">
+      <div class="wkp">
         <span class="run" style="right:3rem;"><a href="work.html">All work</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="about.html">About</a></span>
-        <span class="scrib" style="left:9%; top:13%; font-size:1.15rem;">me, presenting it loudly ↓</span>
-        <img class="co" src="img/co-moon.png" style="left:2%; height:60%; z-index:2;" alt="Hemant presenting the MOON concept">
-        <img class="co" src="img/co-stage.png" style="right:-3%; height:46%; z-index:3;" alt="Hemant on stage with a microphone">
+        <div class="wk-row"><a href="work.html#w4">
+          <div class="wk-meta">nº 04 · marketplace · 2024<b>Vejeez!</b><i>every vegan's dream</i></div>
+          <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez — snowy path between trees">
+        </a></div>
+        <div class="wk-row"><a href="work.html">
+          <div class="wk-meta">from the studio<b style="font-size:.8rem;">earlywinter.studio</b><i>details &amp; outtakes</i></div>
+          <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Film canister held in warm light">
+        </a></div>
+        <a class="scrib" href="work.html" style="position:static; display:inline-block; align-self:flex-end; font-size:1.35rem; transform:rotate(-2deg);">the full shelf →</a>
         <span class="pno">3</span>
       </div>
     </div>
