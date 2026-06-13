@@ -18,8 +18,15 @@
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
       --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
-      --pink:  #FF4D9E;   /* vivid blossom pink */
-      --bloom: #FFC22E;   /* vivid golden — sunlight */
+      --pink:  #FF4D9E;   /* vivid blossom pink (defined, not used as page bg) */
+      --bloom: #FFC22E;   /* vivid golden (defined, not used as page bg) */
+      /* ── vintage palette ── */
+      --marine:    #1F73C2;   /* vintage saturated blue — primary dark-ish page */
+      --cerulean:  #0BB3E6;   /* bright cyan — RESERVED FOR THE COVER ONLY */
+      --sage:      #719A73;   /* sage green — light page */
+      --evergreen: #003A35;   /* deep green — dark page */
+      --inkblue:   #001F27;   /* ink-black (very dark teal-navy) — darkest page + cool text */
+      --cream:     #F4F2E9;   /* warm off-white — TEXT on dark pages (never a page bg) */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --display: 'Archivo Black',system-ui,sans-serif;
@@ -63,9 +70,10 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:var(--bloom); }
-    .tab-work  { background:var(--blue); }
-    .tab-about { background:var(--pink); }
+    .tab-home  { background:var(--sage); }
+    .tab-work  { background:var(--marine); color:rgba(244,242,233,.7); }
+    .tab-about { background:var(--evergreen); color:rgba(244,242,233,.7); }
+    .tab-work:hover, .tab-work.on, .tab-about:hover, .tab-about.on { color:var(--cream); }
 
     /* ── view toggle (single / grid) ── */
     .vt { position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
@@ -121,19 +129,27 @@
     }
     .pg:not(.pg-active) .book,
     .pg:not(.pg-active) .book::before { box-shadow:none; }
-    #w1 .book { --spine: var(--blue); }
-    #w2 .book { --spine: var(--pink); }
-    #w3 .book { --spine: var(--bloom); }
-    #w4 .book { --spine: var(--blue); }
-    #gv .book { --spine: var(--blue); }
+    #w1 .book { --spine: var(--evergreen); }
+    #w2 .book { --spine: var(--inkblue); }
+    #w3 .book { --spine: var(--marine); }
+    #w4 .book { --spine: var(--evergreen); }
+    #gv .book { --spine: var(--inkblue); }
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, var(--pink) 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, var(--bloom) 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, var(--blue) 6.8px 8px);
+        #FEFEFB 0 1.6px, var(--sage) 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, var(--marine) 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, var(--evergreen) 6.8px 8px);
     }
-    .lp, .rp { background:var(--page); }
+    /* ── per-spread page-half palette (no white/cream backgrounds) ── */
+    #w1 .lp { background:var(--marine); }      /* dark  */
+    #w1 .rp { background:var(--sage); }        /* light */
+    #w2 .lp { background:var(--evergreen); }   /* dark  */
+    #w2 .rp { background:var(--marine); }      /* dark  */
+    #w3 .lp { background:var(--sage); }        /* light */
+    #w3 .rp { background:var(--evergreen); }   /* dark  */
+    #w4 .lp { background:var(--marine); }      /* dark  */
+    #w4 .rp { background:var(--inkblue); }     /* dark  */
 
     /* page-turn shading on the flipping half */
     .flip-shade-fwd::after, .flip-shade-back::after {
@@ -221,9 +237,59 @@
     .rp-link:hover { border-color:var(--ink); transform:translateX(2px); }
     .rp-link.dis { opacity:.4; pointer-events:none; }
 
+    /* ══════════ CONTRAST PER PAGE-HALF (vintage palette) ══════════ */
+    /* DARK halves → cream text, labels rgba(244,242,233,.62) */
+    #w1 .lp, #w2 .lp, #w2 .rp, #w3 .rp, #w4 .lp, #w4 .rp {
+      color:var(--cream);
+    }
+    #w1 .lp .run, #w2 .lp .run, #w2 .rp .run,
+    #w3 .rp .run, #w4 .lp .run, #w4 .rp .run { color:rgba(244,242,233,.62); }
+    #w1 .lp .run a:hover, #w2 .lp .run a:hover, #w2 .rp .run a:hover,
+    #w3 .rp .run a:hover, #w4 .lp .run a:hover, #w4 .rp .run a:hover { color:var(--cream); }
+    #w1 .lp .lp-ct, #w2 .lp .lp-ct, #w4 .lp .lp-ct { color:rgba(244,242,233,.62); }
+    #w1 .lp .lp-title h2, #w2 .lp .lp-title h2, #w4 .lp .lp-title h2 { color:var(--cream); }
+    #w1 .lp .lp-title h2 em, #w2 .lp .lp-title h2 em, #w4 .lp .lp-title h2 em { color:rgba(244,242,233,.62); }
+    #w1 .lp .lp-cr, #w2 .lp .lp-cr, #w2 .rp .lp-cr,
+    #w3 .rp .lp-cr, #w4 .lp .lp-cr, #w4 .rp .lp-cr { color:rgba(244,242,233,.78); }
+    #w1 .lp .lp-cr b, #w2 .lp .lp-cr b, #w2 .rp .lp-cr b,
+    #w3 .rp .lp-cr b, #w4 .lp .lp-cr b, #w4 .rp .lp-cr b { color:rgba(244,242,233,.62); }
+    #w1 .lp .lp-cat, #w2 .lp .lp-cat, #w4 .lp .lp-cat { color:rgba(244,242,233,.78); }
+    #w1 .lp .pno, #w2 .lp .pno, #w2 .rp .pno,
+    #w3 .rp .pno, #w4 .lp .pno, #w4 .rp .pno { color:rgba(244,242,233,.24); }
+    #w2 .rp .rp-sub, #w3 .rp .rp-sub, #w4 .rp .rp-sub { color:var(--cream); }
+    #w2 .rp .rp-body, #w3 .rp .rp-body, #w4 .rp .rp-body { color:rgba(244,242,233,.82); }
+    #w2 .rp .rp-body em, #w3 .rp .rp-body em, #w4 .rp .rp-body em { color:var(--cream); }
+    #w2 .rp .rp-link, #w3 .rp .rp-link, #w4 .rp .rp-link {
+      color:var(--cream); border-bottom-color:rgba(244,242,233,.52);
+    }
+    #w2 .rp .rp-link:hover, #w3 .rp .rp-link:hover, #w4 .rp .rp-link:hover { border-bottom-color:var(--cream); }
+    /* gut divider rides the spread seam; lighten it on fully-dark spreads */
+    #w2 .gut, #w4 .gut { background:rgba(244,242,233,.16);
+      box-shadow:6px 0 14px -6px rgba(244,242,233,.16), -6px 0 14px -6px rgba(244,242,233,.16); }
+
+    /* LIGHT halves (--sage) → inkblue text, labels rgba(0,31,39,.6) */
+    #w1 .rp, #w3 .lp { color:var(--inkblue); }
+    #w1 .rp .run, #w3 .lp .run { color:rgba(0,31,39,.6); }
+    #w1 .rp .run a:hover, #w3 .lp .run a:hover { color:var(--inkblue); }
+    #w3 .lp .lp-ct { color:rgba(0,31,39,.6); }
+    #w3 .lp .lp-title h2 { color:var(--inkblue); }
+    #w3 .lp .lp-title h2 em { color:rgba(0,31,39,.6); }
+    #w1 .rp .lp-cr, #w3 .lp .lp-cr { color:rgba(0,31,39,.78); }
+    #w1 .rp .lp-cr b, #w3 .lp .lp-cr b { color:rgba(0,31,39,.6); }
+    #w3 .lp .lp-cat { color:rgba(0,31,39,.78); }
+    #w1 .rp .pno, #w3 .lp .pno { color:rgba(0,31,39,.22); }
+    #w1 .rp .rp-sub { color:var(--inkblue); }
+    #w1 .rp .rp-body { color:rgba(0,31,39,.78); }
+    #w1 .rp .rp-body em { color:var(--inkblue); }
+    #w1 .rp .rp-link { color:var(--inkblue); border-bottom-color:rgba(0,31,39,.52); }
+    #w1 .rp .rp-link:hover { border-bottom-color:var(--inkblue); }
+
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
-    #gv { background:var(--bloom); transition:background .45s ease; }
-    #gv .tcap { color:rgba(21,17,14,.5); }
+    #gv { background:var(--evergreen); transition:background .45s ease; }
+    #gv .tcap { color:rgba(244,242,233,.62); }
+    #gv .run { color:rgba(244,242,233,.62) !important; }
+    #gv .run a { color:inherit; }
+    #gv .run a:hover { color:var(--cream); }
     .fl { position:absolute; width:clamp(150px,16vw,230px); cursor:none;
           touch-action:none; user-select:none; -webkit-user-select:none;
           animation:bob 7s ease-in-out infinite alternate;
@@ -239,10 +305,10 @@
               font-family:var(--sans); pointer-events:none; }
     .fl:hover figcaption, .fl.grab figcaption { opacity:1; transform:none; }
     .fl b { display:block; font-family:var(--sans); font-size:var(--t-caption);
-            font-weight:500; color:var(--ink); }
+            font-weight:500; color:var(--cream); }
     .fl span { display:block; font-family:var(--sans); font-size:var(--t-label); font-weight:500;
                letter-spacing:.1em; text-transform:uppercase;
-               color:rgba(21,17,14,.5); margin-top:.12rem; }
+               color:rgba(244,242,233,.62); margin-top:.12rem; }
     .fl:nth-child(2n) { animation-delay:-2.3s; animation-duration:8s; }
     .fl:nth-child(3n) { animation-delay:-4.1s; }
     .fl:nth-child(5n) { animation-delay:-5.6s; animation-duration:9s; }
@@ -518,36 +584,36 @@
   <!-- ═══ GRID VIEW · LOOSE PHOTOS ═══ -->
   <section class="pg" id="gv" style="display:none;">
     <span class="tcap">Index</span>
-    <span class="run" style="left:6vmin; color:rgba(21,17,14,.5);">Blue Tiger — Index</span>
-    <figure class="fl" data-t="w1" data-c="#2E54C8" style="left:5%;  top:11%;">
+    <span class="run" style="left:6vmin; color:rgba(244,242,233,.62);">Blue Tiger — Index</span>
+    <figure class="fl" data-t="w1" data-c="#1F73C2" style="left:5%;  top:11%;">
       <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship platform" draggable="false">
       <figcaption><b>Uphold</b><span>ed tech · nº 01 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w1" data-c="#2E54C8" style="left:23%; top:46%;">
+    <figure class="fl" data-t="w1" data-c="#1F73C2" style="left:23%; top:46%;">
       <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research and flows" draggable="false">
       <figcaption><b>Uphold</b><span>research &amp; flows</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w2" data-c="#F08CB4" style="left:42%; top:9%; ">
+    <figure class="fl" data-t="w2" data-c="#003A35" style="left:42%; top:9%; ">
       <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — resale marketplace" draggable="false">
       <figcaption><b>Revibe</b><span>commerce · nº 02 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w2" data-c="#F08CB4" style="left:60%; top:40%;">
+    <figure class="fl" data-t="w2" data-c="#003A35" style="left:60%; top:40%;">
       <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — brand and commerce" draggable="false">
       <figcaption><b>Revibe</b><span>brand &amp; commerce</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w3" data-c="#E9C982" style="left:78%; top:12%;">
+    <figure class="fl" data-t="w3" data-c="#001F27" style="left:78%; top:12%;">
       <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research recruiting" draggable="false">
       <figcaption><b>Insight</b><span>b2b saas · nº 03 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w3" data-c="#E9C982" style="left:9%;  top:58%;">
+    <figure class="fl" data-t="w3" data-c="#001F27" style="left:9%;  top:58%;">
       <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research ops" draggable="false">
       <figcaption><b>Insight</b><span>research ops</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#2E54C8" style="left:45%; top:56%;">
+    <figure class="fl" data-t="w4" data-c="#1F73C2" style="left:45%; top:56%;">
       <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — vegan marketplace" draggable="false">
       <figcaption><b>Vejeez!</b><span>commerce · nº 04 · 2024</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#2E54C8" style="left:79%; top:54%;">
+    <figure class="fl" data-t="w4" data-c="#1F73C2" style="left:79%; top:54%;">
       <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand and voice" draggable="false">
       <figcaption><b>Vejeez!</b><span>brand &amp; voice</span></figcaption>
     </figure>

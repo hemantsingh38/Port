@@ -12,14 +12,20 @@
 
     :root {
       --table: #0B0908;
-      --page:  #FEFEFB;   /* white blossom / page */
+      --page:  #FEFEFB;   /* white blossom / page — kept defined, NOT used as a page bg */
       --ink:   #15110E;
       --head:  #2E2A25;   /* heading text — darkest warm grey */
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
-      /* forest-with-blossoms palette — greenery comes from the grass bg video */
+      /* ── VINTAGE PALETTE ── */
+      --marine:    #1F73C2;   /* vintage saturated blue — primary dark-ish page */
+      --cerulean:  #0BB3E6;   /* bright cyan — RESERVED FOR THE COVER ONLY */
+      --sage:      #719A73;   /* sage green — light page */
+      --evergreen: #003A35;   /* deep green — dark page */
+      --inkblue:   #001F27;   /* ink-black (very dark teal-navy) — darkest page + cool text */
+      --cream:     #F4F2E9;   /* warm off-white — TEXT on dark pages (never a page bg) */
+      /* legacy accents kept defined; no longer used as page backgrounds */
       --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
-      --cerulean: #0BB3E6; /* cover — vivid cerulean / cyan */
       --display: 'Archivo Black', system-ui, sans-serif; /* brand / heading display */
       --pink:  #FF4D9E;   /* vivid blossom pink */
       --bloom: #FFC22E;   /* vivid golden — sunlight */
@@ -88,8 +94,13 @@
     .pg { position:fixed; inset:0; z-index:1; overflow:hidden; }
     .pg.pg-active { z-index:10; }
 
-    /* each page half carries its own background so only the flipping half disappears */
-    .cv-l,.cv-r,.wkp,.fq-page,.ab-lp,.sv-lp { background:var(--page); }
+    /* each page half carries its own background so only the flipping half disappears.
+       NO white/cream page halves — every half is a vintage-palette color or a full-bleed photo.
+       Cover halves are overridden in the COVER block (cerulean + tiger photo). */
+    .cv-r        { background:var(--cerulean); }   /* cover only */
+    .wkp         { background:var(--sage); }        /* work teaser — both halves sage (light) */
+    .ab-lp       { background:var(--marine); }      /* about voice page — dark */
+    .sv-lp       { background:var(--evergreen); }   /* services intro page — dark */
     /* contact back-cover inner wrapper */
     .cn-inner { position:absolute; inset:0; background:var(--table); }
 
@@ -285,6 +296,16 @@
     .wk-plate-meta b {
       display:block; font-weight:500; color:var(--ink);
     }
+    /* #wk teaser sits on sage (light) → ink-blue text, ink-blue labels/rules */
+    #wk .wk-intro,
+    #wk .wk-plate-title,
+    #wk .wk-plate-meta b,
+    #wk .run a:hover            { color:var(--inkblue); }
+    #wk .wk-plate-desc,
+    #wk .wk-plate-meta,
+    #wk .run, #wk .run a        { color:rgba(0,31,39,.6); }
+    #wk .wk-plate-info          { border-bottom-color:rgba(0,31,39,.18); }
+    #wk .pno                    { color:rgba(0,31,39,.2); }
 
     /* ══════════ SERVICES SPREAD ══════════ */
     /* left page (cream): eyebrow + intro lead + the three services */
@@ -320,9 +341,9 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(21,17,14,.18);
     }
-    /* right page: blue color-block carrying the big line + tagline */
+    /* right page: marine color-block carrying the big line + tagline */
     .sv-rp {
-      background:var(--blue); position:relative; overflow:hidden;
+      background:var(--marine); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.6rem 2.8rem 2rem;
     }
@@ -344,8 +365,22 @@
     .sv-folio-r {
       align-self:flex-end; font-family:var(--sans); font-weight:400;
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
-      color:rgba(254,254,251,.4);
+      color:rgba(244,242,233,.4);
     }
+    /* #sv left page on evergreen (dark) → cream text + cream labels/rules */
+    #sv .sv-lead,
+    #sv .sv-lead em,
+    #sv .sv-list dt             { color:var(--cream); }
+    #sv .sv-eyebrow,
+    #sv .sv-list dd             { color:rgba(244,242,233,.62); }
+    #sv .sv-eyebrow             { border-bottom-color:rgba(244,242,233,.25); }
+    #sv .sv-list dt             { border-top-color:rgba(244,242,233,.22); }
+    #sv .sv-folio               { color:rgba(244,242,233,.4); }
+    /* #sv right page on marine (dark) → cream text */
+    #sv .sv-big                 { color:var(--cream); }
+    #sv .sv-tag                 { color:rgba(244,242,233,.9); }
+    #sv .sv-rp-eyebrow          { color:rgba(244,242,233,.62);
+                                  border-bottom-color:rgba(244,242,233,.25); }
 
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
@@ -357,7 +392,11 @@
     .fq small { display:block; margin-top:.7rem; text-align:left;
       font-family:var(--sans); font-weight:500; font-size:var(--t-label);
       letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
-    .fq-light, .fq-light small { color:rgba(254,254,251,.92); }
+    /* quote text colors — cream on dark pages, ink-blue on light pages */
+    .fq-light       { color:var(--cream); }
+    .fq-light small { color:rgba(244,242,233,.62); }
+    .fq-ink         { color:var(--inkblue); }
+    .fq-ink small   { color:rgba(0,31,39,.6); }
     .fp-img { position:absolute; inset:0; width:100%; height:100%;
               object-fit:cover; filter:saturate(1.05) contrast(1.02); }
     .fp-cap { position:absolute; left:2.2rem; right:2.2rem; bottom:1.6rem; z-index:2;
@@ -399,6 +438,14 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(21,17,14,.18);
     }
+    /* #ab left voice page on marine (dark) → cream text + cream labels/rules */
+    #ab .ab-lead,
+    #ab .ab-lead em,
+    #ab .ab-bio em             { color:var(--cream); }
+    #ab .ab-bio                { color:rgba(244,242,233,.82); }
+    #ab .ab-eyebrow            { color:rgba(244,242,233,.62);
+                                 border-bottom-color:rgba(244,242,233,.25); }
+    #ab .ab-folio              { color:rgba(244,242,233,.4); }
     /* right (DIRECTION 1 · Portrait): full-bleed photo + overlaid metadata */
     .ab-rp {
       position:relative; overflow:hidden; background:var(--ink);
@@ -441,7 +488,7 @@
     /* ══════════ CONNECT — BACK COVER ══════════ */
     /* ═══ CONNECT spread ═══ */
     .cn-lp {
-      background:var(--page); position:relative; overflow:hidden;
+      background:var(--inkblue); position:relative; overflow:hidden;
       display:flex; flex-direction:column;
       padding:2.8rem 2.6rem 2.4rem 3rem;
     }
@@ -482,9 +529,9 @@
       font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
       color:var(--mu); display:flex; flex-direction:column; gap:.18rem;
     }
-    /* right: blue contact card — the tiger */
+    /* right: evergreen contact card — the tiger */
     .cn-rp {
-      background:var(--blue); position:relative; overflow:hidden;
+      background:var(--evergreen); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.8rem 2.8rem 2.6rem;
     }
@@ -518,6 +565,28 @@
       transition:transform .2s var(--ease-out);
     }
     .cn-link:hover .cn-link-name { transform:translateX(-4px); }
+
+    /* #cn left page on inkblue (dark) → cream text + cream labels/rules */
+    #cn .cn-hed,
+    #cn .cn-hed em             { color:var(--cream); }
+    #cn .cn-label,
+    #cn .cn-lp-top,
+    #cn .cn-lp-foot-meta       { color:rgba(244,242,233,.62); }
+    #cn .cn-mail               { color:rgba(244,242,233,.82);
+                                 border-bottom-color:rgba(244,242,233,.32); }
+    #cn .cn-mail:hover         { color:var(--cream); border-color:var(--cream); }
+    #cn .cn-lp-top             { border-bottom-color:rgba(244,242,233,.22); }
+    #cn .cn-lp-foot            { border-top-color:rgba(244,242,233,.22); }
+    #cn .cn-lp-foot .pno       { color:rgba(244,242,233,.4); }
+    /* #cn right page on evergreen (dark) → cream links/text */
+    #cn .cn-rp-hed,
+    #cn .cn-rp-invite,
+    #cn .cn-link-name          { color:var(--cream); }
+    #cn .cn-link-label         { color:rgba(244,242,233,.62); }
+    #cn .cn-link               { border-top-color:rgba(244,242,233,.4); }
+    #cn .cn-link:last-child    { border-bottom-color:rgba(244,242,233,.4); }
+    #cn .cn-link:hover         { border-color:var(--cream); }
+    #cn .folio                 { color:rgba(244,242,233,.4); }
 
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
@@ -696,29 +765,29 @@
     <span class="tcap">iv / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--pink);">
-        <div class="fq" style="left:18%; top:46%;">
+      <div class="fq-page" style="background:var(--marine);">
+        <div class="fq fq-light" style="left:18%; top:46%;">
           Good design is actually a lot harder to notice than poor design,
           in part because good designs fit our needs so well that the
           design is invisible.
           <small>Don Norman / The Design of Everyday Things</small>
         </div>
-        <div class="fq thru" style="left:30%; top:64%; width:46%;">
+        <div class="fq thru fq-light" style="left:30%; top:64%; width:46%;">
           things people actually use, made to feel like things people
           actually keep.
         </div>
-        <span class="pno">06</span>
+        <span class="pno" style="color:rgba(244,242,233,.4);">06</span>
       </div>
-      <div class="fq-page" style="background:var(--blue);">
-        <div class="fq fq-light" style="right:14%; top:28%;">
+      <div class="fq-page" style="background:var(--sage);">
+        <div class="fq fq-ink" style="right:14%; top:28%;">
           Users do not care who I am. They care whether the thing works.
           So I make it work, then make it feel inevitable.
           <small>Blue Tiger / studio notes</small>
         </div>
-        <div class="fq thru fq-light" style="left:12%; bottom:18%; width:48%;">
+        <div class="fq thru fq-ink" style="left:12%; bottom:18%; width:48%;">
           good designs fit our needs so well that the design is invisible.
         </div>
-        <span class="pno">07</span>
+        <span class="pno" style="color:rgba(0,31,39,.2);">07</span>
       </div>
     </div>
   </section>
@@ -728,19 +797,19 @@
     <span class="tcap">v / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--bloom);">
-        <div class="fq" style="left:20%; top:40%;">
+      <div class="fq-page" style="background:var(--sage);">
+        <div class="fq fq-ink" style="left:20%; top:40%;">
           Good design is as little design as possible. Less, but better —
           for it concentrates on the essential aspects, and the products
           are not burdened with non-essentials.
           <small>Dieter Rams / Ten Principles</small>
         </div>
-        <div class="fq thru" style="left:28%; bottom:14%; width:44%;">
+        <div class="fq thru fq-ink" style="left:28%; bottom:14%; width:44%;">
           less, but better — but warmer.
         </div>
-        <span class="pno">08</span>
+        <span class="pno" style="color:rgba(0,31,39,.2);">08</span>
       </div>
-      <div class="fq-page">
+      <div class="fq-page" style="background:var(--evergreen);">
         <img class="fp-img" src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway after rain">
         <div class="fp-cap"><b>■ Influences</b> — Norman, Rams, cinema, print.</div>
         <span class="pno" style="color:rgba(254,254,251,.85); z-index:3;">09</span>
