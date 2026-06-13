@@ -15,6 +15,10 @@
       --table: #0B0908;
       --page:  #FEFEFB;
       --ink:   #15110E;
+      --head:  #2E2A25;   /* heading text — darkest warm grey */
+      --h-max: 3.5rem;    /* 56px — primary headings */
+      --h-sub: 3rem;      /* 48px — sub headings */
+      --body:  1.125rem;  /* 18px — body text */
       --mu:    #978D7C;
       --green: #2DF952;
       --serif: 'Outfit',system-ui,sans-serif;
@@ -158,11 +162,11 @@
       border-bottom:1px solid rgba(21,17,14,.14);
     }
     .hed {
-      font-family:var(--serif); font-weight:600;
-      font-size:clamp(1.75rem,3.1vw,2.9rem); line-height:1.08;
-      letter-spacing:-2px; color:var(--ink);
+      font-family:var(--serif); font-weight:400;
+      font-size:var(--h-sub); line-height:1.05;
+      letter-spacing:-1px; color:var(--head);
     }
-    .hed em { font-style:normal; color:rgba(21,17,14,.72); }
+    .hed em { font-style:normal; color:var(--head); }
     .dek {
       font-family:var(--sans); font-size:clamp(.92rem,1.2vw,1.08rem);
       line-height:1.78; color:rgba(21,17,14,.72); margin-top:1.3rem;
@@ -250,15 +254,15 @@
       position:absolute; top:1.1rem; left:3rem;
       font-family:var(--sans); font-size:.52rem; font-weight:500;
       letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
-    .abk-hed { font-family:var(--serif); font-weight:600;
-      font-size:clamp(2.9rem,5.2vw,5.4rem); line-height:.88;
-      letter-spacing:-2px; color:var(--ink); }
-    .abk-hed em { font-style:normal; font-weight:400; opacity:.4; }
+    .abk-hed { font-family:var(--serif); font-weight:400;
+      font-size:var(--h-max); line-height:1;
+      letter-spacing:-1px; color:var(--head); }
+    .abk-hed em { font-style:normal; font-weight:400; opacity:1; }
     .abk-rp { background:var(--ink); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:flex-end;
       padding:2.8rem 2.8rem 2.6rem; }
     .abk-rp-hed { font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:clamp(2.6rem,4.6vw,4.6rem); line-height:.92;
+      font-size:var(--h-sub); line-height:1;
       letter-spacing:-1px; color:var(--page); margin-bottom:auto; padding-top:1.6rem; }
     .abk-links { display:flex; flex-direction:column; }
     .abk-links a { display:flex; justify-content:space-between; align-items:baseline;

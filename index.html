@@ -14,6 +14,11 @@
       --table: #0B0908;
       --page:  #FEFEFB;
       --ink:   #15110E;
+      --head:  #2E2A25;   /* heading text — darkest warm grey */
+      --h-max: 3.5rem;    /* 56px — primary headings */
+      --h-sub: 3rem;      /* 48px — sub headings */
+      --lead:  1.5rem;    /* 24px — lead caption (opens most pages) */
+      --body:  1.125rem;  /* 18px — body text */
       --mu:    #978D7C;
       --green: #2DF952;
       --pink:  #FF85B0;   /* filler tints */
@@ -172,12 +177,12 @@
       align-items:center; border-bottom:1px solid rgba(21,17,14,.12); padding-bottom:.7rem;
     }
     .cv-l h1 {
-      font-family:var(--serif); font-weight:600;
-      font-size:clamp(2.9rem,5.2vw,5.4rem); line-height:.88;
-      letter-spacing:-2px; color:var(--ink); flex:1; display:flex;
+      font-family:var(--serif); font-weight:400;
+      font-size:var(--h-max); line-height:1;
+      letter-spacing:-1px; color:var(--head); flex:1; display:flex;
       flex-direction:column; justify-content:center;
     }
-    .cv-l h1 em { font-style:normal; font-weight:400; opacity:.4; display:block; }
+    .cv-l h1 em { font-style:normal; font-weight:400; opacity:1; display:block; }
     .cv-l-note {
       font-family:var(--sans); font-size:.62rem; line-height:1.6;
       color:rgba(21,17,14,.72);
@@ -202,11 +207,11 @@
       display:flex; flex-direction:column;
       padding:2.8rem 3rem 2.4rem 2.6rem; overflow:hidden;
     }
-    .cv-r-inner h1 { font-family:var(--serif); font-weight:600;
-      font-size:clamp(2.9rem,5.2vw,5.4rem); line-height:.88;
-      letter-spacing:-2px; color:var(--ink); flex:1; display:flex;
+    .cv-r-inner h1 { font-family:var(--serif); font-weight:400;
+      font-size:var(--h-max); line-height:1;
+      letter-spacing:-1px; color:var(--head); flex:1; display:flex;
       flex-direction:column; justify-content:center; }
-    .cv-r-inner h1 em { font-style:normal; font-weight:400; opacity:.4; display:block; }
+    .cv-r-inner h1 em { font-style:normal; font-weight:400; opacity:1; display:block; }
     .cv-plate {
       position:absolute; top:2.6rem; right:2.4rem; bottom:2.6rem; left:2rem;
       display:flex; flex-direction:column;
@@ -293,46 +298,72 @@
                filter:blur(.4px); pointer-events:none; user-select:none; }
 
     /* ══════════ ABOUT SPREAD ══════════ */
+    /* ── ABOUT TEASER — lead-led editorial spread (per DESIGN.md) ── */
+    /* left: the voice page (cream), lead-led, no heading */
     .ab-lp {
       position:relative; display:flex; flex-direction:column;
-      padding:2.6rem 2.8rem 2rem 3rem; overflow:hidden;
+      padding:2.6rem 3rem 2rem 3rem; overflow:hidden;
     }
-    .ab-runtop {
-      text-align:center; font-family:var(--sans); font-size:.52rem; font-weight:500;
+    .ab-eyebrow, .ab-eyebrow-r {
+      display:flex; justify-content:space-between; align-items:baseline;
+      font-family:var(--sans); font-size:.75rem; font-weight:500;
       letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5);
-      padding-bottom:.75rem; margin-bottom:2rem;
-      border-bottom:1px solid rgba(21,17,14,.14);
+      padding-bottom:.7rem; border-bottom:1px solid rgba(21,17,14,.14);
     }
-    .ab-hed {
-      font-family:var(--serif); font-weight:600;
-      font-size:clamp(1.75rem,3.1vw,2.9rem); line-height:1.06;
-      letter-spacing:-2px; color:var(--ink); margin-bottom:1.6rem;
+    .ab-voice { margin-top:auto; max-width:23ch; }   /* anchored to lower-middle */
+    .ab-lead {
+      font-family:var(--sans); font-weight:400; font-size:var(--lead);
+      line-height:1.32; letter-spacing:-.2px; color:var(--head);
+      margin-bottom:1.4rem;
     }
-    .ab-hed em { font-style:normal; font-weight:400; color:rgba(21,17,14,.55); }
-    .ab-dek {
-      font-family:var(--sans); font-size:clamp(.95rem,1.25vw,1.1rem);
-      line-height:1.78; color:rgba(21,17,14,.68);
+    .ab-lead em { font-family:var(--book); font-style:italic; font-weight:400; }
+    .ab-bio {
+      font-family:var(--sans); font-size:var(--body); line-height:1.55;
+      color:rgba(21,17,14,.66); max-width:38ch;
     }
-    .ab-dek em { font-style:italic; }
-    /* right: bold flat colour with inset photo */
-    .ab-rp { position:relative; background:#F5E10A; overflow:hidden; }
-    .ab-runtop-r {
-      position:absolute; top:1.1rem; left:50%; transform:translateX(-50%);
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); white-space:nowrap;
+    .ab-bio em { font-style:italic; }
+    .ab-folio {
+      margin-top:1.4rem; font-family:var(--sans); font-weight:400;
+      font-size:var(--h-sub); letter-spacing:-1px; line-height:1;
+      color:rgba(21,17,14,.16);
     }
-    .ab-inset {
-      position:absolute; top:2.6rem; right:2.2rem; bottom:2.4rem; left:2.2rem;
-      overflow:hidden;
+    /* right (DIRECTION 1 · Portrait): full-bleed photo + overlaid metadata */
+    .ab-rp {
+      position:relative; overflow:hidden; background:var(--ink);
+      display:flex; flex-direction:column; justify-content:space-between;
     }
-    .ab-inset img {
-      width:100%; height:100%; object-fit:cover;
-      filter:saturate(.9) contrast(.97);
+    .ab-photo-full { position:absolute; inset:0; z-index:0; }
+    .ab-photo-full img {
+      width:100%; height:100%; object-fit:cover; filter:saturate(.9) contrast(1.02);
     }
-    .ab-pno {
-      position:absolute; bottom:1rem; right:2.2rem;
-      font-family:var(--sans); font-size:.7rem; color:rgba(21,17,14,.55);
+    .ab-rp::after {           /* gradient scrim for text legibility */
+      content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:linear-gradient(to bottom,
+        rgba(11,9,8,.5) 0%, rgba(11,9,8,0) 20%,
+        rgba(11,9,8,0) 50%, rgba(11,9,8,.86) 100%);
+    }
+    .ab-eyebrow-r {
+      position:relative; z-index:2; margin:2.6rem 2.6rem 0;
+      color:rgba(254,254,251,.88); border-bottom-color:rgba(254,254,251,.28);
+    }
+    .ab-rp-foot {
+      position:relative; z-index:2; padding:0 2.6rem 2rem;
+      display:flex; flex-direction:column; gap:1rem;
+    }
+    .ab-meta {
+      display:grid; grid-template-columns:auto 1fr; gap:.5rem 1.4rem; align-items:baseline;
+    }
+    .ab-meta dt {
+      font-family:var(--sans); font-size:.75rem; font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.62);
+    }
+    .ab-meta dd {
+      font-family:var(--sans); font-size:var(--body); line-height:1.3; color:var(--page);
+    }
+    .ab-folio-r {
+      align-self:flex-end; font-family:var(--sans); font-weight:400;
+      font-size:var(--h-sub); letter-spacing:-1px; line-height:1;
+      color:rgba(254,254,251,.5);
     }
 
     /* ══════════ CONNECT — BACK COVER ══════════ */
@@ -359,11 +390,11 @@
       color:rgba(21,17,14,.5);
     }
     .cn-hed {
-      font-family:var(--serif); font-weight:600;
-      font-size:clamp(2.9rem,5.2vw,5.4rem); line-height:.88;
-      letter-spacing:-2px; color:var(--ink);
+      font-family:var(--serif); font-weight:400;
+      font-size:var(--h-max); line-height:1;
+      letter-spacing:-1px; color:var(--head);
     }
-    .cn-hed em { font-style:normal; font-weight:400; opacity:.4; }
+    .cn-hed em { font-style:normal; font-weight:400; opacity:1; }
     .cn-mail {
       font-family:var(--sans); font-style:italic; font-size:1rem;
       color:rgba(21,17,14,.55); text-decoration:none;
@@ -387,7 +418,7 @@
     }
     .cn-rp-hed {
       font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:clamp(2.6rem,4.6vw,4.6rem); line-height:.92;
+      font-size:var(--h-sub); line-height:1;
       letter-spacing:-1px; color:var(--ink);
     }
     .cn-rp-links { display:flex; flex-direction:column; }
@@ -422,7 +453,7 @@
       .lp-crs,.rp-crs { display:none; }
       .cn-wrap { padding:3rem 1.6rem; }
       .cn-rule,.cn-foot { left:1.6rem; right:1.6rem; }
-      .cn-hed { font-size:clamp(3.3rem,15vw,5rem); }
+      .cn-hed { font-size:clamp(2.2rem,8vw,3.5rem); }
       .ribbon { left:10%; }
     }
 
@@ -624,31 +655,33 @@
     <div class="book rv">
       <div class="gut"></div>
 
-      <!-- left: headline + body text -->
+      <!-- left: the voice page — lead-led, no heading -->
       <div class="ab-lp">
-        <div class="ab-runtop">About</div>
-        <h2 class="ab-hed rv">He was always<br>an <em>artist.</em><br>Now he builds<br>things that feel<br>like <em>memories.</em></h2>
-        <p class="ab-dek rv" style="transition-delay:.1s">
-          Hemant Singh is a UX designer with 3.5 years across ed tech,
-          fintech, e-commerce and B2B SaaS. Based in New Delhi, he founded
-          Early Winter as a small, slow, intentional studio. His work is
-          shaped by Don Norman, by cinema, and by the belief that good design
-          should feel like the first cold morning of the season — present,
-          calm, and a little nostalgic.
-          <em>Currently open to new work and collaborations.</em>
-        </p>
-        <a class="scrib rv" href="about.html" style="position:static; display:inline-block; margin-top:1.4rem; font-size:1.55rem; transform:rotate(-2deg); align-self:flex-start;">read the whole story →</a>
-        <span class="pno" style="left:3rem;transform:none;">122</span>
+        <div class="ab-eyebrow rv"><span>Early Winter</span><span>About</span></div>
+        <div class="ab-voice rv" style="transition-delay:.1s">
+          <p class="ab-lead">He was always an <em>artist.</em> Now he builds things that feel like <em>memories.</em></p>
+          <p class="ab-bio">A UX designer with 3.5 years across ed tech, fintech, e-commerce and B2B SaaS — building Early Winter as a small, slow, intentional studio. Work shaped by Don Norman, by cinema, and by the belief that good design should feel like the first cold morning of the season. <em>Open to new work.</em></p>
+          <a class="scrib" href="about.html" style="display:inline-block; margin-top:1.3rem; font-size:1.5rem; transform:rotate(-2deg);">read the whole story →</a>
+        </div>
+        <div class="ab-folio rv" style="transition-delay:.18s">122</div>
       </div>
 
-      <!-- right: neon green page with inset photo -->
+      <!-- right (Direction 1 · Portrait): full-bleed photo + overlaid metadata -->
       <div class="ab-rp">
-        <span class="ab-runtop-r">About</span>
-        <div class="ab-inset">
+        <div class="ab-photo-full rv">
           <img src="img/bar-look.jpg"
                alt="Hemant in a dim wood-panelled bar, looking at the camera">
         </div>
-        <span class="ab-pno">123</span>
+        <div class="ab-eyebrow-r rv"><span>The Designer</span><span>New Delhi</span></div>
+        <div class="ab-rp-foot rv" style="transition-delay:.16s">
+          <dl class="ab-meta">
+            <dt>Role</dt><dd>UX / Product Designer</dd>
+            <dt>Practice</dt><dd>3.5 years</dd>
+            <dt>Sectors</dt><dd>Ed Tech, Fintech, E-comm, B2B SaaS</dd>
+            <dt>Status</dt><dd>Open to new work</dd>
+          </dl>
+          <div class="ab-folio-r">123</div>
+        </div>
       </div>
 
     </div>
