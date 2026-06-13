@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work — Early Winter</title>
+  <title>Work — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -17,8 +17,9 @@
       --head:  #2E2A25;   /* heading text — darkest warm grey */
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
-      --green: #2DF952;
-      --pink:  #FF85B0;
+      --blue:  #2E54C8;   /* PRIMARY accent — the tiger */
+      --pink:  #F08CB4;   /* blossom pink — secondary accent */
+      --bloom: #E9C982;   /* warm dappled gold — sunlight through canopy */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --t-display: 2.5rem;   /* 40px */
@@ -61,9 +62,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:#F5E10A; }
-    .tab-work  { background:#5B8CFF; }
-    .tab-about { background:#FF4B1F; }
+    .tab-home  { background:var(--bloom); }
+    .tab-work  { background:var(--blue); }
+    .tab-about { background:var(--pink); }
 
     /* ── view toggle (single / grid) ── */
     .vt { position:fixed; top:1.1rem; left:50%; transform:translateX(-50%);
@@ -75,7 +76,7 @@
                  padding:.5rem .7rem; cursor:none; display:flex; align-items:center;
                  transition:all .22s; }
     .vt button:hover { color:rgba(252,250,246,.85); }
-    .vt button.on { background:var(--green); color:#0B0908; }
+    .vt button.on { background:var(--blue); color:#FEFEFB; }
     .vt svg { width:11px; height:11px; }
 
     .pg { position:fixed; inset:0; z-index:1; overflow:hidden; }
@@ -114,22 +115,22 @@
     }
     .book::before {
       content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
-      background:var(--spine, var(--green)); z-index:-1;
+      background:var(--spine, var(--blue)); z-index:-1;
       box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
     .pg:not(.pg-active) .book,
     .pg:not(.pg-active) .book::before { box-shadow:none; }
-    #w1 .book { --spine: #5B8CFF; }
-    #w2 .book { --spine: #FF9E00; }
-    #w3 .book { --spine: #2FC97B; }
-    #w4 .book { --spine: #9D7BFF; }
-    #gv .book { --spine: var(--green); }
+    #w1 .book { --spine: var(--blue); }
+    #w2 .book { --spine: var(--pink); }
+    #w3 .book { --spine: var(--bloom); }
+    #w4 .book { --spine: var(--blue); }
+    #gv .book { --spine: var(--blue); }
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, #FF4B1F 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, #F5E10A 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, #2B5BFF 6.8px 8px);
+        #FEFEFB 0 1.6px, var(--pink) 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, var(--bloom) 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, var(--blue) 6.8px 8px);
     }
     .lp, .rp { background:var(--page); }
 
@@ -194,12 +195,18 @@
              letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
 
     .rp { padding:3.2rem 3rem 2.6rem 2.8rem; }
-    .rp-sub { position:absolute; top:5rem; left:2.8rem; right:3rem;
+    /* Year/Place meta sits as one horizontal row pinned to the top of the
+       right page. The lead (.rp-sub) starts well below it so the two never
+       collide, even when the lead wraps to three lines. */
+    .rp-crs { position:absolute; top:3.2rem; left:2.8rem; right:3rem;
+              display:flex; gap:2.2rem; align-items:flex-start; }
+    .rp-crs .lp-cr { writing-mode:horizontal-tb; transform:none; white-space:nowrap; }
+    .rp-sub { position:absolute; top:7.4rem; left:2.8rem; right:3rem;
               font-family:var(--sans); font-style:normal; font-size:var(--t-lead);
               line-height:1.3; letter-spacing:-.2px; color:var(--head); }
-    .rp-crs { position:absolute; top:3.2rem; left:2.8rem; display:flex; gap:1.05rem; }
-    .rp-body { position:absolute; left:2.8rem; right:3rem; bottom:5.4rem;
-               columns:2; column-gap:1.7rem;
+    /* Body is bounded top AND bottom so it can never climb into the lead. */
+    .rp-body { position:absolute; left:2.8rem; right:3rem; top:14rem; bottom:5.4rem;
+               columns:2; column-gap:1.7rem; overflow:hidden;
                font-family:var(--sans); font-size:var(--t-body); line-height:1.55;
                color:rgba(21,17,14,.7); }
     .rp-body p + p { margin-top:.7rem; }
@@ -214,7 +221,7 @@
     .rp-link.dis { opacity:.4; pointer-events:none; }
 
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
-    #gv { background:#F5E10A; transition:background .45s ease; }
+    #gv { background:var(--bloom); transition:background .45s ease; }
     #gv .tcap { color:rgba(21,17,14,.5); }
     .fl { position:absolute; width:clamp(150px,16vw,230px); cursor:none;
           touch-action:none; user-select:none; -webkit-user-select:none;
@@ -292,7 +299,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
         <span class="lp-ct v">01 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
@@ -324,12 +331,15 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">I connect new designers with working mentors.</div>
+        <div class="rp-sub v">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</div>
         <div class="rp-body">
-          <p>Uphold pairs new designers with working mentors who review their
-          work and point to the next step.</p>
-          <p>I designed it end-to-end: <em>research, flows, and interface.</em>
-          Every screen earns its place or comes out.</p>
+          <p>Uphold pairs new designers with working mentors who review the
+          actual files, not the polished case study, and name <em>one concrete
+          change</em> before any praise — because "looks great" teaches nothing.</p>
+          <p>I designed it end to end. The hard part was never the match; it was
+          the wait: a mentor reply can take two days, so I built for the gap — a
+          submission state that reads "in good hands," not "ignored," and
+          reminders that <em>nudge the mentor without nagging the learner.</em></p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">
@@ -345,7 +355,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
         <span class="lp-ct v">02 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
@@ -376,12 +386,15 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">I built a resale marketplace for Gen Z India.</div>
+        <div class="rp-sub v">Secondhand isn't a discount aisle. It's a different way of shopping.</div>
         <div class="rp-body">
-          <p>Most wardrobes hold clothes worn once. Revibe lets people
-          <em>shop, sell, and remake</em> thrifted fashion in one place.</p>
-          <p>I designed the full flow, discovery to checkout, with AI to size
-          and match what sells.</p>
+          <p>Resale inventory is one-of-one: a single item, one size, one fade
+          in the wash. So the AI doesn't guess off the label you usually buy — it
+          reads a garment's measured shoulder, chest and length against your
+          <em>real closet,</em> and tells you the truth when nothing fits.</p>
+          <p>The work was in the unglamorous parts: a sell flow that gets a
+          photo and price out in <em>under a minute,</em> and a sold-out state
+          that points to three near-matches instead of a dead end.</p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/page">View case study ↗</a>
@@ -396,7 +409,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
         <span class="lp-ct v">03 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
@@ -427,13 +440,16 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">I help research teams find participants faster.</div>
+        <div class="rp-sub v">Insight finds research participants for teams that can't expense a $20k recruiting tool.</div>
         <div class="rp-body">
-          <p>The hard part of research isn't the questions. It's finding the
-          people. Insight handles participant recruiting for teams without
-          enterprise budgets.</p>
-          <p>I designed this B2B SaaS product in Figma and Miro, problem map to
-          prototype. <em>Dense data, quiet screens.</em></p>
+          <p>The hard part was never the matching — it was trust: convincing a
+          lead that the strangers showing up are real, screened, and worth the
+          hour. So the work went where that's decided — a question builder that
+          flags when <em>two screener criteria contradict each other</em> before
+          you send it, and a no-show ledger that quietly downranks the people who
+          flake.</p>
+          <p>Built in Figma and Miro, for the designer who needs <em>eight
+          participants by Thursday.</em></p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
@@ -448,7 +464,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Early Winter — Selected Work</span>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
         <span class="lp-ct v">04 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
@@ -479,12 +495,15 @@
           <div class="lp-cr v"><b>Year</b>2024</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">I designed a marketplace for plant-based living.</div>
+        <div class="rp-sub v">Most vegan products default to clinical white or aggressive green — both of which read as a chore, not a craving.</div>
         <div class="rp-body">
-          <p>Vejeez! is a marketplace for plant-based living — find products,
-          buy them, and connect with other vegans.</p>
-          <p>I designed <em>brand, voice, and interface</em> as one piece.
-          Case study coming soon.</p>
+          <p>Vejeez! treats vegan as an <em>appetite, not a verdict.</em> I built
+          the brand, voice and storefront as one hand: listings lead with the
+          three things shoppers actually scan for, and the filter for hidden
+          animal-derived additives — gelatin, carmine, shellac — sits up front
+          instead of buried in tags.</p>
+          <p>The empty search suggests a swap instead of apologizing; the
+          <em>voice that wrote the wordmark wrote the "added to cart" line too.</em></p>
         </div>
         <a class="rp-link dis">Case study soon</a>
         <span class="scrib" style="left:8.6rem; bottom:2.3rem; transform:rotate(-2deg);">soon.</span>
@@ -498,36 +517,36 @@
   <!-- ═══ GRID VIEW · LOOSE PHOTOS ═══ -->
   <section class="pg" id="gv" style="display:none;">
     <span class="tcap">Index</span>
-    <span class="run" style="left:6vmin; color:rgba(21,17,14,.5);">Early Winter — Index</span>
-    <figure class="fl" data-t="w1" data-c="#5B8CFF" style="left:5%;  top:11%;">
+    <span class="run" style="left:6vmin; color:rgba(21,17,14,.5);">Blue Tiger — Index</span>
+    <figure class="fl" data-t="w1" data-c="#2E54C8" style="left:5%;  top:11%;">
       <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship platform" draggable="false">
       <figcaption><b>Uphold</b><span>ed tech · nº 01 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w1" data-c="#5B8CFF" style="left:23%; top:46%;">
+    <figure class="fl" data-t="w1" data-c="#2E54C8" style="left:23%; top:46%;">
       <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research and flows" draggable="false">
       <figcaption><b>Uphold</b><span>research &amp; flows</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w2" data-c="#FF9E00" style="left:42%; top:9%; ">
+    <figure class="fl" data-t="w2" data-c="#F08CB4" style="left:42%; top:9%; ">
       <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — resale marketplace" draggable="false">
       <figcaption><b>Revibe</b><span>commerce · nº 02 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w2" data-c="#FF9E00" style="left:60%; top:40%;">
+    <figure class="fl" data-t="w2" data-c="#F08CB4" style="left:60%; top:40%;">
       <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — brand and commerce" draggable="false">
       <figcaption><b>Revibe</b><span>brand &amp; commerce</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w3" data-c="#2FC97B" style="left:78%; top:12%;">
+    <figure class="fl" data-t="w3" data-c="#E9C982" style="left:78%; top:12%;">
       <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research recruiting" draggable="false">
       <figcaption><b>Insight</b><span>b2b saas · nº 03 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w3" data-c="#2FC97B" style="left:9%;  top:58%;">
+    <figure class="fl" data-t="w3" data-c="#E9C982" style="left:9%;  top:58%;">
       <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research ops" draggable="false">
       <figcaption><b>Insight</b><span>research ops</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#9D7BFF" style="left:45%; top:56%;">
+    <figure class="fl" data-t="w4" data-c="#2E54C8" style="left:45%; top:56%;">
       <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — vegan marketplace" draggable="false">
       <figcaption><b>Vejeez!</b><span>commerce · nº 04 · 2024</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#9D7BFF" style="left:79%; top:54%;">
+    <figure class="fl" data-t="w4" data-c="#2E54C8" style="left:79%; top:54%;">
       <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand and voice" draggable="false">
       <figcaption><b>Vejeez!</b><span>brand &amp; voice</span></figcaption>
     </figure>

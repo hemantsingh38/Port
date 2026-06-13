@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Early Winter</title>
+  <title>About — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -18,11 +18,9 @@
       --head:  #2E2A25;   /* heading text — darkest warm grey */
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
-      --pink:  #FF85B0;
-      --green: #2DF952;
-      --blue:  #DCE8EF;
-      --warm:  #F2EADC;
-      --yellow:#F5E10A;
+      --blue:  #2E54C8;   /* PRIMARY accent — the tiger */
+      --pink:  #F08CB4;   /* blossom pink — secondary accent */
+      --bloom: #E9C982;   /* warm dappled gold — sunlight-through-canopy */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
@@ -60,9 +58,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:#F5E10A; }
-    .tab-work  { background:#5B8CFF; }
-    .tab-about { background:#FF4B1F; }
+    .tab-home  { background:#E9C982; }
+    .tab-work  { background:#F08CB4; }
+    .tab-about { background:#2E54C8; }
 
     .pg { position:fixed; inset:0; z-index:1; overflow:hidden; }
     .pg.pg-active { z-index:10; }
@@ -90,24 +88,24 @@
     }
     .book::before {
       content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
-      background:var(--spine, var(--green)); z-index:-1;
+      background:var(--spine, var(--blue)); z-index:-1;
       box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
     .pg:not(.pg-active) .book,
     .pg:not(.pg-active) .book::before { box-shadow:none; }
-    #a-cv .book { --spine: #F5E10A; }
-    #a-me .book { --spine: #5B8CFF; }
-    #a-ph .book { --spine: #0095E8; }
-    #a-wk .book { --spine: #FF9E00; }
-    #a-in .book { --spine: #9D7BFF; }
-    #a-ta .book { --spine: #FF4B1F; }
-    #a-nn .book { --spine: #2FC97B; }
+    #a-cv .book { --spine: var(--blue); }
+    #a-me .book { --spine: var(--pink); }
+    #a-ph .book { --spine: var(--bloom); }
+    #a-wk .book { --spine: var(--blue); }
+    #a-in .book { --spine: var(--pink); }
+    #a-ta .book { --spine: var(--bloom); }
+    #a-nn .book { --spine: var(--blue); }
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, #FF4B1F 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, #F5E10A 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, #2B5BFF 6.8px 8px);
+        #FEFEFB 0 1.6px, #F08CB4 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, #E9C982 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, #2E54C8 6.8px 8px);
     }
     /* moving shadow on the flipping page half */
     .flip-shade-fwd::after, .flip-shade-back::after {
@@ -193,7 +191,7 @@
                  drop-shadow(0 8px 16px rgba(21,17,14,.16)); }
 
     /* ══════════ PHILOSOPHY ══════════ */
-    .aph-l { position:relative; background:#0095E8; overflow:hidden;
+    .aph-l { position:relative; background:var(--blue); overflow:hidden;
              display:flex; align-items:center; padding:3rem 2.6rem 3rem 3rem; }
     .aph-l .hed { font-size:var(--t-display); color:var(--page); }
     .aph-l .hed em { color:var(--page); }
@@ -236,7 +234,7 @@
     .tst li:last-child { border-bottom:none; }
     .tst .tick { font-family:var(--scrib); font-weight:600; font-size:1.4rem; color:#C8385A; }
     .tst span { font-family:var(--sans); font-size:var(--t-body); color:rgba(21,17,14,.7); }
-    .ata-r { position:relative; background:#FF4B1F; overflow:hidden; }
+    .ata-r { position:relative; background:var(--bloom); overflow:hidden; }
 
     /* ══════════ NON-NEGOTIABLES (inventory grid) ══════════ */
     .inv { display:grid; grid-template-columns:repeat(3,1fr);
@@ -250,7 +248,7 @@
       color:var(--mu); }
 
     /* ══════════ BACK — closing spread ══════════ */
-    #a-bk .book { --spine: #FF85B0; }
+    #a-bk .book { --spine: var(--blue); }
     .abk-lp { background:var(--page); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:flex-end;
       padding:2.8rem 2.6rem 2.6rem 3rem; }
@@ -322,15 +320,15 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="ctr-pg">
-        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <span class="run" style="left:3rem;">Blue Tiger — About</span>
         <h2 class="ctr-hed">contributors</h2>
         <p class="ctr-txt">
-          <b>[01]</b> UX designer in New Delhi. 3.5 years across ed tech,
-          fintech, commerce and B2B SaaS.
+          <b>[01]</b> I'm Blue Tiger — product and interaction design in New
+          Delhi, plus the brand and strategy around it.
           <b>[02]</b> I lift before the inbox opens. The gym never gets
           rescheduled.
           <b>[03]</b> I play pickleball now. It is already a personality trait.
-          <b>[04]</b> I drink the martini slowly, like user research.
+          <b>[04]</b> I drink the martini slowly, like a good critique.
         </p>
         <img class="co" src="img/co-stage.png" style="left:-4%; height:48%; z-index:3;" alt="Hemant on stage with a microphone">
         <img class="co" src="img/co-gymwhite.png" style="left:26%; height:54%; z-index:2;" alt="Hemant in a white tank, gym mirror">
@@ -341,12 +339,14 @@
         <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <h2 class="ctr-hed">contributors</h2>
         <p class="ctr-txt">
-          <b>[05]</b> I present loud and design quiet. MOON survived its first
-          demo. So did the room.
-          <b>[06]</b> I held a mic under purple lights once. The audience lived.
+          <b>[05]</b> I present loud and design quiet. Soft paws in the room,
+          sharp claws in the file.
+          <b>[06]</b> A blue tiger doesn't exist in nature — so the name is an
+          invention. So is most good work.
           <b>[07]</b> I climb to cold mountain towns to feel at home. Chai is
           mandatory.
-          <b>[08]</b> All eight are the same person. I am open to new work.
+          <b>[08]</b> All eight are the same person. Blue Tiger is open to new
+          work.
         </p>
         <span class="scrib" style="right:2.4rem; bottom:42%; transform:rotate(-3deg);">all of them are me ↓</span>
         <img class="co" src="img/co-moon.png" style="left:-3%; height:50%; z-index:2;" alt="Hemant presenting MOON on a screen">
@@ -373,14 +373,14 @@
       <div class="pp pp-pad">
         <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="runtop">About me</div>
-        <h2 class="hed">I draw things,<br>then I <em>build</em> them.</h2>
+        <h2 class="hed lead">It started as a tattoo — a <em>blue tiger cub.</em></h2>
         <div class="dek">
-          <p>UX designer in New Delhi. 3.5 years across ed tech, fintech,
-          commerce and B2B SaaS.</p>
-          <p>I run <em>Early Winter</em> — a studio of one, slow on purpose.
-          I sweat the parts users never notice.</p>
-          <p>Sketchbooks first, screens later. The medium changed. The instinct
-          did not.</p>
+          <p>The tiger because design takes nerve: opinions, hard calls, work
+          that holds up. The cub because the best work stays curious, a little
+          reckless, never bored.</p>
+          <p>I shape products — how they work, how they feel, how they fit
+          together — and the <em>brand and strategy</em> around them: decisive
+          where it counts, free everywhere else.</p>
         </div>
         <span class="pno">127</span>
       </div>
@@ -402,19 +402,21 @@
         <div class="runtop">Philosophy</div>
         <ul class="prn">
           <li><span class="n">01.</span>
-            <div><b>Invisible until it matters.</b>
-            <p>Good design disappears into use. Notice the interface and
-            something already went wrong.</p></div>
+            <div><b>The empty state earns the page.</b>
+            <p>It's the first real screen a new user meets, so it has to orient
+            them and offer the first move. I write it before the dashboard it
+            leads to.</p></div>
           </li>
           <li><span class="n">02.</span>
-            <div><b>Less, but warmer.</b>
-            <p>Rams was right about less. Minimal is not cold. Restraint and
-            warmth share the same screen.</p></div>
+            <div><b>Error copy is the apology.</b>
+            <p>When something breaks, the message owes two things in plain
+            words: whether we know what happened, and what they do next. Never
+            "something went wrong."</p></div>
           </li>
           <li><span class="n">03.</span>
-            <div><b>Made for Tuesdays.</b>
-            <p>I build for an ordinary Tuesday. Everyday first, memorable
-            second.</p></div>
+            <div><b>Design for the 2am edge case.</b>
+            <p>Tired user, one bar of signal, a half-finished form on the third
+            try. Hold for them and the happy path was never in question.</p></div>
           </li>
         </ul>
         <span class="pno">129</span>
@@ -428,13 +430,13 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
-        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <span class="run" style="left:3rem;">Blue Tiger — About</span>
         <div class="runtop">Work, briefly</div>
-        <h2 class="hed lead">The formal page.</h2>
+        <h2 class="hed lead">Proof, not <em>promises.</em></h2>
         <div class="wkb">
-          <div class="wkb-row"><b>What I do</b><span>End-to-end product design. Research, flows, interface.</span></div>
-          <div class="wkb-row"><b>Sectors</b><span>Ed tech, fintech, commerce, B2B SaaS.</span></div>
-          <div class="wkb-row"><b>Years</b><span>3.5.</span></div>
+          <div class="wkb-row"><b>Product & interaction</b><span>How it works, how it feels, how it holds together.</span></div>
+          <div class="wkb-row"><b>Branding</b><span>What it is, how it sounds, how it looks.</span></div>
+          <div class="wkb-row"><b>Strategy</b><span>Why it wins, and where it goes next.</span></div>
           <div class="wkb-row"><b>Tools</b><span>Figma, Miro, pen and paper.</span></div>
           <div class="wkb-row"><b>Now</b><span>Open to new work.</span></div>
         </div>
@@ -465,18 +467,18 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
-        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <span class="run" style="left:3rem;">Blue Tiger — About</span>
         <div class="runtop">Inspirations</div>
         <h2 class="hed">Borrowed <em>light.</em></h2>
         <ul class="insp" style="margin-top:1.2rem;">
-          <li><b>Don Norman</b><p>A confusing door is the door's fault.</p></li>
-          <li><b>Dieter Rams</b><p>Less, but better. I argue with it daily.</p></li>
-          <li><b>Cinema</b><p>Slow films I remember as a temperature.</p></li>
-          <li><b>Print</b><p>Magazines and zines. The internet on paper.</p></li>
+          <li><b>Don Norman</b><p>A confusing door is the door's fault, never yours.</p></li>
+          <li><b>Dieter Rams</b><p>Less, but better. I argue with it daily and lose well.</p></li>
+          <li><b>Cinema</b><p>Slow films I remember as a temperature, not a plot.</p></li>
+          <li><b>Print</b><p>Magazines and zines — the internet before it forgot the margins.</p></li>
         </ul>
         <span class="pno">132</span>
       </div>
-      <div class="pp" style="background:#9D7BFF;">
+      <div class="pp" style="background:var(--pink);">
         <span class="run" style="right:3rem; color:rgba(21,17,14,.5);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <figure class="cut" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/11092278/pexels-photo-11092278.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage film projector">
@@ -498,13 +500,13 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
-        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <span class="run" style="left:3rem;">Blue Tiger — About</span>
         <div class="runtop">My taste</div>
         <h2 class="hed lead">Things that feel<br><em>right.</em></h2>
         <ul class="tst" style="margin-top:1.2rem;">
           <li><span class="tick">✓</span><span>Film grain over gradients.</span></li>
           <li><span class="tick">✓</span><span>Warm paper, cold mornings.</span></li>
-          <li><span class="tick">✓</span><span>Neon green on near-black.</span></li>
+          <li><span class="tick">✓</span><span>A single blue on warm near-white.</span></li>
           <li><span class="tick">✓</span><span>Handwriting in the margins.</span></li>
           <li><span class="tick">✓</span><span>Tapes, reels, things that click.</span></li>
           <li><span class="tick">✓</span><span>Interfaces that know when to be quiet.</span></li>
@@ -540,7 +542,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
-        <span class="run" style="left:3rem;">Early Winter — About</span>
+        <span class="run" style="left:3rem;">Blue Tiger — About</span>
         <div class="runtop">Non-negotiables</div>
         <h2 class="hed lead">The things<br>that <em>stay.</em></h2>
         <div class="dek">
@@ -571,16 +573,17 @@
 
   <!-- ═══ BACK — closing spread ═══ -->
   <section class="pg" id="a-bk">
-    <span class="tcap">viii / viii — early winter, new delhi</span>
+    <span class="tcap">viii / viii — blue tiger, new delhi</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="abk-lp">
-        <span class="abk-run">Early Winter — About</span>
+        <span class="abk-run">Blue Tiger — About</span>
         <h2 class="abk-hed">Enough<br><em>about me.</em></h2>
+        <span class="scrib" style="left:3rem; bottom:5rem;">a cub with claws ✦</span>
         <span class="pno">138</span>
       </div>
       <div class="abk-rp">
-        <p class="abk-rp-hed">Where<br>next.</p>
+        <p class="abk-rp-hed">Blue Tiger —<br>"a cub<br>with claws."</p>
         <div class="abk-links">
           <a href="index.html"><span class="abk-link-label">The book</span><span class="abk-link-name">back to the start</span></a>
           <a href="index.html#cn"><span class="abk-link-label">Connect</span><span class="abk-link-name">say hello</span></a>

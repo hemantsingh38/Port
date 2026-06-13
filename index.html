@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Early Winter — UX Design Studio</title>
+  <title>Blue Tiger — Product &amp; Interaction Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -12,16 +12,15 @@
 
     :root {
       --table: #0B0908;
-      --page:  #FEFEFB;
+      --page:  #FEFEFB;   /* white blossom / page */
       --ink:   #15110E;
       --head:  #2E2A25;   /* heading text — darkest warm grey */
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
-      --green: #2DF952;
-      --pink:  #FF85B0;   /* filler tints */
-      --blue:  #DCE8EF;
-      --sage:  #E4EAE0;
-      --warm:  #F2EADC;
+      /* forest-with-blossoms palette — greenery comes from the grass bg video */
+      --blue:  #2E54C8;   /* PRIMARY accent — the tiger */
+      --pink:  #F08CB4;   /* blossom pink — secondary accent */
+      --bloom: #E9C982;   /* warm dappled gold — sunlight through canopy */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       /* five sizes — the only scale */
@@ -75,9 +74,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:#F5E10A; }
-    .tab-work  { background:#5B8CFF; }
-    .tab-about { background:#FF4B1F; }
+    .tab-home  { background:var(--bloom); }
+    .tab-work  { background:var(--blue); }
+    .tab-about { background:var(--pink); }
 
     /* ── background video ── */
     .bg-vid { position:fixed; inset:0; z-index:0; width:100%; height:100%;
@@ -88,7 +87,7 @@
     .pg.pg-active { z-index:10; }
 
     /* each page half carries its own background so only the flipping half disappears */
-    .cv-l,.cv-r,.wkp,.fq-page,.ab-lp { background:var(--page); }
+    .cv-l,.cv-r,.wkp,.fq-page,.ab-lp,.sv-lp { background:var(--page); }
     /* contact back-cover inner wrapper */
     .cn-inner { position:absolute; inset:0; background:var(--table); }
 
@@ -125,24 +124,26 @@
     }
     .book::before {
       content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
-      background:var(--spine, var(--green)); z-index:-1;
+      background:var(--spine, var(--blue)); z-index:-1;
       box-shadow:0 10px 30px rgba(0,0,0,.4);
     }
     /* only the active page's book casts a shadow — stacked hidden books
        would otherwise pile identical shadows and darken the margins */
     .pg:not(.pg-active) .book,
     .pg:not(.pg-active) .book::before { box-shadow:none; }
-    /* per-section spine colours */
-    #f1 .book { --spine: #0095E8; }
-    #f2 .book { --spine: #FF4B1F; }
-    #ab .book { --spine: #F5E10A; }
-    #cn .book { --spine: var(--ink); }
+    /* per-section spine colours — cycle blue (primary), pink, bloom */
+    #wk .book { --spine: var(--blue); }
+    #sv .book { --spine: var(--pink); }
+    #f1 .book { --spine: var(--bloom); }
+    #f2 .book { --spine: var(--blue); }
+    #ab .book { --spine: var(--pink); }
+    #cn .book { --spine: var(--blue); }
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, #FF4B1F 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, #F5E10A 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, #2B5BFF 6.8px 8px);
+        #FEFEFB 0 1.6px, var(--pink) 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, var(--bloom) 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, var(--blue) 6.8px 8px);
     }
     .gut {
       position:absolute; left:50%; top:0; bottom:0; width:1px;
@@ -231,11 +232,15 @@
     }
 
     /* ══════════ WORK TEASER — full-width plates ══════════ */
-    #wk .book { --spine:#5B8CFF; }
     .wkp {
       position:relative; overflow:hidden;
       padding:2.2rem 2.6rem 2rem;
       display:flex; flex-direction:column; gap:1.4rem;
+    }
+    .wk-intro {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.3; letter-spacing:-.2px; color:var(--head);
+      max-width:30ch; margin-top:1.4rem;
     }
     .wk-plate {
       flex:1; min-height:0;
@@ -278,6 +283,67 @@
       display:block; font-weight:500; color:var(--ink);
     }
 
+    /* ══════════ SERVICES SPREAD ══════════ */
+    /* left page (cream): eyebrow + intro lead + the three services */
+    .sv-lp {
+      position:relative; display:flex; flex-direction:column;
+      padding:2.6rem 3rem 2rem 3rem; overflow:hidden;
+    }
+    .sv-eyebrow {
+      display:flex; justify-content:space-between; align-items:baseline;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--mu);
+      padding-bottom:.7rem; border-bottom:1px solid var(--line);
+    }
+    .sv-body { margin-top:auto; }
+    .sv-lead {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.3; letter-spacing:-.2px; color:var(--head);
+      max-width:32ch; margin-bottom:1.6rem;
+    }
+    .sv-lead em { font-style:normal; font-weight:500; color:var(--ink); }
+    .sv-list { display:flex; flex-direction:column; }
+    .sv-list dt {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.2; letter-spacing:-.2px; color:var(--ink);
+      padding-top:.9rem; border-top:1px solid var(--line);
+    }
+    .sv-list dd {
+      font-family:var(--sans); font-size:var(--t-caption); line-height:1.5;
+      color:var(--mu); padding-bottom:.9rem;
+    }
+    .sv-folio {
+      margin-top:1.4rem; font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); letter-spacing:-1px; line-height:1;
+      color:rgba(21,17,14,.18);
+    }
+    /* right page: blue color-block carrying the big line + tagline */
+    .sv-rp {
+      background:var(--blue); position:relative; overflow:hidden;
+      display:flex; flex-direction:column; justify-content:space-between;
+      padding:2.6rem 2.8rem 2rem;
+    }
+    .sv-rp-eyebrow {
+      display:flex; justify-content:space-between; align-items:baseline;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.6);
+      padding-bottom:.7rem; border-bottom:1px solid rgba(254,254,251,.25);
+    }
+    .sv-rp-body { display:flex; flex-direction:column; gap:1.2rem; }
+    .sv-big {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-display);
+      line-height:1; letter-spacing:-1.5px; color:var(--page);
+    }
+    .sv-tag {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.3; letter-spacing:-.2px; color:rgba(254,254,251,.9);
+    }
+    .sv-folio-r {
+      align-self:flex-end; font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); letter-spacing:-1px; line-height:1;
+      color:rgba(254,254,251,.4);
+    }
+
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
     .fq {
@@ -313,7 +379,7 @@
       letter-spacing:.1em; text-transform:uppercase; color:var(--mu);
       padding-bottom:.7rem; border-bottom:1px solid var(--line);
     }
-    .ab-voice { margin-top:auto; max-width:26ch; }   /* anchored to lower-middle */
+    .ab-voice { margin-top:auto; max-width:42ch; }   /* anchored to lower-middle */
     .ab-lead {
       font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
       line-height:1.3; letter-spacing:-.2px; color:var(--head);
@@ -413,9 +479,9 @@
       font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
       color:var(--mu); display:flex; flex-direction:column; gap:.18rem;
     }
-    /* right: pink contact card */
+    /* right: blue contact card — the tiger */
     .cn-rp {
-      background:var(--pink); position:relative; overflow:hidden;
+      background:var(--blue); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.8rem 2.8rem 2.6rem;
     }
@@ -426,8 +492,8 @@
       letter-spacing:-1.5px; color:var(--page);
     }
     .cn-rp-invite {
-      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
-      line-height:1.3; letter-spacing:-.2px; color:var(--page); max-width:20ch;
+      font-family:var(--sans); font-weight:400; font-size:var(--t-body);
+      line-height:1.55; letter-spacing:0; color:var(--page); max-width:36ch;
     }
     .folio { font:400 var(--t-display)/1 var(--sans); letter-spacing:-1px;
              color:rgba(21,17,14,.18); }
@@ -489,7 +555,7 @@
 
   <!-- ═══ COVER ═══ -->
   <section class="pg" id="cv">
-    <span class="tcap">i / vi — cover</span>
+    <span class="tcap">i / vii — cover</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: cover video -->
@@ -498,27 +564,26 @@
           <video autoplay muted loop playsinline>
             <source src="img/cover.mp4" type="video/mp4">
           </video>
-          <figcaption>Early Winter · 2025</figcaption>
+          <figcaption>Blue Tiger · 2025</figcaption>
         </figure>
       </div>
       <!-- right: editorial title page -->
       <div class="cv-r">
         <div class="cv-r-inner">
           <div class="cv-l-top">
-            <span>Early Winter</span>
+            <span>Blue Tiger</span>
             <span>Issue Nº 01</span>
           </div>
-          <h1>Early<em>Winter.</em></h1>
-          <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.4rem; transform:rotate(5deg);">est. one cold<br>morning ❅</span>
+          <h1>Blue tigers don't exist.<em>So I made one.</em></h1>
+          <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.4rem; transform:rotate(5deg);">a cub with<br>claws ✦</span>
           <div class="cv-l-note">
-            <p>I design product UX. I run Early Winter, a studio of one.</p>
-            <p>Slow on purpose. One project at a time, finished properly.</p>
-            <p class="cv-l-pull">I sweat the parts users never notice.</p>
+            <p>Product and interaction design — plus the brand and strategy around it. <em>Bold enough to ship, playful enough to keep it fun.</em></p>
+            <p class="cv-l-pull">Tiger for the craft. Cub for the play. Blue because the default was never the point.</p>
           </div>
           <p class="cv-l-foot">
-            UX design studio.<br>
-            Selected work, 2022 — 2025.<br>
-            New Delhi, India.
+            Blue Tiger<br>
+            Product &amp; interaction design<br>
+            New Delhi, India
           </p>
         </div>
       </div>
@@ -528,12 +593,13 @@
 
   <!-- ═══ WORK TEASER · PHOTO BOOK ═══ -->
   <section class="pg" id="wk">
-    <span class="tcap">ii / vi — selected work</span>
+    <span class="tcap">ii / vii — selected work</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left page: two full-width plates -->
       <div class="wkp">
-        <span class="run" style="left:2.6rem;">Early Winter — Selected Work</span>
+        <span class="run" style="left:2.6rem;">Blue Tiger — Selected Work</span>
+        <p class="wk-intro">Proof, not promises. Products I've shaped, calls I'd make again, and a few experiments I couldn't leave alone.</p>
 
         <a href="work.html#w1" class="wk-plate">
           <div class="wk-plate-img">
@@ -599,9 +665,42 @@
     </div>
   </section>
 
+  <!-- ═══ SERVICES ═══ -->
+  <section class="pg" id="sv">
+    <span class="tcap">iii / vii — services</span>
+    <div class="book rv">
+      <div class="gut"></div>
+      <!-- left page (cream): intro + the three services -->
+      <div class="sv-lp">
+        <div class="sv-eyebrow rv"><span>Blue Tiger</span><span>Services</span></div>
+        <div class="sv-body rv" style="transition-delay:.1s">
+          <p class="sv-lead">Product and interaction design at the center: how a thing works and feels. Brand and strategy around it: what it is and why it wins. <em>I go deep, then zoom out.</em></p>
+          <dl class="sv-list">
+            <dt>Product &amp; Interaction Design</dt>
+            <dd>How it works, how it feels, how it holds together.</dd>
+            <dt>Branding</dt>
+            <dd>What it is, how it sounds, how it looks.</dd>
+            <dt>Strategy</dt>
+            <dd>Why it wins, and where it goes next.</dd>
+          </dl>
+        </div>
+        <div class="sv-folio rv" style="transition-delay:.18s">8</div>
+      </div>
+      <!-- right page: blue color-block with the big line -->
+      <div class="sv-rp on-dark">
+        <div class="sv-rp-eyebrow rv"><span>Blue Tiger</span><span>Soft paws. Sharp claws.</span></div>
+        <div class="sv-rp-body rv" style="transition-delay:.12s">
+          <p class="sv-big">Soft paws.<br>Sharp claws.</p>
+          <p class="sv-tag">Blue Tiger — &ldquo;a cub with claws.&rdquo;</p>
+        </div>
+        <div class="sv-folio-r rv" style="transition-delay:.2s">9</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ FILLER 1 · pink / blue ═══ -->
   <section class="pg" id="f1">
-    <span class="tcap">iii / vi — influences</span>
+    <span class="tcap">iv / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="fq-page" style="background:var(--pink);">
@@ -617,11 +716,11 @@
         </div>
         <span class="pno">4</span>
       </div>
-      <div class="fq-page" style="background:#0095E8;">
+      <div class="fq-page" style="background:var(--blue);">
         <div class="fq fq-light" style="right:14%; top:28%;">
           Users do not care who I am. They care whether the thing works.
           So I make it work, then make it feel inevitable.
-          <small>Early Winter / studio notes</small>
+          <small>Blue Tiger / studio notes</small>
         </div>
         <div class="fq thru fq-light" style="left:12%; bottom:18%; width:48%;">
           good designs fit our needs so well that the design is invisible.
@@ -631,12 +730,12 @@
     </div>
   </section>
 
-  <!-- ═══ FILLER 2 · sage / warm ═══ -->
+  <!-- ═══ FILLER 2 · bloom / photo ═══ -->
   <section class="pg" id="f2">
-    <span class="tcap">iv / vi — influences</span>
+    <span class="tcap">v / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:#FF4B1F;">
+      <div class="fq-page" style="background:var(--bloom);">
         <div class="fq" style="left:20%; top:40%;">
           Good design is as little design as possible. Less, but better —
           for it concentrates on the essential aspects, and the products
@@ -658,16 +757,16 @@
 
   <!-- ═══ ABOUT ═══ -->
   <section class="pg" id="ab">
-    <span class="tcap">v / vi — about</span>
+    <span class="tcap">vi / vii — about</span>
     <div class="book rv">
       <div class="gut"></div>
 
       <!-- left: the voice page — lead-led, no heading -->
       <div class="ab-lp">
-        <div class="ab-eyebrow rv"><span>Early Winter</span><span>About</span></div>
+        <div class="ab-eyebrow rv"><span>Blue Tiger</span><span>About</span></div>
         <div class="ab-voice rv" style="transition-delay:.1s">
-          <p class="ab-lead">UX designer in New Delhi. <em>3.5 years.</em></p>
-          <p class="ab-bio">Across ed tech, fintech, commerce and B2B SaaS. I run Early Winter, a studio of one. <em>Open to new work.</em></p>
+          <p class="ab-lead">It started as a tattoo — <em>a blue tiger cub.</em></p>
+          <p class="ab-bio">The tiger because design takes nerve: opinions, hard calls, work that holds up. The cub because the best work stays curious, a little reckless, never bored. I shape products — how they work, how they feel, how they fit together — and the brand and strategy around them: <em>decisive where it counts, free everywhere else.</em></p>
           <a class="scrib" href="about.html" style="display:inline-block; margin-top:1.3rem; font-size:1.4rem; transform:rotate(-2deg);">read the whole story →</a>
         </div>
         <div class="ab-folio rv" style="transition-delay:.18s">122</div>
@@ -682,7 +781,7 @@
         <div class="ab-eyebrow-r rv"><span>The Designer</span><span>New Delhi</span></div>
         <div class="ab-rp-foot rv" style="transition-delay:.16s">
           <dl class="ab-meta">
-            <dt>Role</dt><dd>UX / Product Designer</dd>
+            <dt>Role</dt><dd>Product &amp; Interaction Designer</dd>
             <dt>Practice</dt><dd>3.5 years</dd>
             <dt>Sectors</dt><dd>Ed Tech, Fintech, Commerce, B2B SaaS</dd>
             <dt>Status</dt><dd>Open to new work</dd>
@@ -696,35 +795,35 @@
 
   <!-- ═══ CONNECT spread ═══ -->
   <section class="pg" id="cn">
-    <span class="tcap">vi / vi — contact</span>
+    <span class="tcap">vii / vii — contact</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: contact text on cream page -->
       <div class="cn-lp">
         <div class="cn-lp-top">
-          <span>Early Winter</span>
+          <span>Blue Tiger</span>
           <span>Issue Nº 01</span>
         </div>
         <div class="cn-lp-body">
           <span class="cn-label">Contact</span>
-          <h2 class="cn-hed">Let's<br><em>build it.</em></h2>
+          <h2 class="cn-hed">Let's<br><em>talk.</em></h2>
           <a href="mailto:hgusain307@gmail.com" class="cn-mail">
             hgusain307@gmail.com
           </a>
         </div>
         <div class="cn-lp-foot">
           <div class="cn-lp-foot-meta">
-            <span>Early Winter — 2025</span>
+            <span>Blue Tiger — 2025</span>
             <span>New Delhi, India</span>
           </div>
           <span class="pno" style="position:static;transform:none;">124</span>
         </div>
       </div>
-      <!-- right: pink accent page with links -->
+      <!-- right: blue accent page with links -->
       <div class="cn-rp on-dark">
         <div class="cn-rp-head">
           <p class="cn-rp-hed">Find<br>me<br>here.</p>
-          <p class="cn-rp-invite">Tell me what you're building. I'll say if I can help.</p>
+          <p class="cn-rp-invite">Got something that needs both claws and curiosity? Tell me what you're making and where it falls apart — I'll say, straight, how I'd fix it and whether I'm the right person to.</p>
         </div>
         <div class="cn-rp-links">
           <a href="https://findingyouhemant.framer.website" target="_blank" rel="noopener" class="cn-link">
