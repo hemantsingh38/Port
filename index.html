@@ -6,7 +6,7 @@
   <title>Blue Tiger — Product &amp; Interaction Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -18,9 +18,11 @@
       --mu:    rgba(21,17,14,.55);
       --line:  rgba(21,17,14,.14);
       /* forest-with-blossoms palette — greenery comes from the grass bg video */
-      --blue:  #2E54C8;   /* PRIMARY accent — the tiger */
-      --pink:  #F08CB4;   /* blossom pink — secondary accent */
-      --bloom: #E9C982;   /* warm dappled gold — sunlight through canopy */
+      --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
+      --cerulean: #0BB3E6; /* cover — vivid cerulean / cyan */
+      --display: 'Bagel Fat One', system-ui, sans-serif; /* brand wordmark */
+      --pink:  #FF4D9E;   /* vivid blossom pink */
+      --bloom: #FFC22E;   /* vivid golden — sunlight */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       /* five sizes — the only scale */
@@ -188,8 +190,8 @@
       border-bottom:1px solid var(--line); padding-bottom:.7rem;
     }
     .cv-brand {
-      font-family:var(--sans); font-weight:400; font-size:var(--t-display);
-      line-height:1; letter-spacing:-1.5px; color:var(--head); margin-top:1.8rem;
+      font-family:var(--display); font-weight:400; font-size:2.9rem;
+      line-height:.92; letter-spacing:0; color:var(--head); margin-top:1.8rem;
     }
     .cv-hook {
       font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
@@ -216,20 +218,20 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(21,17,14,.16);
     }
-    .cv-plate {
-      position:absolute; top:2.6rem; right:2.4rem; bottom:2.6rem; left:2rem;
-      display:flex; flex-direction:column;
-      overflow:hidden;
+    /* cover colour pages + centred cub (cub is a CSS bg — graceful if file absent) */
+    #cv .cv-l {
+      background:var(--pink) url("img/tiger-cub.png") no-repeat center;
+      background-size:72%;
     }
-    .cv-plate video {
-      width:100%; flex:1; min-height:0; object-fit:cover;
-      filter:saturate(.9) contrast(.97);
-    }
-    .cv-plate figcaption {
-      margin-top:.5rem; flex-shrink:0; text-align:center;
-      font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
-      color:var(--mu);
-    }
+    #cv .cv-r { background:var(--cerulean); }
+    /* right page: navy wordmark + dark ink on the vivid cerulean */
+    #cv .cv-r .cv-brand { color:#08252E; }
+    #cv .cv-r .cv-hook, #cv .cv-r .cv-whatido em { color:var(--ink); }
+    #cv .cv-r .cv-eyebrow, #cv .cv-r .cv-whatido-label { color:rgba(21,17,14,.62); }
+    #cv .cv-r .cv-eyebrow { border-bottom-color:rgba(21,17,14,.28); }
+    #cv .cv-r .cv-whatido p { color:rgba(21,17,14,.8); }
+    #cv .cv-r .cv-folio { color:rgba(21,17,14,.22); }
+    #cv .cv-r .cv-tagline { color:var(--pink); }
 
     /* ══════════ WORK TEASER — full-width plates ══════════ */
     .wkp {
@@ -559,14 +561,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: cover video -->
-      <div class="cv-l">
-        <figure class="cv-plate">
-          <video autoplay muted loop playsinline>
-            <source src="img/cover.mp4" type="video/mp4">
-          </video>
-          <figcaption>Blue Tiger · 2025</figcaption>
-        </figure>
-      </div>
+      <div class="cv-l" role="img" aria-label="Blue Tiger — a blue tiger cub"></div>
       <!-- right: title / identity -->
       <div class="cv-r">
         <div class="cv-r-inner">
