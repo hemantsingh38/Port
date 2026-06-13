@@ -6,7 +6,7 @@
   <title>About — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -23,6 +23,7 @@
       --bloom: #FFC22E;   /* vivid golden — sunlight */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
+      --display: 'Archivo Black',system-ui,sans-serif;
       --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
     }
 
@@ -256,16 +257,16 @@
       position:absolute; top:1.1rem; left:3rem;
       font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
-    .abk-hed { font-family:var(--sans); font-weight:400;
-      font-size:var(--t-display); line-height:1;
-      letter-spacing:-1.5px; color:var(--head); }
+    .abk-hed { font-family:var(--display); font-weight:400;
+      font-size:clamp(2.2rem,4.6vw,3.2rem); line-height:.9;
+      letter-spacing:-1px; color:var(--head); text-transform:uppercase; }
     .abk-hed em { font-style:normal; font-weight:500; color:var(--ink); opacity:1; }
     .abk-rp { background:var(--ink); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:flex-end;
       padding:2.8rem 2.8rem 2.6rem; }
-    .abk-rp-hed { font-family:var(--sans); font-style:normal; font-weight:400;
-      font-size:var(--t-display); line-height:1;
-      letter-spacing:-1.5px; color:var(--page); margin-bottom:auto; padding-top:1.6rem; }
+    .abk-rp-hed { font-family:var(--display); font-style:normal; font-weight:400;
+      font-size:clamp(2.2rem,4.6vw,3.2rem); line-height:.9;
+      letter-spacing:-1px; color:var(--page); margin-bottom:auto; padding-top:1.6rem; text-transform:uppercase; }
     .abk-links { display:flex; flex-direction:column; }
     .abk-links a { display:flex; justify-content:space-between; align-items:baseline;
       gap:1rem; text-decoration:none; padding:.85rem 0;

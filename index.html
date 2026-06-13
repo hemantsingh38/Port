@@ -6,7 +6,7 @@
   <title>Blue Tiger — Product &amp; Interaction Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -20,7 +20,7 @@
       /* forest-with-blossoms palette — greenery comes from the grass bg video */
       --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
       --cerulean: #0BB3E6; /* cover — vivid cerulean / cyan */
-      --display: 'Bagel Fat One', system-ui, sans-serif; /* brand wordmark */
+      --display: 'Archivo Black', system-ui, sans-serif; /* brand / heading display */
       --pink:  #FF4D9E;   /* vivid blossom pink */
       --bloom: #FFC22E;   /* vivid golden — sunlight */
       --sans:  'Inter',system-ui,sans-serif;
@@ -190,8 +190,10 @@
       border-bottom:1px solid var(--line); padding-bottom:.7rem;
     }
     .cv-brand {
-      font-family:var(--display); font-weight:400; font-size:2.9rem;
-      line-height:.92; letter-spacing:0; color:var(--head); margin-top:1.8rem;
+      font-family:var(--display); font-weight:400;
+      font-size:clamp(3rem,8.5vw,5.2rem); line-height:.85;
+      letter-spacing:-1px; color:var(--head); margin-top:1.4rem;
+      text-transform:uppercase;
     }
     .cv-hook {
       font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
@@ -220,8 +222,7 @@
     }
     /* cover colour pages + centred cub (cub is a CSS bg — graceful if file absent) */
     #cv .cv-l {
-      background:var(--pink) url("img/tiger-cub.png") no-repeat center;
-      background-size:72%;
+      background:var(--table) url("img/hero-tiger.jpg") center / cover no-repeat;
     }
     #cv .cv-r { background:var(--cerulean); }
     /* right page: navy wordmark + dark ink on the vivid cerulean */
@@ -333,8 +334,8 @@
     }
     .sv-rp-body { display:flex; flex-direction:column; gap:1.2rem; }
     .sv-big {
-      font-family:var(--sans); font-weight:400; font-size:var(--t-display);
-      line-height:1; letter-spacing:-1.5px; color:var(--page);
+      font-family:var(--display); font-weight:400; font-size:clamp(2.4rem,5vw,3.4rem);
+      line-height:.9; letter-spacing:-1px; color:var(--page); text-transform:uppercase;
     }
     .sv-tag {
       font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
@@ -461,9 +462,9 @@
       color:var(--mu);
     }
     .cn-hed {
-      font-family:var(--sans); font-weight:400;
-      font-size:var(--t-display); line-height:1;
-      letter-spacing:-1.5px; color:var(--head);
+      font-family:var(--display); font-weight:400;
+      font-size:clamp(2.4rem,5vw,3.4rem); line-height:.9;
+      letter-spacing:-1px; color:var(--head); text-transform:uppercase;
     }
     .cn-hed em { font-style:normal; font-weight:400; opacity:1; }
     .cn-mail {
@@ -561,7 +562,7 @@
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: cover video -->
-      <div class="cv-l" role="img" aria-label="Blue Tiger — a blue tiger cub"></div>
+      <div class="cv-l" role="img" aria-label="Blue Tiger — a tiger half-submerged in water"></div>
       <!-- right: title / identity -->
       <div class="cv-r">
         <div class="cv-r-inner">
