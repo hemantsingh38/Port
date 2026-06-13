@@ -6,7 +6,7 @@
   <title>About — Early Winter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -16,15 +16,16 @@
       --page:  #FEFEFB;
       --ink:   #15110E;
       --head:  #2E2A25;   /* heading text — darkest warm grey */
-      --h-max: 3.5rem;    /* 56px — primary headings */
-      --h-sub: 3rem;      /* 48px — sub headings */
-      --body:  1.125rem;  /* 18px — body text */
-      --mu:    #978D7C;
+      --mu:    rgba(21,17,14,.55);
+      --line:  rgba(21,17,14,.14);
+      --pink:  #FF85B0;
       --green: #2DF952;
-      --serif: 'Outfit',system-ui,sans-serif;
-      --book:  'EB Garamond',Georgia,serif;
+      --blue:  #DCE8EF;
+      --warm:  #F2EADC;
+      --yellow:#F5E10A;
       --sans:  'Inter',system-ui,sans-serif;
-      --hand:  'Caveat',cursive;
+      --scrib: 'Caveat',cursive;
+      --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
     }
 
     html,body { overflow:hidden; height:100%; }
@@ -51,8 +52,8 @@
     /* ── page index tabs ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
-           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
+    .tab { font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+           letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
@@ -73,7 +74,7 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
       color:rgba(254,254,251,.55);
     }
@@ -125,16 +126,17 @@
     .pp { background:var(--page); }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--sans); font-size:.7rem; color:rgba(21,17,14,.68); }
+           font-family:var(--sans); font-weight:400; font-size:var(--t-display);
+           letter-spacing:-1px; line-height:1; color:rgba(21,17,14,.18); }
     .run { position:absolute; top:1.1rem; z-index:6;
-           font-family:var(--sans); font-size:.52rem; font-weight:500;
-           letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
+           font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+           letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
     /* handwritten pen notes */
-    .scrib { position:absolute; z-index:40; font-family:var(--hand);
-             font-weight:600; color:#C8385A; line-height:1.05;
+    .scrib { position:absolute; z-index:40; font-family:var(--scrib);
+             font-weight:600; font-size:1.4rem; color:#C8385A; line-height:1.05;
              transform:rotate(-3.5deg); pointer-events:none; }
     a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
               border-bottom:2px solid rgba(200,56,90,.35); }
@@ -147,44 +149,45 @@
                filter:saturate(.9) contrast(.97); }
     .cut.tall img { aspect-ratio:3/4; }
     .cut figcaption { margin-top:.45rem; text-align:left;
-      font-family:var(--sans); font-weight:500; font-size:.52rem;
+      font-family:var(--sans); font-weight:500; font-size:var(--t-label);
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); }
+      color:var(--mu); }
 
     /* generic page paddings */
     .pp { position:relative; overflow:hidden; }
     .pp-pad { padding:3.4rem 2.8rem 2.6rem 3rem; }
 
     .runtop {
-      text-align:center; font-family:var(--sans); font-size:.52rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5);
+      text-align:left; font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--mu);
       padding-bottom:.75rem; margin-bottom:1.8rem;
-      border-bottom:1px solid rgba(21,17,14,.14);
+      border-bottom:1px solid var(--line);
     }
     .hed {
-      font-family:var(--serif); font-weight:400;
-      font-size:var(--h-sub); line-height:1.05;
-      letter-spacing:-1px; color:var(--head);
+      font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); line-height:1.0;
+      letter-spacing:-1.5px; color:var(--head);
     }
-    .hed em { font-style:normal; color:var(--head); }
+    .hed em { font-style:normal; font-weight:500; color:var(--ink); }
+    .hed.lead { font-size:var(--t-lead); line-height:1.3; letter-spacing:-.2px; }
     .dek {
-      font-family:var(--sans); font-size:clamp(.92rem,1.2vw,1.08rem);
-      line-height:1.78; color:rgba(21,17,14,.72); margin-top:1.3rem;
+      font-family:var(--sans); font-size:var(--t-body);
+      line-height:1.55; color:rgba(21,17,14,.7); margin-top:1.3rem;
     }
-    .dek em { font-style:italic; }
+    .dek em { font-style:normal; font-weight:500; color:var(--ink); }
     .dek p + p { margin-top:.8rem; }
 
     /* ══════════ HERO — contributors spread ══════════ */
     .ctr-pg { position:relative; overflow:hidden; background:var(--page);
               padding:2.4rem 2.6rem 0 3rem; }
-    .ctr-hed { text-align:center; font-family:var(--book); font-style:italic;
-               font-weight:400; font-size:1.2rem; letter-spacing:.02em;
-               color:var(--ink); margin:1.2rem 0 1rem; }
+    .ctr-hed { text-align:left; font-family:var(--sans);
+               font-weight:500; font-size:var(--t-label); letter-spacing:.1em;
+               text-transform:uppercase; color:var(--mu); margin:1.6rem 0 1.1rem; }
     .ctr-txt { columns:2; column-gap:1.3rem; font-family:var(--sans);
-               font-size:.62rem; line-height:1.6; text-align:justify;
-               color:rgba(21,17,14,.72); }
-    .ctr-txt b { font-family:var(--sans); font-weight:500; font-size:.54rem;
-                 letter-spacing:.02em; color:var(--ink); }
+               font-size:var(--t-caption); line-height:1.5; text-align:left;
+               color:var(--mu); }
+    .ctr-txt b { font-family:var(--sans); font-weight:500; font-size:var(--t-caption);
+                 letter-spacing:0; color:var(--ink); }
     .co { position:absolute; bottom:-6px; pointer-events:none;
           filter:saturate(.96) contrast(.99)
                  drop-shadow(0 8px 16px rgba(21,17,14,.16)); }
@@ -192,46 +195,47 @@
     /* ══════════ PHILOSOPHY ══════════ */
     .aph-l { position:relative; background:#0095E8; overflow:hidden;
              display:flex; align-items:center; padding:3rem 2.6rem 3rem 3rem; }
-    .aph-l .hed { font-size:clamp(2rem,3.4vw,3.2rem); color:#FEFEFB; }
+    .aph-l .hed { font-size:var(--t-display); color:var(--page); }
+    .aph-l .hed em { color:var(--page); }
     .prn { margin-top:1.5rem; }
     .prn li { list-style:none; display:flex; gap:.9rem; align-items:baseline;
-              padding:.85rem 0; border-bottom:1px solid rgba(21,17,14,.12); }
+              padding:.85rem 0; border-bottom:1px solid var(--line); }
     .prn li:last-child { border-bottom:none; }
-    .prn .n { font-family:var(--hand); font-weight:600; font-size:1.25rem;
+    .prn .n { font-family:var(--scrib); font-weight:600; font-size:1.4rem;
               color:#C8385A; flex-shrink:0; }
-    .prn b { display:block; font-family:var(--book); font-style:italic; font-weight:400;
-             letter-spacing:-.5px; font-size:clamp(1.2rem,2vw,1.8rem); color:var(--ink);
+    .prn b { display:block; font-family:var(--sans); font-weight:500;
+             font-size:var(--t-body); letter-spacing:0; color:var(--ink);
              margin-bottom:.2rem; }
-    .prn p { font-family:var(--sans); font-size:.88rem; line-height:1.6;
-             color:rgba(21,17,14,.65); }
+    .prn p { font-family:var(--sans); font-size:var(--t-body); line-height:1.55;
+             color:rgba(21,17,14,.7); }
 
     /* ══════════ WORK BRIEF ══════════ */
     .wkb { margin-top:1.6rem; }
     .wkb-row { display:flex; gap:1.4rem; padding:.8rem 0;
-               border-bottom:1px solid rgba(21,17,14,.12); }
+               border-bottom:1px solid var(--line); }
     .wkb-row b { flex:0 0 7.2rem; font-family:var(--sans); font-weight:500;
-      font-size:.52rem; letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); padding-top:.25rem; }
-    .wkb-row span { font-family:var(--sans); font-size:.92rem;
-      line-height:1.6; color:rgba(21,17,14,.78); }
+      font-size:var(--t-label); letter-spacing:.1em; text-transform:uppercase;
+      color:var(--mu); padding-top:.25rem; }
+    .wkb-row span { font-family:var(--sans); font-size:var(--t-caption);
+      line-height:1.5; color:var(--mu); }
 
     /* ══════════ INSPIRATIONS ══════════ */
     .insp { margin-top:.4rem; }
     .insp li { list-style:none; padding:1rem 0;
-               border-bottom:1px solid rgba(21,17,14,.12); }
+               border-bottom:1px solid var(--line); }
     .insp li:last-child { border-bottom:none; }
-    .insp b { display:block; font-family:var(--book); font-style:italic; font-weight:400;
-              letter-spacing:-.5px; font-size:clamp(1.2rem,2vw,1.8rem); color:var(--ink);
+    .insp b { display:block; font-family:var(--sans); font-weight:500;
+              letter-spacing:0; font-size:var(--t-body); color:var(--ink);
               margin-bottom:.25rem; }
-    .insp p { font-family:var(--sans); font-style:italic; font-size:.7rem;
-              line-height:1.6; color:rgba(21,17,14,.5); }
+    .insp p { font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
+              line-height:1.5; color:var(--mu); }
 
     /* ══════════ TASTE ══════════ */
     .tst li { list-style:none; padding:.7rem 0; display:flex; gap:.8rem;
-              align-items:baseline; border-bottom:1px solid rgba(21,17,14,.12); }
+              align-items:baseline; border-bottom:1px solid var(--line); }
     .tst li:last-child { border-bottom:none; }
-    .tst .tick { font-family:var(--hand); font-weight:600; color:#C8385A; }
-    .tst span { font-family:var(--sans); font-size:.94rem; color:rgba(21,17,14,.75); }
+    .tst .tick { font-family:var(--scrib); font-weight:600; font-size:1.4rem; color:#C8385A; }
+    .tst span { font-family:var(--sans); font-size:var(--t-body); color:rgba(21,17,14,.7); }
     .ata-r { position:relative; background:#FF4B1F; overflow:hidden; }
 
     /* ══════════ NON-NEGOTIABLES (inventory grid) ══════════ */
@@ -242,8 +246,8 @@
     .inv img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:0;
                max-height:20vh; filter:saturate(.8) contrast(.98); }
     .inv figcaption { margin-top:.5rem; font-family:var(--sans); font-weight:500;
-      font-size:.52rem; letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); }
+      font-size:var(--t-label); letter-spacing:.1em; text-transform:uppercase;
+      color:var(--mu); }
 
     /* ══════════ BACK — closing spread ══════════ */
     #a-bk .book { --spine: #FF85B0; }
@@ -252,18 +256,18 @@
       padding:2.8rem 2.6rem 2.6rem 3rem; }
     .abk-run {
       position:absolute; top:1.1rem; left:3rem;
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
-    .abk-hed { font-family:var(--serif); font-weight:400;
-      font-size:var(--h-max); line-height:1;
-      letter-spacing:-1px; color:var(--head); }
-    .abk-hed em { font-style:normal; font-weight:400; opacity:1; }
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
+    .abk-hed { font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--head); }
+    .abk-hed em { font-style:normal; font-weight:500; color:var(--ink); opacity:1; }
     .abk-rp { background:var(--ink); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:flex-end;
       padding:2.8rem 2.8rem 2.6rem; }
-    .abk-rp-hed { font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:var(--h-sub); line-height:1;
-      letter-spacing:-1px; color:var(--page); margin-bottom:auto; padding-top:1.6rem; }
+    .abk-rp-hed { font-family:var(--sans); font-style:normal; font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--page); margin-bottom:auto; padding-top:1.6rem; }
     .abk-links { display:flex; flex-direction:column; }
     .abk-links a { display:flex; justify-content:space-between; align-items:baseline;
       gap:1rem; text-decoration:none; padding:.85rem 0;
@@ -273,10 +277,10 @@
     .abk-links a:hover { border-color:rgba(254,254,251,.4); }
     .abk-link-name { transition:transform .2s var(--ease-out); }
     .abk-links a:hover .abk-link-name { transform:translateX(-4px); }
-    .abk-link-label { font-family:var(--sans); font-size:.52rem; font-weight:500;
+    .abk-link-label { font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.55); }
-    .abk-link-name { font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:1.05rem; color:var(--page); }
+    .abk-link-name { font-family:var(--sans); font-style:normal; font-weight:400;
+      font-size:var(--t-body); color:var(--page); }
 
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
@@ -321,16 +325,12 @@
         <span class="run" style="left:3rem;">Early Winter — About</span>
         <h2 class="ctr-hed">contributors</h2>
         <p class="ctr-txt">
-          <b>[01]</b> Hemant Singh is a UX designer based in New Delhi. He founded
-          Early Winter as a one-person studio and has spent 3.5 years across
-          ed tech, fintech, e-commerce and B2B SaaS. He believes good design
-          is invisible until it matters.
-          <b>[02]</b> Hemant Singh lifts heavy things before the inbox opens.
-          The gym is the only meeting that never gets rescheduled.
-          <b>[03]</b> Hemant Singh recently discovered pickleball and has
-          already made it a personality trait.
-          <b>[04]</b> Hemant Singh drinks his martini slowly, like it's
-          user research.
+          <b>[01]</b> UX designer in New Delhi. 3.5 years across ed tech,
+          fintech, commerce and B2B SaaS.
+          <b>[02]</b> I lift before the inbox opens. The gym never gets
+          rescheduled.
+          <b>[03]</b> I play pickleball now. It is already a personality trait.
+          <b>[04]</b> I drink the martini slowly, like user research.
         </p>
         <img class="co" src="img/co-stage.png" style="left:-4%; height:48%; z-index:3;" alt="Hemant on stage with a microphone">
         <img class="co" src="img/co-gymwhite.png" style="left:26%; height:54%; z-index:2;" alt="Hemant in a white tank, gym mirror">
@@ -341,16 +341,14 @@
         <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <h2 class="ctr-hed">contributors</h2>
         <p class="ctr-txt">
-          <b>[05]</b> Hemant Singh presents loudly and designs quietly.
-          The MOON concept survived its first public demo; so did the room.
-          <b>[06]</b> Hemant Singh once held a mic under purple lights.
-          The audience survived too.
-          <b>[07]</b> Hemant Singh climbs to cold mountain towns to feel at
-          home. Prayer flags optional, chai mandatory.
-          <b>[08]</b> All of the above are the same person. He is currently
-          open to new work.
+          <b>[05]</b> I present loud and design quiet. MOON survived its first
+          demo. So did the room.
+          <b>[06]</b> I held a mic under purple lights once. The audience lived.
+          <b>[07]</b> I climb to cold mountain towns to feel at home. Chai is
+          mandatory.
+          <b>[08]</b> All eight are the same person. I am open to new work.
         </p>
-        <span class="scrib" style="right:2.4rem; bottom:42%; font-size:1.15rem; transform:rotate(-3deg);">all of them are me ↓</span>
+        <span class="scrib" style="right:2.4rem; bottom:42%; transform:rotate(-3deg);">all of them are me ↓</span>
         <img class="co" src="img/co-moon.png" style="left:-3%; height:50%; z-index:2;" alt="Hemant presenting MOON on a screen">
         <img class="co" src="img/co-gymbw.png" style="left:40%; height:56%; z-index:3;" alt="Hemant in black and white, gym mirror">
         <img class="co" src="img/co-bar.png" style="right:-5%; height:42%; z-index:1;" alt="Hemant sipping a martini">
@@ -369,22 +367,20 @@
           <img src="img/bar-glass.jpg" alt="Hemant studying a martini glass in a dim wood-panelled bar">
           <figcaption>me, probably.</figcaption>
         </figure>
-        <span class="scrib" style="left:3rem; bottom:3.2rem; font-size:1.1rem;">New Delhi,<br>most days ↓</span>
+        <span class="scrib" style="left:3rem; bottom:3.2rem;">New Delhi, most days ↓</span>
         <span class="pno">126</span>
       </div>
       <div class="pp pp-pad">
         <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="runtop">About me</div>
-        <h2 class="hed">He was always an <em>artist.</em><br>Now he builds things that<br>feel like <em>memories.</em></h2>
+        <h2 class="hed">I draw things,<br>then I <em>build</em> them.</h2>
         <div class="dek">
-          <p>Hemant Singh is a UX designer with 3.5 years across ed tech, fintech,
-          e-commerce and B2B SaaS. He founded Early Winter as a small, slow,
-          intentional studio — one person, a lot of care.</p>
-          <p>The name is the brief: work that feels like the first cold morning
-          of the season. <em>Present, calm, and a little nostalgic.</em></p>
-          <p>Before the pixels there were sketchbooks, and before the sketchbooks
-          there was a kid who drew on everything. The medium changed; the
-          instinct didn't.</p>
+          <p>UX designer in New Delhi. 3.5 years across ed tech, fintech,
+          commerce and B2B SaaS.</p>
+          <p>I run <em>Early Winter</em> — a studio of one, slow on purpose.
+          I sweat the parts users never notice.</p>
+          <p>Sketchbooks first, screens later. The medium changed. The instinct
+          did not.</p>
         </div>
         <span class="pno">127</span>
       </div>
@@ -398,27 +394,27 @@
       <div class="gut"></div>
       <div class="aph-l">
         <span class="run" style="left:3rem; color:rgba(21,17,14,.5);">Philosophy</span>
-        <h2 class="hed">Design should feel like the first cold morning of the season.</h2>
-        <span class="scrib" style="left:3rem; bottom:2.6rem; font-size:1.15rem; color:#15110E;">— the whole philosophy, honestly</span>
+        <h2 class="hed">Three rules I design by.</h2>
+        <span class="scrib" style="left:3rem; bottom:2.6rem;">the whole brief</span>
         <span class="pno" style="color:rgba(21,17,14,.72);">128</span>
       </div>
       <div class="pp pp-pad">
-        <div class="runtop">Three rules</div>
+        <div class="runtop">Philosophy</div>
         <ul class="prn">
           <li><span class="n">01.</span>
             <div><b>Invisible until it matters.</b>
-            <p>Good design disappears into use. If someone notices the interface,
-            it usually means something went wrong.</p></div>
+            <p>Good design disappears into use. Notice the interface and
+            something already went wrong.</p></div>
           </li>
           <li><span class="n">02.</span>
             <div><b>Less, but warmer.</b>
-            <p>Rams was right about less. But minimal shouldn't mean cold —
-            restraint and warmth can live on the same screen.</p></div>
+            <p>Rams was right about less. Minimal is not cold. Restraint and
+            warmth share the same screen.</p></div>
           </li>
           <li><span class="n">03.</span>
             <div><b>Made for Tuesdays.</b>
-            <p>Designed to be used on an ordinary Tuesday, and remembered
-            on a slow Sunday. Everyday first, memorable second.</p></div>
+            <p>I build for an ordinary Tuesday. Everyday first, memorable
+            second.</p></div>
           </li>
         </ul>
         <span class="pno">129</span>
@@ -434,14 +430,13 @@
       <div class="pp pp-pad">
         <span class="run" style="left:3rem;">Early Winter — About</span>
         <div class="runtop">Work, briefly</div>
-        <h2 class="hed">The formal page.</h2>
-        <span class="scrib" style="right:2.4rem; top:7.6rem; font-size:1.1rem; transform:rotate(3deg);">(skip if you like)</span>
+        <h2 class="hed lead">The formal page.</h2>
         <div class="wkb">
-          <div class="wkb-row"><b>What I do</b><span>Research → flows → interface. End-to-end product design, from the first messy question to the final polished screen.</span></div>
-          <div class="wkb-row"><b>Industries</b><span>Ed tech, fintech, e-commerce, B2B SaaS.</span></div>
-          <div class="wkb-row"><b>Years</b><span>3.5 and counting.</span></div>
-          <div class="wkb-row"><b>Tools</b><span>Figma, Miro, pen &amp; paper — usually in that order, reversed.</span></div>
-          <div class="wkb-row"><b>Now</b><span>Open to new work and collaborations.</span></div>
+          <div class="wkb-row"><b>What I do</b><span>End-to-end product design. Research, flows, interface.</span></div>
+          <div class="wkb-row"><b>Sectors</b><span>Ed tech, fintech, commerce, B2B SaaS.</span></div>
+          <div class="wkb-row"><b>Years</b><span>3.5.</span></div>
+          <div class="wkb-row"><b>Tools</b><span>Figma, Miro, pen and paper.</span></div>
+          <div class="wkb-row"><b>Now</b><span>Open to new work.</span></div>
         </div>
         <figure class="cut" style="right:2.6rem; bottom:3rem; width:30%; transform:rotate(2.5deg);">
           <img src="img/moon-talk.jpg" alt="Hemant presenting the MOON concept to a room">
@@ -453,12 +448,12 @@
         <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="runtop">Selected work</div>
         <ul class="insp">
-          <li><b>Uphold</b><p>mentorship, held steady — ed tech, 2025</p></li>
-          <li><b>Revibe</b><p>worn again, loved harder — thrift &amp; AI, 2025</p></li>
-          <li><b>Insight</b><p>the right people, found — B2B SaaS, 2025</p></li>
-          <li><b>Vejeez!</b><p>every vegan's dream — marketplace, 2024</p></li>
+          <li><b>Uphold</b><p>Mentorship platform. Ed tech, 2025.</p></li>
+          <li><b>Revibe</b><p>Thrift resale, AI matching. 2025.</p></li>
+          <li><b>Insight</b><p>People finder. B2B SaaS, 2025.</p></li>
+          <li><b>Vejeez</b><p>Vegan marketplace. 2024.</p></li>
         </ul>
-        <a class="scrib" href="work.html" style="position:static; display:inline-block; margin-top:1.3rem; font-size:1.35rem; transform:rotate(-2deg);">see them all →</a>
+        <a class="scrib" href="work.html" style="position:static; display:inline-block; margin-top:1.3rem; transform:rotate(-2deg);">see them all →</a>
         <span class="pno">131</span>
       </div>
     </div>
@@ -474,11 +469,10 @@
         <div class="runtop">Inspirations</div>
         <h2 class="hed">Borrowed <em>light.</em></h2>
         <ul class="insp" style="margin-top:1.2rem;">
-          <li><b>Don Norman</b><p>for proving that when a door confuses you, it's the door's fault.</p></li>
-          <li><b>Dieter Rams</b><p>less, but better — the sentence the studio argues with daily.</p></li>
-          <li><b>Cinema</b><p>films that feel like weather. Slow ones. The kind you remember as a temperature.</p></li>
-          <li><b>Print</b><p>magazines, zines, screenshots bound into books — the internet on paper.</p></li>
-          <li><b>Winter itself</b><p>the season that makes everything quieter and more honest.</p></li>
+          <li><b>Don Norman</b><p>A confusing door is the door's fault.</p></li>
+          <li><b>Dieter Rams</b><p>Less, but better. I argue with it daily.</p></li>
+          <li><b>Cinema</b><p>Slow films I remember as a temperature.</p></li>
+          <li><b>Print</b><p>Magazines and zines. The internet on paper.</p></li>
         </ul>
         <span class="pno">132</span>
       </div>
@@ -492,7 +486,7 @@
           <img src="https://images.pexels.com/photos/30503068/pexels-photo-30503068.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bare trees in winter mist">
           <figcaption>the weather</figcaption>
         </figure>
-        <span class="scrib" style="left:14%; bottom:10%; font-size:1.2rem;">watch more films ↑</span>
+        <span class="scrib" style="left:14%; bottom:10%;">watch more films ↑</span>
         <span class="pno" style="color:rgba(21,17,14,.72);">133</span>
       </div>
     </div>
@@ -506,14 +500,14 @@
       <div class="pp pp-pad">
         <span class="run" style="left:3rem;">Early Winter — About</span>
         <div class="runtop">My taste</div>
-        <h2 class="hed">Things that feel<br><em>right.</em></h2>
+        <h2 class="hed lead">Things that feel<br><em>right.</em></h2>
         <ul class="tst" style="margin-top:1.2rem;">
-          <li><span class="tick">✓</span><span>film grain over gradients</span></li>
-          <li><span class="tick">✓</span><span>warm paper, cold mornings</span></li>
-          <li><span class="tick">✓</span><span>neon green on near-black</span></li>
-          <li><span class="tick">✓</span><span>handwriting in the margins</span></li>
-          <li><span class="tick">✓</span><span>tapes, reels, anything that clicks</span></li>
-          <li><span class="tick">✓</span><span>interfaces that know when to be quiet</span></li>
+          <li><span class="tick">✓</span><span>Film grain over gradients.</span></li>
+          <li><span class="tick">✓</span><span>Warm paper, cold mornings.</span></li>
+          <li><span class="tick">✓</span><span>Neon green on near-black.</span></li>
+          <li><span class="tick">✓</span><span>Handwriting in the margins.</span></li>
+          <li><span class="tick">✓</span><span>Tapes, reels, things that click.</span></li>
+          <li><span class="tick">✓</span><span>Interfaces that know when to be quiet.</span></li>
         </ul>
         <span class="pno">134</span>
       </div>
@@ -548,14 +542,13 @@
       <div class="pp pp-pad">
         <span class="run" style="left:3rem;">Early Winter — About</span>
         <div class="runtop">Non-negotiables</div>
-        <h2 class="hed">The things<br>that <em>stay.</em></h2>
+        <h2 class="hed lead">The things<br>that <em>stay.</em></h2>
         <div class="dek">
-          <p>Whatever the deadline, whatever the city — these survive.
-          The gym before the inbox. Real food, eaten slowly. A road
-          out of town every few months. And the last show at the
-          nearest cinema, aisle seat.</p>
+          <p>Whatever the deadline, these survive. The gym before the inbox.
+          Real food, eaten slowly. A road out of town every few months. The
+          last show at the cinema, aisle seat.</p>
         </div>
-        <span class="scrib" style="left:3rem; bottom:4.6rem; font-size:1.2rem;">in no particular order (lies)</span>
+        <span class="scrib" style="left:3rem; bottom:4.6rem;">in no particular order (lies)</span>
         <span class="pno">136</span>
       </div>
       <div class="pp">
@@ -589,8 +582,8 @@
       <div class="abk-rp">
         <p class="abk-rp-hed">Where<br>next.</p>
         <div class="abk-links">
-          <a href="index.html"><span class="abk-link-label">The book</span><span class="abk-link-name">back to the start ←</span></a>
-          <a href="index.html#cn"><span class="abk-link-label">Say hello</span><span class="abk-link-name">straight to connect →</span></a>
+          <a href="index.html"><span class="abk-link-label">The book</span><span class="abk-link-name">back to the start</span></a>
+          <a href="index.html#cn"><span class="abk-link-label">Connect</span><span class="abk-link-name">say hello</span></a>
           <a href="mailto:hgusain307@gmail.com"><span class="abk-link-label">Email</span><span class="abk-link-name">hgusain307@gmail.com</span></a>
         </div>
         <span class="pno" style="color:rgba(254,254,251,.55);">139</span>

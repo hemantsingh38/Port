@@ -6,7 +6,7 @@
   <title>Early Winter — UX Design Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -15,19 +15,21 @@
       --page:  #FEFEFB;
       --ink:   #15110E;
       --head:  #2E2A25;   /* heading text — darkest warm grey */
-      --h-max: 3.5rem;    /* 56px — primary headings */
-      --h-sub: 3rem;      /* 48px — sub headings */
-      --lead:  1.5rem;    /* 24px — lead caption (opens most pages) */
-      --body:  1.125rem;  /* 18px — body text */
-      --mu:    #978D7C;
+      --mu:    rgba(21,17,14,.55);
+      --line:  rgba(21,17,14,.14);
       --green: #2DF952;
       --pink:  #FF85B0;   /* filler tints */
       --blue:  #DCE8EF;
       --sage:  #E4EAE0;
       --warm:  #F2EADC;
-      --serif: 'Outfit',system-ui,sans-serif;
-      --book:  'EB Garamond',Georgia,serif;
       --sans:  'Inter',system-ui,sans-serif;
+      --scrib: 'Caveat',cursive;
+      /* five sizes — the only scale */
+      --t-display: 2.5rem;   /* 40px */
+      --t-lead:    1.5rem;   /* 24px */
+      --t-body:    1.125rem; /* 18px */
+      --t-caption: .875rem;  /* 14px */
+      --t-label:   .75rem;   /* 12px */
       --ease-out: cubic-bezier(.23,1,.32,1);
     }
 
@@ -65,7 +67,7 @@
     /* ── page index tabs (bottom centre, like physical book tabs) ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
+    .tab { font-family:var(--sans); font-size:var(--t-label); font-weight:500;
            letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
@@ -98,8 +100,8 @@
     .v { writing-mode:vertical-rl; transform:rotate(180deg); }
 
     /* handwritten pen notes */
-    .scrib { position:absolute; z-index:40; font-family:'Caveat',cursive;
-             font-weight:600; color:#C8385A; line-height:1.05;
+    .scrib { position:absolute; z-index:40; font-family:var(--scrib);
+             font-weight:600; font-size:1.4rem; color:#C8385A; line-height:1.05;
              transform:rotate(-3.5deg); pointer-events:none; }
     a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
               border-bottom:2px solid rgba(200,56,90,.35); }
@@ -107,7 +109,7 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
       color:rgba(254,254,251,.55);
     }
@@ -158,10 +160,11 @@
     @keyframes pg-shade { 0% { opacity:0; } 38% { opacity:1; } 100% { opacity:0; } }
 
     .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--sans); font-size:.7rem; color:rgba(21,17,14,.68); }
+           font-family:var(--sans); font-weight:400; font-size:var(--t-display);
+           letter-spacing:-1px; line-height:1; color:rgba(21,17,14,.18); }
     .run { position:absolute; top:1.1rem;
-           font-family:var(--sans); font-size:.52rem; font-weight:500;
-           letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
+           font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+           letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
@@ -171,34 +174,34 @@
       padding:2.8rem 2.6rem 2.4rem 3rem; overflow:hidden;
     }
     .cv-l-top {
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); display:flex; justify-content:space-between;
-      align-items:center; border-bottom:1px solid rgba(21,17,14,.12); padding-bottom:.7rem;
+      color:var(--mu); display:flex; justify-content:space-between;
+      align-items:center; border-bottom:1px solid var(--line); padding-bottom:.7rem;
     }
     .cv-l h1 {
-      font-family:var(--serif); font-weight:400;
-      font-size:var(--h-max); line-height:1;
-      letter-spacing:-1px; color:var(--head); flex:1; display:flex;
+      font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--head); flex:1; display:flex;
       flex-direction:column; justify-content:center;
     }
     .cv-l h1 em { font-style:normal; font-weight:400; opacity:1; display:block; }
     .cv-l-note {
-      font-family:var(--sans); font-size:.62rem; line-height:1.6;
+      font-family:var(--sans); font-size:var(--t-caption); line-height:1.5;
       color:rgba(21,17,14,.72);
-      border-top:1px solid rgba(21,17,14,.08); padding-top:.7rem;
+      border-top:1px solid var(--line); padding-top:.7rem;
       display:flex; flex-direction:column; gap:.55rem;
     }
-    .cv-l-note em { font-style:italic; }
+    .cv-l-note em { font-style:normal; font-weight:500; color:var(--ink); }
     .cv-l-pull {
-      font-family:var(--sans); font-style:italic; padding-left:.7rem;
+      font-family:var(--sans); font-style:normal; padding-left:.7rem;
       border-left:1.5px solid rgba(21,17,14,.18);
       color:rgba(21,17,14,.72);
     }
     .cv-l-foot {
-      font-family:var(--sans); font-style:italic; font-size:.7rem;
-      line-height:1.65; color:rgba(21,17,14,.5);
-      border-top:1px solid rgba(21,17,14,.1); padding-top:.8rem;
+      font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
+      line-height:1.5; color:var(--mu);
+      border-top:1px solid var(--line); padding-top:.8rem;
     }
     /* right page: editorial text */
     .cv-r { position:relative; overflow:hidden; }
@@ -207,9 +210,9 @@
       display:flex; flex-direction:column;
       padding:2.8rem 3rem 2.4rem 2.6rem; overflow:hidden;
     }
-    .cv-r-inner h1 { font-family:var(--serif); font-weight:400;
-      font-size:var(--h-max); line-height:1;
-      letter-spacing:-1px; color:var(--head); flex:1; display:flex;
+    .cv-r-inner h1 { font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--head); flex:1; display:flex;
       flex-direction:column; justify-content:center; }
     .cv-r-inner h1 em { font-style:normal; font-weight:400; opacity:1; display:block; }
     .cv-plate {
@@ -223,8 +226,8 @@
     }
     .cv-plate figcaption {
       margin-top:.5rem; flex-shrink:0; text-align:center;
-      font-family:var(--sans); font-style:italic; font-size:.7rem;
-      color:rgba(21,17,14,.5);
+      font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
+      color:var(--mu);
     }
 
     /* ══════════ WORK TEASER — full-width plates ══════════ */
@@ -252,24 +255,24 @@
       flex-shrink:0; padding-top:.55rem;
       display:flex; align-items:baseline; justify-content:space-between;
       gap:1rem;
-      border-bottom:1px solid rgba(21,17,14,.14); padding-bottom:.6rem;
+      border-bottom:1px solid var(--line); padding-bottom:.6rem;
     }
     .wk-plate:last-of-type .wk-plate-info { border-bottom:none; }
     .wk-plate-left { display:flex; flex-direction:column; gap:.1rem; min-width:0; }
     .wk-plate-title {
-      font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:clamp(1.2rem,2vw,1.8rem); line-height:1;
-      letter-spacing:-.5px; color:var(--ink);
+      font-family:var(--sans); font-style:normal; font-weight:400;
+      font-size:var(--t-lead); line-height:1.3;
+      letter-spacing:-.2px; color:var(--ink);
     }
     .wk-plate-desc {
-      font-family:var(--sans); font-size:.7rem; font-style:italic;
-      color:rgba(21,17,14,.5);
+      font-family:var(--sans); font-size:var(--t-caption); font-style:normal;
+      color:var(--mu);
     }
     .wk-plate-meta {
       flex-shrink:0; text-align:right;
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5); line-height:1.9;
+      color:var(--mu); line-height:1.9;
     }
     .wk-plate-meta b {
       display:block; font-weight:500; color:var(--ink);
@@ -278,18 +281,18 @@
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
     .fq {
-      position:absolute; width:min(58%,17.5rem);
-      font-family:var(--sans); font-weight:500; font-size:.84rem;
-      line-height:1.62; text-align:justify; color:rgba(21,17,14,.78);
+      position:absolute; width:min(58%,20rem);
+      font-family:var(--sans); font-weight:400; font-size:var(--t-body);
+      line-height:1.55; color:rgba(21,17,14,.7);
     }
     .fq small { display:block; margin-top:.7rem; text-align:left;
-      font-family:var(--sans); font-weight:500; font-size:.54rem;
-      letter-spacing:.05em; text-transform:uppercase; color:rgba(21,17,14,.62); }
+      font-family:var(--sans); font-weight:500; font-size:var(--t-label);
+      letter-spacing:.1em; text-transform:uppercase; color:var(--mu); }
     .fq-light, .fq-light small { color:rgba(254,254,251,.92); }
     .fp-img { position:absolute; inset:0; width:100%; height:100%;
               object-fit:cover; filter:saturate(1.05) contrast(1.02); }
     .fp-cap { position:absolute; left:2.2rem; right:2.2rem; bottom:1.6rem; z-index:2;
-              font-family:var(--sans); font-size:.7rem; line-height:1.55;
+              font-family:var(--sans); font-size:var(--t-caption); line-height:1.5;
               color:#FEFEFB; background:rgba(11,9,8,.72);
               padding:.55rem .8rem; }
     .fp-cap b { font-weight:600; }
@@ -306,26 +309,26 @@
     }
     .ab-eyebrow, .ab-eyebrow-r {
       display:flex; justify-content:space-between; align-items:baseline;
-      font-family:var(--sans); font-size:.75rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5);
-      padding-bottom:.7rem; border-bottom:1px solid rgba(21,17,14,.14);
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--mu);
+      padding-bottom:.7rem; border-bottom:1px solid var(--line);
     }
-    .ab-voice { margin-top:auto; max-width:23ch; }   /* anchored to lower-middle */
+    .ab-voice { margin-top:auto; max-width:26ch; }   /* anchored to lower-middle */
     .ab-lead {
-      font-family:var(--sans); font-weight:400; font-size:var(--lead);
-      line-height:1.32; letter-spacing:-.2px; color:var(--head);
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.3; letter-spacing:-.2px; color:var(--head);
       margin-bottom:1.4rem;
     }
-    .ab-lead em { font-family:var(--book); font-style:italic; font-weight:400; }
+    .ab-lead em { font-style:normal; font-weight:500; color:var(--ink); }
     .ab-bio {
-      font-family:var(--sans); font-size:var(--body); line-height:1.55;
-      color:rgba(21,17,14,.66); max-width:38ch;
+      font-family:var(--sans); font-size:var(--t-body); line-height:1.55;
+      color:rgba(21,17,14,.7); max-width:42ch;
     }
-    .ab-bio em { font-style:italic; }
+    .ab-bio em { font-style:normal; font-weight:500; color:var(--ink); }
     .ab-folio {
       margin-top:1.4rem; font-family:var(--sans); font-weight:400;
-      font-size:var(--h-sub); letter-spacing:-1px; line-height:1;
-      color:rgba(21,17,14,.16);
+      font-size:var(--t-display); letter-spacing:-1px; line-height:1;
+      color:rgba(21,17,14,.18);
     }
     /* right (DIRECTION 1 · Portrait): full-bleed photo + overlaid metadata */
     .ab-rp {
@@ -354,16 +357,16 @@
       display:grid; grid-template-columns:auto 1fr; gap:.5rem 1.4rem; align-items:baseline;
     }
     .ab-meta dt {
-      font-family:var(--sans); font-size:.75rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.62);
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.6);
     }
     .ab-meta dd {
-      font-family:var(--sans); font-size:var(--body); line-height:1.3; color:var(--page);
+      font-family:var(--sans); font-size:var(--t-body); line-height:1.3; color:var(--page);
     }
     .ab-folio-r {
       align-self:flex-end; font-family:var(--sans); font-weight:400;
-      font-size:var(--h-sub); letter-spacing:-1px; line-height:1;
-      color:rgba(254,254,251,.5);
+      font-size:var(--t-display); letter-spacing:-1px; line-height:1;
+      color:rgba(254,254,251,.4);
     }
 
     /* ══════════ CONNECT — BACK COVER ══════════ */
@@ -374,41 +377,41 @@
       padding:2.8rem 2.6rem 2.4rem 3rem;
     }
     .cn-lp-top {
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5);
+      color:var(--mu);
       display:flex; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(21,17,14,.12); padding-bottom:.7rem;
+      border-bottom:1px solid var(--line); padding-bottom:.7rem;
     }
     .cn-lp-body {
       flex:1; display:flex; flex-direction:column;
       justify-content:center; gap:1.2rem;
     }
     .cn-label {
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(21,17,14,.5);
+      color:var(--mu);
     }
     .cn-hed {
-      font-family:var(--serif); font-weight:400;
-      font-size:var(--h-max); line-height:1;
-      letter-spacing:-1px; color:var(--head);
+      font-family:var(--sans); font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--head);
     }
     .cn-hed em { font-style:normal; font-weight:400; opacity:1; }
     .cn-mail {
-      font-family:var(--sans); font-style:italic; font-size:1rem;
-      color:rgba(21,17,14,.55); text-decoration:none;
+      font-family:var(--sans); font-style:normal; font-size:var(--t-body);
+      color:rgba(21,17,14,.7); text-decoration:none;
       border-bottom:1px solid rgba(21,17,14,.16); padding-bottom:.18rem;
       transition:color .22s,border-color .22s; width:fit-content;
     }
     .cn-mail:hover { color:var(--ink); border-color:var(--ink); }
     .cn-lp-foot {
       display:flex; justify-content:space-between; align-items:flex-end;
-      border-top:1px solid rgba(21,17,14,.1); padding-top:.8rem;
+      border-top:1px solid var(--line); padding-top:.8rem;
     }
     .cn-lp-foot-meta {
-      font-family:var(--sans); font-style:italic; font-size:.7rem;
-      color:rgba(21,17,14,.5); display:flex; flex-direction:column; gap:.18rem;
+      font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
+      color:var(--mu); display:flex; flex-direction:column; gap:.18rem;
     }
     /* right: pink contact card */
     .cn-rp {
@@ -416,26 +419,33 @@
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.8rem 2.8rem 2.6rem;
     }
+    .cn-rp-head { display:flex; flex-direction:column; gap:1.2rem; }
     .cn-rp-hed {
-      font-family:var(--book); font-style:italic; font-weight:400;
-      font-size:var(--h-sub); line-height:1;
-      letter-spacing:-1px; color:var(--ink);
+      font-family:var(--sans); font-style:normal; font-weight:400;
+      font-size:var(--t-display); line-height:1;
+      letter-spacing:-1.5px; color:var(--page);
     }
+    .cn-rp-invite {
+      font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+      line-height:1.3; letter-spacing:-.2px; color:var(--page); max-width:20ch;
+    }
+    .folio { font:400 var(--t-display)/1 var(--sans); letter-spacing:-1px;
+             color:rgba(21,17,14,.18); }
     .cn-rp-links { display:flex; flex-direction:column; }
     .cn-link {
       display:flex; justify-content:space-between; align-items:baseline;
-      padding:.85rem 0; border-top:1px solid rgba(21,17,14,.18);
+      padding:.85rem 0; border-top:1px solid rgba(254,254,251,.4);
       text-decoration:none; transition:border-color .2s var(--ease-out);
     }
-    .cn-link:last-child { border-bottom:1px solid rgba(21,17,14,.18); }
-    .cn-link:hover { border-color:rgba(21,17,14,.4); }
+    .cn-link:last-child { border-bottom:1px solid rgba(254,254,251,.4); }
+    .cn-link:hover { border-color:var(--page); }
     .cn-link-label {
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5);
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(254,254,251,.6);
     }
     .cn-link-name {
-      font-family:var(--book); font-style:italic; font-size:1.05rem; font-weight:400;
-      color:var(--ink);
+      font-family:var(--sans); font-style:normal; font-size:var(--t-body); font-weight:500;
+      color:var(--page);
       transition:transform .2s var(--ease-out);
     }
     .cn-link:hover .cn-link-name { transform:translateX(-4px); }
@@ -453,7 +463,7 @@
       .lp-crs,.rp-crs { display:none; }
       .cn-wrap { padding:3rem 1.6rem; }
       .cn-rule,.cn-foot { left:1.6rem; right:1.6rem; }
-      .cn-hed { font-size:clamp(2.2rem,8vw,3.5rem); }
+      .cn-hed { font-size:var(--t-display); }
       .ribbon { left:10%; }
     }
 
@@ -499,14 +509,14 @@
             <span>Issue Nº 01</span>
           </div>
           <h1>Early<em>Winter.</em></h1>
-          <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.2rem; transform:rotate(5deg);">est. one cold<br>morning ❅</span>
+          <span class="scrib" style="right:2.4rem; top:6.6rem; font-size:1.4rem; transform:rotate(5deg);">est. one cold<br>morning ❅</span>
           <div class="cv-l-note">
-            <p><em>Hemant</em> is Sanskrit for the early cold — the hush between autumn and winter, not yet frost but its quiet arrival. A threshold. The studio takes its name from this moment of stillness before change.</p>
-            <p>Before humans drew the first line, nature had already been designing. A snowflake optimises strength through hexagonal symmetry. Leaf venation is a logistics network. The nautilus traces a logarithmic spiral.</p>
-            <p class="cv-l-pull">Design is not invention. It is recognition — seeing what was always there, and naming it with intention.</p>
+            <p>I design product UX. I run Early Winter, a studio of one.</p>
+            <p>Slow on purpose. One project at a time, finished properly.</p>
+            <p class="cv-l-pull">I sweat the parts users never notice.</p>
           </div>
           <p class="cv-l-foot">
-            A UX design studio.<br>
+            UX design studio.<br>
             Selected work, 2022 — 2025.<br>
             New Delhi, India.
           </p>
@@ -518,7 +528,7 @@
 
   <!-- ═══ WORK TEASER · PHOTO BOOK ═══ -->
   <section class="pg" id="wk">
-    <span class="tcap">ii / vi — selected work, the short version</span>
+    <span class="tcap">ii / vi — selected work</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left page: two full-width plates -->
@@ -532,7 +542,7 @@
           <div class="wk-plate-info">
             <div class="wk-plate-left">
               <span class="wk-plate-title">Uphold</span>
-              <span class="wk-plate-desc">mentorship, held steady</span>
+              <span class="wk-plate-desc">Mentorship matching</span>
             </div>
             <div class="wk-plate-meta">Nº 01 · Ed Tech · 2025<b>View case study ↗</b></div>
           </div>
@@ -545,7 +555,7 @@
           <div class="wk-plate-info">
             <div class="wk-plate-left">
               <span class="wk-plate-title">Revibe</span>
-              <span class="wk-plate-desc">worn again, loved harder</span>
+              <span class="wk-plate-desc">Resale, AI-assisted</span>
             </div>
             <div class="wk-plate-meta">Nº 02 · Thrift &amp; AI · 2025<b>View case study ↗</b></div>
           </div>
@@ -565,7 +575,7 @@
           <div class="wk-plate-info">
             <div class="wk-plate-left">
               <span class="wk-plate-title">Insight</span>
-              <span class="wk-plate-desc">the right people, found</span>
+              <span class="wk-plate-desc">B2B prospecting</span>
             </div>
             <div class="wk-plate-meta">Nº 03 · B2B SaaS · 2025<b>View case study ↗</b></div>
           </div>
@@ -577,8 +587,8 @@
           </div>
           <div class="wk-plate-info">
             <div class="wk-plate-left">
-              <span class="wk-plate-title">Vejeez!</span>
-              <span class="wk-plate-desc">every vegan's dream</span>
+              <span class="wk-plate-title">Vejeez</span>
+              <span class="wk-plate-desc">Vegan marketplace</span>
             </div>
             <div class="wk-plate-meta">Nº 04 · Marketplace · 2024<b>View case study ↗</b></div>
           </div>
@@ -591,7 +601,7 @@
 
   <!-- ═══ FILLER 1 · pink / blue ═══ -->
   <section class="pg" id="f1">
-    <span class="tcap">iii / vi — a note before the work</span>
+    <span class="tcap">iii / vi — influences</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="fq-page" style="background:var(--pink);">
@@ -609,9 +619,8 @@
       </div>
       <div class="fq-page" style="background:#0095E8;">
         <div class="fq fq-light" style="right:14%; top:28%;">
-          As for what this studio believes: audiences neither know nor care
-          who we are. The work has to feel like something instead — calm,
-          present, a little nostalgic. A cold morning, indoors.
+          Users do not care who I am. They care whether the thing works.
+          So I make it work, then make it feel inevitable.
           <small>Early Winter / studio notes</small>
         </div>
         <div class="fq thru fq-light" style="left:12%; bottom:18%; width:48%;">
@@ -624,7 +633,7 @@
 
   <!-- ═══ FILLER 2 · sage / warm ═══ -->
   <section class="pg" id="f2">
-    <span class="tcap">iv / vi — a pause</span>
+    <span class="tcap">iv / vi — influences</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="fq-page" style="background:#FF4B1F;">
@@ -641,9 +650,7 @@
       </div>
       <div class="fq-page">
         <img class="fp-img" src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway after rain">
-        <div class="fp-cap"><b>■ After the rain</b> — hydrangeas on the hill path.
-          Less, but better — <em>but warmer.</em> Made to be used on a Tuesday,
-          remembered on a Sunday.</div>
+        <div class="fp-cap"><b>■ Influences</b> — Norman, Rams, cinema, print.</div>
         <span class="pno" style="color:rgba(254,254,251,.85); z-index:3;">7</span>
       </div>
     </div>
@@ -651,7 +658,7 @@
 
   <!-- ═══ ABOUT ═══ -->
   <section class="pg" id="ab">
-    <span class="tcap">v / vi — about the designer</span>
+    <span class="tcap">v / vi — about</span>
     <div class="book rv">
       <div class="gut"></div>
 
@@ -659,9 +666,9 @@
       <div class="ab-lp">
         <div class="ab-eyebrow rv"><span>Early Winter</span><span>About</span></div>
         <div class="ab-voice rv" style="transition-delay:.1s">
-          <p class="ab-lead">He was always an <em>artist.</em> Now he builds things that feel like <em>memories.</em></p>
-          <p class="ab-bio">A UX designer with 3.5 years across ed tech, fintech, e-commerce and B2B SaaS — building Early Winter as a small, slow, intentional studio. Work shaped by Don Norman, by cinema, and by the belief that good design should feel like the first cold morning of the season. <em>Open to new work.</em></p>
-          <a class="scrib" href="about.html" style="display:inline-block; margin-top:1.3rem; font-size:1.5rem; transform:rotate(-2deg);">read the whole story →</a>
+          <p class="ab-lead">UX designer in New Delhi. <em>3.5 years.</em></p>
+          <p class="ab-bio">Across ed tech, fintech, commerce and B2B SaaS. I run Early Winter, a studio of one. <em>Open to new work.</em></p>
+          <a class="scrib" href="about.html" style="display:inline-block; margin-top:1.3rem; font-size:1.4rem; transform:rotate(-2deg);">read the whole story →</a>
         </div>
         <div class="ab-folio rv" style="transition-delay:.18s">122</div>
       </div>
@@ -677,7 +684,7 @@
           <dl class="ab-meta">
             <dt>Role</dt><dd>UX / Product Designer</dd>
             <dt>Practice</dt><dd>3.5 years</dd>
-            <dt>Sectors</dt><dd>Ed Tech, Fintech, E-comm, B2B SaaS</dd>
+            <dt>Sectors</dt><dd>Ed Tech, Fintech, Commerce, B2B SaaS</dd>
             <dt>Status</dt><dd>Open to new work</dd>
           </dl>
           <div class="ab-folio-r">123</div>
@@ -689,7 +696,7 @@
 
   <!-- ═══ CONNECT spread ═══ -->
   <section class="pg" id="cn">
-    <span class="tcap">vi / vi — let's work together</span>
+    <span class="tcap">vi / vi — contact</span>
     <div class="book rv">
       <div class="gut"></div>
       <!-- left: contact text on cream page -->
@@ -699,10 +706,10 @@
           <span>Issue Nº 01</span>
         </div>
         <div class="cn-lp-body">
-          <span class="cn-label">Let's work together</span>
-          <h2 class="cn-hed">Let's<br><em>talk up.</em></h2>
+          <span class="cn-label">Contact</span>
+          <h2 class="cn-hed">Let's<br><em>build it.</em></h2>
           <a href="mailto:hgusain307@gmail.com" class="cn-mail">
-            hgusain307@gmail.com — or just a friendly hello.
+            hgusain307@gmail.com
           </a>
         </div>
         <div class="cn-lp-foot">
@@ -713,9 +720,12 @@
           <span class="pno" style="position:static;transform:none;">124</span>
         </div>
       </div>
-      <!-- right: green accent page with links -->
-      <div class="cn-rp">
-        <p class="cn-rp-hed">Find<br>me<br>here.</p>
+      <!-- right: pink accent page with links -->
+      <div class="cn-rp on-dark">
+        <div class="cn-rp-head">
+          <p class="cn-rp-hed">Find<br>me<br>here.</p>
+          <p class="cn-rp-invite">Tell me what you're building. I'll say if I can help.</p>
+        </div>
         <div class="cn-rp-links">
           <a href="https://findingyouhemant.framer.website" target="_blank" rel="noopener" class="cn-link">
             <span class="cn-link-label">Portfolio</span>
@@ -729,8 +739,8 @@
             <span class="cn-link-label">Email</span>
             <span class="cn-link-name">Write me ↗</span>
           </a>
+          <span class="folio" style="align-self:flex-end;margin-top:1.4rem;color:rgba(254,254,251,.4);">125</span>
         </div>
-        <span class="pno" style="position:static;transform:none;color:rgba(11,9,8,.35);">125</span>
       </div>
     </div>
   </section>

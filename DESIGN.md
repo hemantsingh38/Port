@@ -1,220 +1,185 @@
-# Early Winter — Visual Guidelines
+# Early Winter — Design Language (v2)
 
-The single source of truth for type, grid, hierarchy, and layout across `index.html`,
-`work.html`, and `about.html`. When in doubt, this document wins. The goal: a calm,
-confident editorial magazine — Swiss structure, nostalgic warmth.
+The single source of truth for type, layout, copy, and color across `index.html`,
+`work.html`, `about.html`. If a page disagrees with this document, the page is wrong.
 
----
-
-## 0. The five principles
-
-1. **One grotesque does the work.** Inter carries 90% of the page — headings, captions,
-   body, labels, numbers. Consistency comes from *one* voice at many sizes, not many fonts.
-2. **A heading is a privilege, not a default.** Most pages do NOT need a 48–56px heading.
-   A 24px lead caption can open a page. Reserve big headings for section openers and key moments.
-3. **Place chunks on an invisible grid.** Never flow everything from the same top-left point.
-   Anchor self-contained blocks to *different* grid positions. Asymmetry creates interest.
-4. **Hierarchy = size jump + isolation + position.** What the eye hits first must be the most
-   important thing. Rank with big size contrast and whitespace, not with five mid-sizes.
-5. **Big jumps, no mud.** Use the scale below and skip steps. 56 next to 12 reads as designed;
-   56 / 40 / 32 / 24 / 18 all on one page reads as indecision.
+Goal: a calm, confident editorial magazine. Swiss structure, one quiet voice.
 
 ---
 
-## 1. Type system — exactly 3 fonts
+## 0. Hard rules (these are not suggestions)
 
-| Role | Font | Used for |
-|------|------|----------|
-| **Grotesque** (workhorse) | **Inter** | Headings, sub-heads, leads, body, captions, labels, page numbers — everything structural |
-| **Serif** (accent) | **EB Garamond**, italic | Pull-quotes and the rare editorial display moment. Sparingly — never body. |
-| **Script** (signature) | **Caveat** | Handwritten margin notes only (e.g. "est. one cold morning ❅"). Never structural. |
+1. **Two typefaces. That is all.** Inter for everything structural. Caveat only for the
+   occasional handwritten margin note. **No third font.**
+2. **No italic serif. Anywhere.** EB Garamond is removed from the project. Emphasis is done with
+   **weight (500)** or the label style — never with a slanted serif word.
+3. **Five sizes, no others.** Everything is `--t-display / --t-lead / --t-body / --t-caption / --t-label`.
+   No 36px, no 56px, no `.7rem`, no one-off sizes.
+4. **Body text is the default voice.** Most text on most pages is 18px body. Big type is rare
+   and earns its place by being alone.
+5. **Cut the copy in half, then cut the adjectives.** Every line makes one point. No "calm,
+   present, a little nostalgic." Concrete nouns, active verbs, short sentences.
+6. **One first read per spread.** Decide it before you place anything.
 
-> **Change to apply:** Outfit is retired. Headings move to Inter (tight tracking, large size).
-> This is the only way to honor "3 fonts" + the reference look.
+---
 
-CSS variables (already in `:root`):
+## 1. Type — two fonts
+
+| Font | Role |
+|------|------|
+| **Inter** | Display, lead, body, caption, label, page numbers — all structural text |
+| **Caveat** | Handwritten margin notes only. Sparingly. One per spread at most. |
+
 ```css
---sans: 'Inter', system-ui, sans-serif;   /* grotesque workhorse */
---book: 'EB Garamond', Georgia, serif;     /* serif accent */
---scrib: 'Caveat', cursive;                /* signature script */
---head: #2E2A25;                           /* heading ink — darkest warm grey */
+--sans:  'Inter', system-ui, sans-serif;
+--scrib: 'Caveat', cursive;
+```
+
+Emphasis = `font-weight:500` and `color:var(--ink)`. That's the `.t-emph` utility. Never italic, never serif.
+
+---
+
+## 2. Scale — five tokens
+
+| Token | Size | Weight | LH | Tracking | Use |
+|-------|------|--------|----|----|-----|
+| `--t-display` | **40px** (2.5rem) | 400 | 1.0 | -1.5px | Section openers only. Once per spread, max. Often not at all. |
+| `--t-lead` | **24px** (1.5rem) | 400 | 1.3 | -.2px | One opening statement. Sparingly. |
+| `--t-body` | **18px** (1.125rem) | 400 | 1.55 | 0 | The default. 90% of all text. |
+| `--t-caption` | **14px** (.875rem) | 400 | 1.5 | 0 | Dense/secondary text, image captions. |
+| `--t-label` | **12px** (.75rem) | 500 | 1.4 | .1em | Eyebrows, running heads, metadata keys, fol`io labels. UPPERCASE. |
+
+- **Folio (page number):** uses `--t-display` size, color `rgba(21,17,14,.18)` — a quiet graphic, parked in a corner.
+- **Margin note (Caveat):** ~1.4rem, `#C8385A`, slight rotation, off the grid on purpose.
+
+If body "feels too big," the column is too narrow or the copy is too long — fix those, not the size.
+
+---
+
+## 3. Standard component CSS — paste identically into every file
+
+This block lives in the `<style>` of all three files, byte-for-byte. Consistency is structural,
+not a matter of each page's discretion.
+
+```css
+:root{
+  --page:#FEFEFB; --ink:#15110E; --head:#2E2A25;
+  --mu:rgba(21,17,14,.55); --line:rgba(21,17,14,.14); --table:#0B0908;
+  --pink:#FF85B0; --green:#2DF952; --blue:#DCE8EF; --warm:#F2EADC; --yellow:#F5E10A;
+  --sans:'Inter',system-ui,sans-serif; --scrib:'Caveat',cursive;
+  --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+}
+.t-display{font:400 var(--t-display)/1.0 var(--sans);letter-spacing:-1.5px;color:var(--head);}
+.t-lead   {font:400 var(--t-lead)/1.3 var(--sans);letter-spacing:-.2px;color:var(--head);}
+.t-body   {font:400 var(--t-body)/1.55 var(--sans);color:rgba(21,17,14,.7);}
+.t-caption{font:400 var(--t-caption)/1.5 var(--sans);color:var(--mu);}
+.t-label  {font:500 var(--t-label)/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mu);}
+.t-emph   {font-weight:500;color:var(--ink);}                 /* emphasis — never italic */
+.eyebrow  {display:flex;justify-content:space-between;align-items:baseline;
+           border-bottom:1px solid var(--line);padding-bottom:.7rem;}
+.folio    {font:400 var(--t-display)/1 var(--sans);letter-spacing:-1px;color:rgba(21,17,14,.18);}
+.meta     {display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.4rem;align-items:baseline;}
+.note     {font:400 1.4rem/1.05 var(--scrib);color:#C8385A;}  /* Caveat scribble */
+/* on dark/color pages, set parent class `.on-dark`: */
+.on-dark .t-display,.on-dark .t-lead{color:var(--page);}
+.on-dark .t-body{color:rgba(254,254,251,.8);}
+.on-dark .t-label,.on-dark .t-caption,.on-dark .meta dt{color:rgba(254,254,251,.6);}
+.on-dark .t-emph,.on-dark .meta dd{color:var(--page);}
+.on-dark .eyebrow{border-bottom-color:rgba(254,254,251,.25);}
+.on-dark .folio{color:rgba(254,254,251,.4);}
+```
+
+Use the utilities. A new page should add almost no new type CSS — only layout (positioning) rules.
+
+---
+
+## 4. Layout — invisible 6-column grid, content in chunks
+
+- Page-half margin ~9%. Six columns, 24px gutter. All vertical spacing in multiples of 8px.
+- A spread is **2–4 self-contained chunks**, each anchored to a *different* grid region. Never flow
+  everything from the top-left margin.
+- Anchors to mix: eyebrow (full width, top) · main chunk (a column span, anchored high OR low) ·
+  image chunk (opposite side) · metadata stack (beside/under image) · folio (a corner).
+- Whitespace is the composition. A near-empty page with one lead is finished, not unfinished.
+
+**Standard spread template** (most pages use this; vary the anchor, not the parts):
+```
+EYEBROW (brand · section)            ─── hairline ───
+                                                       FOLIO (faint, corner)
+      ┌ main chunk ┐         ┌ image / data chunk ┐
+      │ lead/body  │         │                    │
+      └────────────┘         └────────────────────┘
 ```
 
 ---
 
-## 2. The scale — five sizes, big jumps
+## 5. Copy — voice & rules
 
-| Token | Size | Font / weight | LH | Tracking | Case | When it appears |
-|-------|------|---------------|----|----|------|-----------------|
-| `--h-max` Display | **56px** (3.5rem) | Inter 400 | 1.0 | -2px | — | Section openers ONLY. Once per spread, at most. |
-| `--h-sub` Sub-head | **48px** (3rem) | Inter 400 | 1.05 | -1px | — | A spread's headline when it genuinely needs one. |
-| `--lead` Lead | **24px** (1.5rem) | Inter 400 | 1.35 | -.2px | — | Page-carrying caption. **Use this instead of a heading** on most pages. |
-| `--body` Body | **18px** (1.125rem) | Inter 400 | 1.5 | 0 | — | Reading text, standard captions. |
-| `--label` Label | **12px** (.75rem) | Inter 500 | 1.4 | .1em | UPPER | Eyebrows, running heads, metadata keys, credits. |
+The studio is "Early Winter." First person, plain, a little dry. Write like a designer who
+respects the reader's time.
 
-**Accent tokens** (off the main scale, used rarely):
-- **Folio / page number:** 48px Inter 400, `-1px` — a *graphic* element, not a footnote. Park it in a corner.
-- **Pull-quote:** 24–32px EB Garamond italic, `-.5px`, LH 1.3 — isolated, lots of margin.
-- **Margin note:** 20–28px Caveat — set at a slight rotation, off the grid on purpose.
+- **One point per block.** If a sentence doesn't change what the reader thinks, cut it.
+- **Concrete over poetic.** "I sweat the parts users never notice" > "calm, present, a little nostalgic."
+- **Active and direct.** "I run a studio of one." not "Early Winter was founded as a small studio."
+- **No filler labels.** No "SECTION 01", no "a note before the work", no mock-humble taglines.
+- **Numbers are facts, state them flat.** 3.5 years. 4 sectors. Studio of one.
+- **Length caps:** lead ≤ 12 words · body block ≤ 45 words · caption ≤ 12 words · label ≤ 4 words.
 
-**Forbidden:** 40px, 36px, 32px (except quotes), 14px, 16px as type sizes. They blur the jumps.
-If text feels "too big at 18" or "too small at 24," fix the *line length and whitespace*, not the size.
-
----
-
-## 3. Grid — content lives in chunks
-
-Each book page-half is its own canvas. **Six columns**, consistent gutter, generous margin.
-
-```
-margin: ~9% of page-half on all sides
-columns: 6
-gutter: 24px
-baseline rhythm: 8px (all vertical spacing is a multiple of 8)
-```
-
-**The rule that matters:** a page is built from 2–4 *chunks*, each anchored to a grid region —
-NOT a single column flowing top to bottom. A chunk is self-contained: it has its own top edge,
-its own width (a column span), and its own alignment.
-
-Anchor regions to mix between (never all the same on one spread):
-```
-┌─────────────────────────────┐
-│ ① eyebrow (full width, top)        │
-│                                     │
-│   ② lead / text chunk               │
-│      (cols 1–3, anchored ~40% down) │
-│                          ③ image    │
-│                          (cols 4–6) │
-│                          ④ meta     │
-│                          stack      │
-│                                     │
-│ ⑤ folio (corner)            running │
-└─────────────────────────────┘
-```
-- Some chunks start low. Some hug the right edge. The empty space is the composition.
-- Align chunks to column edges, but vary *which* column and *which* vertical anchor.
-
----
-
-## 4. Hierarchy — design the first read
-
-Every spread has exactly **three tiers**. Decide them before placing anything.
-
-1. **Primary (first read).** The one thing the visitor should see first. Make it win by *size*
-   (biggest), *isolation* (most whitespace around it), or *position* (upper-left, or dramatically
-   placed). Only one per spread.
-2. **Secondary.** Supporting block — the body chunk, the image. Clearly subordinate.
-3. **Tertiary.** Eyebrows, running heads, metadata, folio. Quiet, in corners or edges, 12px.
-
-If two elements compete for first read, the spread has failed — shrink or move one.
-
----
-
-## 5. Chunk patterns (the reusable blocks)
-
-**Eyebrow pair** — top of page, 12px label, brand left + section/edition right, hairline under:
-```
-EARLY WINTER                                    ISSUE Nº 01
-─────────────────────────────────────────────────────────
-```
-
-**Lead-only page** (no heading) — a 24px lead does the talking, anchored low-left:
-```
-
-
-              (empty — this is intentional)
-
-
-  Hemant is Sanskrit for the early cold — the hush
-  between autumn and winter. A threshold.
-                                                    124
-```
-
-**Index / TOC row** — label left, hairline, big folio right (huge size contrast):
-```
-Selected Work                                          ── 02
-Uphold · ed tech                                       ── 36
-```
-
-**Image + metadata stack** — image chunk, tiny labeled data beside or under it:
-```
-┌────────────┐   UPHOLD
-│            │   ──────────────
-│   image    │   ROLE      UX / UI
-│            │   YEAR      2025
-└────────────┘   SECTOR    Ed Tech
-```
-Metadata keys are 12px UPPER label; values 18px body. Keys and values align in two micro-columns.
-
-**Pull-quote** — serif italic, isolated, never inside a text column:
-```
-        Design is not invention.
-        It is recognition.
-```
-
-**Masthead / credits** — 12px label caps in a 3–4 column grid, bottom of a closing page.
-
-**Folio** — 48px number, parked in the outer corner. Same position every spread = rhythm.
+Rewrite examples:
+- ❌ "Hemant Singh is a UX designer with 3.5 years across ed tech, fintech, e-commerce and B2B SaaS.
+  Based in New Delhi, he founded Early Winter as a small, slow, intentional studio. His work is shaped
+  by Don Norman, by cinema, and by the belief that good design should feel like the first cold morning
+  of the season — present, calm, and a little nostalgic."
+- ✅ "UX designer in New Delhi. 3.5 years across ed tech, fintech, commerce and B2B SaaS. I run Early
+  Winter — a studio of one, slow on purpose. I sweat the parts users never notice."
 
 ---
 
 ## 6. Color
 
+Cream by default. One color-block page is a *moment* (contact = pink). Don't habitually color pages.
+
 | Token | Value | Use |
 |-------|-------|-----|
-| `--page` | `#FEFEFB` | Default page surface (cream) |
-| `--ink` | `#15110E` | Body text, full-strength marks |
-| `--head` | `#2E2A25` | Headings (darkest warm grey, softer than pure black) |
-| `--table` | `#0B0908` | Dark spreads, video margins |
-| `--pink` | `#FF85B0` | One color-block page (contact) |
-| `--green` `--blue` `--warm` | tints | Accent / filler spreads, one per spread max |
+| `--page` | `#FEFEFB` | Default surface |
+| `--ink` | `#15110E` | Emphasis, full-strength marks |
+| `--head` | `#2E2A25` | Display & lead text (warm darkest grey) |
+| `--mu` | `rgba(21,17,14,.55)` | Labels, captions |
+| `--line` | `rgba(21,17,14,.14)` | Hairlines |
+| `--pink` `--yellow` `--green` `--blue` | — | Accent pages — one per spread, rarely |
 
-- **One color-block page is a moment, not a habit** (like the pink Catalys spread). Most pages cream.
-- Body text on cream: `rgba(21,17,14,.72)`. Labels: `rgba(21,17,14,.5)`. Never pure black on cream.
-- On a color/dark page, flip to `--page` text and `rgba(254,254,251,.55)` labels.
+On any color/dark page, add `.on-dark` to the page-half so the type utilities flip to light automatically.
 
 ---
 
-## 7. Spacing & rhythm
+## 7. Page archetypes
 
-- All vertical gaps are multiples of **8px** (8 / 16 / 24 / 40 / 64).
-- Whitespace is a design element — a near-empty page with one 24px lead is *correct*, not unfinished.
-- Hairlines: `1px solid rgba(21,17,14,.14)`. Use to separate TOC rows and under eyebrows. Never box things in.
-- Line length for body: 45–70 characters. If a column is wider, the size is wrong or it needs columns.
-
----
-
-## 8. Page archetypes (pick one per spread — don't invent every time)
-
-1. **Cover** — full-bleed media one side, title (56px) + eyebrow + lead other side.
-2. **Lead page** — no heading; a single 24px lead anchored low, huge whitespace, folio corner.
-3. **Index / contents** — TOC rows: label left + hairline + 48px folio right.
-4. **Work item** — image chunk + metadata stack + 18px description; 24px lead, no big heading.
-5. **Quote / pause** — one EB Garamond pull-quote isolated on color or cream.
-6. **Section opener** — the rare 56px display moment + eyebrow. Earns its size by being alone.
-7. **Closing / masthead** — sub-head + 12px credit grid, optional color block.
+1. **Cover** — full-bleed media + display title + eyebrow.
+2. **Body page** (the default) — eyebrow + body chunk + image/meta chunk + folio. No big heading.
+3. **Lead page** — one 24px lead, lots of air, folio. Used to open a section.
+4. **Index** — TOC rows: label left · hairline · faint display-size number right.
+5. **Work item** — image + metadata stack + 18px description. Lead, not heading.
+6. **Contact** — display title + one-line invite + link rows (label · destination). Make it pointed, not empty.
 
 ---
 
-## 9. Motion (already built — keep)
+## 8. Motion (built — keep)
 
 Page-turn shading, staggered first-load reveal, spring-follow paw cursor, hover micro-feedback,
-`prefers-reduced-motion` support. Easing token `--ease-out: cubic-bezier(.23,1,.32,1)`. UI feedback
-under 300ms. Don't add infinite loops or parallax.
+`prefers-reduced-motion`. Easing `--ease-out`. UI feedback < 300ms. No infinite loops, no parallax.
 
 ---
 
-## 10. Don't
+## 9. Don't
 
-- Don't put a 48–56px heading on every page. Most pages are lead-led (24px).
-- Don't flow all content from the top-left margin. Place chunks on the grid.
-- Don't use more than 3 fonts, or sizes off the scale.
-- Don't use pure black, AI-grey gradients, or center everything.
-- Don't fill the page. Whitespace is the layout.
-- Don't let two elements tie for first read.
+- Don't use a serif, or italics, or a third font.
+- Don't use a size off the five-token scale.
+- Don't put a 40px heading on every page — most pages are body-led.
+- Don't write three sentences where one works.
+- Don't flow everything from the top-left. Don't fill the page. Don't tie two elements for first read.
 
 ---
 
-*Build from this. When a page feels off, check it against §0 and §4 first — it's almost always
-a hierarchy or chunk-placement problem, not a font problem.*
+*Tokens for Figma live in `design-tokens.json` (Tokens Studio format). Import via the Tokens Studio
+plugin to get this exact scale, color, and type as Figma styles.*

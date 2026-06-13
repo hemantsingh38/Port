@@ -6,7 +6,7 @@
   <title>Work — Early Winter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -15,15 +15,17 @@
       --page:  #FEFEFB;
       --ink:   #15110E;
       --head:  #2E2A25;   /* heading text — darkest warm grey */
-      --h-max: 3.5rem;    /* 56px — primary headings */
-      --h-sub: 3rem;      /* 48px — sub headings */
-      --body:  1.125rem;  /* 18px — body text */
-      --mu:    #978D7C;
+      --mu:    rgba(21,17,14,.55);
+      --line:  rgba(21,17,14,.14);
       --green: #2DF952;
-      --serif: 'Outfit',system-ui,sans-serif;
-      --book:  'EB Garamond',Georgia,serif;
+      --pink:  #FF85B0;
       --sans:  'Inter',system-ui,sans-serif;
-      --hand:  'Caveat',cursive;
+      --scrib: 'Caveat',cursive;
+      --t-display: 2.5rem;   /* 40px */
+      --t-lead:    1.5rem;   /* 24px */
+      --t-body:    1.125rem; /* 18px */
+      --t-caption: .875rem;  /* 14px */
+      --t-label:   .75rem;   /* 12px */
       --ease-out: cubic-bezier(.23,1,.32,1);
     }
 
@@ -51,8 +53,8 @@
     /* ── page index tabs ── */
     .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
             display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:.58rem; font-weight:500;
-           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
+    .tab { font-family:var(--sans); font-size:var(--t-label); font-weight:500;
+           letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
            color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
            border-radius:0; transform:translateY(46%);
            box-shadow:0 -6px 16px rgba(0,0,0,.32);
@@ -87,8 +89,8 @@
     .v { writing-mode:vertical-rl; transform:rotate(180deg); }
 
     /* handwritten pen notes */
-    .scrib { position:absolute; z-index:40; font-family:var(--hand);
-             font-weight:600; color:#C8385A; line-height:1.05;
+    .scrib { position:absolute; z-index:40; font-family:var(--scrib);
+             font-weight:600; font-size:1.4rem; color:#C8385A; line-height:1.05;
              transform:rotate(-3.5deg); pointer-events:none; }
     a.scrib { pointer-events:auto; text-decoration:none; color:#C8385A;
               border-bottom:2px solid rgba(200,56,90,.35); }
@@ -96,7 +98,7 @@
 
     .tcap {
       position:absolute; z-index:30; left:6vmin; bottom:1.4vmin;
-      font-family:var(--sans); font-size:.52rem; font-weight:500;
+      font-family:var(--sans); font-size:var(--t-label); font-weight:500;
       letter-spacing:.1em; text-transform:uppercase;
       color:rgba(254,254,251,.55);
     }
@@ -145,10 +147,13 @@
       box-shadow:6px 0 14px -6px rgba(21,17,14,.14), -6px 0 14px -6px rgba(21,17,14,.14);
     }
 
-    .pno { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%);
-           font-family:var(--sans); font-size:.7rem; color:rgba(21,17,14,.68); }
+    .pno { position:absolute; bottom:1.6rem;
+           font-family:var(--sans); font-weight:400; font-size:var(--t-display);
+           letter-spacing:-1px; line-height:1; color:rgba(21,17,14,.18); }
+    .lp .pno { right:2.4rem; }
+    .rp .pno { right:3rem; }
     .run { position:absolute; top:1.1rem;
-           font-family:var(--sans); font-size:.52rem; font-weight:500;
+           font-family:var(--sans); font-size:var(--t-label); font-weight:500;
            letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
@@ -158,18 +163,19 @@
     .lp { padding:3.2rem 2.4rem 2.6rem 3rem; }
     .lp-head { position:absolute; top:5rem; left:3rem; right:2.4rem;
                display:flex; flex-direction:column; gap:.7rem; align-items:flex-start; }
-    .lp-title h2 { font-family:var(--serif); font-weight:400; font-size:1.7rem;
-                   letter-spacing:-1px; line-height:1.05; color:var(--head); }
+    .lp-title h2 { font-family:var(--sans); font-weight:400; font-size:var(--t-lead);
+                   letter-spacing:-.2px; line-height:1.3; color:var(--head); }
     .lp-title h2 em { display:block; font-style:normal; font-weight:400;
-                      opacity:1; font-size:.88em; }
+                      opacity:1; font-size:var(--t-caption); color:var(--mu);
+                      letter-spacing:0; margin-top:.3rem; }
     .lp-crs { display:flex; gap:1.6rem; padding-top:.15rem; flex-wrap:wrap; }
     .lp-title.v,.lp-ct.v,.lp-cat.v,.lp-cr.v,.rp-sub.v {
       writing-mode:horizontal-tb; transform:none;
     }
-    .lp-cr { font-family:var(--sans); font-size:.66rem; line-height:1.5;
-             color:rgba(21,17,14,.55); white-space:nowrap; }
+    .lp-cr { font-family:var(--sans); font-size:var(--t-caption); line-height:1.5;
+             color:var(--mu); white-space:nowrap; }
     .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
-               font-size:.52rem; letter-spacing:.1em; text-transform:uppercase;
+               font-size:var(--t-label); letter-spacing:.1em; text-transform:uppercase;
                color:rgba(21,17,14,.5); margin-bottom:.2rem; }
     .lp-media { position:absolute; left:0; right:2.4rem; top:46%; bottom:2.6rem;
                 display:flex; flex-direction:column; justify-content:flex-end; }
@@ -181,25 +187,25 @@
     .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
           background:#EFECE6; filter:saturate(.92) contrast(.97); }
     .lp-cat { position:absolute; left:3rem; bottom:2.6rem; z-index:3;
-              font-family:var(--sans); font-style:italic; font-size:.7rem;
-              color:rgba(21,17,14,.5); }
+              font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
+              color:var(--mu); }
     .lp-ct { position:absolute; left:3rem; top:3rem;
-             font-family:var(--sans); font-size:.52rem; font-weight:500;
+             font-family:var(--sans); font-size:var(--t-label); font-weight:500;
              letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
 
     .rp { padding:3.2rem 3rem 2.6rem 2.8rem; }
-    .rp-sub { position:absolute; top:5.4rem; left:2.8rem; right:3rem;
-              font-family:var(--sans); font-style:italic; font-size:.88rem;
-              color:rgba(21,17,14,.72); }
+    .rp-sub { position:absolute; top:5rem; left:2.8rem; right:3rem;
+              font-family:var(--sans); font-style:normal; font-size:var(--t-lead);
+              line-height:1.3; letter-spacing:-.2px; color:var(--head); }
     .rp-crs { position:absolute; top:3.2rem; left:2.8rem; display:flex; gap:1.05rem; }
     .rp-body { position:absolute; left:2.8rem; right:3rem; bottom:5.4rem;
                columns:2; column-gap:1.7rem;
-               font-family:var(--sans); font-size:.88rem; line-height:1.72;
-               color:rgba(21,17,14,.78); }
+               font-family:var(--sans); font-size:var(--t-body); line-height:1.55;
+               color:rgba(21,17,14,.7); }
     .rp-body p + p { margin-top:.7rem; }
-    .rp-body em { font-style:italic; }
+    .rp-body em { font-style:normal; font-weight:500; color:var(--ink); }
     .rp-link { position:absolute; left:2.8rem; bottom:2.7rem;
-               font-family:var(--sans); font-size:.52rem; font-weight:500;
+               font-family:var(--sans); font-size:var(--t-label); font-weight:500;
                letter-spacing:.1em; text-transform:uppercase;
                color:var(--ink); text-decoration:none;
                border-bottom:1px solid rgba(21,17,14,.52); padding-bottom:.16rem;
@@ -224,8 +230,9 @@
               opacity:0; transform:translateY(-4px); transition:all .22s;
               font-family:var(--sans); pointer-events:none; }
     .fl:hover figcaption, .fl.grab figcaption { opacity:1; transform:none; }
-    .fl b { display:block; font-size:.7rem; font-weight:600; color:var(--ink); }
-    .fl span { display:block; font-family:var(--sans); font-size:.52rem; font-weight:500;
+    .fl b { display:block; font-family:var(--sans); font-size:var(--t-caption);
+            font-weight:500; color:var(--ink); }
+    .fl span { display:block; font-family:var(--sans); font-size:var(--t-label); font-weight:500;
                letter-spacing:.1em; text-transform:uppercase;
                color:rgba(21,17,14,.5); margin-top:.12rem; }
     .fl:nth-child(2n) { animation-delay:-2.3s; animation-duration:8s; }
@@ -233,8 +240,8 @@
     .fl:nth-child(5n) { animation-delay:-5.6s; animation-duration:9s; }
     @keyframes bob { from { translate:0 -7px; } to { translate:0 9px; } }
     .gv-hint { position:absolute; left:50%; bottom:4.2rem; transform:translateX(-50%);
-               font-family:var(--hand); font-weight:600; font-size:1.2rem;
-               color:rgba(21,17,14,.6); pointer-events:none;
+               font-family:var(--scrib); font-weight:600; font-size:1.4rem;
+               color:#C8385A; pointer-events:none;
                transform:translateX(-50%) rotate(-2deg); }
 
     @media(max-width:920px){
@@ -281,7 +288,7 @@
   <div id="view-single">
   <!-- ═══ PROJECT 01 · UPHOLD ═══ -->
   <section class="pg" id="w1">
-    <span class="tcap">i / v — selected work, nº 01</span>
+    <span class="tcap">Work 01 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
@@ -289,7 +296,7 @@
         <span class="lp-ct v">01 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
-            <h2>Uphold<em>mentorship, held steady</em></h2>
+            <h2>Uphold<em>Mentorship platform</em></h2>
           </div>
           <div class="lp-crs">
             <div class="lp-cr v"><b>Strategy</b>User research<br>Ed tech</div>
@@ -305,8 +312,8 @@
             src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=900"
             alt="Stack of vintage film boxes on books"></div>
         </div>
-        <span class="lp-cat v">Ed Tech / Education</span>
-        <span class="scrib" style="right:1.8rem; top:36%; font-size:1.2rem; transform:rotate(4deg);">begin here ↓</span>
+        <span class="lp-cat v">Ed Tech</span>
+        <span class="scrib" style="right:1.8rem; top:36%; transform:rotate(4deg);">start here ↓</span>
         <span class="pno">114</span>
       </div>
       <div class="rp">
@@ -317,15 +324,12 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">mentorship, held steady</div>
+        <div class="rp-sub v">I connect new designers with working mentors.</div>
         <div class="rp-body">
-          <p>Some careers begin with a portfolio; most begin with a person who
-          says <em>keep going.</em> Uphold connects aspiring designers with
-          mentors from the industry — working professionals who review, advise,
-          and hold the ladder steady while you climb.</p>
-          <p>Designed end-to-end as a UX case study — research, flows,
-          interface — it asks one question of every screen: <em>does this make
-          the next step feel possible?</em></p>
+          <p>Uphold pairs new designers with working mentors who review their
+          work and point to the next step.</p>
+          <p>I designed it end-to-end: <em>research, flows, and interface.</em>
+          Every screen earns its place or comes out.</p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">
@@ -337,7 +341,7 @@
 
   <!-- ═══ PROJECT 02 · REVIBE ═══ -->
   <section class="pg" id="w2">
-    <span class="tcap">ii / v — selected work, nº 02</span>
+    <span class="tcap">Work 02 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
@@ -345,7 +349,7 @@
         <span class="lp-ct v">02 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
-            <h2>Revibe<em>worn again, loved harder</em></h2>
+            <h2>Revibe<em>Resale marketplace</em></h2>
           </div>
           <div class="lp-crs">
             <div class="lp-cr v"><b>Strategy</b>Gen Z, India<br>Thrift &amp; AI</div>
@@ -372,14 +376,12 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">worn again, loved harder</div>
+        <div class="rp-sub v">I built a resale marketplace for Gen Z India.</div>
         <div class="rp-body">
-          <p>India's wardrobes are full of clothes worn once. Revibe is a
-          Gen Z-first, AI-powered platform for thrifted and upcycled fashion —
-          shop it, sell it, remake it. <em>Save the planet, dress like nobody
-          else.</em></p>
-          <p>The interface borrows from the thrift store itself: warm, tactile,
-          a little serendipitous — designed from discovery to checkout.</p>
+          <p>Most wardrobes hold clothes worn once. Revibe lets people
+          <em>shop, sell, and remake</em> thrifted fashion in one place.</p>
+          <p>I designed the full flow, discovery to checkout, with AI to size
+          and match what sells.</p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/page">View case study ↗</a>
@@ -390,7 +392,7 @@
 
   <!-- ═══ PROJECT 03 · INSIGHT ═══ -->
   <section class="pg" id="w3">
-    <span class="tcap">iii / v — selected work, nº 03</span>
+    <span class="tcap">Work 03 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
@@ -398,7 +400,7 @@
         <span class="lp-ct v">03 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
-            <h2>Insight<em>the right people, found</em></h2>
+            <h2>Insight<em>Research recruiting</em></h2>
           </div>
           <div class="lp-crs">
             <div class="lp-cr v"><b>Strategy</b>Research ops<br>B2B SaaS</div>
@@ -425,15 +427,13 @@
           <div class="lp-cr v"><b>Year</b>2025</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">the right people, found</div>
+        <div class="rp-sub v">I help research teams find participants faster.</div>
         <div class="rp-body">
-          <p>Every researcher knows the hardest part isn't the questions —
-          it's finding the people. Insight streamlines participant recruitment
-          for UX research: affordable, global, built for teams without
+          <p>The hard part of research isn't the questions. It's finding the
+          people. Insight handles participant recruiting for teams without
           enterprise budgets.</p>
-          <p>A B2B SaaS product designed in Figma and Miro, from problem
-          mapping to prototype. The craft is in the calm — <em>dense data,
-          quiet screens.</em></p>
+          <p>I designed this B2B SaaS product in Figma and Miro, problem map to
+          prototype. <em>Dense data, quiet screens.</em></p>
         </div>
         <a class="rp-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
@@ -444,7 +444,7 @@
 
   <!-- ═══ PROJECT 04 · VEJEEZ! ═══ -->
   <section class="pg" id="w4">
-    <span class="tcap">iv / v — selected work, nº 04</span>
+    <span class="tcap">Work 04 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
@@ -452,7 +452,7 @@
         <span class="lp-ct v">04 / 04</span>
         <div class="lp-head">
           <div class="lp-title v">
-            <h2>Vejeez!<em>every vegan's dream</em></h2>
+            <h2>Vejeez!<em>Vegan marketplace</em></h2>
           </div>
           <div class="lp-crs">
             <div class="lp-cr v"><b>Strategy</b>Marketplace<br>Vegan living</div>
@@ -479,17 +479,15 @@
           <div class="lp-cr v"><b>Year</b>2024</div>
           <div class="lp-cr v"><b>Place</b>New Delhi</div>
         </div>
-        <div class="rp-sub v">every vegan's dream</div>
+        <div class="rp-sub v">I designed a marketplace for plant-based living.</div>
         <div class="rp-body">
-          <p>Every vegan's dream come true. Vejeez! is a marketplace for
-          conscious consumers — discover, buy, and connect around plant-based
-          living.</p>
-          <p>Brand, voice and interface designed as one piece: <em>green
-          without cliché, joyful without noise.</em> Case study arriving
-          soon.</p>
+          <p>Vejeez! is a marketplace for plant-based living — find products,
+          buy them, and connect with other vegans.</p>
+          <p>I designed <em>brand, voice, and interface</em> as one piece.
+          Case study coming soon.</p>
         </div>
         <a class="rp-link dis">Case study soon</a>
-        <span class="scrib" style="left:8.6rem; bottom:2.3rem; font-size:1.15rem; transform:rotate(-2deg);">— promise.</span>
+        <span class="scrib" style="left:8.6rem; bottom:2.3rem; transform:rotate(-2deg);">soon.</span>
         <span class="pno">121</span>
       </div>
     </div>
@@ -499,41 +497,41 @@
 
   <!-- ═══ GRID VIEW · LOOSE PHOTOS ═══ -->
   <section class="pg" id="gv" style="display:none;">
-    <span class="tcap">v / v — the index, spilled on the table</span>
+    <span class="tcap">Index</span>
     <span class="run" style="left:6vmin; color:rgba(21,17,14,.5);">Early Winter — Index</span>
     <figure class="fl" data-t="w1" data-c="#5B8CFF" style="left:5%;  top:11%;">
-      <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship, held steady" draggable="false">
-      <figcaption><b>Uphold — mentorship, held steady</b><span>ed tech · nº 01 · 2025</span></figcaption>
+      <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship platform" draggable="false">
+      <figcaption><b>Uphold</b><span>ed tech · nº 01 · 2025</span></figcaption>
     </figure>
     <figure class="fl" data-t="w1" data-c="#5B8CFF" style="left:23%; top:46%;">
-      <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research & flows" draggable="false">
-      <figcaption><b>Uphold — research & flows</b><span>earlywinter.studio</span></figcaption>
+      <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research and flows" draggable="false">
+      <figcaption><b>Uphold</b><span>research &amp; flows</span></figcaption>
     </figure>
     <figure class="fl" data-t="w2" data-c="#FF9E00" style="left:42%; top:9%; ">
-      <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — worn again, loved harder" draggable="false">
-      <figcaption><b>Revibe — worn again, loved harder</b><span>thrift & ai · nº 02 · 2025</span></figcaption>
+      <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — resale marketplace" draggable="false">
+      <figcaption><b>Revibe</b><span>commerce · nº 02 · 2025</span></figcaption>
     </figure>
     <figure class="fl" data-t="w2" data-c="#FF9E00" style="left:60%; top:40%;">
-      <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — brand & commerce" draggable="false">
-      <figcaption><b>Revibe — brand & commerce</b><span>earlywinter.studio</span></figcaption>
+      <img src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Revibe — brand and commerce" draggable="false">
+      <figcaption><b>Revibe</b><span>brand &amp; commerce</span></figcaption>
     </figure>
     <figure class="fl" data-t="w3" data-c="#2FC97B" style="left:78%; top:12%;">
-      <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — the right people, found" draggable="false">
-      <figcaption><b>Insight — the right people, found</b><span>b2b saas · nº 03 · 2025</span></figcaption>
+      <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research recruiting" draggable="false">
+      <figcaption><b>Insight</b><span>b2b saas · nº 03 · 2025</span></figcaption>
     </figure>
     <figure class="fl" data-t="w3" data-c="#2FC97B" style="left:9%;  top:58%;">
       <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research ops" draggable="false">
-      <figcaption><b>Insight — research ops</b><span>earlywinter.studio</span></figcaption>
+      <figcaption><b>Insight</b><span>research ops</span></figcaption>
     </figure>
     <figure class="fl" data-t="w4" data-c="#9D7BFF" style="left:45%; top:56%;">
-      <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — every vegan’s dream" draggable="false">
-      <figcaption><b>Vejeez! — every vegan’s dream</b><span>marketplace · nº 04 · 2024</span></figcaption>
+      <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — vegan marketplace" draggable="false">
+      <figcaption><b>Vejeez!</b><span>commerce · nº 04 · 2024</span></figcaption>
     </figure>
     <figure class="fl" data-t="w4" data-c="#9D7BFF" style="left:79%; top:54%;">
-      <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand & voice" draggable="false">
-      <figcaption><b>Vejeez! — brand & voice</b><span>earlywinter.studio</span></figcaption>
+      <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand and voice" draggable="false">
+      <figcaption><b>Vejeez!</b><span>brand &amp; voice</span></figcaption>
     </figure>
-    <span class="gv-hint">drag them around · tap to open</span>
+    <span class="gv-hint">drag to move · tap to open</span>
   </section>
 
   <script>

@@ -1,0 +1,89 @@
+{
+  "$description": "Early Winter design language v2 — import via the Tokens Studio for Figma plugin (Import > paste/file). Generates color, type, spacing styles matching DESIGN.md.",
+  "global": {
+    "color": {
+      "page":   { "value": "#FEFEFB", "type": "color", "description": "Default page surface (cream)" },
+      "ink":    { "value": "#15110E", "type": "color", "description": "Emphasis / full-strength text" },
+      "head":   { "value": "#2E2A25", "type": "color", "description": "Display & lead text (warm darkest grey)" },
+      "muted":  { "value": "rgba(21,17,14,0.55)", "type": "color", "description": "Labels, captions" },
+      "line":   { "value": "rgba(21,17,14,0.14)", "type": "color", "description": "Hairlines" },
+      "table":  { "value": "#0B0908", "type": "color", "description": "Dark spreads / video margins" },
+      "onDark": { "value": "rgba(254,254,251,0.80)", "type": "color", "description": "Body text on dark/color pages" },
+      "accent": {
+        "pink":   { "value": "#FF85B0", "type": "color" },
+        "yellow": { "value": "#F5E10A", "type": "color" },
+        "green":  { "value": "#2DF952", "type": "color" },
+        "blue":   { "value": "#DCE8EF", "type": "color" },
+        "scrib":  { "value": "#C8385A", "type": "color", "description": "Caveat margin notes" }
+      }
+    },
+    "fontFamilies": {
+      "sans":   { "value": "Inter", "type": "fontFamilies" },
+      "script": { "value": "Caveat", "type": "fontFamilies" }
+    },
+    "fontWeights": {
+      "regular": { "value": "400", "type": "fontWeights" },
+      "medium":  { "value": "500", "type": "fontWeights" }
+    },
+    "fontSizes": {
+      "display": { "value": "40", "type": "fontSizes", "description": "Section openers only" },
+      "lead":    { "value": "24", "type": "fontSizes", "description": "One opening statement" },
+      "body":    { "value": "18", "type": "fontSizes", "description": "Default — 90% of text" },
+      "caption": { "value": "14", "type": "fontSizes", "description": "Dense / secondary" },
+      "label":   { "value": "12", "type": "fontSizes", "description": "Eyebrows, meta keys (uppercase)" }
+    },
+    "lineHeights": {
+      "display": { "value": "100%", "type": "lineHeights" },
+      "lead":    { "value": "130%", "type": "lineHeights" },
+      "body":    { "value": "155%", "type": "lineHeights" },
+      "caption": { "value": "150%", "type": "lineHeights" },
+      "label":   { "value": "140%", "type": "lineHeights" }
+    },
+    "letterSpacing": {
+      "display": { "value": "-1.5", "type": "letterSpacing" },
+      "lead":    { "value": "-0.2", "type": "letterSpacing" },
+      "body":    { "value": "0", "type": "letterSpacing" },
+      "label":   { "value": "10%", "type": "letterSpacing" }
+    },
+    "spacing": {
+      "1": { "value": "8", "type": "spacing" },
+      "2": { "value": "16", "type": "spacing" },
+      "3": { "value": "24", "type": "spacing" },
+      "4": { "value": "40", "type": "spacing" },
+      "5": { "value": "64", "type": "spacing" }
+    },
+    "grid": {
+      "columns": { "value": "6", "type": "sizing" },
+      "gutter":  { "value": "24", "type": "spacing" },
+      "margin":  { "value": "9%", "type": "spacing", "description": "Per page-half" }
+    },
+    "typography": {
+      "display": {
+        "value": { "fontFamily": "{fontFamilies.sans}", "fontWeight": "{fontWeights.regular}", "fontSize": "{fontSizes.display}", "lineHeight": "{lineHeights.display}", "letterSpacing": "{letterSpacing.display}" },
+        "type": "typography", "description": "Section openers — rare, one per spread"
+      },
+      "lead": {
+        "value": { "fontFamily": "{fontFamilies.sans}", "fontWeight": "{fontWeights.regular}", "fontSize": "{fontSizes.lead}", "lineHeight": "{lineHeights.lead}", "letterSpacing": "{letterSpacing.lead}" },
+        "type": "typography", "description": "Opening statement"
+      },
+      "body": {
+        "value": { "fontFamily": "{fontFamilies.sans}", "fontWeight": "{fontWeights.regular}", "fontSize": "{fontSizes.body}", "lineHeight": "{lineHeights.body}", "letterSpacing": "{letterSpacing.body}" },
+        "type": "typography", "description": "Default voice"
+      },
+      "caption": {
+        "value": { "fontFamily": "{fontFamilies.sans}", "fontWeight": "{fontWeights.regular}", "fontSize": "{fontSizes.caption}", "lineHeight": "{lineHeights.caption}" },
+        "type": "typography", "description": "Dense / secondary text"
+      },
+      "label": {
+        "value": { "fontFamily": "{fontFamilies.sans}", "fontWeight": "{fontWeights.medium}", "fontSize": "{fontSizes.label}", "lineHeight": "{lineHeights.label}", "letterSpacing": "{letterSpacing.label}", "textCase": "uppercase" },
+        "type": "typography", "description": "Eyebrows, running heads, metadata keys"
+      },
+      "note": {
+        "value": { "fontFamily": "{fontFamilies.script}", "fontWeight": "{fontWeights.regular}", "fontSize": "22", "lineHeight": "105%" },
+        "type": "typography", "description": "Handwritten margin note (Caveat) — sparingly"
+      }
+    }
+  },
+  "$themes": [],
+  "$metadata": { "tokenSetOrder": ["global"] }
+}
