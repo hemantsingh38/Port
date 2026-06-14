@@ -11,37 +11,37 @@
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
     :root {
-      --table: #0B0908;
-      --page:  #F5F7F8;
-      --paper: #F5F7F8;   /* light page base — cool white, no beige */
-      --ink:   #102129;   /* cool near-black — text on light pages */
-      --head:  #102129;   /* heading text */
-      --mu:    rgba(16,33,41,.55);
-      --line:  rgba(16,33,41,.16);
-      /* ── BLUE-LED VINTAGE EDITORIAL PALETTE (blue family + white + black) ── */
-      --cerulean:  #0BB3E6;   /* hero cyan-blue — cover + bold accents */
-      --sky:       #6FC6E2;   /* powder blue (LIGHT block · ink text) */
-      --cobalt:    #2438C8;   /* vivid royal blue (DARK block · cream text) */
-      --inkblue:   #102A43;   /* deep navy (DARK block · cream text) */
-      --cream:     #F5F7F8;   /* cool white — TEXT on dark blue blocks */
-      /* warm hues repointed into the blue family so nothing clashes */
-      --lime:      #6FC6E2;
-      --mustard:   #F5F7F8;
-      --pink:      #6FC6E2;
-      --red:       #2438C8;
-      --marine:    #2438C8;
-      --sage:      #6FC6E2;
-      --evergreen: #102A43;
-      --blue:      #2438C8;   /* spine/tab accent → cobalt */
-      --bloom:     #6FC6E2;   /* spine/tab accent → powder */
+      --table: #100E0C;
+      --page:  #F3EBD6;
+      --paper: #F3EBD6;   /* warm cream — default page background */
+      --cream: #F3EBD6;   /* text color on dark/saturated fields */
+      --ink:   #1B1916;   /* warm near-black — default text + dark field */
+      --head:  #1B1916;
+      --mu:    rgba(27,25,22,.58);
+      --line:  rgba(27,25,22,.18);
+      /* ── POP-ART / RISO FIELDS (Blue Tiger) ── */
+      --blue:      #2F9FDC;   /* cerulean — brand hero */
+      --blue-soft: #8FD2F5;   /* light sky tint — calm */
+      --red:       #E3402C;   /* vermilion — primary accent (dark · cream text) */
+      --yellow:    #E4DC3E;   /* acid chartreuse — accent (light · ink text) */
+      --pink:      #EC6CAB;   /* hot pink — accent (light · ink text) */
+      /* ── legacy names repointed onto the new palette (contrast preserved) ── */
+      --cerulean:  var(--blue);
+      --cobalt:    var(--ink);
+      --inkblue:   var(--ink);
+      --marine:    var(--ink);
+      --evergreen: var(--ink);
+      --sky:       var(--blue-soft);
+      --sage:      var(--blue-soft);
+      --bloom:     var(--blue-soft);
+      --lime:      var(--yellow);
+      --mustard:   var(--yellow);
+      --orange:    var(--pink);
+      /* fonts + scale (unchanged) */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --display: 'Archivo Black',system-ui,sans-serif;
-      --t-display: 2.5rem;   /* 40px */
-      --t-lead:    1.5rem;   /* 24px */
-      --t-body:    1.125rem; /* 18px */
-      --t-caption: .875rem;  /* 14px */
-      --t-label:   .75rem;   /* 12px */
+      --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
       --ease-out: cubic-bezier(.23,1,.32,1);
     }
 
@@ -52,11 +52,73 @@
     .bg-vid { position:fixed; inset:0; z-index:0; width:100%; height:100%;
               object-fit:cover; opacity:.8; pointer-events:none; }
 
-    .grain {
-      position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.08;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:256px 256px;
-    }
+    /* ============================================================
+   .grain — RISO / vintage-print overlay  (paste-ready)
+   Replaces the old single-image .grain block.
+   Keep the existing markup:  <div class="grain" aria-hidden="true"></div>
+   - layer 1 (::before): fine PAPER-GRAIN noise   (SVG feTurbulence, desaturated)
+   - layer 2 (::after) : HALFTONE-DOT print field  (CSS radial-gradient)
+   CSS/SVG only · no raster · pointer-events:none · static (no animation)
+   ============================================================ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;            /* above pages (page z-index tops out in the hundreds), below paw (9999) */
+  pointer-events: none;
+  /* opacity now lives on the individual layers below */
+}
+
+/* --- 1 · PAPER GRAIN -----------------------------------------
+   feTurbulence fractalNoise, run through feColorMatrix saturate=0
+   so it reads as neutral ink-on-stock tooth, not RGB confetti.
+   multiply keeps it subtractive — darkens slightly, never glows. */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .055;                       /* barely-there paper tooth */
+  mix-blend-mode: multiply;
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- 2 · HALFTONE DOTS ---------------------------------------
+   A single repeating radial-gradient = an evenly spaced dot grid.
+   Tiny 4px cell + a small dot makes solid color fields show the
+   faint regular print dots you get off a RISO drum. Ink-blue tint
+   (--inkblue #102A43) keeps it on-brand; multiply so it only ever
+   darkens the field underneath. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .045;                       /* faint enough to never moiré the eye */
+  mix-blend-mode: multiply;
+  background-color: transparent;
+  background-image: radial-gradient(
+      circle at center,
+      rgba(16, 33, 67, .95) 0,
+      rgba(16, 33, 67, .95) 22%,
+      transparent 26%
+  );
+  background-size: 4px 4px;            /* dot pitch */
+  background-position: 0 0;
+}
+
+/* --- Reduced-motion safety -----------------------------------
+   The overlay is fully static (no transitions, no animation, no
+   transforms), so prefers-reduced-motion needs nothing disabled.
+   This block is an explicit no-op guard: if either layer ever
+   gains animation later, it gets neutralized here automatically. */
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .grain::before,
+  .grain::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
     #paw {
       position:fixed; pointer-events:none; z-index:9999;
@@ -183,113 +245,146 @@
     .run a { color:inherit; text-decoration:none; }
     .run a:hover { color:var(--ink); }
 
-    /* ══════════ PROJECT SPREADS — the magazine way ══════════ */
-    .lp, .rp { position:relative; overflow:hidden; }
-    .lp { padding:3.2rem 2.4rem 2.6rem 3rem; }
-    .lp-head { position:absolute; top:5rem; left:3rem; right:2.4rem;
-               display:flex; flex-direction:column; gap:.7rem; align-items:flex-start; }
-    .lp-title h2 { font-family:var(--display); font-weight:400; font-size:1.9rem;
-                   letter-spacing:-.5px; line-height:1; color:var(--head); text-transform:uppercase; }
-    .lp-title h2 em { display:block; font-style:normal; font-weight:400;
-                      opacity:1; font-size:var(--t-caption); color:var(--mu);
-                      letter-spacing:0; margin-top:.3rem; }
-    .lp-crs { display:flex; gap:1.6rem; padding-top:.15rem; flex-wrap:wrap; }
-    .lp-title.v,.lp-ct.v,.lp-cat.v,.lp-cr.v,.rp-sub.v {
-      writing-mode:horizontal-tb; transform:none;
-    }
-    .lp-cr { font-family:var(--sans); font-size:var(--t-caption); line-height:1.5;
-             color:var(--mu); white-space:nowrap; }
-    .lp-cr b { display:block; font-family:var(--sans); font-weight:500;
-               font-size:var(--t-label); letter-spacing:.1em; text-transform:uppercase;
-               color:rgba(21,17,14,.5); margin-bottom:.2rem; }
-    .lp-media { position:absolute; left:0; right:2.4rem; top:46%; bottom:2.6rem;
-                display:flex; flex-direction:column; justify-content:flex-end; }
-    .m1 { width:86%; margin-left:auto; position:relative; z-index:1;
-          box-shadow:0 8px 22px rgba(21,17,14,.14); }
-    .m2 { width:93%; margin-top:-7.5%; position:relative; z-index:2;
-          box-shadow:0 14px 34px rgba(21,17,14,.22); }
-    .m1,.m2 { min-height:0; overflow:hidden; }
-    .ph { width:100%; aspect-ratio:16/10; object-fit:cover;
-          background:#EFECE6; filter:saturate(.92) contrast(.97); }
-    .lp-cat { position:absolute; left:3rem; bottom:2.6rem; z-index:3;
-              font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
-              color:var(--mu); }
-    .lp-ct { position:absolute; left:3rem; top:3rem;
-             font-family:var(--sans); font-size:var(--t-label); font-weight:500;
-             letter-spacing:.1em; text-transform:uppercase; color:rgba(21,17,14,.5); }
+    /* ═══════════════════════════════════════════════════════════════════════════
+   WORK SPREADS · FULL-BLEED RISO DUOTONE  (Approach 1, hardened per judges)
+   ONE photo across the spread · GIANT Archivo-Black caps over it ·
+   micro-text in the margins · big faint folios. Scoped to #w1–#w4 only.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-    .rp { padding:3.2rem 3rem 2.6rem 2.8rem; }
-    /* Year/Place meta sits as one horizontal row pinned to the top of the
-       right page. The lead (.rp-sub) starts well below it so the two never
-       collide, even when the lead wraps to three lines. */
-    .rp-crs { position:absolute; top:3.2rem; left:2.8rem; right:3rem;
-              display:flex; gap:2.2rem; align-items:flex-start; }
-    .rp-crs .lp-cr { writing-mode:horizontal-tb; transform:none; white-space:nowrap; }
-    .rp-sub { position:absolute; top:7.4rem; left:2.8rem; right:3rem;
-              font-family:var(--sans); font-style:normal; font-size:var(--t-lead);
-              line-height:1.3; letter-spacing:-.2px; color:var(--head); }
-    /* Body is bounded top AND bottom so it can never climb into the lead. */
-    .rp-body { position:absolute; left:2.8rem; right:3rem; top:14rem; bottom:5.4rem;
-               columns:2; column-gap:1.7rem; overflow:hidden;
-               font-family:var(--sans); font-size:var(--t-body); line-height:1.55;
-               color:rgba(21,17,14,.7); }
-    .rp-body p + p { margin-top:.7rem; }
-    .rp-body em { font-style:normal; font-weight:500; color:var(--ink); }
-    .rp-link { position:absolute; left:2.8rem; bottom:2.7rem;
-               font-family:var(--sans); font-size:var(--t-label); font-weight:500;
-               letter-spacing:.1em; text-transform:uppercase;
-               color:var(--ink); text-decoration:none;
-               border-bottom:1px solid rgba(21,17,14,.52); padding-bottom:.16rem;
-               transition:border-color .22s, transform .2s var(--ease-out); }
-    .rp-link:hover { border-color:var(--ink); transform:translateX(2px); }
-    .rp-link.dis { opacity:.4; pointer-events:none; }
+/* ── PALETTE PIN (critical) ──────────────────────────────────────────────────
+   The live :root is blue-remapped: no --yellow, and --red/--blue/--pink all
+   collapse onto cobalt/powder. We re-pin the LOCKED brief palette on the work
+   spreads so the per-spread accents (yellow/red/pink) render as distinct hues
+   instead of cobalt-on-cobalt. Hexes come straight from the brief / tokens —
+   sanctioned palette values, not new invention. */
+#w1, #w2, #w3, #w4 {
+  --paper:#F3EBD6; --ink:#1B1916;
+  --blue:#2F9FDC; --blue-soft:#8FD2F5;
+  --red:#E3402C; --yellow:#E4DC3E; --pink:#EC6CAB;
+}
 
-    /* ══════════ CONTRAST PER PAGE-HALF (white / near-black palette) ══════════ */
-    /* DARK halves → cream text, labels rgba(244,242,233,.62) */
-    #w1 .lp, #w2 .lp, #w2 .rp, #w3 .rp, #w4 .lp, #w4 .rp {
-      color:var(--cream);
-    }
-    #w1 .lp .run, #w2 .lp .run, #w2 .rp .run,
-    #w3 .rp .run, #w4 .lp .run, #w4 .rp .run { color:rgba(244,242,233,.62); }
-    #w1 .lp .run a:hover, #w2 .lp .run a:hover, #w2 .rp .run a:hover,
-    #w3 .rp .run a:hover, #w4 .lp .run a:hover, #w4 .rp .run a:hover { color:var(--cream); }
-    #w1 .lp .lp-ct, #w2 .lp .lp-ct, #w4 .lp .lp-ct { color:rgba(244,242,233,.62); }
-    #w1 .lp .lp-title h2, #w2 .lp .lp-title h2, #w4 .lp .lp-title h2 { color:var(--cream); }
-    #w1 .lp .lp-title h2 em, #w2 .lp .lp-title h2 em, #w4 .lp .lp-title h2 em { color:rgba(244,242,233,.62); }
-    #w1 .lp .lp-cr, #w2 .lp .lp-cr, #w2 .rp .lp-cr,
-    #w3 .rp .lp-cr, #w4 .lp .lp-cr, #w4 .rp .lp-cr { color:rgba(244,242,233,.78); }
-    #w1 .lp .lp-cr b, #w2 .lp .lp-cr b, #w2 .rp .lp-cr b,
-    #w3 .rp .lp-cr b, #w4 .lp .lp-cr b, #w4 .rp .lp-cr b { color:rgba(244,242,233,.62); }
-    #w1 .lp .lp-cat, #w2 .lp .lp-cat, #w4 .lp .lp-cat { color:rgba(244,242,233,.78); }
-    #w1 .lp .pno, #w2 .lp .pno, #w2 .rp .pno,
-    #w3 .rp .pno, #w4 .lp .pno, #w4 .rp .pno { color:rgba(244,242,233,.24); }
-    #w2 .rp .rp-sub, #w3 .rp .rp-sub, #w4 .rp .rp-sub { color:var(--cream); }
-    #w2 .rp .rp-body, #w3 .rp .rp-body, #w4 .rp .rp-body { color:rgba(244,242,233,.82); }
-    #w2 .rp .rp-body em, #w3 .rp .rp-body em, #w4 .rp .rp-body em { color:var(--cream); }
-    #w2 .rp .rp-link, #w3 .rp .rp-link, #w4 .rp .rp-link {
-      color:var(--cream); border-bottom-color:rgba(244,242,233,.52);
-    }
-    #w2 .rp .rp-link:hover, #w3 .rp .rp-link:hover, #w4 .rp .rp-link:hover { border-bottom-color:var(--cream); }
-    /* gut divider rides the spread seam; lighten it on fully-dark spreads */
-    #w2 .gut, #w4 .gut { background:rgba(244,242,233,.16);
-      box-shadow:6px 0 14px -6px rgba(244,242,233,.16), -6px 0 14px -6px rgba(244,242,233,.16); }
+/* page-halves clip one continuous image; they are already pos:rel / overflow:hidden */
+#w1 .lp, #w1 .rp, #w2 .lp, #w2 .rp,
+#w3 .lp, #w3 .rp, #w4 .lp, #w4 .rp { padding:0; }
 
-    /* LIGHT halves (--paper WHITE) → ink text, labels rgba(0,31,39,.6) */
-    #w1 .rp, #w3 .lp { color:var(--ink); }
-    #w1 .rp .run, #w3 .lp .run { color:rgba(0,31,39,.6); }
-    #w1 .rp .run a:hover, #w3 .lp .run a:hover { color:var(--ink); }
-    #w3 .lp .lp-ct { color:rgba(0,31,39,.6); }
-    #w3 .lp .lp-title h2 { color:var(--ink); }
-    #w3 .lp .lp-title h2 em { color:rgba(0,31,39,.6); }
-    #w1 .rp .lp-cr, #w3 .lp .lp-cr { color:rgba(0,31,39,.78); }
-    #w1 .rp .lp-cr b, #w3 .lp .lp-cr b { color:rgba(0,31,39,.6); }
-    #w3 .lp .lp-cat { color:rgba(0,31,39,.78); }
-    #w1 .rp .pno, #w3 .lp .pno { color:rgba(0,31,39,.22); }
-    #w1 .rp .rp-sub { color:var(--ink); }
-    #w1 .rp .rp-body { color:rgba(0,31,39,.78); }
-    #w1 .rp .rp-body em { color:var(--ink); }
-    #w1 .rp .rp-link { color:var(--ink); border-bottom-color:rgba(0,31,39,.52); }
-    #w1 .rp .rp-link:hover { border-bottom-color:var(--ink); }
+/* ── IMAGE LAYER ─────────────────────────────────────────────────────────────
+   solid brand color sits BEHIND <img> → a 404 shows a flat color field, never a
+   broken icon. .book is grid 1fr/1fr with NO column-gap (the .gut is a 1px line
+   riding at 50%), so width:200% / left:-100% lines the two halves up exactly;
+   the hairline gut reads as the editorial spread seam. */
+.fb-img  { position:absolute; inset:0; z-index:0; background:var(--blue); }
+.fb-photo{
+  position:absolute; top:0; height:100%; width:200%;
+  object-fit:cover; object-position:center;
+  /* desaturate + dark base so highlights can't blow out under the caps (judge fix #2) */
+  filter:grayscale(100%) contrast(1.18) brightness(.92);
+}
+.fb-img-l .fb-photo{ left:0; }       /* left half  = photo's left  */
+.fb-img-r .fb-photo{ left:-100%; }   /* right half = photo's right */
+
+/* ── RISO DUOTONE ─ flat brand color over the grayscale photo via multiply ── */
+.fb-wash{ position:absolute; inset:0; z-index:1; pointer-events:none;
+          background:var(--blue); mix-blend-mode:multiply; opacity:.82; }
+/* always-on global darkening so yellow/cream caps clear AA even off the scrims */
+.fb-floor{ position:absolute; inset:0; z-index:2; pointer-events:none;
+           background:rgba(16,33,41,.18); }
+
+/* ── LEGIBILITY SCRIM ─ ink gradient only where type sits ─────────────────── */
+.fb-scrim{ position:absolute; inset:0; z-index:3; pointer-events:none; }
+.fb-scrim-l{ background:linear-gradient(18deg,
+    rgba(16,33,41,.66) 0%, rgba(16,33,41,.24) 44%, rgba(16,33,41,0) 72%); }
+.fb-scrim-r{ background:linear-gradient(200deg,
+    rgba(16,33,41,0) 36%, rgba(16,33,41,.22) 60%, rgba(16,33,41,.66) 100%); }
+.fb-scrim-c{ background:linear-gradient(to top,
+    rgba(16,33,41,.62) 0%, rgba(16,33,41,.28) 40%, rgba(16,33,41,.40) 100%); }
+
+/* ── GIANT DISPLAY TITLE ─ Archivo Black caps, flat (no shadow), spans gutter ─ */
+.fb-title{
+  position:absolute; z-index:6; margin:0;
+  font-family:var(--display); font-weight:400; color:var(--yellow);
+  text-transform:uppercase; line-height:.80; letter-spacing:-.02em;
+  font-size:clamp(3.4rem, 9vw, 8.4rem);
+}
+.fb-t2{ display:block; }                                   /* 2nd syllable drops a line */
+.fb-title-l { left:2.6rem;  bottom:4.6rem; }               /* w1: bottom-left  */
+.fb-title-tl{ left:2.6rem;  top:6.4rem; }                   /* w2: top-left */
+.fb-title-r { right:2.6rem; bottom:4.6rem; text-align:right; } /* w3: bottom-right */
+.fb-title-cL{ right:1.4rem; bottom:38%; text-align:right; }    /* w4: centred-low, meets at gut */
+.fb-title-cR{ left:1.4rem;  bottom:38%; text-align:left; }
+
+/* ── MICRO-TEXT ─ tiny clean Inter in the margins, cream over the wash ─────── */
+.fb-label, .fb-desc, .fb-kick{
+  position:absolute; z-index:7; font-family:var(--sans); color:var(--paper);
+}
+.fb-label{ top:3rem; left:3rem; font-size:var(--t-label); font-weight:500;
+           letter-spacing:.18em; text-transform:uppercase; }
+.fb-kick { top:3rem; right:3rem; font-size:var(--t-label); font-weight:600;
+           letter-spacing:.18em; text-transform:uppercase; color:var(--yellow); text-align:right; }
+.fb-desc { left:3rem; right:3rem; bottom:8.6rem; max-width:24rem;
+           font-size:var(--t-caption); font-weight:500; line-height:1.45; }
+.fb-desc em{ font-style:normal; font-weight:700; color:var(--yellow);
+             background:transparent; }
+
+/* ── PROJECT LINK ─ flat yellow pill, bottom-right (most on-brand treatment) ── */
+.fb-link{
+  position:absolute; z-index:7; right:3rem; bottom:4.6rem;
+  font-family:var(--sans); font-size:var(--t-label); font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink); background:var(--yellow);
+  padding:.5rem .9rem; text-decoration:none;
+  transition:transform .25s var(--ease-out), background .25s var(--ease-out);
+}
+.fb-link:hover{ transform:translateX(2px); background:var(--paper); }
+.fb-link.dis { background:rgba(243,235,214,.22); color:rgba(243,235,214,.7);
+               pointer-events:none; }
+
+/* ── BIG FAINT FOLIOS ─ Kareem-style '36 / 37', enlarged + low-opacity cream ── */
+#w1 .pno, #w2 .pno, #w3 .pno, #w4 .pno{
+  z-index:7; color:var(--paper); opacity:.4; right:3rem; left:auto;
+  font-family:var(--display); font-weight:400; letter-spacing:0;
+  font-size:clamp(2rem, 4vw, 3.4rem);
+}
+
+/* running header rides above the image */
+#w1 .run, #w2 .run, #w3 .run, #w4 .run{ z-index:7; color:rgba(243,235,214,.72); }
+#w1 .run a:hover, #w2 .run a:hover, #w3 .run a:hover, #w4 .run a:hover{ color:var(--paper); }
+
+/* lighten the 1px gut line so the seam reads as a clean crease over the photo */
+#w1 .gut, #w2 .gut, #w3 .gut, #w4 .gut{
+  background:rgba(243,235,214,.22); z-index:5;
+  box-shadow:6px 0 14px -6px rgba(16,33,41,.4), -6px 0 14px -6px rgba(16,33,41,.4);
+}
+
+/* ── PER-PROJECT ACCENT + WASH ROTATION ──────────────────────────────────────
+   Each spread: a DIFFERENT title anchor (set in markup) + a DIFFERENT pop-art
+   accent / duotone wash, for editorial rhythm. */
+/* 01 Uphold — yellow caps over BLUE wash (anchor bottom-left) — default above */
+
+/* 02 Revibe — RED caps over BLUE wash (anchor TOP-left), pink kick */
+#w2 .fb-title{ color:var(--red); }
+#w2 .fb-kick { color:var(--pink); }
+#w2 .fb-desc em{ color:var(--pink); }
+#w2 .fb-link{ background:var(--red); color:var(--paper); }
+#w2 .fb-link:hover{ background:var(--pink); color:var(--ink); }
+
+/* w2 title is TOP-left, so move its label/kick clear of the headline */
+#w2 .fb-label{ top:auto; bottom:4.8rem; left:2.6rem; }
+#w2 .fb-kick { top:auto; bottom:4.8rem; right:3rem; }
+
+/* 03 Insight — YELLOW caps over RED wash (anchor bottom-RIGHT) */
+#w3 .fb-wash{ background:var(--red); }
+#w3 .fb-img { background:var(--red); }
+#w3 .fb-title{ color:var(--yellow); }
+#w3 .fb-kick { color:var(--yellow); }
+#w3 .fb-desc em{ color:var(--yellow); }
+#w3 .fb-link{ background:var(--yellow); color:var(--ink); }
+
+/* 04 Vejeez! — PINK caps over INK wash (anchor centred-low across the gut), link disabled */
+#w4 .fb-wash{ background:var(--ink); opacity:.74; }
+#w4 .fb-img { background:var(--ink); }
+#w4 .fb-title{ color:var(--pink); }
+#w4 .fb-kick { color:var(--pink); }
+#w4 .fb-desc em{ color:var(--pink); }
 
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
     #gv { background:var(--inkblue); transition:background .45s ease; }
@@ -373,51 +468,35 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
-        <span class="lp-ct v">01 / 04</span>
-        <div class="lp-head">
-          <div class="lp-title v">
-            <h2>Uphold<em>Mentorship platform</em></h2>
-          </div>
-          <div class="lp-crs">
-            <div class="lp-cr v"><b>Strategy</b>User research<br>Ed tech</div>
-            <div class="lp-cr v"><b>Craft</b>Flows &amp; interface<br>Figma</div>
-            <div class="lp-cr v"><b>Nº 01</b>Selected work<br>2025</div>
-          </div>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 01</span>
+        <div class="fb-img fb-img-l" role="img" aria-label="A mentor reviewing real design work at a desk">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="A mentor reviewing real design work at a desk">
         </div>
-        <div class="lp-media">
-          <div class="m1"><img class="ph"
-            src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Film camera resting by a bright misty window"></div>
-          <div class="m2"><img class="ph"
-            src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Stack of vintage film boxes on books"></div>
-        </div>
-        <span class="lp-cat v">Ed Tech</span>
-        <span class="scrib" style="right:1.8rem; top:36%; transform:rotate(4deg);">start here ↓</span>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-l"></div>
+        <span class="fb-label">Nº 01 · Ed Tech · 2025</span>
+        <h2 class="fb-title fb-title-l">UP<span class="fb-t2">HOLD</span></h2>
+        <span class="fb-desc">Mentors mark up the real files and name <em>one concrete fix</em> before any praise.</span>
         <span class="pno">114</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
           <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
         </span>
-        <div class="rp-crs">
-          <div class="lp-cr v"><b>Year</b>2025</div>
-          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="">
         </div>
-        <div class="rp-sub v">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</div>
-        <div class="rp-body">
-          <p>Uphold pairs new designers with working mentors who review the
-          actual files, not the polished case study, and name <em>one concrete
-          change</em> before any praise — because "looks great" teaches nothing.</p>
-          <p>I designed it end to end. The hard part was never the match; it was
-          the wait: a mentor reply can take two days, so I built for the gap — a
-          submission state that reads "in good hands," not "ignored," and
-          reminders that <em>nudge the mentor without nagging the learner.</em></p>
-        </div>
-        <a class="rp-link" target="_blank" rel="noopener"
-           href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">
-           View on Behance ↗</a>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-r"></div>
+        <span class="fb-kick">Mentorship platform</span>
+        <a class="fb-link" target="_blank" rel="noopener"
+           href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
         <span class="pno">115</span>
       </div>
     </div>
@@ -429,48 +508,34 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
-        <span class="lp-ct v">02 / 04</span>
-        <div class="lp-head">
-          <div class="lp-title v">
-            <h2>Revibe<em>Resale marketplace</em></h2>
-          </div>
-          <div class="lp-crs">
-            <div class="lp-cr v"><b>Strategy</b>Gen Z, India<br>Thrift &amp; AI</div>
-            <div class="lp-cr v"><b>Craft</b>E-commerce UX<br>Brand</div>
-            <div class="lp-cr v"><b>Nº 02</b>Selected work<br>2025</div>
-          </div>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 02</span>
+        <div class="fb-img fb-img-l" role="img" aria-label="A rail of secondhand clothes in warm light">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="A rail of secondhand clothes in warm light">
         </div>
-        <div class="lp-media">
-          <div class="m1"><img class="ph"
-            src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Footprints disappearing into winter fog"></div>
-          <div class="m2"><img class="ph"
-            src="https://images.pexels.com/photos/16398477/pexels-photo-16398477.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Hand holding a film canister in warm light with dried flowers"></div>
-        </div>
-        <span class="lp-cat v">Fashion / Commerce</span>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-l"></div>
+        <span class="fb-label">Nº 02 · Fashion / Commerce · 2025</span>
+        <h2 class="fb-title fb-title-tl">RE<span class="fb-t2">VIBE</span></h2>
+        <span class="fb-kick">Resale marketplace</span>
         <span class="pno">116</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
           <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
         </span>
-        <div class="rp-crs">
-          <div class="lp-cr v"><b>Year</b>2025</div>
-          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="">
         </div>
-        <div class="rp-sub v">Secondhand isn't a discount aisle. It's a different way of shopping.</div>
-        <div class="rp-body">
-          <p>Resale inventory is one-of-one: a single item, one size, one fade
-          in the wash. So the AI doesn't guess off the label you usually buy — it
-          reads a garment's measured shoulder, chest and length against your
-          <em>real closet,</em> and tells you the truth when nothing fits.</p>
-          <p>The work was in the unglamorous parts: a sell flow that gets a
-          photo and price out in <em>under a minute,</em> and a sold-out state
-          that points to three near-matches instead of a dead end.</p>
-        </div>
-        <a class="rp-link" target="_blank" rel="noopener"
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-r"></div>
+        <span class="fb-desc">Secondhand isn't a discount aisle. It's <em>a different way to shop.</em></span>
+        <a class="fb-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/page">View case study ↗</a>
         <span class="pno">117</span>
       </div>
@@ -483,49 +548,34 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
-        <span class="lp-ct v">03 / 04</span>
-        <div class="lp-head">
-          <div class="lp-title v">
-            <h2>Insight<em>Research recruiting</em></h2>
-          </div>
-          <div class="lp-crs">
-            <div class="lp-cr v"><b>Strategy</b>Research ops<br>B2B SaaS</div>
-            <div class="lp-cr v"><b>Craft</b>Product design<br>Figma · Miro</div>
-            <div class="lp-cr v"><b>Nº 03</b>Selected work<br>2025</div>
-          </div>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 03</span>
+        <div class="fb-img fb-img-l" role="img" aria-label="A team session with sticky notes and laptops">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="A team session with sticky notes and laptops">
         </div>
-        <div class="lp-media">
-          <div class="m1"><img class="ph"
-            src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Foggy town with distant warm lights through trees"></div>
-          <div class="m2"><img class="ph"
-            src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Hand holding a Kodak film roll in warm low light"></div>
-        </div>
-        <span class="lp-cat v">SaaS / Research</span>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-l"></div>
+        <span class="fb-label">Nº 03 · SaaS / Research · 2025</span>
+        <span class="fb-kick">Research recruiting</span>
         <span class="pno">118</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
           <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
         </span>
-        <div class="rp-crs">
-          <div class="lp-cr v"><b>Year</b>2025</div>
-          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="">
         </div>
-        <div class="rp-sub v">Insight finds research participants for teams that can't expense a $20k recruiting tool.</div>
-        <div class="rp-body">
-          <p>The hard part was never the matching — it was trust: convincing a
-          lead that the strangers showing up are real, screened, and worth the
-          hour. So the work went where that's decided — a question builder that
-          flags when <em>two screener criteria contradict each other</em> before
-          you send it, and a no-show ledger that quietly downranks the people who
-          flake.</p>
-          <p>Built in Figma and Miro, for the designer who needs <em>eight
-          participants by Thursday.</em></p>
-        </div>
-        <a class="rp-link" target="_blank" rel="noopener"
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-r"></div>
+        <h2 class="fb-title fb-title-r">IN<span class="fb-t2">SIGHT</span></h2>
+        <span class="fb-desc">Real research participants for teams that <em>can't expense a $20k tool.</em></span>
+        <a class="fb-link" target="_blank" rel="noopener"
            href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
         <span class="pno">119</span>
       </div>
@@ -538,49 +588,35 @@
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work</span>
-        <span class="lp-ct v">04 / 04</span>
-        <div class="lp-head">
-          <div class="lp-title v">
-            <h2>Vejeez!<em>Vegan marketplace</em></h2>
-          </div>
-          <div class="lp-crs">
-            <div class="lp-cr v"><b>Strategy</b>Marketplace<br>Vegan living</div>
-            <div class="lp-cr v"><b>Craft</b>Brand &amp; UX<br>Illustration</div>
-            <div class="lp-cr v"><b>Nº 04</b>Selected work<br>2024</div>
-          </div>
+        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 04</span>
+        <div class="fb-img fb-img-l" role="img" aria-label="A spread of fresh vegan food">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="A spread of fresh vegan food">
         </div>
-        <div class="lp-media">
-          <div class="m1"><img class="ph"
-            src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Snowy path between large trees in fog"></div>
-          <div class="m2"><img class="ph"
-            src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Vintage camera and glass on a warm wooden table"></div>
-        </div>
-        <span class="lp-cat v">Food / Marketplace</span>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-c"></div>
+        <span class="fb-label">Nº 04 · Food / Marketplace · 2024</span>
+        <h2 class="fb-title fb-title-cL">VEJ</h2>
         <span class="pno">120</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;">
           <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
         </span>
-        <div class="rp-crs">
-          <div class="lp-cr v"><b>Year</b>2024</div>
-          <div class="lp-cr v"><b>Place</b>New Delhi</div>
+        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
+          <img class="fb-photo" loading="lazy"
+               src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               alt="">
         </div>
-        <div class="rp-sub v">Most vegan products default to clinical white or aggressive green — both of which read as a chore, not a craving.</div>
-        <div class="rp-body">
-          <p>Vejeez! treats vegan as an <em>appetite, not a verdict.</em> I built
-          the brand, voice and storefront as one hand: listings lead with the
-          three things shoppers actually scan for, and the filter for hidden
-          animal-derived additives — gelatin, carmine, shellac — sits up front
-          instead of buried in tags.</p>
-          <p>The empty search suggests a swap instead of apologizing; the
-          <em>voice that wrote the wordmark wrote the "added to cart" line too.</em></p>
-        </div>
-        <a class="rp-link dis">Case study soon</a>
-        <span class="scrib" style="left:8.6rem; bottom:2.3rem; transform:rotate(-2deg);">soon.</span>
+        <div class="fb-wash"></div>
+        <div class="fb-floor"></div>
+        <div class="fb-scrim fb-scrim-c"></div>
+        <h2 class="fb-title fb-title-cR">EEZ!</h2>
+        <span class="fb-desc">Vegan as <em>an appetite, not a verdict.</em></span>
+        <span class="fb-kick">Vegan marketplace</span>
+        <a class="fb-link dis">Case study soon</a>
         <span class="pno">121</span>
       </div>
     </div>

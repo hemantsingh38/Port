@@ -11,34 +11,38 @@
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
     :root {
-      --ease-out: cubic-bezier(.23,1,.32,1);
-      --table: #0B0908;
-      --page:  #F5F7F8;
-      --paper: #F5F7F8;   /* light page base — cool white, no beige */
-      --ink:   #102129;   /* cool near-black — text on light pages */
-      --head:  #102129;   /* heading text on light pages */
-      --mu:    rgba(16,33,41,.55);
-      --line:  rgba(16,33,41,.16);
-      /* ── BLUE-LED VINTAGE EDITORIAL PALETTE (blue family + white + black) ── */
-      --cerulean:  #0BB3E6;   /* hero cyan-blue — cover + bold accents */
-      --sky:       #6FC6E2;   /* powder blue (LIGHT block · ink text) */
-      --cobalt:    #2438C8;   /* vivid royal blue (DARK block · cream text) */
-      --inkblue:   #102A43;   /* deep navy (DARK block · cream text) */
-      --cream:     #F5F7F8;   /* cool white — TEXT on dark blue blocks */
-      /* warm hues repointed into the blue family so nothing clashes */
-      --lime:      #6FC6E2;
-      --mustard:   #F5F7F8;
-      --pink:      #6FC6E2;
-      --red:       #2438C8;
-      --marine:    #2438C8;
-      --sage:      #6FC6E2;
-      --evergreen: #102A43;
-      --blue:      #2438C8;   /* spine/tab accent → cobalt */
-      --bloom:     #6FC6E2;   /* spine/tab accent → powder */
+      --table: #100E0C;
+      --page:  #F3EBD6;
+      --paper: #F3EBD6;   /* warm cream — default page background */
+      --cream: #F3EBD6;   /* text color on dark/saturated fields */
+      --ink:   #1B1916;   /* warm near-black — default text + dark field */
+      --head:  #1B1916;
+      --mu:    rgba(27,25,22,.58);
+      --line:  rgba(27,25,22,.18);
+      /* ── POP-ART / RISO FIELDS (Blue Tiger) ── */
+      --blue:      #2F9FDC;   /* cerulean — brand hero */
+      --blue-soft: #8FD2F5;   /* light sky tint — calm */
+      --red:       #E3402C;   /* vermilion — primary accent (dark · cream text) */
+      --yellow:    #E4DC3E;   /* acid chartreuse — accent (light · ink text) */
+      --pink:      #EC6CAB;   /* hot pink — accent (light · ink text) */
+      /* ── legacy names repointed onto the new palette (contrast preserved) ── */
+      --cerulean:  var(--blue);
+      --cobalt:    var(--ink);
+      --inkblue:   var(--ink);
+      --marine:    var(--ink);
+      --evergreen: var(--ink);
+      --sky:       var(--blue-soft);
+      --sage:      var(--blue-soft);
+      --bloom:     var(--blue-soft);
+      --lime:      var(--yellow);
+      --mustard:   var(--yellow);
+      --orange:    var(--pink);
+      /* fonts + scale (unchanged) */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --display: 'Archivo Black',system-ui,sans-serif;
       --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
+      --ease-out: cubic-bezier(.23,1,.32,1);
     }
 
     html,body { overflow:hidden; height:100%; }
@@ -48,11 +52,73 @@
     .bg-vid { position:fixed; inset:0; z-index:0; width:100%; height:100%;
               object-fit:cover; opacity:.8; pointer-events:none; }
 
-    .grain {
-      position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.08;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:256px 256px;
-    }
+    /* ============================================================
+   .grain — RISO / vintage-print overlay  (paste-ready)
+   Replaces the old single-image .grain block.
+   Keep the existing markup:  <div class="grain" aria-hidden="true"></div>
+   - layer 1 (::before): fine PAPER-GRAIN noise   (SVG feTurbulence, desaturated)
+   - layer 2 (::after) : HALFTONE-DOT print field  (CSS radial-gradient)
+   CSS/SVG only · no raster · pointer-events:none · static (no animation)
+   ============================================================ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;            /* above pages (page z-index tops out in the hundreds), below paw (9999) */
+  pointer-events: none;
+  /* opacity now lives on the individual layers below */
+}
+
+/* --- 1 · PAPER GRAIN -----------------------------------------
+   feTurbulence fractalNoise, run through feColorMatrix saturate=0
+   so it reads as neutral ink-on-stock tooth, not RGB confetti.
+   multiply keeps it subtractive — darkens slightly, never glows. */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .055;                       /* barely-there paper tooth */
+  mix-blend-mode: multiply;
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- 2 · HALFTONE DOTS ---------------------------------------
+   A single repeating radial-gradient = an evenly spaced dot grid.
+   Tiny 4px cell + a small dot makes solid color fields show the
+   faint regular print dots you get off a RISO drum. Ink-blue tint
+   (--inkblue #102A43) keeps it on-brand; multiply so it only ever
+   darkens the field underneath. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .045;                       /* faint enough to never moiré the eye */
+  mix-blend-mode: multiply;
+  background-color: transparent;
+  background-image: radial-gradient(
+      circle at center,
+      rgba(16, 33, 67, .95) 0,
+      rgba(16, 33, 67, .95) 22%,
+      transparent 26%
+  );
+  background-size: 4px 4px;            /* dot pitch */
+  background-position: 0 0;
+}
+
+/* --- Reduced-motion safety -----------------------------------
+   The overlay is fully static (no transitions, no animation, no
+   transforms), so prefers-reduced-motion needs nothing disabled.
+   This block is an explicit no-op guard: if either layer ever
+   gains animation later, it gets neutralized here automatically. */
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .grain::before,
+  .grain::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
     #paw {
       position:fixed; pointer-events:none; z-index:9999;
@@ -73,9 +139,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:#E9C982; }
-    .tab-work  { background:#F08CB4; }
-    .tab-about { background:#2E54C8; }
+    .tab-home  { background:var(--yellow); }
+    .tab-work  { background:var(--pink); }
+    .tab-about { background:var(--blue); }
 
     .pg { position:fixed; inset:0; z-index:1; overflow:hidden; }
     .pg.pg-active { z-index:10; }
@@ -118,9 +184,9 @@
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, #F08CB4 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, #E9C982 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, #2E54C8 6.8px 8px);
+        #FEFEFB 0 1.6px, var(--pink) 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, var(--yellow) 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, var(--blue) 6.8px 8px);
     }
     /* moving shadow on the flipping page half */
     .flip-shade-fwd::after, .flip-shade-back::after {
@@ -141,12 +207,12 @@
     .pp { background:var(--paper); }
 
     /* ── SECTION → COLOR MAP (per-half) ── */
-    #a-me .pp           { background:var(--paper); }    /* white — ink text */
+    #a-me .pp           { background:var(--blue-soft); } /* sky tint — ink text */
     #a-ph .pp           { background:var(--inkblue); }  /* dark  — cream text */
-    #a-wk .pp           { background:var(--paper); }    /* white — ink text */
-    #a-in .pp           { background:var(--inkblue); }  /* dark  — cream text */
+    #a-wk .pp           { background:var(--yellow); }   /* acid chartreuse — ink text */
+    #a-in .pp           { background:var(--blue); }     /* brand blue — ink text (flipped) */
     #a-ta .pp           { background:var(--paper); }    /* white — ink text (right half overridden below) */
-    #a-nn .pp           { background:var(--paper); }    /* white — ink text */
+    #a-nn .pp           { background:var(--paper); }    /* clean cream — ink text (figure grid stays legible) */
 
     /* ── DARK-PAGE TEXT CONTRAST (cream on inkblue) — only #a-ph & #a-in ── */
     #a-ph .pp, #a-in .pp { color:var(--cream); }
@@ -193,6 +259,18 @@
     #a-wk .pp .insp p                                       { color:rgba(0,31,39,.6); }
     #a-wk .pp .insp li                                      { border-bottom-color:rgba(0,31,39,.18); }
     #a-wk .pp .wkb-row b                                    { color:rgba(0,31,39,.55); }
+    /* #a-in FLIPPED -> blue field (light) -> ink text */
+    #a-in .pp { color:var(--ink); }
+    #a-in .pp .hed, #a-in .pp .hed em, #a-in .pp .dek, #a-in .pp .dek em { color:var(--ink); }
+    #a-in .pp .runtop { color:rgba(27,25,22,.5); }
+    #a-in .pp .run, #a-in .pp .run a { color:rgba(27,25,22,.6); }
+    #a-in .pp .run a:hover { color:var(--ink); }
+    #a-in .pp .pno { color:rgba(27,25,22,.22); }
+    #a-in .pp .insp b { color:var(--ink); }
+    #a-in .pp .insp p { color:rgba(27,25,22,.6); }
+    #a-in .pp .insp li { border-bottom-color:rgba(27,25,22,.18); }
+    #a-in .pp .cut figcaption { color:rgba(27,25,22,.6); }
+
     #a-wk .pp .wkb-row span                                 { color:rgba(0,31,39,.7); }
     #a-wk .pp .wkb-row                                      { border-bottom-color:rgba(0,31,39,.18); }
     #a-ta .pp .tst span                                     { color:rgba(0,31,39,.7); }
@@ -564,8 +642,8 @@
         </ul>
         <span class="pno">132</span>
       </div>
-      <div class="pp" style="background:var(--inkblue);">
-        <span class="run" style="right:3rem; color:rgba(244,242,233,.62);"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+      <div class="pp" style="background:var(--blue-soft);">
+        <span class="run" style="right:3rem;"><a href="index.html">Book</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <figure class="cut" style="left:12%; top:14%; width:44%; transform:rotate(-4deg);">
           <img src="https://images.pexels.com/photos/11092278/pexels-photo-11092278.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage film projector">
           <figcaption>the machine</figcaption>
@@ -575,7 +653,7 @@
           <figcaption>the weather</figcaption>
         </figure>
         <span class="scrib" style="left:14%; bottom:10%;">watch more films ↑</span>
-        <span class="pno" style="color:rgba(244,242,233,.28);">133</span>
+        <span class="pno">133</span>
       </div>
     </div>
   </section>
