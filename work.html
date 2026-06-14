@@ -139,9 +139,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:var(--paper); }
-    .tab-work  { background:var(--cerulean); color:rgba(244,242,233,.7); }
-    .tab-about { background:var(--inkblue); color:rgba(244,242,233,.7); }
+    .tab-home  { background:var(--yellow); }
+    .tab-work  { background:var(--blue); }
+    .tab-about { background:var(--pink); }
     .tab-work:hover, .tab-work.on, .tab-about:hover, .tab-about.on { color:var(--cream); }
 
     /* ── view toggle (single / grid) ── */
@@ -246,98 +246,79 @@
     .run a:hover { color:var(--ink); }
 
     /* ═══════════════════════════════════════════════════════════════════════════
-   WORK SPREADS · FRAMED PHOTO ON A COLOUR PAGE  (magazine plate)
-   Each spread is a solid pop-art COLOUR field; the photo is INSET so the colour
-   frames it (corner padding, like the ref). Image shows in FULL colour (no heavy
-   wash); GIANT caps + text over it; micro-text on the colour frame. Scoped #w1–#w4.
+   WORK SPREADS · COLOUR FEATURE PLATE
+   LEFT page = framed photo + GIANT title (the plate). RIGHT page = colour text
+   page carrying the problem statement, the write-up and the credit captions.
+   Both halves are the project colour; the photo is inset so colour frames it.
+   Scoped #w1–#w4. GPU-layer hints keep the flip smooth on the image pages.
    ═══════════════════════════════════════════════════════════════════════════ */
 #w1, #w2, #w3, #w4 {
   --paper:#F3EBD6; --ink:#1B1916;
   --blue:#2F9FDC; --blue-soft:#8FD2F5;
   --red:#E3402C; --yellow:#E4DC3E; --pink:#EC6CAB;
-  --wtop:3.4rem;            /* top colour frame (fits running head + label) */
-  --wpad:2.4rem;            /* side / bottom colour frame */
+  --wtop:3.4rem;            /* top colour frame (running head + label) */
+  --wpad:3rem;              /* side / bottom colour frame (fills L/R too) */
 }
-/* the page-half IS the colour field; the inset image lets the colour frame it */
 #w1 .lp, #w1 .rp { background:var(--blue); }
 #w2 .lp, #w2 .rp { background:var(--red); }
 #w3 .lp, #w3 .rp { background:var(--yellow); }
 #w4 .lp, #w4 .rp { background:var(--pink); }
-#w1 .lp, #w1 .rp, #w2 .lp, #w2 .rp,
-#w3 .lp, #w3 .rp, #w4 .lp, #w4 .rp { padding:0; }
+#w1 .lp,#w1 .rp,#w2 .lp,#w2 .rp,#w3 .lp,#w3 .rp,#w4 .lp,#w4 .rp {
+  padding:0; backface-visibility:hidden; }   /* GPU layer → smoother flip */
 
-/* ── INSET IMAGE (full colour; page colour shows as a frame) ─────────────────
-   One continuous photo across the spread: each half clips its portion and sits
-   flush to the gutter inside, with colour padding on the outer edges. */
-.fb-img { position:absolute; z-index:1; overflow:hidden; top:var(--wtop); bottom:var(--wpad); }
-.fb-img-l { left:var(--wpad); right:0; }
-.fb-img-r { left:0; right:var(--wpad); }
-.fb-photo { position:absolute; top:0; height:100%; width:200%;
-            object-fit:cover; object-position:center; filter:saturate(1.06) contrast(1.03); }
-.fb-img-l .fb-photo { left:0; }
-.fb-img-r .fb-photo { left:-100%; }
-.fb-wash, .fb-floor { display:none; }   /* heavy duotone removed — image is clear now */
-
-/* ── soft scrim over the photo (very light overall, stronger at the bottom where
-   the big title sits) so type stays legible without murking the image ── */
-.fb-scrim { position:absolute; z-index:2; pointer-events:none; top:var(--wtop); bottom:var(--wpad);
-            background:linear-gradient(to top,
-              rgba(18,16,13,.64) 0%, rgba(18,16,13,.16) 46%, rgba(18,16,13,.10) 100%); }
-.fb-scrim-l { left:var(--wpad); right:0; }
-.fb-scrim-r { left:0; right:var(--wpad); }
-.fb-scrim-c { left:var(--wpad); right:var(--wpad); }
-
-/* ── GIANT DISPLAY TITLE (over the photo, bottom-anchored in the scrim, flat) ── */
-.fb-title { position:absolute; z-index:6; margin:0; font-family:var(--display); font-weight:400;
-            color:var(--yellow); text-transform:uppercase; line-height:.82; letter-spacing:-.02em;
-            font-size:clamp(2.6rem, 7vw, 6.2rem); }
+/* ── LEFT: framed photo plate (colour shows on all four sides) ── */
+.fb-img { position:absolute; z-index:1; overflow:hidden;
+          top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad);
+          backface-visibility:hidden; }
+.fb-photo { width:100%; height:100%; object-fit:cover; object-position:center;
+            filter:saturate(1.06) contrast(1.03);
+            transform:translateZ(0); backface-visibility:hidden; }   /* own GPU layer */
+.fb-wash, .fb-floor { display:none; }
+.fb-scrim { position:absolute; z-index:2; pointer-events:none;
+            top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad);
+            background:linear-gradient(to top, rgba(18,16,13,.68) 0%, rgba(18,16,13,.14) 48%, rgba(18,16,13,0) 72%); }
+.fb-title { position:absolute; z-index:6; left:var(--wpad); bottom:var(--wpad); margin:0;
+            font-family:var(--display); font-weight:400; color:var(--paper);
+            text-transform:uppercase; line-height:.82; letter-spacing:-.02em;
+            font-size:clamp(2.4rem, 6vw, 5.4rem); }
 .fb-t2 { display:block; }
-.fb-title-l, .fb-title-tl { left:var(--wpad); bottom:5rem; }            /* w1, w2 bottom-left */
-.fb-title-r  { right:var(--wpad); bottom:5rem; text-align:right; }      /* w3 bottom-right */
-.fb-title-cL { right:.4rem; bottom:42%; text-align:right; }            /* w4 split at gutter */
-.fb-title-cR { left:.4rem;  bottom:42%; text-align:left; }
-#w3 .fb-title, #w4 .fb-title { color:var(--paper); }                    /* cream caps read cleanest here */
+.fb-label { position:absolute; z-index:7; top:2rem; left:var(--wpad);
+  font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; }
 
-/* ── MICRO-TEXT on the colour FRAME (legible on solid colour) ───────────────── */
-.fb-label, .fb-kick { position:absolute; z-index:7; top:2rem;
-  font-family:var(--sans); font-size:var(--t-label); font-weight:600;
-  letter-spacing:.16em; text-transform:uppercase; }
-.fb-label { left:var(--wpad); }
-.fb-kick  { right:var(--wpad); text-align:right; }
+/* ── RIGHT: colour text page ── */
+.fb-rp { position:absolute; z-index:3; display:flex; flex-direction:column; gap:.95rem;
+         top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad); overflow:hidden; }
+.fb-kick { font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+.fb-lead { font-family:var(--sans); font-weight:500; font-size:var(--t-lead); line-height:1.22; letter-spacing:-.3px; margin:0; }
+.fb-body { font-family:var(--sans); font-size:var(--t-caption); line-height:1.55; display:flex; flex-direction:column; gap:.6rem; }
+.fb-body p { margin:0; }
+.fb-body em { font-style:normal; font-weight:700; }
+.fb-meta { display:flex; flex-wrap:wrap; gap:.8rem 1.5rem; margin-top:.1rem; }
+.fb-meta div { font-family:var(--sans); font-size:var(--t-caption); line-height:1.35; }
+.fb-meta b { display:block; font-family:var(--sans); font-weight:600; font-size:var(--t-label);
+             letter-spacing:.1em; text-transform:uppercase; opacity:.62; margin-bottom:.1rem; }
+.fb-link { align-self:flex-start; margin-top:auto; font-family:var(--sans); font-size:var(--t-label);
+           font-weight:600; letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
+           padding:.5rem .9rem; transition:transform .25s var(--ease-out), background .25s var(--ease-out), color .25s; }
+.fb-link.dis { opacity:.5; pointer-events:none; }
 
-/* descriptor over the photo bottom (on the scrim) */
-.fb-desc { position:absolute; z-index:7; left:var(--wpad); right:var(--wpad); bottom:1.5rem; max-width:24rem;
-  font-family:var(--sans); font-size:var(--t-caption); font-weight:500; line-height:1.45; color:var(--paper); }
-.fb-desc em { font-style:normal; font-weight:700; color:var(--yellow); }
-.fb-title-r ~ .fb-desc { left:auto; text-align:right; }   /* w3: desc aligns under right-anchored title */
+/* folios + running head on the frame */
+#w1 .pno,#w2 .pno,#w3 .pno,#w4 .pno { z-index:7; right:var(--wpad); bottom:.3rem; left:auto; opacity:.5;
+  font-family:var(--display); font-weight:400; letter-spacing:0; font-size:clamp(1.4rem,2.4vw,2rem); }
+#w1 .run,#w2 .run,#w3 .run,#w4 .run { z-index:7; top:1rem; }
+#w1 .gut,#w2 .gut,#w3 .gut,#w4 .gut { background:rgba(27,25,22,.16); z-index:5; box-shadow:none; }
 
-/* link pill — solid, legible on any field */
-.fb-link { position:absolute; z-index:8; right:var(--wpad); bottom:1.4rem;
-  font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.06em;
-  text-transform:uppercase; color:var(--ink); background:var(--yellow);
-  padding:.5rem .9rem; text-decoration:none;
-  transition:transform .25s var(--ease-out), background .25s var(--ease-out); }
-.fb-link:hover { transform:translateX(2px); background:var(--paper); }
-.fb-link.dis { background:rgba(27,25,22,.18); color:rgba(27,25,22,.55); pointer-events:none; }
-
-/* big faint folios on the bottom frame corner */
-#w1 .pno, #w2 .pno, #w3 .pno, #w4 .pno { z-index:7; right:var(--wpad); bottom:.3rem; left:auto;
-  font-family:var(--display); font-weight:400; letter-spacing:0; opacity:.55;
-  font-size:clamp(1.5rem, 2.6vw, 2.3rem); }
-
-/* running head on the top frame */
-#w1 .run, #w2 .run, #w3 .run, #w4 .run { z-index:7; top:1rem; }
-/* lighten the gut line so the spread seam reads cleanly over the frame */
-#w1 .gut, #w2 .gut, #w3 .gut, #w4 .gut { background:rgba(27,25,22,.16); z-index:5; box-shadow:none; }
-
-/* ── PER-PROJECT FRAME TEXT COLOUR ───────────────────────────────────────────
-   LIGHT frames (blue/yellow/pink) → INK frame-text; RED frame → cream. */
-#w1 .fb-label,#w1 .fb-kick,#w1 .run,#w1 .run a,#w1 .pno,
-#w3 .fb-label,#w3 .fb-kick,#w3 .run,#w3 .run a,#w3 .pno,
-#w4 .fb-label,#w4 .fb-kick,#w4 .run,#w4 .run a,#w4 .pno { color:var(--ink); }
-#w2 .fb-label,#w2 .fb-kick,#w2 .run,#w2 .run a,#w2 .pno { color:var(--paper); }
-#w1 .run a:hover,#w3 .run a:hover,#w4 .run a:hover { color:var(--ink); opacity:.65; }
-#w2 .run a:hover { color:var(--paper); }
+/* ── per-project text colour: light fields (blue/yellow/pink) → INK; red → cream ── */
+#w1 .rp,#w1 .fb-label,#w1 .run,#w1 .run a,#w1 .pno,
+#w3 .rp,#w3 .fb-label,#w3 .run,#w3 .run a,#w3 .pno,
+#w4 .rp,#w4 .fb-label,#w4 .run,#w4 .run a,#w4 .pno { color:var(--ink); }
+#w2 .rp,#w2 .fb-label,#w2 .run,#w2 .run a,#w2 .pno { color:var(--paper); }
+#w1 .run a:hover,#w3 .run a:hover,#w4 .run a:hover { opacity:.6; }
+/* link pill */
+#w1 .fb-link,#w3 .fb-link,#w4 .fb-link { background:var(--ink); color:var(--paper); }
+#w1 .fb-link:hover,#w3 .fb-link:hover,#w4 .fb-link:hover { transform:translateX(2px); background:var(--paper); color:var(--ink); }
+#w2 .fb-link { background:var(--paper); color:var(--ink); }
+#w2 .fb-link:hover { transform:translateX(2px); background:var(--yellow); }
 
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
     #gv { background:var(--inkblue); transition:background .45s ease; }
@@ -416,160 +397,144 @@
 
   <div id="view-single">
   <!-- ═══ PROJECT 01 · UPHOLD ═══ -->
-  <section class="pg" id="w1">
+    <section class="pg" id="w1">
     <span class="tcap">Work 01 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 01</span>
-        <div class="fb-img fb-img-l" role="img" aria-label="A mentor reviewing real design work at a desk">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="A mentor reviewing real design work at a desk">
+        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
+          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-l"></div>
+        <div class="fb-scrim"></div>
         <span class="fb-label">Nº 01 · Ed Tech · 2025</span>
-        <h2 class="fb-title fb-title-l">UP<span class="fb-t2">HOLD</span></h2>
-        <span class="fb-desc">Mentors mark up the real files and name <em>one concrete fix</em> before any praise.</span>
+        <h2 class="fb-title">UP<span class="fb-t2">HOLD</span></h2>
         <span class="pno">114</span>
       </div>
       <div class="rp">
-        <span class="run" style="right:3rem;">
-          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
-        </span>
-        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="">
+        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="fb-rp">
+          <span class="fb-kick">Uphold — Mentorship platform</span>
+          <p class="fb-lead">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</p>
+          <div class="fb-body">
+            <p>Uphold pairs new designers with working mentors who review the actual files, not the polished case study, and name <em>one concrete change</em> before any praise — because "looks great" teaches nothing.</p>
+            <p>I designed it end to end. The hard part was never the match; it was the wait: a mentor reply can take two days, so I built for the gap — a submission state that reads "in good hands," not "ignored," and reminders that <em>nudge the mentor without nagging the learner.</em></p>
+          </div>
+          <div class="fb-meta">
+            <div><b>Strategy</b>User research · Ed tech</div>
+            <div><b>Craft</b>Flows &amp; interface · Figma</div>
+            <div><b>Year</b>2025 · New Delhi</div>
+          </div>
+          <a class="fb-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-r"></div>
-        <span class="fb-kick">Mentorship platform</span>
-        <a class="fb-link" target="_blank" rel="noopener"
-           href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
         <span class="pno">115</span>
       </div>
     </div>
   </section>
 
   <!-- ═══ PROJECT 02 · REVIBE ═══ -->
-  <section class="pg" id="w2">
+    <section class="pg" id="w2">
     <span class="tcap">Work 02 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 02</span>
-        <div class="fb-img fb-img-l" role="img" aria-label="A rail of secondhand clothes in warm light">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="A rail of secondhand clothes in warm light">
+        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
+          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-l"></div>
+        <div class="fb-scrim"></div>
         <span class="fb-label">Nº 02 · Fashion / Commerce · 2025</span>
-        <h2 class="fb-title fb-title-tl">RE<span class="fb-t2">VIBE</span></h2>
-        <span class="fb-kick">Resale marketplace</span>
+        <h2 class="fb-title">RE<span class="fb-t2">VIBE</span></h2>
         <span class="pno">116</span>
       </div>
       <div class="rp">
-        <span class="run" style="right:3rem;">
-          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
-        </span>
-        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="">
+        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="fb-rp">
+          <span class="fb-kick">Revibe — Resale marketplace</span>
+          <p class="fb-lead">Secondhand isn't a discount aisle. It's a different way of shopping.</p>
+          <div class="fb-body">
+            <p>Resale inventory is one-of-one: a single item, one size, one fade in the wash. So the AI doesn't guess off the label you usually buy — it reads a garment's measured shoulder, chest and length against your <em>real closet,</em> and tells you the truth when nothing fits.</p>
+            <p>The work was in the unglamorous parts: a sell flow that gets a photo and price out in <em>under a minute,</em> and a sold-out state that points to three near-matches instead of a dead end.</p>
+          </div>
+          <div class="fb-meta">
+            <div><b>Strategy</b>Gen Z, India · Thrift &amp; AI</div>
+            <div><b>Craft</b>E-commerce UX · Brand</div>
+            <div><b>Year</b>2025 · New Delhi</div>
+          </div>
+          <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View case study ↗</a>
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-r"></div>
-        <span class="fb-desc">Secondhand isn't a discount aisle. It's <em>a different way to shop.</em></span>
-        <a class="fb-link" target="_blank" rel="noopener"
-           href="https://findingyouhemant.framer.website/page">View case study ↗</a>
         <span class="pno">117</span>
       </div>
     </div>
   </section>
 
   <!-- ═══ PROJECT 03 · INSIGHT ═══ -->
-  <section class="pg" id="w3">
+    <section class="pg" id="w3">
     <span class="tcap">Work 03 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 03</span>
-        <div class="fb-img fb-img-l" role="img" aria-label="A team session with sticky notes and laptops">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="A team session with sticky notes and laptops">
+        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
+          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-l"></div>
+        <div class="fb-scrim"></div>
         <span class="fb-label">Nº 03 · SaaS / Research · 2025</span>
-        <span class="fb-kick">Research recruiting</span>
+        <h2 class="fb-title">IN<span class="fb-t2">SIGHT</span></h2>
         <span class="pno">118</span>
       </div>
       <div class="rp">
-        <span class="run" style="right:3rem;">
-          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
-        </span>
-        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="">
+        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="fb-rp">
+          <span class="fb-kick">Insight — Research recruiting</span>
+          <p class="fb-lead">Insight finds research participants for teams that can't expense a $20k recruiting tool.</p>
+          <div class="fb-body">
+            <p>The hard part was never the matching — it was trust: convincing a lead that the strangers showing up are real, screened, and worth the hour. So the work went where that's decided — a question builder that flags when <em>two screener criteria contradict each other</em> before you send it, and a no-show ledger that quietly downranks the people who flake.</p>
+            <p>Built in Figma and Miro, for the designer who needs <em>eight participants by Thursday.</em></p>
+          </div>
+          <div class="fb-meta">
+            <div><b>Strategy</b>Research ops · B2B SaaS</div>
+            <div><b>Craft</b>Product design · Figma · Miro</div>
+            <div><b>Year</b>2025 · New Delhi</div>
+          </div>
+          <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-r"></div>
-        <h2 class="fb-title fb-title-r">IN<span class="fb-t2">SIGHT</span></h2>
-        <span class="fb-desc">Real research participants for teams that <em>can't expense a $20k tool.</em></span>
-        <a class="fb-link" target="_blank" rel="noopener"
-           href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
         <span class="pno">119</span>
       </div>
     </div>
   </section>
 
   <!-- ═══ PROJECT 04 · VEJEEZ! ═══ -->
-  <section class="pg" id="w4">
+    <section class="pg" id="w4">
     <span class="tcap">Work 04 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="lp">
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 04</span>
-        <div class="fb-img fb-img-l" role="img" aria-label="A spread of fresh vegan food">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="A spread of fresh vegan food">
+        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
+          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-c"></div>
+        <div class="fb-scrim"></div>
         <span class="fb-label">Nº 04 · Food / Marketplace · 2024</span>
-        <h2 class="fb-title fb-title-cL">VEJ</h2>
+        <h2 class="fb-title">VEJ<span class="fb-t2">EEZ!</span></h2>
         <span class="pno">120</span>
       </div>
       <div class="rp">
-        <span class="run" style="right:3rem;">
-          <a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a>
-        </span>
-        <div class="fb-img fb-img-r" role="img" aria-hidden="true">
-          <img class="fb-photo" loading="lazy"
-               src="img/hero-tiger.jpg"
-               alt="">
+        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
+        <div class="fb-rp">
+          <span class="fb-kick">Vejeez! — Vegan marketplace</span>
+          <p class="fb-lead">Most vegan products default to clinical white or aggressive green — both of which read as a chore, not a craving.</p>
+          <div class="fb-body">
+            <p>Vejeez! treats vegan as an <em>appetite, not a verdict.</em> I built the brand, voice and storefront as one hand: listings lead with the three things shoppers actually scan for, and the filter for hidden animal-derived additives — gelatin, carmine, shellac — sits up front instead of buried in tags.</p>
+            <p>The empty search suggests a swap instead of apologizing; the <em>voice that wrote the wordmark wrote the "added to cart" line too.</em></p>
+          </div>
+          <div class="fb-meta">
+            <div><b>Strategy</b>Marketplace · Vegan living</div>
+            <div><b>Craft</b>Brand &amp; UX · Illustration</div>
+            <div><b>Year</b>2024 · New Delhi</div>
+          </div>
+          <a class="fb-link dis">Case study soon</a>
         </div>
-        <div class="fb-wash"></div>
-        <div class="fb-floor"></div>
-        <div class="fb-scrim fb-scrim-c"></div>
-        <h2 class="fb-title fb-title-cR">EEZ!</h2>
-        <span class="fb-desc">Vegan as <em>an appetite, not a verdict.</em></span>
-        <span class="fb-kick">Vegan marketplace</span>
-        <a class="fb-link dis">Case study soon</a>
         <span class="pno">121</span>
       </div>
     </div>
