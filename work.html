@@ -246,145 +246,98 @@
     .run a:hover { color:var(--ink); }
 
     /* ═══════════════════════════════════════════════════════════════════════════
-   WORK SPREADS · FULL-BLEED RISO DUOTONE  (Approach 1, hardened per judges)
-   ONE photo across the spread · GIANT Archivo-Black caps over it ·
-   micro-text in the margins · big faint folios. Scoped to #w1–#w4 only.
+   WORK SPREADS · FRAMED PHOTO ON A COLOUR PAGE  (magazine plate)
+   Each spread is a solid pop-art COLOUR field; the photo is INSET so the colour
+   frames it (corner padding, like the ref). Image shows in FULL colour (no heavy
+   wash); GIANT caps + text over it; micro-text on the colour frame. Scoped #w1–#w4.
    ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ── PALETTE PIN (critical) ──────────────────────────────────────────────────
-   The live :root is blue-remapped: no --yellow, and --red/--blue/--pink all
-   collapse onto cobalt/powder. We re-pin the LOCKED brief palette on the work
-   spreads so the per-spread accents (yellow/red/pink) render as distinct hues
-   instead of cobalt-on-cobalt. Hexes come straight from the brief / tokens —
-   sanctioned palette values, not new invention. */
 #w1, #w2, #w3, #w4 {
   --paper:#F3EBD6; --ink:#1B1916;
   --blue:#2F9FDC; --blue-soft:#8FD2F5;
   --red:#E3402C; --yellow:#E4DC3E; --pink:#EC6CAB;
+  --wtop:3.4rem;            /* top colour frame (fits running head + label) */
+  --wpad:2.4rem;            /* side / bottom colour frame */
 }
-
-/* page-halves clip one continuous image; they are already pos:rel / overflow:hidden */
+/* the page-half IS the colour field; the inset image lets the colour frame it */
+#w1 .lp, #w1 .rp { background:var(--blue); }
+#w2 .lp, #w2 .rp { background:var(--red); }
+#w3 .lp, #w3 .rp { background:var(--yellow); }
+#w4 .lp, #w4 .rp { background:var(--pink); }
 #w1 .lp, #w1 .rp, #w2 .lp, #w2 .rp,
 #w3 .lp, #w3 .rp, #w4 .lp, #w4 .rp { padding:0; }
 
-/* ── IMAGE LAYER ─────────────────────────────────────────────────────────────
-   solid brand color sits BEHIND <img> → a 404 shows a flat color field, never a
-   broken icon. .book is grid 1fr/1fr with NO column-gap (the .gut is a 1px line
-   riding at 50%), so width:200% / left:-100% lines the two halves up exactly;
-   the hairline gut reads as the editorial spread seam. */
-.fb-img  { position:absolute; inset:0; z-index:0; background:var(--blue); }
-.fb-photo{
-  position:absolute; top:0; height:100%; width:200%;
-  object-fit:cover; object-position:center;
-  /* desaturate + dark base so highlights can't blow out under the caps (judge fix #2) */
-  filter:grayscale(100%) contrast(1.18) brightness(.92);
-}
-.fb-img-l .fb-photo{ left:0; }       /* left half  = photo's left  */
-.fb-img-r .fb-photo{ left:-100%; }   /* right half = photo's right */
+/* ── INSET IMAGE (full colour; page colour shows as a frame) ─────────────────
+   One continuous photo across the spread: each half clips its portion and sits
+   flush to the gutter inside, with colour padding on the outer edges. */
+.fb-img { position:absolute; z-index:1; overflow:hidden; top:var(--wtop); bottom:var(--wpad); }
+.fb-img-l { left:var(--wpad); right:0; }
+.fb-img-r { left:0; right:var(--wpad); }
+.fb-photo { position:absolute; top:0; height:100%; width:200%;
+            object-fit:cover; object-position:center; filter:saturate(1.06) contrast(1.03); }
+.fb-img-l .fb-photo { left:0; }
+.fb-img-r .fb-photo { left:-100%; }
+.fb-wash, .fb-floor { display:none; }   /* heavy duotone removed — image is clear now */
 
-/* ── RISO DUOTONE ─ flat brand color over the grayscale photo via multiply ── */
-.fb-wash{ position:absolute; inset:0; z-index:1; pointer-events:none;
-          background:var(--blue); mix-blend-mode:multiply; opacity:.82; }
-/* always-on global darkening so yellow/cream caps clear AA even off the scrims */
-.fb-floor{ position:absolute; inset:0; z-index:2; pointer-events:none;
-           background:rgba(16,33,41,.18); }
+/* ── soft scrim over the photo (very light overall, stronger at the bottom where
+   the big title sits) so type stays legible without murking the image ── */
+.fb-scrim { position:absolute; z-index:2; pointer-events:none; top:var(--wtop); bottom:var(--wpad);
+            background:linear-gradient(to top,
+              rgba(18,16,13,.64) 0%, rgba(18,16,13,.16) 46%, rgba(18,16,13,.10) 100%); }
+.fb-scrim-l { left:var(--wpad); right:0; }
+.fb-scrim-r { left:0; right:var(--wpad); }
+.fb-scrim-c { left:var(--wpad); right:var(--wpad); }
 
-/* ── LEGIBILITY SCRIM ─ ink gradient only where type sits ─────────────────── */
-.fb-scrim{ position:absolute; inset:0; z-index:3; pointer-events:none; }
-.fb-scrim-l{ background:linear-gradient(18deg,
-    rgba(16,33,41,.66) 0%, rgba(16,33,41,.24) 44%, rgba(16,33,41,0) 72%); }
-.fb-scrim-r{ background:linear-gradient(200deg,
-    rgba(16,33,41,0) 36%, rgba(16,33,41,.22) 60%, rgba(16,33,41,.66) 100%); }
-.fb-scrim-c{ background:linear-gradient(to top,
-    rgba(16,33,41,.62) 0%, rgba(16,33,41,.28) 40%, rgba(16,33,41,.40) 100%); }
+/* ── GIANT DISPLAY TITLE (over the photo, bottom-anchored in the scrim, flat) ── */
+.fb-title { position:absolute; z-index:6; margin:0; font-family:var(--display); font-weight:400;
+            color:var(--yellow); text-transform:uppercase; line-height:.82; letter-spacing:-.02em;
+            font-size:clamp(2.6rem, 7vw, 6.2rem); }
+.fb-t2 { display:block; }
+.fb-title-l, .fb-title-tl { left:var(--wpad); bottom:5rem; }            /* w1, w2 bottom-left */
+.fb-title-r  { right:var(--wpad); bottom:5rem; text-align:right; }      /* w3 bottom-right */
+.fb-title-cL { right:.4rem; bottom:42%; text-align:right; }            /* w4 split at gutter */
+.fb-title-cR { left:.4rem;  bottom:42%; text-align:left; }
+#w3 .fb-title, #w4 .fb-title { color:var(--paper); }                    /* cream caps read cleanest here */
 
-/* ── GIANT DISPLAY TITLE ─ Archivo Black caps, flat (no shadow), spans gutter ─ */
-.fb-title{
-  position:absolute; z-index:6; margin:0;
-  font-family:var(--display); font-weight:400; color:var(--yellow);
-  text-transform:uppercase; line-height:.80; letter-spacing:-.02em;
-  font-size:clamp(3.4rem, 9vw, 8.4rem);
-}
-.fb-t2{ display:block; }                                   /* 2nd syllable drops a line */
-.fb-title-l { left:2.6rem;  bottom:4.6rem; }               /* w1: bottom-left  */
-.fb-title-tl{ left:2.6rem;  top:6.4rem; }                   /* w2: top-left */
-.fb-title-r { right:2.6rem; bottom:4.6rem; text-align:right; } /* w3: bottom-right */
-.fb-title-cL{ right:1.4rem; bottom:38%; text-align:right; }    /* w4: centred-low, meets at gut */
-.fb-title-cR{ left:1.4rem;  bottom:38%; text-align:left; }
-
-/* ── MICRO-TEXT ─ tiny clean Inter in the margins, cream over the wash ─────── */
-.fb-label, .fb-desc, .fb-kick{
-  position:absolute; z-index:7; font-family:var(--sans); color:var(--paper);
-}
-.fb-label{ top:3rem; left:3rem; font-size:var(--t-label); font-weight:500;
-           letter-spacing:.18em; text-transform:uppercase; }
-.fb-kick { top:3rem; right:3rem; font-size:var(--t-label); font-weight:600;
-           letter-spacing:.18em; text-transform:uppercase; color:var(--yellow); text-align:right; }
-.fb-desc { left:3rem; right:3rem; bottom:8.6rem; max-width:24rem;
-           font-size:var(--t-caption); font-weight:500; line-height:1.45; }
-.fb-desc em{ font-style:normal; font-weight:700; color:var(--yellow);
-             background:transparent; }
-
-/* ── PROJECT LINK ─ flat yellow pill, bottom-right (most on-brand treatment) ── */
-.fb-link{
-  position:absolute; z-index:7; right:3rem; bottom:4.6rem;
+/* ── MICRO-TEXT on the colour FRAME (legible on solid colour) ───────────────── */
+.fb-label, .fb-kick { position:absolute; z-index:7; top:2rem;
   font-family:var(--sans); font-size:var(--t-label); font-weight:600;
-  letter-spacing:.06em; text-transform:uppercase;
-  color:var(--ink); background:var(--yellow);
+  letter-spacing:.16em; text-transform:uppercase; }
+.fb-label { left:var(--wpad); }
+.fb-kick  { right:var(--wpad); text-align:right; }
+
+/* descriptor over the photo bottom (on the scrim) */
+.fb-desc { position:absolute; z-index:7; left:var(--wpad); right:var(--wpad); bottom:1.5rem; max-width:24rem;
+  font-family:var(--sans); font-size:var(--t-caption); font-weight:500; line-height:1.45; color:var(--paper); }
+.fb-desc em { font-style:normal; font-weight:700; color:var(--yellow); }
+.fb-title-r ~ .fb-desc { left:auto; text-align:right; }   /* w3: desc aligns under right-anchored title */
+
+/* link pill — solid, legible on any field */
+.fb-link { position:absolute; z-index:8; right:var(--wpad); bottom:1.4rem;
+  font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink); background:var(--yellow);
   padding:.5rem .9rem; text-decoration:none;
-  transition:transform .25s var(--ease-out), background .25s var(--ease-out);
-}
-.fb-link:hover{ transform:translateX(2px); background:var(--paper); }
-.fb-link.dis { background:rgba(243,235,214,.22); color:rgba(243,235,214,.7);
-               pointer-events:none; }
+  transition:transform .25s var(--ease-out), background .25s var(--ease-out); }
+.fb-link:hover { transform:translateX(2px); background:var(--paper); }
+.fb-link.dis { background:rgba(27,25,22,.18); color:rgba(27,25,22,.55); pointer-events:none; }
 
-/* ── BIG FAINT FOLIOS ─ Kareem-style '36 / 37', enlarged + low-opacity cream ── */
-#w1 .pno, #w2 .pno, #w3 .pno, #w4 .pno{
-  z-index:7; color:var(--paper); opacity:.4; right:3rem; left:auto;
-  font-family:var(--display); font-weight:400; letter-spacing:0;
-  font-size:clamp(2rem, 4vw, 3.4rem);
-}
+/* big faint folios on the bottom frame corner */
+#w1 .pno, #w2 .pno, #w3 .pno, #w4 .pno { z-index:7; right:var(--wpad); bottom:.3rem; left:auto;
+  font-family:var(--display); font-weight:400; letter-spacing:0; opacity:.55;
+  font-size:clamp(1.5rem, 2.6vw, 2.3rem); }
 
-/* running header rides above the image */
-#w1 .run, #w2 .run, #w3 .run, #w4 .run{ z-index:7; color:rgba(243,235,214,.72); }
-#w1 .run a:hover, #w2 .run a:hover, #w3 .run a:hover, #w4 .run a:hover{ color:var(--paper); }
+/* running head on the top frame */
+#w1 .run, #w2 .run, #w3 .run, #w4 .run { z-index:7; top:1rem; }
+/* lighten the gut line so the spread seam reads cleanly over the frame */
+#w1 .gut, #w2 .gut, #w3 .gut, #w4 .gut { background:rgba(27,25,22,.16); z-index:5; box-shadow:none; }
 
-/* lighten the 1px gut line so the seam reads as a clean crease over the photo */
-#w1 .gut, #w2 .gut, #w3 .gut, #w4 .gut{
-  background:rgba(243,235,214,.22); z-index:5;
-  box-shadow:6px 0 14px -6px rgba(16,33,41,.4), -6px 0 14px -6px rgba(16,33,41,.4);
-}
-
-/* ── PER-PROJECT ACCENT + WASH ROTATION ──────────────────────────────────────
-   Each spread: a DIFFERENT title anchor (set in markup) + a DIFFERENT pop-art
-   accent / duotone wash, for editorial rhythm. */
-/* 01 Uphold — yellow caps over BLUE wash (anchor bottom-left) — default above */
-
-/* 02 Revibe — RED caps over BLUE wash (anchor TOP-left), pink kick */
-#w2 .fb-title{ color:var(--red); }
-#w2 .fb-kick { color:var(--pink); }
-#w2 .fb-desc em{ color:var(--pink); }
-#w2 .fb-link{ background:var(--red); color:var(--paper); }
-#w2 .fb-link:hover{ background:var(--pink); color:var(--ink); }
-
-/* w2 title is TOP-left, so move its label/kick clear of the headline */
-#w2 .fb-label{ top:auto; bottom:4.8rem; left:2.6rem; }
-#w2 .fb-kick { top:auto; bottom:4.8rem; right:3rem; }
-
-/* 03 Insight — YELLOW caps over RED wash (anchor bottom-RIGHT) */
-#w3 .fb-wash{ background:var(--red); }
-#w3 .fb-img { background:var(--red); }
-#w3 .fb-title{ color:var(--yellow); }
-#w3 .fb-kick { color:var(--yellow); }
-#w3 .fb-desc em{ color:var(--yellow); }
-#w3 .fb-link{ background:var(--yellow); color:var(--ink); }
-
-/* 04 Vejeez! — PINK caps over INK wash (anchor centred-low across the gut), link disabled */
-#w4 .fb-wash{ background:var(--ink); opacity:.74; }
-#w4 .fb-img { background:var(--ink); }
-#w4 .fb-title{ color:var(--pink); }
-#w4 .fb-kick { color:var(--pink); }
-#w4 .fb-desc em{ color:var(--pink); }
+/* ── PER-PROJECT FRAME TEXT COLOUR ───────────────────────────────────────────
+   LIGHT frames (blue/yellow/pink) → INK frame-text; RED frame → cream. */
+#w1 .fb-label,#w1 .fb-kick,#w1 .run,#w1 .run a,#w1 .pno,
+#w3 .fb-label,#w3 .fb-kick,#w3 .run,#w3 .run a,#w3 .pno,
+#w4 .fb-label,#w4 .fb-kick,#w4 .run,#w4 .run a,#w4 .pno { color:var(--ink); }
+#w2 .fb-label,#w2 .fb-kick,#w2 .run,#w2 .run a,#w2 .pno { color:var(--paper); }
+#w1 .run a:hover,#w3 .run a:hover,#w4 .run a:hover { color:var(--ink); opacity:.65; }
+#w2 .run a:hover { color:var(--paper); }
 
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
     #gv { background:var(--inkblue); transition:background .45s ease; }
@@ -471,7 +424,7 @@
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 01</span>
         <div class="fb-img fb-img-l" role="img" aria-label="A mentor reviewing real design work at a desk">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="A mentor reviewing real design work at a desk">
         </div>
         <div class="fb-wash"></div>
@@ -488,7 +441,7 @@
         </span>
         <div class="fb-img fb-img-r" role="img" aria-hidden="true">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="">
         </div>
         <div class="fb-wash"></div>
@@ -511,7 +464,7 @@
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 02</span>
         <div class="fb-img fb-img-l" role="img" aria-label="A rail of secondhand clothes in warm light">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="A rail of secondhand clothes in warm light">
         </div>
         <div class="fb-wash"></div>
@@ -528,7 +481,7 @@
         </span>
         <div class="fb-img fb-img-r" role="img" aria-hidden="true">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="">
         </div>
         <div class="fb-wash"></div>
@@ -551,7 +504,7 @@
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 03</span>
         <div class="fb-img fb-img-l" role="img" aria-label="A team session with sticky notes and laptops">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="A team session with sticky notes and laptops">
         </div>
         <div class="fb-wash"></div>
@@ -567,7 +520,7 @@
         </span>
         <div class="fb-img fb-img-r" role="img" aria-hidden="true">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="">
         </div>
         <div class="fb-wash"></div>
@@ -591,7 +544,7 @@
         <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 04</span>
         <div class="fb-img fb-img-l" role="img" aria-label="A spread of fresh vegan food">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="A spread of fresh vegan food">
         </div>
         <div class="fb-wash"></div>
@@ -607,7 +560,7 @@
         </span>
         <div class="fb-img fb-img-r" role="img" aria-hidden="true">
           <img class="fb-photo" loading="lazy"
-               src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=1400"
+               src="img/hero-tiger.jpg"
                alt="">
         </div>
         <div class="fb-wash"></div>
