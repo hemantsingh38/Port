@@ -12,23 +12,30 @@
 
     :root {
       --table: #0B0908;
-      --page:  #FEFEFB;   /* white blossom / page — kept defined, NOT used as a page bg */
-      --ink:   #15110E;
-      --head:  #2E2A25;   /* heading text — darkest warm grey */
-      --mu:    rgba(21,17,14,.55);
-      --line:  rgba(21,17,14,.14);
-      /* ── VINTAGE PALETTE ── */
-      --marine:    #1F73C2;   /* vintage saturated blue — primary dark-ish page */
-      --cerulean:  #0BB3E6;   /* bright cyan — RESERVED FOR THE COVER ONLY */
-      --sage:      #719A73;   /* sage green — light page */
-      --evergreen: #003A35;   /* deep green — dark page */
-      --inkblue:   #001F27;   /* ink-black (very dark teal-navy) — darkest page + cool text */
-      --cream:     #F4F2E9;   /* warm off-white — TEXT on dark pages (never a page bg) */
-      /* legacy accents kept defined; no longer used as page backgrounds */
-      --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
+      --page:  #F5F7F8;   /* clean cool white — no beige */
+      --paper: #F5F7F8;   /* light page base — cool white */
+      --ink:   #102129;   /* cool near-black — text on light pages */
+      --head:  #102129;   /* heading text */
+      --mu:    rgba(16,33,41,.55);
+      --line:  rgba(16,33,41,.16);
+      /* ── BLUE-LED VINTAGE EDITORIAL PALETTE (blue family + white + black) ── */
+      --cerulean:  #0BB3E6;   /* hero cyan-blue — cover + bold accents */
+      --sky:       #6FC6E2;   /* powder blue (LIGHT block · ink text) */
+      --cobalt:    #2438C8;   /* vivid royal blue (DARK block · cream text) */
+      --inkblue:   #102A43;   /* deep navy (DARK block · cream text) */
+      --cream:     #F5F7F8;   /* cool white — TEXT on dark blue blocks */
+      /* warm hues repointed into the blue family so nothing clashes */
+      --lime:      #6FC6E2;   /* → powder blue */
+      --mustard:   #F5F7F8;   /* → white */
+      --orange:    #6FC6E2;   /* → powder blue */
+      --pink:      #6FC6E2;   /* → powder blue */
+      --red:       #2438C8;   /* → cobalt (was a warm red text/blocks) */
+      --marine:    #2438C8;
+      --sage:      #6FC6E2;
+      --evergreen: #102A43;
+      --blue:      #2438C8;   /* spine/tab accent → cobalt */
+      --bloom:     #6FC6E2;   /* spine/tab accent → powder */
       --display: 'Archivo Black', system-ui, sans-serif; /* brand / heading display */
-      --pink:  #FF4D9E;   /* vivid blossom pink */
-      --bloom: #FFC22E;   /* vivid golden — sunlight */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       /* five sizes — the only scale */
@@ -98,9 +105,9 @@
        NO white/cream page halves — every half is a vintage-palette color or a full-bleed photo.
        Cover halves are overridden in the COVER block (cerulean + tiger photo). */
     .cv-r        { background:var(--cerulean); }   /* cover only */
-    .wkp         { background:var(--sage); }        /* work teaser — both halves sage (light) */
-    .ab-lp       { background:var(--marine); }      /* about voice page — dark */
-    .sv-lp       { background:var(--evergreen); }   /* services intro page — dark */
+    .wkp         { background:var(--lime); }        /* work teaser — acid chartreuse block */
+    .ab-lp       { background:var(--mustard); }     /* about voice page — ochre block */
+    .sv-lp       { background:var(--pink); }         /* services left — NOISE pink */
     /* contact back-cover inner wrapper */
     .cn-inner { position:absolute; inset:0; background:var(--table); }
 
@@ -243,7 +250,7 @@
     #cv .cv-r .cv-eyebrow { border-bottom-color:rgba(21,17,14,.28); }
     #cv .cv-r .cv-whatido p { color:rgba(21,17,14,.8); }
     #cv .cv-r .cv-folio { color:rgba(21,17,14,.22); }
-    #cv .cv-r .cv-tagline { color:var(--pink); }
+    #cv .cv-r .cv-tagline { color:#FF4D9E; }
 
     /* ══════════ WORK TEASER — full-width plates ══════════ */
     .wkp {
@@ -296,7 +303,7 @@
     .wk-plate-meta b {
       display:block; font-weight:500; color:var(--ink);
     }
-    /* #wk teaser sits on sage (light) → ink-blue text, ink-blue labels/rules */
+    /* #wk teaser sits on WHITE (--paper) → ink-blue text, ink-blue labels/rules */
     #wk .wk-intro,
     #wk .wk-plate-title,
     #wk .wk-plate-meta b,
@@ -307,8 +314,8 @@
     #wk .wk-plate-info          { border-bottom-color:rgba(0,31,39,.18); }
     #wk .pno                    { color:rgba(0,31,39,.2); }
 
-    /* ══════════ SERVICES SPREAD ══════════ */
-    /* left page (cream): eyebrow + intro lead + the three services */
+    /* ══════════ SERVICES SPREAD — NOISE pink/red ══════════ */
+    /* left page (NOISE pink): eyebrow + intro lead + the three services */
     .sv-lp {
       position:relative; display:flex; flex-direction:column;
       padding:2.6rem 3rem 2rem 3rem; overflow:hidden;
@@ -341,9 +348,9 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(21,17,14,.18);
     }
-    /* right page: marine color-block carrying the big line + tagline */
+    /* right page: NOISE red color-block carrying the big line + tagline */
     .sv-rp {
-      background:var(--marine); position:relative; overflow:hidden;
+      background:var(--red); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.6rem 2.8rem 2rem;
     }
@@ -367,20 +374,20 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(244,242,233,.4);
     }
-    /* #sv left page on evergreen (dark) → cream text + cream labels/rules */
+    /* #sv left page on NOISE pink (light) → ink body, RED display (service titles) */
     #sv .sv-lead,
-    #sv .sv-lead em,
-    #sv .sv-list dt             { color:var(--cream); }
+    #sv .sv-lead em             { color:var(--inkblue); }
+    #sv .sv-list dt             { color:var(--red); }
     #sv .sv-eyebrow,
-    #sv .sv-list dd             { color:rgba(244,242,233,.62); }
-    #sv .sv-eyebrow             { border-bottom-color:rgba(244,242,233,.25); }
-    #sv .sv-list dt             { border-top-color:rgba(244,242,233,.22); }
-    #sv .sv-folio               { color:rgba(244,242,233,.4); }
-    /* #sv right page on marine (dark) → cream text */
+    #sv .sv-list dd             { color:rgba(0,31,39,.6); }
+    #sv .sv-eyebrow             { border-bottom-color:rgba(0,31,39,.2); }
+    #sv .sv-list dt             { border-top-color:rgba(0,31,39,.18); }
+    #sv .sv-folio               { color:rgba(0,31,39,.2); }
+    /* #sv right page on NOISE red (dark) → cream/pink display + cream text */
     #sv .sv-big                 { color:var(--cream); }
-    #sv .sv-tag                 { color:rgba(244,242,233,.9); }
-    #sv .sv-rp-eyebrow          { color:rgba(244,242,233,.62);
-                                  border-bottom-color:rgba(244,242,233,.25); }
+    #sv .sv-tag                 { color:var(--pink); }
+    #sv .sv-rp-eyebrow          { color:rgba(244,242,233,.8);
+                                  border-bottom-color:rgba(244,242,233,.32); }
 
     /* ══════════ FILLER QUOTE SPREADS ══════════ */
     .fq-page { position:relative; overflow:hidden; }
@@ -438,14 +445,14 @@
       font-size:var(--t-display); letter-spacing:-1px; line-height:1;
       color:rgba(21,17,14,.18);
     }
-    /* #ab left voice page on marine (dark) → cream text + cream labels/rules */
+    /* #ab left voice page on WHITE (--paper) → cool ink text + ink labels/rules */
     #ab .ab-lead,
     #ab .ab-lead em,
-    #ab .ab-bio em             { color:var(--cream); }
-    #ab .ab-bio                { color:rgba(244,242,233,.82); }
-    #ab .ab-eyebrow            { color:rgba(244,242,233,.62);
-                                 border-bottom-color:rgba(244,242,233,.25); }
-    #ab .ab-folio              { color:rgba(244,242,233,.4); }
+    #ab .ab-bio em             { color:var(--inkblue); }
+    #ab .ab-bio                { color:rgba(0,31,39,.82); }
+    #ab .ab-eyebrow            { color:rgba(0,31,39,.6);
+                                 border-bottom-color:rgba(0,31,39,.2); }
+    #ab .ab-folio              { color:rgba(0,31,39,.2); }
     /* right (DIRECTION 1 · Portrait): full-bleed photo + overlaid metadata */
     .ab-rp {
       position:relative; overflow:hidden; background:var(--ink);
@@ -529,9 +536,9 @@
       font-family:var(--sans); font-style:normal; font-size:var(--t-caption);
       color:var(--mu); display:flex; flex-direction:column; gap:.18rem;
     }
-    /* right: evergreen contact card — the tiger */
+    /* right: deep navy contact card — the tiger */
     .cn-rp {
-      background:var(--evergreen); position:relative; overflow:hidden;
+      background:var(--inkblue); position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:space-between;
       padding:2.8rem 2.8rem 2.6rem;
     }
@@ -765,29 +772,29 @@
     <span class="tcap">iv / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--marine);">
-        <div class="fq fq-light" style="left:18%; top:46%;">
+      <div class="fq-page" style="background:var(--sky);">
+        <div class="fq fq-ink" style="left:18%; top:46%;">
           Good design is actually a lot harder to notice than poor design,
           in part because good designs fit our needs so well that the
           design is invisible.
           <small>Don Norman / The Design of Everyday Things</small>
         </div>
-        <div class="fq thru fq-light" style="left:30%; top:64%; width:46%;">
+        <div class="fq thru fq-ink" style="left:30%; top:64%; width:46%;">
           things people actually use, made to feel like things people
           actually keep.
         </div>
-        <span class="pno" style="color:rgba(244,242,233,.4);">06</span>
+        <span class="pno" style="color:rgba(0,31,39,.2);">06</span>
       </div>
-      <div class="fq-page" style="background:var(--sage);">
-        <div class="fq fq-ink" style="right:14%; top:28%;">
+      <div class="fq-page" style="background:var(--cobalt);">
+        <div class="fq fq-light" style="right:14%; top:28%;">
           Users do not care who I am. They care whether the thing works.
           So I make it work, then make it feel inevitable.
           <small>Blue Tiger / studio notes</small>
         </div>
-        <div class="fq thru fq-ink" style="left:12%; bottom:18%; width:48%;">
+        <div class="fq thru fq-light" style="left:12%; bottom:18%; width:48%;">
           good designs fit our needs so well that the design is invisible.
         </div>
-        <span class="pno" style="color:rgba(0,31,39,.2);">07</span>
+        <span class="pno" style="color:rgba(244,242,233,.4);">07</span>
       </div>
     </div>
   </section>
@@ -797,19 +804,19 @@
     <span class="tcap">v / vii — influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--sage);">
-        <div class="fq fq-ink" style="left:20%; top:40%;">
+      <div class="fq-page" style="background:var(--red);">
+        <div class="fq fq-light" style="left:20%; top:40%;">
           Good design is as little design as possible. Less, but better —
           for it concentrates on the essential aspects, and the products
           are not burdened with non-essentials.
           <small>Dieter Rams / Ten Principles</small>
         </div>
-        <div class="fq thru fq-ink" style="left:28%; bottom:14%; width:44%;">
+        <div class="fq thru fq-light" style="left:28%; bottom:14%; width:44%;">
           less, but better — but warmer.
         </div>
-        <span class="pno" style="color:rgba(0,31,39,.2);">08</span>
+        <span class="pno" style="color:rgba(244,242,233,.4);">08</span>
       </div>
-      <div class="fq-page" style="background:var(--evergreen);">
+      <div class="fq-page" style="background:var(--inkblue);">
         <img class="fp-img" src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway after rain">
         <div class="fp-cap"><b>■ Influences</b> — Norman, Rams, cinema, print.</div>
         <span class="pno" style="color:rgba(254,254,251,.85); z-index:3;">09</span>

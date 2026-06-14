@@ -12,21 +12,28 @@
 
     :root {
       --table: #0B0908;
-      --page:  #FEFEFB;
-      --ink:   #15110E;
-      --head:  #2E2A25;   /* heading text — darkest warm grey */
-      --mu:    rgba(21,17,14,.55);
-      --line:  rgba(21,17,14,.14);
-      --blue:  #2B4FF0;   /* PRIMARY accent — the tiger (electric) */
-      --pink:  #FF4D9E;   /* vivid blossom pink (defined, not used as page bg) */
-      --bloom: #FFC22E;   /* vivid golden (defined, not used as page bg) */
-      /* ── vintage palette ── */
-      --marine:    #1F73C2;   /* vintage saturated blue — primary dark-ish page */
-      --cerulean:  #0BB3E6;   /* bright cyan — RESERVED FOR THE COVER ONLY */
-      --sage:      #719A73;   /* sage green — light page */
-      --evergreen: #003A35;   /* deep green — dark page */
-      --inkblue:   #001F27;   /* ink-black (very dark teal-navy) — darkest page + cool text */
-      --cream:     #F4F2E9;   /* warm off-white — TEXT on dark pages (never a page bg) */
+      --page:  #F5F7F8;
+      --paper: #F5F7F8;   /* light page base — cool white, no beige */
+      --ink:   #102129;   /* cool near-black — text on light pages */
+      --head:  #102129;   /* heading text */
+      --mu:    rgba(16,33,41,.55);
+      --line:  rgba(16,33,41,.16);
+      /* ── BLUE-LED VINTAGE EDITORIAL PALETTE (blue family + white + black) ── */
+      --cerulean:  #0BB3E6;   /* hero cyan-blue — cover + bold accents */
+      --sky:       #6FC6E2;   /* powder blue (LIGHT block · ink text) */
+      --cobalt:    #2438C8;   /* vivid royal blue (DARK block · cream text) */
+      --inkblue:   #102A43;   /* deep navy (DARK block · cream text) */
+      --cream:     #F5F7F8;   /* cool white — TEXT on dark blue blocks */
+      /* warm hues repointed into the blue family so nothing clashes */
+      --lime:      #6FC6E2;
+      --mustard:   #F5F7F8;
+      --pink:      #6FC6E2;
+      --red:       #2438C8;
+      --marine:    #2438C8;
+      --sage:      #6FC6E2;
+      --evergreen: #102A43;
+      --blue:      #2438C8;   /* spine/tab accent → cobalt */
+      --bloom:     #6FC6E2;   /* spine/tab accent → powder */
       --sans:  'Inter',system-ui,sans-serif;
       --scrib: 'Caveat',cursive;
       --display: 'Archivo Black',system-ui,sans-serif;
@@ -70,9 +77,9 @@
            transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
     .tab:hover { transform:translateY(14%); color:var(--ink); }
     .tab.on { transform:translateY(10%); color:var(--ink); }
-    .tab-home  { background:var(--sage); }
-    .tab-work  { background:var(--marine); color:rgba(244,242,233,.7); }
-    .tab-about { background:var(--evergreen); color:rgba(244,242,233,.7); }
+    .tab-home  { background:var(--paper); }
+    .tab-work  { background:var(--cerulean); color:rgba(244,242,233,.7); }
+    .tab-about { background:var(--inkblue); color:rgba(244,242,233,.7); }
     .tab-work:hover, .tab-work.on, .tab-about:hover, .tab-about.on { color:var(--cream); }
 
     /* ── view toggle (single / grid) ── */
@@ -129,26 +136,26 @@
     }
     .pg:not(.pg-active) .book,
     .pg:not(.pg-active) .book::before { box-shadow:none; }
-    #w1 .book { --spine: var(--evergreen); }
+    #w1 .book { --spine: var(--inkblue); }
     #w2 .book { --spine: var(--inkblue); }
-    #w3 .book { --spine: var(--marine); }
-    #w4 .book { --spine: var(--evergreen); }
+    #w3 .book { --spine: var(--inkblue); }
+    #w4 .book { --spine: var(--inkblue); }
     #gv .book { --spine: var(--inkblue); }
     .book::after {
       content:''; position:absolute; left:-8px; top:2px; bottom:-3px; width:8px;
       background:repeating-linear-gradient(to right,
-        #FEFEFB 0 1.6px, var(--sage) 1.6px 2.6px,
-        #FEFEFB 2.6px 4.2px, var(--marine) 4.2px 5.2px,
-        #FEFEFB 5.2px 6.8px, var(--evergreen) 6.8px 8px);
+        #FEFEFB 0 1.6px, var(--cerulean) 1.6px 2.6px,
+        #FEFEFB 2.6px 4.2px, var(--inkblue) 4.2px 5.2px,
+        #FEFEFB 5.2px 6.8px, var(--inkblue) 6.8px 8px);
     }
-    /* ── per-spread page-half palette (no white/cream backgrounds) ── */
-    #w1 .lp { background:var(--marine); }      /* dark  */
-    #w1 .rp { background:var(--sage); }        /* light */
-    #w2 .lp { background:var(--evergreen); }   /* dark  */
-    #w2 .rp { background:var(--marine); }      /* dark  */
-    #w3 .lp { background:var(--sage); }        /* light */
-    #w3 .rp { background:var(--evergreen); }   /* dark  */
-    #w4 .lp { background:var(--marine); }      /* dark  */
+    /* ── per-spread page-half palette (white / near-black, more white) ── */
+    #w1 .lp { background:var(--inkblue); }     /* dark  */
+    #w1 .rp { background:var(--paper); }       /* WHITE */
+    #w2 .lp { background:var(--paper); }       /* WHITE */
+    #w2 .rp { background:var(--inkblue); }     /* dark  */
+    #w3 .lp { background:var(--inkblue); }     /* dark  */
+    #w3 .rp { background:var(--paper); }       /* WHITE */
+    #w4 .lp { background:var(--paper); }       /* WHITE */
     #w4 .rp { background:var(--inkblue); }     /* dark  */
 
     /* page-turn shading on the flipping half */
@@ -237,7 +244,7 @@
     .rp-link:hover { border-color:var(--ink); transform:translateX(2px); }
     .rp-link.dis { opacity:.4; pointer-events:none; }
 
-    /* ══════════ CONTRAST PER PAGE-HALF (vintage palette) ══════════ */
+    /* ══════════ CONTRAST PER PAGE-HALF (white / near-black palette) ══════════ */
     /* DARK halves → cream text, labels rgba(244,242,233,.62) */
     #w1 .lp, #w2 .lp, #w2 .rp, #w3 .rp, #w4 .lp, #w4 .rp {
       color:var(--cream);
@@ -267,25 +274,25 @@
     #w2 .gut, #w4 .gut { background:rgba(244,242,233,.16);
       box-shadow:6px 0 14px -6px rgba(244,242,233,.16), -6px 0 14px -6px rgba(244,242,233,.16); }
 
-    /* LIGHT halves (--sage) → inkblue text, labels rgba(0,31,39,.6) */
-    #w1 .rp, #w3 .lp { color:var(--inkblue); }
+    /* LIGHT halves (--paper WHITE) → ink text, labels rgba(0,31,39,.6) */
+    #w1 .rp, #w3 .lp { color:var(--ink); }
     #w1 .rp .run, #w3 .lp .run { color:rgba(0,31,39,.6); }
-    #w1 .rp .run a:hover, #w3 .lp .run a:hover { color:var(--inkblue); }
+    #w1 .rp .run a:hover, #w3 .lp .run a:hover { color:var(--ink); }
     #w3 .lp .lp-ct { color:rgba(0,31,39,.6); }
-    #w3 .lp .lp-title h2 { color:var(--inkblue); }
+    #w3 .lp .lp-title h2 { color:var(--ink); }
     #w3 .lp .lp-title h2 em { color:rgba(0,31,39,.6); }
     #w1 .rp .lp-cr, #w3 .lp .lp-cr { color:rgba(0,31,39,.78); }
     #w1 .rp .lp-cr b, #w3 .lp .lp-cr b { color:rgba(0,31,39,.6); }
     #w3 .lp .lp-cat { color:rgba(0,31,39,.78); }
     #w1 .rp .pno, #w3 .lp .pno { color:rgba(0,31,39,.22); }
-    #w1 .rp .rp-sub { color:var(--inkblue); }
+    #w1 .rp .rp-sub { color:var(--ink); }
     #w1 .rp .rp-body { color:rgba(0,31,39,.78); }
-    #w1 .rp .rp-body em { color:var(--inkblue); }
-    #w1 .rp .rp-link { color:var(--inkblue); border-bottom-color:rgba(0,31,39,.52); }
-    #w1 .rp .rp-link:hover { border-bottom-color:var(--inkblue); }
+    #w1 .rp .rp-body em { color:var(--ink); }
+    #w1 .rp .rp-link { color:var(--ink); border-bottom-color:rgba(0,31,39,.52); }
+    #w1 .rp .rp-link:hover { border-bottom-color:var(--ink); }
 
     /* ══════════ GRID VIEW — loose photos on the table ══════════ */
-    #gv { background:var(--evergreen); transition:background .45s ease; }
+    #gv { background:var(--inkblue); transition:background .45s ease; }
     #gv .tcap { color:rgba(244,242,233,.62); }
     #gv .run { color:rgba(244,242,233,.62) !important; }
     #gv .run a { color:inherit; }
@@ -585,11 +592,11 @@
   <section class="pg" id="gv" style="display:none;">
     <span class="tcap">Index</span>
     <span class="run" style="left:6vmin; color:rgba(244,242,233,.62);">Blue Tiger — Index</span>
-    <figure class="fl" data-t="w1" data-c="#1F73C2" style="left:5%;  top:11%;">
+    <figure class="fl" data-t="w1" data-c="#001F27" style="left:5%;  top:11%;">
       <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship platform" draggable="false">
       <figcaption><b>Uphold</b><span>ed tech · nº 01 · 2025</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w1" data-c="#1F73C2" style="left:23%; top:46%;">
+    <figure class="fl" data-t="w1" data-c="#001F27" style="left:23%; top:46%;">
       <img src="https://images.pexels.com/photos/17564017/pexels-photo-17564017.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — research and flows" draggable="false">
       <figcaption><b>Uphold</b><span>research &amp; flows</span></figcaption>
     </figure>
@@ -609,11 +616,11 @@
       <img src="https://images.pexels.com/photos/12957797/pexels-photo-12957797.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Insight — research ops" draggable="false">
       <figcaption><b>Insight</b><span>research ops</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#1F73C2" style="left:45%; top:56%;">
+    <figure class="fl" data-t="w4" data-c="#001F27" style="left:45%; top:56%;">
       <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — vegan marketplace" draggable="false">
       <figcaption><b>Vejeez!</b><span>commerce · nº 04 · 2024</span></figcaption>
     </figure>
-    <figure class="fl" data-t="w4" data-c="#1F73C2" style="left:79%; top:54%;">
+    <figure class="fl" data-t="w4" data-c="#001F27" style="left:79%; top:54%;">
       <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand and voice" draggable="false">
       <figcaption><b>Vejeez!</b><span>brand &amp; voice</span></figcaption>
     </figure>
