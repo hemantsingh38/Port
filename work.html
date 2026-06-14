@@ -93,7 +93,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: .045;                       /* faint enough to never moiré the eye */
+  opacity: 0; display: none;           /* halftone dot grid OFF — it screened the big type */
   mix-blend-mode: multiply;
   background-color: transparent;
   background-image: radial-gradient(
@@ -246,72 +246,63 @@
     .run a:hover { color:var(--ink); }
 
     /* ═══════════════════════════════════════════════════════════════════════════
-   WORK SPREADS · COLOUR FEATURE PLATE
-   LEFT page = framed photo + GIANT title (the plate). RIGHT page = colour text
-   page carrying the problem statement, the write-up and the credit captions.
-   Both halves are the project colour; the photo is inset so colour frames it.
-   Scoped #w1–#w4. GPU-layer hints keep the flip smooth on the image pages.
+   WORK SPREADS · MAGAZINE PLATE (equal pages, photo bleeds across the centre)
+   The .book stays 1fr 1fr (equal pages, gutter at the CENTRE like a real
+   magazine). The PHOTO bleeds from the left edge ACROSS the centre seam to ~62%.
+   The TEXT lives on the right ~33% (headline up top, short note at the bottom,
+   big gap between). Children anchor to .book (so the photo can cross the seam),
+   so #w .lp/.rp stay static — do NOT add position:relative here. Scoped #w1–#w4.
    ═══════════════════════════════════════════════════════════════════════════ */
 #w1, #w2, #w3, #w4 {
   --paper:#F3EBD6; --ink:#1B1916;
   --blue:#2F9FDC; --blue-soft:#8FD2F5;
   --red:#E3402C; --yellow:#E4DC3E; --pink:#EC6CAB;
-  --wtop:3.4rem;            /* top colour frame (running head + label) */
-  --wpad:3rem;              /* side / bottom colour frame (fills L/R too) */
+  --wtop:3.4rem; --wpad:3rem;
+  --img-r:38%;        /* photo right edge = 62% across → crosses the centre seam */
+  --txt-l:65%;        /* text column starts at 65% → ~3% colour gap from the photo */
 }
 #w1 .lp, #w1 .rp { background:var(--blue); }
 #w2 .lp, #w2 .rp { background:var(--red); }
 #w3 .lp, #w3 .rp { background:var(--yellow); }
 #w4 .lp, #w4 .rp { background:var(--pink); }
-/* image page = 2/3 of the spread, text page = 1/3 (scoped to work only) */
-#w1 .book,#w2 .book,#w3 .book,#w4 .book { grid-template-columns:2fr 1fr; }
-#w1 .gut,#w2 .gut,#w3 .gut,#w4 .gut { left:66.666%; }
-/* CRITICAL: contain the photo to the LEFT page and the text to the RIGHT page
-   (without position:relative they both anchored to the whole spread and overlapped) */
 #w1 .lp,#w1 .rp,#w2 .lp,#w2 .rp,#w3 .lp,#w3 .rp,#w4 .lp,#w4 .rp {
-  position:relative; overflow:hidden; padding:0; backface-visibility:hidden; }
+  padding:0; backface-visibility:hidden; }   /* static → children anchor to .book */
 
-/* ── LEFT: framed photo plate (colour shows on all four sides) ── */
+/* ── PHOTO: bleeds across the centre seam (left edge → 62%) ── */
 .fb-img { position:absolute; z-index:1; overflow:hidden;
-          top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad);
+          top:var(--wtop); bottom:var(--wpad); left:var(--wpad); right:var(--img-r);
           backface-visibility:hidden; }
 .fb-photo { width:100%; height:100%; object-fit:cover; object-position:center;
-            filter:saturate(1.06) contrast(1.03);
-            transform:translateZ(0); backface-visibility:hidden; }   /* own GPU layer */
+            filter:saturate(1.06) contrast(1.03); transform:translateZ(0); backface-visibility:hidden; }
 .fb-wash, .fb-floor { display:none; }
 .fb-scrim { position:absolute; z-index:2; pointer-events:none;
-            top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad);
+            top:var(--wtop); bottom:var(--wpad); left:var(--wpad); right:var(--img-r);
             background:linear-gradient(to top, rgba(18,16,13,.68) 0%, rgba(18,16,13,.14) 48%, rgba(18,16,13,0) 72%); }
 .fb-title { position:absolute; z-index:6; left:var(--wpad); bottom:var(--wpad); margin:0;
             font-family:var(--display); font-weight:400; color:var(--paper);
             text-transform:uppercase; line-height:.82; letter-spacing:-.02em;
-            font-size:clamp(2.4rem, 6vw, 5.4rem); }
+            font-size:clamp(2.4rem, 5.5vw, 5rem); }
 .fb-t2 { display:block; }
 .fb-label { position:absolute; z-index:7; top:2rem; left:var(--wpad);
   font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; }
 
-/* ── RIGHT: colour text page ── */
-.fb-rp { position:absolute; z-index:3; display:flex; flex-direction:column; gap:.95rem;
-         top:var(--wtop); right:var(--wpad); bottom:var(--wpad); left:var(--wpad); overflow:hidden; }
-.fb-kick { font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
+/* ── TEXT column (right ~33%): headline top, short note + link bottom, big gap ── */
+.fb-rp { position:absolute; z-index:3; display:flex; flex-direction:column; justify-content:space-between;
+         top:var(--wtop); bottom:var(--wpad); left:var(--txt-l); right:var(--wpad); }
+.fb-kick { font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.14em;
+           text-transform:uppercase; opacity:.8; display:block; margin-bottom:.9rem; }
 .fb-lead { font-family:var(--sans); font-weight:500; font-size:var(--t-lead); line-height:1.22; letter-spacing:-.3px; margin:0; }
-.fb-body { font-family:var(--sans); font-size:var(--t-caption); line-height:1.55; display:flex; flex-direction:column; gap:.6rem; }
-.fb-body p { margin:0; }
-.fb-body em { font-style:normal; font-weight:700; }
-.fb-meta { display:flex; flex-wrap:wrap; gap:.8rem 1.5rem; margin-top:.1rem; }
-.fb-meta div { font-family:var(--sans); font-size:var(--t-caption); line-height:1.35; }
-.fb-meta b { display:block; font-family:var(--sans); font-weight:600; font-size:var(--t-label);
-             letter-spacing:.1em; text-transform:uppercase; opacity:.62; margin-bottom:.1rem; }
-.fb-link { align-self:flex-start; margin-top:auto; font-family:var(--sans); font-size:var(--t-label);
+.fb-note { font-family:var(--sans); font-size:var(--t-caption); line-height:1.55; margin:0 0 1.1rem; opacity:.92; }
+.fb-note em { font-style:normal; font-weight:700; opacity:1; }
+.fb-link { align-self:flex-start; font-family:var(--sans); font-size:var(--t-label);
            font-weight:600; letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
            padding:.5rem .9rem; transition:transform .25s var(--ease-out), background .25s var(--ease-out), color .25s; }
 .fb-link.dis { opacity:.5; pointer-events:none; }
 
-/* folios + running head on the frame */
+/* one folio, bottom-right of the text column */
 #w1 .pno,#w2 .pno,#w3 .pno,#w4 .pno { z-index:7; right:var(--wpad); bottom:.3rem; left:auto; opacity:.5;
   font-family:var(--display); font-weight:400; letter-spacing:0; font-size:clamp(1.4rem,2.4vw,2rem); }
 #w1 .run,#w2 .run,#w3 .run,#w4 .run { z-index:7; top:1rem; }
-#w1 .gut,#w2 .gut,#w3 .gut,#w4 .gut { background:rgba(27,25,22,.16); z-index:5; box-shadow:none; }
 
 /* ── per-project text colour: light fields (blue/yellow/pink) → INK; red → cream ── */
 #w1 .rp,#w1 .fb-label,#w1 .run,#w1 .run a,#w1 .pno,
@@ -319,7 +310,6 @@
 #w4 .rp,#w4 .fb-label,#w4 .run,#w4 .run a,#w4 .pno { color:var(--ink); }
 #w2 .rp,#w2 .fb-label,#w2 .run,#w2 .run a,#w2 .pno { color:var(--paper); }
 #w1 .run a:hover,#w3 .run a:hover,#w4 .run a:hover { opacity:.6; }
-/* link pill */
 #w1 .fb-link,#w3 .fb-link,#w4 .fb-link { background:var(--ink); color:var(--paper); }
 #w1 .fb-link:hover,#w3 .fb-link:hover,#w4 .fb-link:hover { transform:translateX(2px); background:var(--paper); color:var(--ink); }
 #w2 .fb-link { background:var(--paper); color:var(--ink); }
@@ -402,7 +392,7 @@
 
   <div id="view-single">
   <!-- ═══ PROJECT 01 · UPHOLD ═══ -->
-    <section class="pg" id="w1">
+      <section class="pg" id="w1">
     <span class="tcap">Work 01 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
@@ -414,23 +404,18 @@
         <div class="fb-scrim"></div>
         <span class="fb-label">Nº 01 · Ed Tech · 2025</span>
         <h2 class="fb-title">UP<span class="fb-t2">HOLD</span></h2>
-        <span class="pno">114</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="fb-rp">
-          <span class="fb-kick">Uphold — Mentorship platform</span>
-          <p class="fb-lead">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</p>
-          <div class="fb-body">
-            <p>Uphold pairs new designers with working mentors who review the actual files, not the polished case study, and name <em>one concrete change</em> before any praise — because "looks great" teaches nothing.</p>
-            <p>I designed it end to end. The hard part was never the match; it was the wait: a mentor reply can take two days, so I built for the gap — a submission state that reads "in good hands," not "ignored," and reminders that <em>nudge the mentor without nagging the learner.</em></p>
+          <div>
+            <span class="fb-kick">Uphold — Mentorship platform</span>
+            <p class="fb-lead">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</p>
           </div>
-          <div class="fb-meta">
-            <div><b>Strategy</b>User research · Ed tech</div>
-            <div><b>Craft</b>Flows &amp; interface · Figma</div>
-            <div><b>Year</b>2025 · New Delhi</div>
+          <div>
+            <p class="fb-note">Uphold pairs new designers with mentors who mark up the real files and name <em>one concrete fix</em> before any praise.</p>
+            <a class="fb-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
           </div>
-          <a class="fb-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
         </div>
         <span class="pno">115</span>
       </div>
@@ -438,7 +423,7 @@
   </section>
 
   <!-- ═══ PROJECT 02 · REVIBE ═══ -->
-    <section class="pg" id="w2">
+      <section class="pg" id="w2">
     <span class="tcap">Work 02 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
@@ -450,23 +435,18 @@
         <div class="fb-scrim"></div>
         <span class="fb-label">Nº 02 · Fashion / Commerce · 2025</span>
         <h2 class="fb-title">RE<span class="fb-t2">VIBE</span></h2>
-        <span class="pno">116</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="fb-rp">
-          <span class="fb-kick">Revibe — Resale marketplace</span>
-          <p class="fb-lead">Secondhand isn't a discount aisle. It's a different way of shopping.</p>
-          <div class="fb-body">
-            <p>Resale inventory is one-of-one: a single item, one size, one fade in the wash. So the AI doesn't guess off the label you usually buy — it reads a garment's measured shoulder, chest and length against your <em>real closet,</em> and tells you the truth when nothing fits.</p>
-            <p>The work was in the unglamorous parts: a sell flow that gets a photo and price out in <em>under a minute,</em> and a sold-out state that points to three near-matches instead of a dead end.</p>
+          <div>
+            <span class="fb-kick">Revibe — Resale marketplace</span>
+            <p class="fb-lead">Secondhand isn't a discount aisle. It's a different way of shopping.</p>
           </div>
-          <div class="fb-meta">
-            <div><b>Strategy</b>Gen Z, India · Thrift &amp; AI</div>
-            <div><b>Craft</b>E-commerce UX · Brand</div>
-            <div><b>Year</b>2025 · New Delhi</div>
+          <div>
+            <p class="fb-note">The AI reads a garment's real measurements against your <em>own closet,</em> and a sell flow ships a listing in under a minute.</p>
+            <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View case study ↗</a>
           </div>
-          <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View case study ↗</a>
         </div>
         <span class="pno">117</span>
       </div>
@@ -474,7 +454,7 @@
   </section>
 
   <!-- ═══ PROJECT 03 · INSIGHT ═══ -->
-    <section class="pg" id="w3">
+      <section class="pg" id="w3">
     <span class="tcap">Work 03 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
@@ -486,23 +466,18 @@
         <div class="fb-scrim"></div>
         <span class="fb-label">Nº 03 · SaaS / Research · 2025</span>
         <h2 class="fb-title">IN<span class="fb-t2">SIGHT</span></h2>
-        <span class="pno">118</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="fb-rp">
-          <span class="fb-kick">Insight — Research recruiting</span>
-          <p class="fb-lead">Insight finds research participants for teams that can't expense a $20k recruiting tool.</p>
-          <div class="fb-body">
-            <p>The hard part was never the matching — it was trust: convincing a lead that the strangers showing up are real, screened, and worth the hour. So the work went where that's decided — a question builder that flags when <em>two screener criteria contradict each other</em> before you send it, and a no-show ledger that quietly downranks the people who flake.</p>
-            <p>Built in Figma and Miro, for the designer who needs <em>eight participants by Thursday.</em></p>
+          <div>
+            <span class="fb-kick">Insight — Research recruiting</span>
+            <p class="fb-lead">Research participants for teams that can't expense a $20k recruiting tool.</p>
           </div>
-          <div class="fb-meta">
-            <div><b>Strategy</b>Research ops · B2B SaaS</div>
-            <div><b>Craft</b>Product design · Figma · Miro</div>
-            <div><b>Year</b>2025 · New Delhi</div>
+          <div>
+            <p class="fb-note">A screener that flags its own <em>contradictions</em> before you send it, and a ledger that quietly downranks the people who flake.</p>
+            <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
           </div>
-          <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
         </div>
         <span class="pno">119</span>
       </div>
@@ -510,7 +485,7 @@
   </section>
 
   <!-- ═══ PROJECT 04 · VEJEEZ! ═══ -->
-    <section class="pg" id="w4">
+      <section class="pg" id="w4">
     <span class="tcap">Work 04 / 04</span>
     <div class="book rv">
       <div class="gut"></div>
@@ -522,23 +497,18 @@
         <div class="fb-scrim"></div>
         <span class="fb-label">Nº 04 · Food / Marketplace · 2024</span>
         <h2 class="fb-title">VEJ<span class="fb-t2">EEZ!</span></h2>
-        <span class="pno">120</span>
       </div>
       <div class="rp">
         <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
         <div class="fb-rp">
-          <span class="fb-kick">Vejeez! — Vegan marketplace</span>
-          <p class="fb-lead">Most vegan products default to clinical white or aggressive green — both of which read as a chore, not a craving.</p>
-          <div class="fb-body">
-            <p>Vejeez! treats vegan as an <em>appetite, not a verdict.</em> I built the brand, voice and storefront as one hand: listings lead with the three things shoppers actually scan for, and the filter for hidden animal-derived additives — gelatin, carmine, shellac — sits up front instead of buried in tags.</p>
-            <p>The empty search suggests a swap instead of apologizing; the <em>voice that wrote the wordmark wrote the "added to cart" line too.</em></p>
+          <div>
+            <span class="fb-kick">Vejeez! — Vegan marketplace</span>
+            <p class="fb-lead">Most vegan products read as a chore, not a craving.</p>
           </div>
-          <div class="fb-meta">
-            <div><b>Strategy</b>Marketplace · Vegan living</div>
-            <div><b>Craft</b>Brand &amp; UX · Illustration</div>
-            <div><b>Year</b>2024 · New Delhi</div>
+          <div>
+            <p class="fb-note">Vejeez! treats vegan as an <em>appetite:</em> listings lead with what shoppers scan for, and hidden additives surface up front, not buried in tags.</p>
+            <a class="fb-link dis">Case study soon</a>
           </div>
-          <a class="fb-link dis">Case study soon</a>
         </div>
         <span class="pno">121</span>
       </div>
