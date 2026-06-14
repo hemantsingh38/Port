@@ -263,8 +263,13 @@
 #w2 .lp, #w2 .rp { background:var(--red); }
 #w3 .lp, #w3 .rp { background:var(--yellow); }
 #w4 .lp, #w4 .rp { background:var(--pink); }
+/* image page = 2/3 of the spread, text page = 1/3 (scoped to work only) */
+#w1 .book,#w2 .book,#w3 .book,#w4 .book { grid-template-columns:2fr 1fr; }
+#w1 .gut,#w2 .gut,#w3 .gut,#w4 .gut { left:66.666%; }
+/* CRITICAL: contain the photo to the LEFT page and the text to the RIGHT page
+   (without position:relative they both anchored to the whole spread and overlapped) */
 #w1 .lp,#w1 .rp,#w2 .lp,#w2 .rp,#w3 .lp,#w3 .rp,#w4 .lp,#w4 .rp {
-  padding:0; backface-visibility:hidden; }   /* GPU layer → smoother flip */
+  position:relative; overflow:hidden; padding:0; backface-visibility:hidden; }
 
 /* ── LEFT: framed photo plate (colour shows on all four sides) ── */
 .fb-img { position:absolute; z-index:1; overflow:hidden;
