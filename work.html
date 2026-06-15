@@ -349,6 +349,40 @@
                color:#C8385A; pointer-events:none;
                transform:translateX(-50%) rotate(-2deg); }
 
+    /* ══════════ INDEX VIEW · scalable project list (magazine contents) ══════════ */
+    #iv { position:fixed; inset:0; z-index:15; background:var(--paper); color:var(--ink);
+          overflow:auto; padding:max(9vmin,3.6rem) 11vmin 9vmin; }
+    .iv-head { display:block; font-family:var(--sans); font-size:var(--t-label); font-weight:600;
+               letter-spacing:.16em; text-transform:uppercase; opacity:.62; margin-bottom:2rem; }
+    .iv-list { border-top:2px solid var(--ink); }
+    .iv-row { display:grid; grid-template-columns:2.8rem 1fr auto 3.2rem; align-items:baseline; gap:1.2rem;
+              padding:1.05rem .3rem; border-bottom:1.5px solid rgba(27,25,22,.22); text-decoration:none;
+              color:var(--ink); cursor:none; transition:background .2s, padding .2s; }
+    .iv-row:hover { background:var(--blue); padding-left:1rem; padding-right:1rem; }
+    .iv-no  { font-family:var(--sans); font-size:var(--t-caption); font-weight:600; opacity:.5; }
+    .iv-name{ font-family:var(--display); font-weight:400; text-transform:uppercase; line-height:1;
+              font-size:clamp(1.5rem,3.2vw,2.7rem); letter-spacing:-.02em; }
+    .iv-cat { font-family:var(--sans); font-size:var(--t-caption); opacity:.62; justify-self:end; text-align:right; }
+    .iv-yr  { font-family:var(--sans); font-size:var(--t-caption); font-weight:600; opacity:.5; text-align:right; }
+    .iv-tax { display:flex; flex-wrap:wrap; gap:1.2rem 3rem; margin-top:2.2rem; }
+    .iv-tax div { font-family:var(--sans); font-size:var(--t-caption); line-height:1.5; color:rgba(27,25,22,.72); max-width:40ch; }
+    .iv-tax b { font-family:var(--sans); font-weight:600; font-size:var(--t-label); letter-spacing:.12em;
+                text-transform:uppercase; color:var(--ink); margin-right:.5rem; }
+    #iv-preview { position:fixed; right:8vmin; top:50%; transform:translateY(-50%) rotate(-2.5deg);
+                  width:clamp(170px,20vw,300px); aspect-ratio:4/5; object-fit:cover; z-index:16;
+                  box-shadow:0 18px 44px rgba(0,0,0,.3); opacity:0; transition:opacity .18s; pointer-events:none; }
+    #iv-preview.show { opacity:1; }
+
+    /* ── tightened GRID mosaic (was scattered floaties) ── */
+    #gv .gv-grid { position:absolute; inset:max(9vmin,3.6rem) 9vmin 9vmin; display:grid;
+                   grid-template-columns:repeat(4,1fr); gap:.5rem; align-content:start; overflow:auto; }
+    #gv .fl { position:relative !important; left:auto !important; top:auto !important; right:auto !important;
+              width:auto !important; animation:none !important; }
+    #gv .fl img { aspect-ratio:4/5; }
+    #gv .fl figcaption { position:static; opacity:1; transform:none; padding-top:.4rem; }
+    @media(max-width:760px){ #gv .gv-grid { grid-template-columns:repeat(2,1fr); }
+      #iv-preview { display:none; } .iv-row { grid-template-columns:2rem 1fr; } .iv-cat,.iv-yr { display:none; } }
+
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
               grid-template-rows:1fr 1fr; }
@@ -381,6 +415,9 @@
     </button>
     <button id="bt-grid" aria-label="Grid view" title="The shelf">
       <svg viewBox="0 0 12 12" fill="currentColor"><rect x="1" y="1" width="4.4" height="4.4" rx=".8"/><rect x="6.6" y="1" width="4.4" height="4.4" rx=".8"/><rect x="1" y="6.6" width="4.4" height="4.4" rx=".8"/><rect x="6.6" y="6.6" width="4.4" height="4.4" rx=".8"/></svg>
+    </button>
+    <button id="bt-index" aria-label="Index view" title="The index">
+      <svg viewBox="0 0 12 12" fill="currentColor"><rect x="1" y="1.6" width="10" height="1.5" rx=".5"/><rect x="1" y="5.3" width="10" height="1.5" rx=".5"/><rect x="1" y="9" width="10" height="1.5" rx=".5"/></svg>
     </button>
   </div>
 
@@ -518,9 +555,25 @@
   </div>
 
   <!-- ═══ GRID VIEW · LOOSE PHOTOS ═══ -->
+  <section id="iv" style="display:none;">
+    <span class="iv-head">Blue Tiger — Index · Selected Work</span>
+    <div class="iv-list">
+      <a class="iv-row" data-t="w1" data-img="img/hero-tiger.jpg"><span class="iv-no">01</span><span class="iv-name">Uphold</span><span class="iv-cat">Mentorship · Ed Tech</span><span class="iv-yr">2025</span></a>
+      <a class="iv-row" data-t="w2" data-img="img/hero-tiger.jpg"><span class="iv-no">02</span><span class="iv-name">Revibe</span><span class="iv-cat">Resale · Commerce</span><span class="iv-yr">2025</span></a>
+      <a class="iv-row" data-t="w3" data-img="img/hero-tiger.jpg"><span class="iv-no">03</span><span class="iv-name">Insight</span><span class="iv-cat">Recruiting · B2B SaaS</span><span class="iv-yr">2025</span></a>
+      <a class="iv-row" data-t="w4" data-img="img/hero-tiger.jpg"><span class="iv-no">04</span><span class="iv-name">Vejeez!</span><span class="iv-cat">Marketplace · Food</span><span class="iv-yr">2024</span></a>
+    </div>
+    <div class="iv-tax">
+      <div><b>Services</b> Product Design · Interaction · Brand &amp; Identity · Strategy</div>
+      <div><b>Industries</b> Ed Tech · Commerce · B2B SaaS · Food &amp; Marketplace</div>
+    </div>
+    <img id="iv-preview" alt="" aria-hidden="true">
+  </section>
+
   <section class="pg" id="gv" style="display:none;">
     <span class="tcap">Index</span>
     <span class="run" style="left:6vmin; color:rgba(244,242,233,.62);">Blue Tiger — Index</span>
+    <div class="gv-grid">
     <figure class="fl" data-t="w1" data-c="#001F27" style="left:5%;  top:11%;">
       <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Uphold — mentorship platform" draggable="false">
       <figcaption><b>Uphold</b><span>ed tech · nº 01 · 2025</span></figcaption>
@@ -553,7 +606,8 @@
       <img src="https://images.pexels.com/photos/20937747/pexels-photo-20937747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vejeez! — brand and voice" draggable="false">
       <figcaption><b>Vejeez!</b><span>brand &amp; voice</span></figcaption>
     </figure>
-    <span class="gv-hint">drag to move · tap to open</span>
+    </div>
+    <span class="gv-hint">tap any plate to open</span>
   </section>
 
   <script>
@@ -697,16 +751,37 @@
       const bS = document.getElementById('bt-single');
       const bG = document.getElementById('bt-grid');
 
-      function setMode(grid) {
-        gridMode = grid;
-        bS.classList.toggle('on', !grid);
-        bG.classList.toggle('on', grid);
-        gv.style.display = grid ? '' : 'none';
-        gv.style.zIndex  = grid ? '15' : '';
+      const bI = document.getElementById('bt-index');
+      const iv = document.getElementById('iv');
+      const ivPrev = document.getElementById('iv-preview');
+      function setMode(mode) {                 // 'single' | 'grid' | 'index'
+        if (mode === true)  mode = 'grid';
+        if (mode === false) mode = 'single';
+        gridMode = mode !== 'single';
+        bS.classList.toggle('on', mode === 'single');
+        bG.classList.toggle('on', mode === 'grid');
+        bI.classList.toggle('on', mode === 'index');
+        gv.style.display = mode === 'grid'  ? '' : 'none';
+        gv.style.zIndex  = mode === 'grid'  ? '15' : '';
+        iv.style.display = mode === 'index' ? '' : 'none';
       }
-
-      bS.addEventListener('click', () => setMode(false));
-      bG.addEventListener('click', () => setMode(true));
+      function openProject(id) {
+        const idx = pgs.findIndex(pg => pg.id === id);
+        setMode('single');
+        if (idx >= 0 && idx !== cur) {
+          pgs[cur].classList.remove('pg-active'); pgs[cur].style.zIndex = '';
+          cur = idx;
+          pgs[cur].classList.add('pg-active'); reveal(pgs[cur]);
+        }
+      }
+      bS.addEventListener('click', () => setMode('single'));
+      bG.addEventListener('click', () => setMode('grid'));
+      bI.addEventListener('click', () => setMode('index'));
+      document.querySelectorAll('#iv .iv-row').forEach(row => {
+        row.addEventListener('click', e => { e.preventDefault(); openProject(row.dataset.t); });
+        row.addEventListener('pointerenter', () => { if (row.dataset.img) { ivPrev.src = row.dataset.img; ivPrev.classList.add('show'); } });
+        row.addEventListener('pointerleave', () => ivPrev.classList.remove('show'));
+      });
 
       /* ── floating photos: drag to move, tap to navigate ── */
       let topZ = 20, drag = null;
