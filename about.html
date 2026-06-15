@@ -6,7 +6,7 @@
   <title>About — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&family=Permanent+Marker&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -445,6 +445,39 @@
     .abk-link-name { font-family:var(--sans); font-style:normal; font-weight:400;
       font-size:var(--t-body); color:var(--cream); }
 
+    /* ══════════ CONTACT SHEET — full blue field ══════════ */
+    #a-cs .book { --spine: var(--yellow); }
+    #a-cs .gut { background:rgba(243,235,214,.18); box-shadow:none; }
+    /* LEFT — the images on blue */
+    .cs-plate { position:relative; overflow:hidden; background:#2747D6;
+                display:flex; flex-direction:column; justify-content:center;
+                padding:2.4rem 1.9rem 3rem; }
+    .cs-plate .pno { color:rgba(243,235,214,.42); }
+    .cs-grid { position:relative; display:grid; grid-template-columns:repeat(4,1fr);
+               gap:.42rem; align-content:center; }
+    .csf { position:relative; margin:0; line-height:0; }
+    .csf img { width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+    .csf::after { content:''; position:absolute; inset:0; pointer-events:none;
+                  box-shadow:inset 0 0 0 1px rgba(0,0,0,.07); }
+    .csn { position:absolute; left:0; bottom:0; z-index:3;
+           font:500 .56rem/1 var(--sans); letter-spacing:.04em;
+           color:rgba(243,235,214,.92); background:rgba(14,24,80,.55); padding:1px 4px 1px 3px; }
+    .csf:hover { z-index:6; }
+    .csf:hover img { filter:brightness(1.06) contrast(1.03); }
+
+    /* RIGHT — solid blue, handwritten scrawl (90s diary, like the reference) */
+    .cs-select { position:relative; overflow:hidden; background:#2747D6; }
+    .cs-select .pno { color:rgba(243,235,214,.4); z-index:4; }
+    .cs-hand { position:absolute; top:19%; left:2.6rem; z-index:3; pointer-events:none;
+               font-family:'Caveat', var(--scrib), cursive; font-weight:700; line-height:.82;
+               font-size:clamp(3.2rem,7vw,5.4rem); color:var(--cream);
+               transform:rotate(-4deg); text-shadow:0 1px 2px rgba(14,24,80,.25); }
+    .cs-scrawl { position:absolute; z-index:3; pointer-events:none;
+                 font-family:'Kalam', var(--scrib), cursive; font-weight:400; line-height:1.3;
+                 color:rgba(243,235,214,.82); font-size:clamp(1rem,1.7vw,1.35rem); }
+    .cs-scrawl-1 { top:53%; left:3rem;   transform:rotate(-2deg); }
+    .cs-scrawl-2 { top:64%; left:5.4rem; transform:rotate(2deg); }
+
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
               grid-template-rows:1fr 1fr; }
@@ -481,7 +514,7 @@
 
   <!-- ═══ HERO · CONTRIBUTORS ═══ -->
   <section class="pg" id="a-cv">
-    <span class="tcap">i / viii — the contributors</span>
+    <span class="tcap">i / ix — the contributors</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="ctr-pg">
@@ -524,7 +557,7 @@
 
   <!-- ═══ ABOUT ME ═══ -->
   <section class="pg" id="a-me">
-    <span class="tcap">ii / viii — about me</span>
+    <span class="tcap">ii / ix — about me</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp" style="display:flex; align-items:center; justify-content:center;">
@@ -554,7 +587,7 @@
 
   <!-- ═══ PHILOSOPHY ═══ -->
   <section class="pg" id="a-ph">
-    <span class="tcap">iii / viii — my philosophy</span>
+    <span class="tcap">iii / ix — my philosophy</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="aph-l">
@@ -591,7 +624,7 @@
 
   <!-- ═══ WORK BRIEF ═══ -->
   <section class="pg" id="a-wk">
-    <span class="tcap">iv / viii — work, briefly</span>
+    <span class="tcap">iv / ix — work, briefly</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -628,7 +661,7 @@
 
   <!-- ═══ INSPIRATIONS ═══ -->
   <section class="pg" id="a-in">
-    <span class="tcap">v / viii — inspirations</span>
+    <span class="tcap">v / ix — inspirations</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -661,7 +694,7 @@
 
   <!-- ═══ MY TASTE ═══ -->
   <section class="pg" id="a-ta">
-    <span class="tcap">vi / viii — my taste</span>
+    <span class="tcap">vi / ix — my taste</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -703,7 +736,7 @@
 
   <!-- ═══ NON-NEGOTIABLES ═══ -->
   <section class="pg" id="a-nn">
-    <span class="tcap">vii / viii — the non-negotiables</span>
+    <span class="tcap">vii / ix — the non-negotiables</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -736,16 +769,51 @@
     </div>
   </section>
 
+  <!-- ═══ CONTACT SHEET — the select ═══ -->
+  <section class="pg" id="a-cs">
+    <span class="tcap">viii / ix — the contact sheet</span>
+    <div class="book rv">
+      <div class="gut"></div>
+
+      <!-- left · the images, on blue -->
+      <div class="cs-plate">
+        <div class="cs-grid">
+          <figure class="csf"><img src="img/cs-01.jpg" alt="Contact frame: hand pushed back through hair, eyes to camera"><span class="csn">01</span></figure>
+          <figure class="csf"><img src="img/cs-02.jpg" alt="Contact frame: straight to camera"><span class="csn">02</span></figure>
+          <figure class="csf"><img src="img/cs-03.jpg" alt="Contact frame: glancing aside"><span class="csn">03</span></figure>
+          <figure class="csf"><img src="img/cs-04.jpg" alt="Contact frame: hand at temple, looking down"><span class="csn">04</span></figure>
+          <figure class="csf"><img src="img/cs-05.jpg" alt="Contact frame: caught mid-word"><span class="csn">05</span></figure>
+          <figure class="csf"><img src="img/cs-06.jpg" alt="Contact frame: eyes lowered, soft"><span class="csn">06</span></figure>
+          <figure class="csf"><img src="img/cs-07.jpg" alt="Contact frame: finger to lips, thinking"><span class="csn">07</span></figure>
+          <figure class="csf"><img src="img/cs-08.jpg" alt="Contact frame: hand in hair, brow drawn"><span class="csn">08</span></figure>
+          <figure class="csf"><img src="img/cs-09.jpg" alt="Contact frame: half-smile, finger at chin"><span class="csn">09</span></figure>
+          <figure class="csf"><img src="img/cs-10.jpg" alt="Contact frame: looking off-camera"><span class="csn">10</span></figure>
+          <figure class="csf"><img src="img/cs-11.jpg" alt="Contact frame: hand on forehead, eyes up"><span class="csn">11</span></figure>
+          <figure class="csf"><img src="img/cs-12.jpg" alt="Contact frame: hand to jaw, unsure"><span class="csn">12</span></figure>
+        </div>
+        <span class="pno">138</span>
+      </div>
+
+      <!-- right · solid blue, handwritten scrawl -->
+      <div class="cs-select">
+        <p class="cs-hand">all of them<br>are me</p>
+        <span class="cs-scrawl cs-scrawl-1">roll 01 — no retakes</span>
+        <span class="cs-scrawl cs-scrawl-2">couldn't pick<br>just one</span>
+        <span class="pno">139</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ BACK — closing spread ═══ -->
   <section class="pg" id="a-bk">
-    <span class="tcap">viii / viii — blue tiger, new delhi</span>
+    <span class="tcap">ix / ix — blue tiger, new delhi</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="abk-lp">
         <span class="abk-run">Blue Tiger — About</span>
         <h2 class="abk-hed">Enough<br><em>about me.</em></h2>
         <span class="scrib" style="left:3rem; bottom:5rem;">a cub with claws ✦</span>
-        <span class="pno">138</span>
+        <span class="pno">140</span>
       </div>
       <div class="abk-rp">
         <p class="abk-rp-hed">Blue Tiger —<br>"a cub<br>with claws."</p>
@@ -754,7 +822,7 @@
           <a href="index.html#cn"><span class="abk-link-label">Connect</span><span class="abk-link-name">say hello</span></a>
           <a href="mailto:hgusain307@gmail.com"><span class="abk-link-label">Email</span><span class="abk-link-name">hgusain307@gmail.com</span></a>
         </div>
-        <span class="pno" style="color:rgba(244,242,233,.34);">139</span>
+        <span class="pno" style="color:rgba(244,242,233,.34);">141</span>
       </div>
     </div>
   </section>
