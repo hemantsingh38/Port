@@ -676,70 +676,6 @@
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
   
-    /* ══════════════════════════════════════════════════════════════════
-   #f1 · CUT-OUT COLLAGE  —  SOFT PAWS / SHARP CLAWS
-   REAL die-cut subjects (co-*.png, transparent) freely pasted, ONE unified
-   high-contrast B&W treatment so they cohere; the lone RED is the tiger-cub
-   anchor + the wordmark + the hand-MARKER annotations (roughened red strokes
-   + Caveat notes). Print texture (halftone tooth + paper grain). No rings.
-   ══════════════════════════════════════════════════════════════════ */
-#f1 .fq-page{ background:var(--paper)!important; position:relative; }
-/* fine print tooth — visible-but-subtle, never dotty (subjects sit above) */
-#f1 .fq-page::after{
-  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:radial-gradient(rgba(27,25,22,.5) .55px, transparent 1px) 0 0 / 3.6px 3.6px;
-  opacity:.06; mix-blend-mode:multiply;
-}
-
-/* ── DIE-CUT SUBJECTS — transparent PNGs, ONE B&W ink, paper-cut shadow
-      (drop-shadow follows the alpha, so the shadow IS the cut silhouette) ── */
-#f1 .f1-cut{
-  position:absolute; z-index:var(--z,3);
-  left:var(--x); top:var(--y); width:var(--d); height:auto;
-  transform:rotate(var(--r,0deg));
-  filter:grayscale(1) contrast(1.3) brightness(1.05)
-         drop-shadow(.5rem .62rem .42rem rgba(27,25,22,.3));
-}
-
-/* ── THE ONE RED ANCHOR — the cub, circular red-ink duotone on cream stock ── */
-#f1 .f1-hero{
-  position:absolute; z-index:6; left:var(--x); top:var(--y); width:var(--d);
-  aspect-ratio:1; border-radius:50%; overflow:hidden; isolation:isolate;
-  background:var(--paper); transform:rotate(var(--r,0deg));
-  box-shadow:.5rem .62rem .6rem -.1rem rgba(27,25,22,.32);
-}
-#f1 .f1-hero img{ position:relative; z-index:0; width:100%; height:100%; object-fit:cover;
-  filter:grayscale(1) contrast(1.42) brightness(1.05); }
-#f1 .f1-hero::before{ content:''; position:absolute; inset:0; z-index:1; background:var(--red); mix-blend-mode:multiply; }
-#f1 .f1-hero::after{ content:''; position:absolute; inset:0; z-index:2; background:var(--paper); mix-blend-mode:screen; opacity:.3; }
-
-/* ── RED DISPLAY WORDS — solid, tight, confident (no outline) ── */
-#f1 .f1-word{
-  position:absolute; z-index:7; margin:0; font-family:var(--display); font-weight:900;
-  font-size:clamp(2.6rem,7vw,5rem); line-height:.82; letter-spacing:-.035em;
-  text-transform:uppercase; color:var(--red); pointer-events:none;
-}
-#f1 .f1-word span{ display:block; }
-#f1 .f1-word--l{ left:7%; top:8%; } #f1 .f1-word--l span:last-child{ margin-left:.62em; }
-#f1 .f1-word--r{ right:7%; bottom:9%; text-align:right; } #f1 .f1-word--r span:last-child{ margin-right:.62em; }
-
-/* ── HAND-MARKER ANNOTATIONS — roughened red strokes (feDisplacement) + Caveat ── */
-#f1 .f1-mark{ position:absolute; z-index:8; pointer-events:none; overflow:visible; }
-#f1 .f1-mark path, #f1 .f1-mark ellipse{ fill:none; stroke:var(--red); stroke-width:3.4;
-  stroke-linecap:round; stroke-linejoin:round; filter:url(#f1rough); }
-#f1 .f1-note{ position:absolute; z-index:8; font-family:var(--scrib); font-weight:600;
-  color:var(--red); font-size:clamp(1.1rem,2.5vmin,1.5rem);
-  transform:rotate(var(--nr,-3deg)); pointer-events:none; }
-#f1 .f1-note.ink{ color:rgba(27,25,22,.6); }
-
-/* ── editorial meta + folio ── */
-#f1 .f1-kick{ position:absolute; z-index:7; left:7%; bottom:8%;
-  font-family:var(--sans); font-weight:500; font-size:var(--t-label);
-  letter-spacing:.26em; text-transform:uppercase; color:rgba(27,25,22,.5); }
-#f1 .f1-folio{ position:absolute; bottom:1.1rem; left:1.6rem; z-index:7; font-family:var(--sans);
-  font-weight:500; font-size:var(--t-label); letter-spacing:.12em; color:rgba(27,25,22,.32); }
-#f1 .f1-folio--r{ left:auto; right:1.6rem; }
-@media(max-width:760px){ #f1 .f1-word{ font-size:clamp(2.2rem,11vw,3.4rem); } }
   </style>
 </head>
 <body>
@@ -892,54 +828,6 @@
     </div>
   </section>
 
-  <!-- ═══ FILLER 1 · pink / blue ═══ -->
-  <section class="pg" id="f1">
-    <span class="tcap">filler · influences</span>
-    <svg width="0" height="0" aria-hidden="true" style="position:absolute;">
-      <defs><filter id="f1rough"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></defs>
-    </svg>
-    <div class="book rv">
-      <div class="gut"></div>
-
-      <!-- ░░░ LEFT — SOFT PAWS · cut-out subjects pasted, the red cub anchors + is circled ░░░ -->
-      <div class="fq-page">
-        <h2 class="f1-word f1-word--l"><span>SOFT</span><span>PAWS</span></h2>
-
-        <img class="f1-cut" style="--d:25%; --x:5%;  --y:50%; --r:-5deg; --z:3;" src="img/co-gymbw.png" alt="Training, kept honest" loading="lazy">
-        <img class="f1-cut" style="--d:21%; --x:27%; --y:31%; --r:4deg;  --z:4;" src="img/co-bar.png" alt="A glass at the end of it" loading="lazy">
-
-        <!-- the ONE red: tiger cub, circular red-ink duotone, marker-circled -->
-        <figure class="f1-hero" style="--d:30%; --x:50%; --y:44%; --r:2deg;">
-          <img src="img/hero-tiger.jpg" alt="Blue Tiger — the cub, mid-stride" loading="lazy">
-        </figure>
-        <svg class="f1-mark" style="left:46%; top:36%; width:40%; height:54%;" viewBox="0 0 220 250" aria-hidden="true">
-          <ellipse cx="108" cy="120" rx="98" ry="112"/>
-        </svg>
-        <span class="f1-note" style="left:39%; top:30%; --nr:-7deg;">the one ↘</span>
-
-        <span class="f1-kick">Fig. 06 — Influences</span>
-        <span class="f1-folio">06</span>
-      </div>
-
-      <!-- ░░░ RIGHT — SHARP CLAWS · the cut-out cluster continues, falling away ░░░ -->
-      <div class="fq-page">
-        <h2 class="f1-word f1-word--r"><span>SHARP</span><span>CLAWS</span></h2>
-
-        <img class="f1-cut" style="--d:23%; --x:6%;  --y:18%; --r:5deg;  --z:4;" src="img/co-moon.png" alt="Late-night moon talk" loading="lazy">
-        <img class="f1-cut" style="--d:27%; --x:31%; --y:40%; --r:-4deg; --z:5;" src="img/co-pickle.png" alt="Pickleball, full swing" loading="lazy">
-        <img class="f1-cut" style="--d:21%; --x:62%; --y:22%; --r:3deg;  --z:3;" src="img/co-stage.png" alt="On stage" loading="lazy">
-
-        <!-- marker underline + hand note -->
-        <svg class="f1-mark" style="left:8%; top:13%; width:34%; height:9%;" viewBox="0 0 240 40" aria-hidden="true">
-          <path d="M8 28 q66 -16 132 -7 t92 3"/>
-        </svg>
-        <span class="f1-note ink" style="left:9%; top:5%; --nr:2deg;">made to last —</span>
-
-        <span class="f1-folio f1-folio--r">07</span>
-      </div>
-
-    </div>
-  </section>
 
   <!-- ═══ FILLER 2 · bloom / photo ═══ -->
   <section class="pg" id="f2">
