@@ -675,6 +675,104 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
+  
+    /* ══════════════════════════════════════════════════════════════════
+   #f1 · DIGITAL-COLLAGE LOVE-LETTER SPREAD
+   ONE cluster of circular photo cut-outs straddling the gutter.
+   Layer order:  paper(0) < ascii texture(1) < photos(2, leads 3)
+                 < gutter line(5, untouched) < red words + scribble(6)
+   FLAT: red words use a hard cream knockout (stroke), NO soft shadows.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* repaint both halves cream so the collage reads as one paper field */
+#f1 .fq-page{ background:var(--paper)!important; }
+
+/* ── ASCII / RANDOM-CODE TEXT TEXTURE — the "encoded" layer, under photos ── */
+#f1 .col-ascii{
+  position:absolute; z-index:1; pointer-events:none; user-select:none;
+  font-family:ui-monospace,'SFMono-Regular',Menlo,'Courier New',monospace;
+  font-size:9px; line-height:1.34; letter-spacing:.5px;
+  color:rgba(27,25,22,.5); opacity:.55;
+  white-space:pre-wrap; word-break:break-all;
+  text-transform:uppercase; mix-blend-mode:multiply;
+}
+#f1 .col-ascii.a-wide{ width:78%; }
+#f1 .col-ascii.a-tall{ width:46%; }
+/* sparser tinted scatters for depth */
+#f1 .col-ascii.a-red { color:rgba(227,64,44,.34); opacity:.5; }
+#f1 .col-ascii.a-blue{ color:rgba(47,159,220,.40); opacity:.45; }
+
+/* ── CIRCULAR PHOTO CUT-OUTS — overlapping cluster, printed-paper feel ── */
+#f1 .cut{
+  position:absolute; z-index:2; border-radius:50%; overflow:hidden;
+  background:var(--ink);                          /* graceful fallback disc */
+  /* riso paper-cut: cream bleed ring + brand-colour ring + HARD print drop */
+  box-shadow:
+    0 0 0 .32rem var(--paper),                    /* paper bleed ring */
+    0 0 0 .58rem var(--ring,var(--ink)),          /* riso colour ring */
+    .42rem .46rem 0 rgba(27,25,22,.22);           /* hard, flat ink drop */
+}
+#f1 .cut img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(1.06) contrast(1.03);
+}
+/* ring colour tints (riso pop) */
+#f1 .t-red { --ring:var(--red); }
+#f1 .t-blue{ --ring:var(--blue); }
+#f1 .t-yel { --ring:var(--yellow); }
+#f1 .t-pink{ --ring:var(--pink); }
+/* the big anchor discs that hug the gutter ride above the rest */
+#f1 .cut.lead{
+  z-index:3;
+  box-shadow:
+    0 0 0 .4rem var(--paper),
+    0 0 0 .72rem var(--ring,var(--ink)),
+    .55rem .6rem 0 rgba(27,25,22,.26);
+}
+
+/* ── BOLD ROUNDED RED DISPLAY WORDS — on top of the cluster, FLAT ── */
+#f1 .col-word{
+  position:absolute; z-index:6; margin:0;
+  font-family:var(--display); font-weight:900;
+  font-size:clamp(2.6rem,7.4vw,5rem); line-height:.84;
+  letter-spacing:-.02em; color:var(--red); text-transform:uppercase;
+  /* hard cream knockout so red stays legible over photos+ascii — NO soft shadow */
+  -webkit-text-stroke:3px var(--paper);
+  paint-order:stroke fill;
+  pointer-events:none;
+}
+#f1 .col-word span{ display:block; }
+#f1 .w-left { left:7%;  top:9%;  transform:rotate(-4deg); text-align:left; }
+#f1 .w-left span:last-child { margin-left:1.1em; }     /* PAWS stepped right */
+#f1 .w-right{ right:7%; bottom:11%; transform:rotate(3deg); text-align:right; }
+#f1 .w-right span:last-child{ margin-right:.5em; }      /* CLAWS stepped */
+
+/* ── playful Caveat hand-tag (cub voice) ── */
+#f1 .col-scrib{
+  position:absolute; z-index:6; font-family:var(--scrib);
+  font-size:clamp(1.2rem,2.6vmin,1.55rem);
+  color:rgba(27,25,22,.66); transform:rotate(-3deg);
+  pointer-events:none;
+}
+
+/* ── folio to match neighbouring spreads ── */
+#f1 .col-pno{
+  position:absolute; bottom:1.1rem; right:1.6rem; z-index:6;
+  font-family:var(--sans); font-weight:500; font-size:var(--t-label);
+  letter-spacing:.12em; color:rgba(27,25,22,.30);
+}
+
+/* tighten on single-column mobile so the cluster stays packed */
+@media (max-width:760px){
+  #f1 .col-word { font-size:clamp(2.2rem,11vw,3.4rem); -webkit-text-stroke-width:2px; }
+  #f1 .col-ascii{ font-size:8px; }
+  #f1 .cut{
+    box-shadow:
+      0 0 0 .22rem var(--paper),
+      0 0 0 .4rem var(--ring,var(--ink)),
+      .3rem .32rem 0 rgba(27,25,22,.22);
+  }
+}
   </style>
 </head>
 <body>
@@ -829,33 +927,77 @@
 
   <!-- ═══ FILLER 1 · pink / blue ═══ -->
   <section class="pg" id="f1">
-    <span class="tcap">iv / vii — influences</span>
+    <span class="tcap">filler · influences</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="fq-page" style="background:var(--yellow);">
-        <div class="fq fq-ink" style="left:18%; top:46%;">
-          Good design is actually a lot harder to notice than poor design,
-          in part because good designs fit our needs so well that the
-          design is invisible.
-          <small>Don Norman / The Design of Everyday Things</small>
-        </div>
-        <div class="fq thru fq-ink" style="left:30%; top:64%; width:46%;">
-          things people actually use, made to feel like things people
-          actually keep.
-        </div>
-        <span class="pno" style="color:rgba(0,31,39,.2); left:auto; right:1.6rem; transform:none;">06</span>
+
+      <!-- ░░░ LEFT half: ascii texture → photo cluster (packed toward gutter) → SOFT PAWS ░░░ -->
+      <div class="fq-page">
+        <pre class="col-ascii a-wide" style="left:5%; top:6%; transform:rotate(-1deg);">01001 SOFT//PAWS ▚▞ tiger.exe loaded ░▒▓ rnd[0x4F2A]
+{ if(quiet){ render(warmth); } } &lt;cluster id=love&gt; 7c#a2
+≡≡ photo.cut(circle, r=50%) ∴ overlap:true rot:-6deg ░░▒▒
+0xFE 0x3A 0x9C // paper-grain ☓ ☓ ☓ riso.layer.multiply
+loop( hue, +1 ){ saturate(1.06); } &lt;/love&gt; null;void(0)
+{{ a=b }} :: encode(image) → ascii ▞▚▞▚ 1010 0110 1100
+∎ blue.tiger ∎ studio.notes ∎ printed not flat ∎ 4F2A8</pre>
+
+        <pre class="col-ascii a-red" style="left:34%; top:40%; transform:rotate(2deg);">▓▒░ &lt;3 &lt;3 &lt;3 ░▒▓ R=227 G=64 B=44 // vermilion
+cut(r:50%) ∴ rotate ∴ overlap ∴ stack ∴ kiss(gutter)
+1F 0C A2 9E :: love.letter.collage :: 0110 1001 ░░▒▒</pre>
+
+        <!-- cluster: small to large; lead discs pushed to the RIGHT edge to meet the right half across the gutter -->
+        <div class="cut t-yel"      style="width:23%; aspect-ratio:1; left:9%;  top:30%; transform:rotate(-7deg);">
+          <img src="img/ramen.jpg" alt="Ramen bowl, steam rising"></div>
+        <div class="cut t-blue"     style="width:20%; aspect-ratio:1; left:24%; top:18%; transform:rotate(5deg);">
+          <img src="img/mountains.jpg" alt="Mountain ridgeline at dusk"></div>
+        <div class="cut t-pink"     style="width:18%; aspect-ratio:1; left:20%; top:52%; transform:rotate(-3deg);">
+          <img src="img/bar-glass.jpg" alt="Cocktail glass on a dark bar"></div>
+        <div class="cut lead t-red" style="width:31%; aspect-ratio:1; right:4%; top:24%; transform:rotate(4deg);">
+          <img src="img/hero-tiger.jpg" alt="Blue Tiger hero portrait"></div>
+        <div class="cut lead t-blue" style="width:26%; aspect-ratio:1; right:1%; top:54%; transform:rotate(-6deg);">
+          <img src="img/moon-talk.jpg" alt="Late-night moon conversation"></div>
+        <div class="cut t-yel"      style="width:16%; aspect-ratio:1; right:18%; top:8%; transform:rotate(8deg);">
+          <img src="img/gym.jpg" alt="Gym training session"></div>
+
+        <h2 class="col-word w-left"><span>SOFT</span><span>PAWS</span></h2>
+        <span class="col-scrib" style="left:11%; bottom:18%;">easy, tiger —</span>
+        <span class="col-pno">06</span>
       </div>
-      <div class="fq-page" style="background:var(--blue);">
-        <div class="fq fq-ink" style="right:14%; top:28%;">
-          Users do not care who I am. They care whether the thing works.
-          So I make it work, then make it feel inevitable.
-          <small>Blue Tiger / studio notes</small>
-        </div>
-        <div class="fq thru fq-ink" style="left:12%; bottom:18%; width:48%;">
-          good designs fit our needs so well that the design is invisible.
-        </div>
-        <span class="pno" style="color:rgba(27,25,22,.32); left:auto; right:1.6rem; transform:none;">07</span>
+
+      <!-- ░░░ RIGHT half: ascii texture → photo cluster (packed toward gutter) → SHARP CLAWS ░░░ -->
+      <div class="fq-page">
+        <pre class="col-ascii a-wide" style="right:5%; top:8%; transform:rotate(1deg);">SHARP//CLAWS 11010 ▚▞ claws.deploy() ▒▓ rnd[0x9C7E]
+&lt;cluster id=letter&gt; { if(loud){ render(edge); } } 8b#d4
+≡≡ photo.cut(circle, r=50%) ∴ overlap:true rot:+7deg ▒▒░░
+0xA1 0x5C 0x2F // ink-grain ☓ ☓ ☓ riso.layer.multiply
+loop( sharpen, +1 ){ contrast(1.03); } &lt;/letter&gt; void(0)
+{{ x=y }} :: encode(image) → ascii ▞▚▞▚ 0101 1010 0011
+∎ E3402C ∎ archivo.black ∎ tilt(+3deg) ∎ pop ∎ 9C7E1</pre>
+
+        <pre class="col-ascii a-blue a-tall" style="right:30%; bottom:8%; transform:rotate(-2deg);">2F9FDC ▞▚ cerulean ░▒▓ &lt;3 &lt;3
+cut(r:50%) ∴ rotate ∴ overlap
+9E A1 5C 2F :: 1001 0110 ░░▒▒
+collage.not.flat :: printed ∎</pre>
+
+        <!-- cluster: lead discs pushed to the LEFT edge to meet the left half across the gutter -->
+        <div class="cut lead t-blue" style="width:30%; aspect-ratio:1; left:3%;  top:20%; transform:rotate(-5deg);">
+          <img src="img/hydrangeas.jpg" alt="Blue hydrangeas after rain"></div>
+        <div class="cut lead t-red"  style="width:25%; aspect-ratio:1; left:1%;  top:52%; transform:rotate(6deg);">
+          <img src="img/pickleball.jpg" alt="Pickleball court action"></div>
+        <div class="cut t-yel"       style="width:21%; aspect-ratio:1; left:24%; top:14%; transform:rotate(7deg);">
+          <img src="img/moodboard.jpg" alt="Studio moodboard wall"></div>
+        <div class="cut t-pink"      style="width:18%; aspect-ratio:1; left:28%; top:50%; transform:rotate(-4deg);">
+          <img src="img/gym.jpg" alt="Gym training, black and white"></div>
+        <div class="cut t-blue"      style="width:19%; aspect-ratio:1; right:8%; top:30%; transform:rotate(3deg);">
+          <img src="img/mountains.jpg" alt="Mountains in fog"></div>
+        <div class="cut t-yel"       style="width:15%; aspect-ratio:1; right:22%; top:10%; transform:rotate(-8deg);">
+          <img src="img/bar-glass.jpg" alt="Bar glass detail"></div>
+
+        <h2 class="col-word w-right"><span>SHARP</span><span>CLAWS</span></h2>
+        <span class="col-scrib" style="right:9%; top:23%; transform:rotate(2deg);">— cub energy</span>
+        <span class="col-pno">07</span>
       </div>
+
     </div>
   </section>
 
