@@ -478,6 +478,21 @@
     .cs-scrawl-1 { top:53%; left:3rem;   transform:rotate(-2deg); }
     .cs-scrawl-2 { top:64%; left:5.4rem; transform:rotate(2deg); }
 
+    /* #a-bk · "still deciding" closer — ask LEFT, contact grid RIGHT (royal blue) */
+    #a-bk .book { --spine: var(--yellow); }
+    #a-bk .gut { background:rgba(243,235,214,.18); box-shadow:none; }
+    #a-bk .pno { color:rgba(243,235,214,.42); z-index:4; }
+    .bk-ask { position:relative; overflow:hidden; background:#2747D6; }
+    .bk-scrawl { position:absolute; top:15%; left:2.5rem; z-index:4; pointer-events:none;
+      font-family:'Permanent Marker', var(--scrib), cursive; color:#F45CAD; line-height:1.12;
+      font-size:clamp(1.25rem,2.7vmin,1.7rem); transform:rotate(-5deg); }
+    .bk-hed { position:absolute; top:15%; left:7rem; right:1.6rem; z-index:2; margin:0;
+      font-family:var(--display); font-weight:400; color:#0C1330; line-height:.94;
+      font-size:clamp(2.6rem,7.4vw,5.8rem); letter-spacing:-.02em; }
+    .bk-roll { position:absolute; top:33%; left:1.1rem; z-index:5; pointer-events:none;
+      font-family:'Permanent Marker', var(--scrib), cursive; color:#F45CAD;
+      font-size:clamp(.95rem,1.7vw,1.25rem); transform:rotate(-3deg); }
+
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
               grid-template-rows:1fr 1fr; }
@@ -806,23 +821,35 @@
 
   <!-- ═══ BACK — closing spread ═══ -->
   <section class="pg" id="a-bk">
-    <span class="tcap">ix / ix — blue tiger, new delhi</span>
+    <span class="tcap">ix / ix — still deciding</span>
     <div class="book rv">
       <div class="gut"></div>
-      <div class="abk-lp">
-        <span class="abk-run">Blue Tiger — About</span>
-        <h2 class="abk-hed">Enough<br><em>about me.</em></h2>
-        <span class="scrib" style="left:3rem; bottom:5rem;">a cub with claws ✦</span>
-        <span class="pno">140</span>
+
+      <!-- left · the ask, on blue -->
+      <div class="bk-ask">
+        <span class="bk-scrawl">What Do<br>you mean<br>????</span>
+        <h2 class="bk-hed">You R<br>stiLLL<br>DEciding?</h2>
+        <span class="pno">139</span>
       </div>
-      <div class="abk-rp">
-        <p class="abk-rp-hed">Blue Tiger —<br>"a cub<br>with claws."</p>
-        <div class="abk-links">
-          <a href="index.html"><span class="abk-link-label">The book</span><span class="abk-link-name">back to the start</span></a>
-          <a href="index.html#cn"><span class="abk-link-label">Connect</span><span class="abk-link-name">say hello</span></a>
-          <a href="mailto:hgusain307@gmail.com"><span class="abk-link-label">Email</span><span class="abk-link-name">hgusain307@gmail.com</span></a>
+
+      <!-- right · the contact grid (same roll) -->
+      <div class="cs-plate">
+        <div class="cs-grid">
+          <figure class="csf"><img src="img/cs-01.jpg?v=3" alt="Contact frame 01"></figure>
+          <figure class="csf"><img src="img/cs-02.jpg?v=3" alt="Contact frame 02"></figure>
+          <figure class="csf"><img src="img/cs-03.jpg?v=3" alt="Contact frame 03"></figure>
+          <figure class="csf"><img src="img/cs-04.jpg?v=3" alt="Contact frame 04"></figure>
+          <figure class="csf"><img src="img/cs-05.jpg?v=3" alt="Contact frame 05"></figure>
+          <figure class="csf"><img src="img/cs-06.jpg?v=3" alt="Contact frame 06"></figure>
+          <figure class="csf"><img src="img/cs-07.jpg?v=3" alt="Contact frame 07"></figure>
+          <figure class="csf"><img src="img/cs-08.jpg?v=3" alt="Contact frame 08"></figure>
+          <figure class="csf"><img src="img/cs-09.jpg?v=3" alt="Contact frame 09"></figure>
+          <figure class="csf"><img src="img/cs-10.jpg?v=3" alt="Contact frame 10"></figure>
+          <figure class="csf"><img src="img/cs-11.jpg?v=3" alt="Contact frame 11"></figure>
+          <figure class="csf"><img src="img/cs-12.jpg?v=3" alt="Contact frame 12"></figure>
         </div>
-        <span class="pno" style="color:rgba(244,242,233,.34);">141</span>
+        <span class="bk-roll">roll 01 — no retakes</span>
+        <span class="pno">138</span>
       </div>
     </div>
   </section>
