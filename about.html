@@ -478,17 +478,18 @@
     .cs-scrawl-1 { top:53%; left:3rem;   transform:rotate(-2deg); }
     .cs-scrawl-2 { top:64%; left:5.4rem; transform:rotate(2deg); }
 
-    /* #a-bk · "still deciding" closer — ask LEFT, contact grid RIGHT (royal blue) */
-    #a-bk .book { --spine: var(--yellow); }
-    #a-bk .gut { background:rgba(243,235,214,.18); box-shadow:none; }
-    #a-bk .pno { color:rgba(243,235,214,.42); z-index:4; }
+    /* contact-sheet "ask" side — big headline + cyan split handwriting (royal blue) */
     .bk-ask { position:relative; overflow:hidden; background:#2747D6; }
-    .bk-scrawl { position:absolute; top:15%; left:2.5rem; z-index:4; pointer-events:none;
-      font-family:'Permanent Marker', var(--scrib), cursive; color:#F45CAD; line-height:1.12;
-      font-size:clamp(1.25rem,2.7vmin,1.7rem); transform:rotate(-5deg); }
-    .bk-hed { position:absolute; top:15%; left:7rem; right:1.6rem; z-index:2; margin:0;
-      font-family:var(--display); font-weight:400; color:#0C1330; line-height:.94;
-      font-size:clamp(2.6rem,7.4vw,5.8rem); letter-spacing:-.02em; }
+    .bk-ask .pno { color:rgba(243,235,214,.42); z-index:4; }
+    .bk-hed { position:absolute; top:23%; left:5.4rem; right:4.4rem; z-index:2; margin:0;
+      font-family:var(--display); font-weight:400; color:#11207F; line-height:.92;
+      font-size:clamp(2.6rem,7.2vw,5.6rem); letter-spacing:-.02em; }
+    .bk-what { position:absolute; top:31%; left:2.2rem; z-index:4; pointer-events:none;
+      font-family:var(--scrib),cursive; font-weight:600; color:#5FDEDC;
+      font-size:clamp(1.4rem,3vmin,1.9rem); transform:rotate(-6deg); }
+    .bk-mean { position:absolute; top:37%; right:1.8rem; z-index:4; pointer-events:none; text-align:right;
+      font-family:var(--scrib),cursive; font-weight:600; color:#5FDEDC; line-height:1.12;
+      font-size:clamp(1.4rem,3vmin,1.9rem); transform:rotate(-4deg); }
     .bk-roll { position:absolute; top:33%; left:1.1rem; z-index:5; pointer-events:none;
       font-family:'Permanent Marker', var(--scrib), cursive; color:#F45CAD;
       font-size:clamp(.95rem,1.7vw,1.25rem); transform:rotate(-3deg); }
@@ -529,7 +530,7 @@
 
   <!-- ═══ HERO · CONTRIBUTORS ═══ -->
   <section class="pg" id="a-cv">
-    <span class="tcap">i / ix — the contributors</span>
+    <span class="tcap">i / viii — the contributors</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="ctr-pg">
@@ -572,7 +573,7 @@
 
   <!-- ═══ ABOUT ME ═══ -->
   <section class="pg" id="a-me">
-    <span class="tcap">ii / ix — about me</span>
+    <span class="tcap">ii / viii — about me</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp" style="display:flex; align-items:center; justify-content:center;">
@@ -602,7 +603,7 @@
 
   <!-- ═══ PHILOSOPHY ═══ -->
   <section class="pg" id="a-ph">
-    <span class="tcap">iii / ix — my philosophy</span>
+    <span class="tcap">iii / viii — my philosophy</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="aph-l">
@@ -639,7 +640,7 @@
 
   <!-- ═══ WORK BRIEF ═══ -->
   <section class="pg" id="a-wk">
-    <span class="tcap">iv / ix — work, briefly</span>
+    <span class="tcap">iv / viii — work, briefly</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -676,7 +677,7 @@
 
   <!-- ═══ INSPIRATIONS ═══ -->
   <section class="pg" id="a-in">
-    <span class="tcap">v / ix — inspirations</span>
+    <span class="tcap">v / viii — inspirations</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -709,7 +710,7 @@
 
   <!-- ═══ MY TASTE ═══ -->
   <section class="pg" id="a-ta">
-    <span class="tcap">vi / ix — my taste</span>
+    <span class="tcap">vi / viii — my taste</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -751,7 +752,7 @@
 
   <!-- ═══ NON-NEGOTIABLES ═══ -->
   <section class="pg" id="a-nn">
-    <span class="tcap">vii / ix — the non-negotiables</span>
+    <span class="tcap">vii / viii — the non-negotiables</span>
     <div class="book rv">
       <div class="gut"></div>
       <div class="pp pp-pad">
@@ -786,53 +787,19 @@
 
   <!-- ═══ CONTACT SHEET — the select ═══ -->
   <section class="pg" id="a-cs">
-    <span class="tcap">viii / ix — the contact sheet</span>
+    <span class="tcap">viii / viii — the contact sheet</span>
     <div class="book rv">
       <div class="gut"></div>
 
-      <!-- left · the images, on blue -->
-      <div class="cs-plate">
-        <div class="cs-grid">
-          <figure class="csf"><img src="img/cs-01.jpg?v=3" alt="Contact frame: hand pushed back through hair, eyes to camera"></figure>
-          <figure class="csf"><img src="img/cs-02.jpg?v=3" alt="Contact frame: straight to camera"></figure>
-          <figure class="csf"><img src="img/cs-03.jpg?v=3" alt="Contact frame: glancing aside"></figure>
-          <figure class="csf"><img src="img/cs-04.jpg?v=3" alt="Contact frame: hand at temple, looking down"></figure>
-          <figure class="csf"><img src="img/cs-05.jpg?v=3" alt="Contact frame: caught mid-word"></figure>
-          <figure class="csf"><img src="img/cs-06.jpg?v=3" alt="Contact frame: eyes lowered, soft"></figure>
-          <figure class="csf"><img src="img/cs-07.jpg?v=3" alt="Contact frame: finger to lips, thinking"></figure>
-          <figure class="csf"><img src="img/cs-08.jpg?v=3" alt="Contact frame: hand in hair, brow drawn"></figure>
-          <figure class="csf"><img src="img/cs-09.jpg?v=3" alt="Contact frame: half-smile, finger at chin"></figure>
-          <figure class="csf"><img src="img/cs-10.jpg?v=3" alt="Contact frame: looking off-camera"></figure>
-          <figure class="csf"><img src="img/cs-11.jpg?v=3" alt="Contact frame: hand on forehead, eyes up"></figure>
-          <figure class="csf"><img src="img/cs-12.jpg?v=3" alt="Contact frame: hand to jaw, unsure"></figure>
-        </div>
-        <span class="pno">138</span>
-      </div>
-
-      <!-- right · solid blue, handwritten scrawl -->
-      <div class="cs-select">
-        <p class="cs-hand">all of them<br>are me</p>
-        <span class="cs-scrawl cs-scrawl-1">roll 01 — no retakes</span>
-        <span class="cs-scrawl cs-scrawl-2">couldn't pick<br>just one</span>
-        <span class="pno">139</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ BACK — closing spread ═══ -->
-  <section class="pg" id="a-bk">
-    <span class="tcap">ix / ix — still deciding</span>
-    <div class="book rv">
-      <div class="gut"></div>
-
-      <!-- left · the ask, on blue -->
+      <!-- left · the ask -->
       <div class="bk-ask">
-        <span class="bk-scrawl">What Do<br>you mean<br>????</span>
-        <h2 class="bk-hed">You R<br>stiLLL<br>DEciding?</h2>
+        <span class="bk-what">What</span>
+        <h2 class="bk-hed">You R<br>Stil<br>Deciding?</h2>
+        <span class="bk-mean">Do you<br>mean<br>????</span>
         <span class="pno">139</span>
       </div>
 
-      <!-- right · the contact grid (same roll) -->
+      <!-- right · the contact grid -->
       <div class="cs-plate">
         <div class="cs-grid">
           <figure class="csf"><img src="img/cs-01.jpg?v=3" alt="Contact frame 01"></figure>
