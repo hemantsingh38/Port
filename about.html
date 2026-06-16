@@ -6,7 +6,7 @@
   <title>About — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&family=Permanent+Marker&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -76,34 +76,27 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: .055;                       /* barely-there paper tooth */
+  opacity: .075;                       /* barely-there paper tooth */
   mix-blend-mode: multiply;
   background-repeat: repeat;
   background-size: 180px 180px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* --- 2 · HALFTONE DOTS ---------------------------------------
-   A single repeating radial-gradient = an evenly spaced dot grid.
-   Tiny 4px cell + a small dot makes solid color fields show the
-   faint regular print dots you get off a RISO drum. Ink-blue tint
-   (--inkblue #102A43) keeps it on-brand; multiply so it only ever
-   darkens the field underneath. */
+/* --- 2 · PAPER BODY -----------------------------------------
+   Low-frequency grayscale noise on SOFT-LIGHT = gentle tonal
+   mottling (light/dark unevenness) like real printed stock.
+   Irregular + soft, so it adds "page feel" without ever
+   screening the type the way a regular dot grid did. */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0; display: none;           /* halftone dot grid OFF — it screened the big type */
-  mix-blend-mode: multiply;
-  background-color: transparent;
-  background-image: radial-gradient(
-      circle at center,
-      rgba(16, 33, 67, .95) 0,
-      rgba(16, 33, 67, .95) 22%,
-      transparent 26%
-  );
-  background-size: 4px 4px;            /* dot pitch */
-  background-position: 0 0;
+  opacity: .11;
+  mix-blend-mode: soft-light;
+  background-repeat: repeat;
+  background-size: 560px 560px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 560 560'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
 }
 
 /* --- Reduced-motion safety -----------------------------------
@@ -478,21 +471,22 @@
     .cs-scrawl-1 { top:53%; left:3rem;   transform:rotate(-2deg); }
     .cs-scrawl-2 { top:64%; left:5.4rem; transform:rotate(2deg); }
 
-    /* contact-sheet "ask" side — big headline + cyan split handwriting (royal blue) */
+    /* contact-sheet "ask" side — SYNCED to Figma node 2015:2 (royal blue #2747D6) */
     .bk-ask { position:relative; overflow:hidden; background:#2747D6; }
-    .bk-ask .pno { color:rgba(243,235,214,.42); z-index:4; }
-    .bk-hed { position:absolute; top:22%; left:5rem; right:2.4rem; z-index:2; margin:0;
-      font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#11207F;
-      font-size:clamp(2.8rem,8vw,6.6rem); line-height:.882; letter-spacing:-.07em; }
-    .bk-what { position:absolute; top:28%; left:2.1rem; z-index:4; pointer-events:none;
-      font-family:var(--scrib),cursive; font-weight:400; color:#5FDEDC; line-height:.965; letter-spacing:0;
-      font-size:clamp(1.6rem,3.6vmin,2.35rem); transform:rotate(-6deg); }
-    .bk-mean { position:absolute; top:36%; right:1.8rem; z-index:4; pointer-events:none; text-align:right;
-      font-family:var(--scrib),cursive; font-weight:400; color:#5FDEDC; line-height:.965; letter-spacing:0;
-      font-size:clamp(1.6rem,3.6vmin,2.35rem); transform:rotate(-4deg); }
-    .bk-roll { position:absolute; top:33%; left:1.1rem; z-index:5; pointer-events:none;
-      font-family:var(--scrib),'Caveat',cursive; color:#F45CAD;
-      font-size:clamp(.95rem,1.7vw,1.25rem); transform:rotate(-3deg); }
+    .bk-ask .pno { color:rgba(243,235,214,.42); z-index:4; left:auto; right:auto; left:45%; transform:none; }
+    .bk-hed { position:absolute; top:12%; left:1.4rem; right:1.4rem; z-index:2; margin:0;
+      font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:700; color:#001276;
+      font-size:clamp(2.8rem,9vw,7.4rem); line-height:.882; letter-spacing:-.07em;
+      text-align:center; transform:rotate(-4deg); }
+    .bk-what, .bk-mean, .bk-q { position:absolute; z-index:4; pointer-events:none;
+      font-family:var(--scrib),cursive; font-weight:400; color:#2f9fdc; line-height:.965; letter-spacing:0;
+      font-size:clamp(1.6rem,3.6vmin,2.35rem); }
+    .bk-what { top:24%; left:2.3rem; transform:rotate(-1deg); }
+    .bk-mean { top:33%; right:1.6rem; text-align:right; }
+    .bk-q    { top:70%; right:3rem;  transform:rotate(9deg); }
+    .bk-roll { position:absolute; top:32%; left:1.1rem; z-index:5; pointer-events:none;
+      font-family:var(--scrib),'Caveat',cursive; font-weight:700; color:#ff1aa7;
+      font-size:clamp(.9rem,1.5vw,1.1rem); transform:rotate(-2deg); }
 
     @media(max-width:920px){
       .book { left:3vmin; right:3vmin; grid-template-columns:1fr;
@@ -512,6 +506,7 @@
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
 <body>
   <video class="bg-vid" autoplay muted loop playsinline aria-hidden="true">
@@ -715,7 +710,8 @@
       <div class="bk-ask">
         <span class="bk-what">What</span>
         <h2 class="bk-hed">You R<br>Stil<br>Deciding?</h2>
-        <span class="bk-mean">Do you<br>mean<br>????</span>
+        <span class="bk-mean">Do you<br>mean</span>
+        <span class="bk-q">????</span>
         <span class="pno">139</span>
       </div>
 

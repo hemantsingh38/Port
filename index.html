@@ -6,7 +6,7 @@
   <title>Blue Tiger — Product &amp; Interaction Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
@@ -74,34 +74,27 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: .055;                       /* barely-there paper tooth */
+  opacity: .075;                       /* barely-there paper tooth */
   mix-blend-mode: multiply;
   background-repeat: repeat;
   background-size: 180px 180px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* --- 2 · HALFTONE DOTS ---------------------------------------
-   A single repeating radial-gradient = an evenly spaced dot grid.
-   Tiny 4px cell + a small dot makes solid color fields show the
-   faint regular print dots you get off a RISO drum. Ink-blue tint
-   (--inkblue #102A43) keeps it on-brand; multiply so it only ever
-   darkens the field underneath. */
+/* --- 2 · PAPER BODY -----------------------------------------
+   Low-frequency grayscale noise on SOFT-LIGHT = gentle tonal
+   mottling (light/dark unevenness) like real printed stock.
+   Irregular + soft, so it adds "page feel" without ever
+   screening the type the way a regular dot grid did. */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0; display: none;           /* halftone dot grid OFF — it screened the big type */
-  mix-blend-mode: multiply;
-  background-color: transparent;
-  background-image: radial-gradient(
-      circle at center,
-      rgba(16, 33, 67, .95) 0,
-      rgba(16, 33, 67, .95) 22%,
-      transparent 26%
-  );
-  background-size: 4px 4px;            /* dot pitch */
-  background-position: 0 0;
+  opacity: .11;
+  mix-blend-mode: soft-light;
+  background-repeat: repeat;
+  background-size: 560px 560px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 560 560'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
 }
 
 /* --- Reduced-motion safety -----------------------------------
@@ -677,6 +670,7 @@
     }
   
   </style>
+  <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
 <body>
   <video class="bg-vid" autoplay muted loop playsinline aria-hidden="true">
@@ -702,6 +696,8 @@
       <div class="cv-l" role="img" aria-label="Blue Tiger — a tiger cub running through fresh snow"></div>
       <!-- right: title / identity -->
       <div class="cv-r">
+        <div class="pop-burst" style="left:8%;top:42%;" aria-hidden="true"></div>
+        <div class="cv-sticker" aria-hidden="true">Vol.<span>01</span>2025</div>
         <div class="cv-r-inner">
           <div class="cv-eyebrow">
             <span>Portfolio</span>
