@@ -6,41 +6,46 @@
   <title>Work — Blue Tiger</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
     :root {
       --table: #100E0C;
-      --page:  #F3EBD6;
-      --paper: #F3EBD6;   /* warm cream — default page background */
-      --cream: #F3EBD6;   /* text color on dark/saturated fields */
-      --ink:   #1B1916;   /* warm near-black — default text + dark field */
-      --head:  #1B1916;
-      --mu:    rgba(27,25,22,.58);
-      --line:  rgba(27,25,22,.18);
+      --page:  #F3F7F9;
+      --paper: #F3F7F9;   /* warm cream — default page background */
+      --cream: #F3F7F9;   /* text color on dark/saturated fields */
+      --ink:   #212020;   /* warm near-black — default text + dark field */
+      --head:  #212020;
+      --mu:    rgba(33,32,32,.58);
+      --line:  rgba(33,32,32,.18);
       /* ── POP-ART / RISO FIELDS (Blue Tiger) ── */
-      --blue:      #2F9FDC;   /* cerulean — brand hero */
-      --blue-soft: #8FD2F5;   /* light sky tint — calm */
-      --red:       #E3402C;   /* vermilion — primary accent (dark · cream text) */
-      --yellow:    #E4DC3E;   /* acid chartreuse — accent (light · ink text) */
-      --pink:      #EC6CAB;   /* hot pink — accent (light · ink text) */
+      --blue:      #00DDFF;   /* cerulean — brand hero */
+      --blue-soft: #EAFACE;   /* light sky tint — calm */
+      --red:       #DE2537;   /* vermilion — primary accent (dark · cream text) */
+      --yellow:    #FCFF64;   /* acid chartreuse — accent (light · ink text) */
+      --pink:      #F898FB;   /* hot pink — accent (light · ink text) */
       /* ── legacy names repointed onto the new palette (contrast preserved) ── */
       --cerulean:  var(--blue);
       --cobalt:    var(--ink);
       --inkblue:   var(--ink);
       --marine:    var(--ink);
       --evergreen: var(--ink);
-      --sky:       var(--blue);
-      --sage:      var(--blue);
+      --sky:       var(--blue-soft);
+      --sage:      var(--blue-soft);
       --bloom:     var(--yellow);
       --lime:      var(--yellow);
       --mustard:   var(--yellow);
       --orange:    var(--pink);
+      /* ── DESIGN_SYSTEM.md tokens (whole-site re-skin) ── */
+      --bg-blue:#1D45FA; --bg-red:#DE2537; --bg-yellow:#FCFF64; --bg-mint:#EAFACE;
+      --bg-pink-soft:#FACEF3; --bg-paper:#F3F7F9; --bg-ink:#212020;
+      --bg-pink-bright:#F898FB; --bg-cyan:#00DDFF; --bg-magenta:#F161C3;
+      --text-blue:#1D45FA; --text-magenta:#F161C3; --text-azure:#0073FF; --text-plum:#B50489; --text-green:#009860;
       /* fonts + scale (unchanged) */
-      --sans:  'Inter',system-ui,sans-serif;
+      --sans:  'Helvetica','Helvetica Neue',Arial,sans-serif;
       --scrib: 'Caveat',cursive;
-      --display: 'Archivo Black',system-ui,sans-serif;
+      --display: 'Bacasime Antique',Georgia,'Times New Roman',serif;
       --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.125rem; --t-caption:.875rem; --t-label:.75rem;
       --ease-out: cubic-bezier(.23,1,.32,1);
     }
@@ -245,9 +250,9 @@
    so #w .lp/.rp stay static — do NOT add position:relative here. Scoped #w1–#w4.
    ═══════════════════════════════════════════════════════════════════════════ */
 #w1, #w2, #w3, #w4 {
-  --paper:#F3EBD6; --ink:#1B1916;
-  --blue:#2F9FDC; --blue-soft:#8FD2F5;
-  --red:#E3402C; --yellow:#E4DC3E; --pink:#EC6CAB;
+  --paper:#F3F7F9; --ink:#212020;
+  --blue:#00DDFF; --blue-soft:#EAFACE;
+  --red:#DE2537; --yellow:#FCFF64; --pink:#F898FB;
   --wtop:3.4rem; --wpad:3rem;
   --img-r:38%;        /* photo right edge = 62% across → crosses the centre seam */
   --txt-l:65%;        /* text column starts at 65% → ~3% colour gap from the photo */
