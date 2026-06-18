@@ -359,12 +359,13 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
+    .cv-hero { filter:url(#rough); }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-    <filter id="rough"><feTurbulence type="turbulence" baseFrequency="0.026" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="rough"><feTurbulence type="turbulence" baseFrequency="0.026" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs></svg>
   <div class="grain" aria-hidden="true"></div>
   <div id="paw" aria-hidden="true">

@@ -675,12 +675,26 @@
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
   
+    /* Main cover #cv — standard-cover (cyan + Blue tiger hero + image) */
+    #cv .mc-l { position:relative; overflow:hidden; padding:0; background:var(--bg-cyan); }
+    #cv .mc-r { position:relative; overflow:hidden; padding:0; background:var(--bg-paper); }
+    .mc-hero { position:absolute; left:1.9rem; right:1.4rem; top:13%; margin:0; z-index:3; font-family:var(--display);
+      font-weight:400; letter-spacing:-0.04em; line-height:.9; font-size:clamp(3.6rem,11vw,8rem); color:var(--bg-ink); }
+    .mc-tagline { position:absolute; left:1.9rem; bottom:2.6rem; max-width:42%; z-index:4; font-family:var(--sans); letter-spacing:-0.03em; font-size:var(--t-caption); line-height:1.32; color:var(--bg-ink); }
+    .mc-aka { position:absolute; right:1.9rem; bottom:2.6rem; z-index:4; text-align:right; margin:0; font-family:var(--sans); text-transform:uppercase; letter-spacing:.03em; font-size:var(--t-caption); line-height:1.4; color:var(--bg-ink); }
+    .mc-aka b { font-weight:700; }
+    .mc-yl { position:absolute; left:1.9rem; bottom:1rem; z-index:4; font-family:var(--sans); font-size:var(--t-caption); color:var(--bg-ink); opacity:.85; }
+    .mc-rtag { position:absolute; top:1.9rem; left:1.9rem; max-width:60%; z-index:4; font-family:var(--sans); font-size:var(--t-caption); line-height:1.3; letter-spacing:-0.02em; color:var(--text-azure); }
+    .mc-yr { position:absolute; top:1.9rem; right:1.9rem; z-index:4; font-family:var(--sans); font-size:var(--t-caption); color:var(--text-azure); }
+    .mc-feat { position:absolute; left:1.9rem; right:1.9rem; top:4.6rem; bottom:1.9rem; z-index:2; object-fit:cover; background:var(--bg-ink); }
+    /* rough/eroded texture on every title (4px dynamic-stroke look) */
+    .mc-hero, .sv-big, .cn-hed, .col-word { filter:url(#rough); }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-    <filter id="rough"><feTurbulence type="turbulence" baseFrequency="0.026" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="rough"><feTurbulence type="turbulence" baseFrequency="0.026" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs></svg>
   <div class="grain" aria-hidden="true"></div>
   <div id="paw" aria-hidden="true">
@@ -696,29 +710,17 @@
   <!-- ═══ COVER ═══ -->
   <section class="pg" id="cv">
     <span class="tcap">i / vii — cover</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <!-- left: cover video -->
-      <div class="cv-l" role="img" aria-label="Blue Tiger — a tiger cub running through fresh snow"></div>
-      <!-- right: title / identity -->
-      <div class="cv-r">
-        <div class="pop-burst" style="left:8%;top:42%;" aria-hidden="true"></div>
-        <div class="cv-sticker" aria-hidden="true">Vol.<span>01</span>2025</div>
-        <div class="cv-r-inner">
-          <div class="cv-eyebrow">
-            <span>Portfolio</span>
-            <span>Nº 01 — 2025</span>
-          </div>
-          <h1 class="cv-brand">Blue Tiger</h1>
-          <p class="cv-hook">Blue tigers don't exist. So I made one.</p>
-          <span class="cv-tagline">a cub with claws ✦</span>
-          <div class="cv-whatido">
-            <span class="cv-whatido-label">What I do</span>
-            <p>Product and interaction design — plus the brand and strategy around it. <em>Bold enough to ship, playful enough to keep it fun.</em></p>
-          </div>
-          <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
-          <div class="cv-folio">01</div>
-        </div>
+    <div class="book rv"><div class="gut"></div>
+      <div class="mc-l">
+        <h1 class="mc-hero">Blue tiger</h1>
+        <p class="mc-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+        <p class="mc-aka">AKA<br><b>Hemant Singh</b></p>
+        <span class="mc-yl">2025</span>
+      </div>
+      <div class="mc-r">
+        <p class="mc-rtag">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+        <span class="mc-yr">2025</span>
+        <img class="mc-feat" src="img/hero-tiger.jpg" alt="Blue Tiger — the snow cub">
       </div>
     </div>
   </section>
