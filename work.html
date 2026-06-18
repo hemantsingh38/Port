@@ -242,76 +242,41 @@
     .run a:hover { color:var(--ink); }
 
     /* ═══════════════════════════════════════════════════════════════════════════
-   WORK SPREADS · MAGAZINE PLATE (equal pages, photo bleeds across the centre)
-   The .book stays 1fr 1fr (equal pages, gutter at the CENTRE like a real
-   magazine). The PHOTO bleeds from the left edge ACROSS the centre seam to ~62%.
-   The TEXT lives on the right ~33% (headline up top, short note at the bottom,
-   big gap between). Children anchor to .book (so the photo can cross the seam),
-   so #w .lp/.rp stay static — do NOT add position:relative here. Scoped #w1–#w4.
+   WORK SPREADS · CASE-STUDY COVER  (exact match to design lg/Container-*.png)
+   standard: LEFT colour + clean Bacasime hero + fixed tagline + AKA/HEMANT SINGH;
+   RIGHT contrasting fill + tagline (top-left) + feature image + year.
+   descriptor (w2/Revibe): LEFT red + hero + small image; RIGHT pink-soft + tags + big plum paragraph.
    ═══════════════════════════════════════════════════════════════════════════ */
-#w1, #w2, #w3, #w4 {
-  --paper:#F3F7F9; --ink:#212020;
-  --blue:#00DDFF; --blue-soft:#EAFACE;
-  --red:#DE2537; --yellow:#FCFF64; --pink:#F898FB;
-  --wtop:3.4rem; --wpad:3rem;
-  --img-r:38%;        /* photo right edge = 62% across → crosses the centre seam */
-  --txt-l:65%;        /* text column starts at 65% → ~3% colour gap from the photo */
-}
-#w1 .lp, #w1 .rp { background:var(--blue); }
-#w2 .lp, #w2 .rp { background:var(--red); }
-#w3 .lp, #w3 .rp { background:var(--yellow); }
-#w4 .lp, #w4 .rp { background:var(--pink); }
-#w1 .lp,#w1 .rp,#w2 .lp,#w2 .rp,#w3 .lp,#w3 .rp,#w4 .lp,#w4 .rp {
-  padding:0; backface-visibility:hidden; }   /* static → children anchor to .book */
+    #w1 { --cv-fill:var(--bg-cyan);        --cv-on:var(--bg-ink);   --cv-rfill:var(--bg-paper);     --cv-ron:var(--bg-ink); }
+    #w2 { --cv-fill:var(--bg-red);         --cv-on:var(--bg-paper); --cv-rfill:var(--bg-pink-soft); --cv-ron:var(--text-plum); }
+    #w3 { --cv-fill:var(--bg-pink-bright); --cv-on:var(--text-plum);--cv-rfill:var(--bg-ink);       --cv-ron:var(--bg-paper); }
+    #w4 { --cv-fill:var(--bg-blue);        --cv-on:var(--bg-paper); --cv-rfill:var(--bg-mint);      --cv-ron:var(--bg-ink); }
+    #w1 .lp,#w2 .lp,#w3 .lp,#w4 .lp { position:relative; overflow:hidden; padding:0; background:var(--cv-fill); }
+    #w1 .rp,#w2 .rp,#w3 .rp,#w4 .rp { position:relative; overflow:hidden; padding:0; background:var(--cv-rfill); }
+    #w1 .pno,#w2 .pno,#w3 .pno,#w4 .pno { display:none; }
+    .cv-hero { position:absolute; left:1.9rem; right:1.4rem; top:7%; margin:0; z-index:3; font-family:var(--display);
+      font-weight:400; letter-spacing:-0.04em; line-height:.9; font-size:clamp(3rem,10vw,7.4rem); color:var(--cv-on); }
+    .cv-tagline { position:absolute; left:1.9rem; bottom:2.6rem; max-width:40%; z-index:4; font-family:var(--sans);
+      letter-spacing:-0.03em; font-size:var(--t-caption); line-height:1.32; color:var(--cv-on); }
+    .cv-aka { position:absolute; right:1.9rem; bottom:2.6rem; z-index:4; text-align:right; margin:0; font-family:var(--sans);
+      letter-spacing:.03em; font-size:var(--t-caption); line-height:1.45; text-transform:uppercase; color:var(--cv-on); }
+    .cv-aka b { font-weight:700; }
+    .cv-yl { position:absolute; left:1.9rem; bottom:1rem; z-index:4; font-family:var(--sans); font-size:var(--t-caption); color:var(--cv-on); opacity:.85; }
+    .cv-rtag { position:absolute; top:1.9rem; left:1.9rem; max-width:54%; z-index:4; font-family:var(--sans);
+      font-size:var(--t-caption); line-height:1.3; letter-spacing:-0.02em; color:var(--cv-ron); }
+    .cv-feat { position:absolute; left:1.9rem; right:1.9rem; top:4.6rem; bottom:3.2rem; z-index:2; object-fit:cover; background:var(--bg-ink); }
+    .cv-yr { position:absolute; right:1.9rem; bottom:1rem; z-index:4; font-family:var(--sans); font-size:var(--t-caption); color:var(--cv-ron); }
+    .cv-link { position:absolute; left:1.9rem; bottom:.85rem; z-index:5; font-family:var(--sans); font-size:var(--t-label);
+      letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color:var(--cv-rfill); background:var(--cv-ron); padding:.35rem .7rem; }
+    .cv-link.dis { opacity:.5; pointer-events:none; }
+    /* descriptor variant (w2) */
+    .cv-tags { position:absolute; top:1.9rem; right:1.9rem; max-width:46%; text-align:right; z-index:4; font-family:var(--sans);
+      font-size:var(--t-label); letter-spacing:.04em; color:var(--cv-ron); opacity:.85; }
+    .cv-desc { position:absolute; left:1.9rem; right:1.9rem; top:23%; z-index:4; font-family:var(--sans); font-weight:500;
+      letter-spacing:-0.02em; font-size:clamp(1.05rem,1.7vw,1.55rem); line-height:1.3; color:var(--cv-ron); }
+    .cv-leftimg { position:absolute; left:1.9rem; top:36%; width:44%; aspect-ratio:4/3; z-index:2; object-fit:cover; background:var(--bg-ink); }
 
-/* ── PHOTO: bleeds across the centre seam (left edge → 62%) ── */
-.fb-img { position:absolute; z-index:1; overflow:hidden;
-          top:var(--wtop); bottom:var(--wpad); left:var(--wpad); right:var(--img-r);
-          backface-visibility:hidden; }
-.fb-photo { width:100%; height:100%; object-fit:cover; object-position:center;
-            filter:saturate(1.06) contrast(1.03); transform:translateZ(0); backface-visibility:hidden; }
-.fb-wash, .fb-floor { display:none; }
-.fb-scrim { position:absolute; z-index:2; pointer-events:none;
-            top:var(--wtop); bottom:var(--wpad); left:var(--wpad); right:var(--img-r);
-            background:linear-gradient(to top, rgba(18,16,13,.68) 0%, rgba(18,16,13,.14) 48%, rgba(18,16,13,0) 72%); }
-.fb-title { position:absolute; z-index:6; left:var(--wpad); bottom:var(--wpad); margin:0;
-            font-family:var(--display); font-weight:400; color:var(--paper);
-            text-transform:uppercase; line-height:.82; letter-spacing:-.02em;
-            font-size:clamp(2.4rem, 5.5vw, 5rem); }
-.fb-t2 { display:block; }
-.fb-label { position:absolute; z-index:7; top:2rem; left:var(--wpad);
-  font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.16em; text-transform:uppercase; }
-
-/* ── TEXT column (right ~33%): headline top, short note + link bottom, big gap ── */
-.fb-rp { position:absolute; z-index:3; display:flex; flex-direction:column; justify-content:space-between;
-         top:var(--wtop); bottom:var(--wpad); left:var(--txt-l); right:var(--wpad); }
-.fb-kick { font-family:var(--sans); font-size:var(--t-label); font-weight:600; letter-spacing:.14em;
-           text-transform:uppercase; opacity:.8; display:block; margin-bottom:.9rem; }
-.fb-lead { font-family:var(--sans); font-weight:500; font-size:var(--t-lead); line-height:1.22; letter-spacing:-.3px; margin:0; }
-.fb-note { font-family:var(--sans); font-size:var(--t-caption); line-height:1.55; margin:0 0 1.1rem; opacity:.92; }
-.fb-note em { font-style:normal; font-weight:700; opacity:1; }
-.fb-link { align-self:flex-start; font-family:var(--sans); font-size:var(--t-label);
-           font-weight:600; letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
-           padding:.5rem .9rem; transition:transform .25s var(--ease-out), background .25s var(--ease-out), color .25s; }
-.fb-link.dis { opacity:.5; pointer-events:none; }
-
-/* one folio, bottom-right of the text column */
-#w1 .pno,#w2 .pno,#w3 .pno,#w4 .pno { z-index:7; right:var(--wpad); bottom:.3rem; left:auto; opacity:.5;
-  font-family:var(--display); font-weight:400; letter-spacing:0; font-size:clamp(1.4rem,2.4vw,2rem); }
-#w1 .run,#w2 .run,#w3 .run,#w4 .run { z-index:7; top:1rem; }
-
-/* ── per-project text colour: light fields (blue/yellow/pink) → INK; red → cream ── */
-#w1 .rp,#w1 .fb-label,#w1 .run,#w1 .run a,#w1 .pno,
-#w3 .rp,#w3 .fb-label,#w3 .run,#w3 .run a,#w3 .pno,
-#w4 .rp,#w4 .fb-label,#w4 .run,#w4 .run a,#w4 .pno { color:var(--ink); }
-#w2 .rp,#w2 .fb-label,#w2 .run,#w2 .run a,#w2 .pno { color:var(--ink); }
-#w1 .run a:hover,#w3 .run a:hover,#w4 .run a:hover { opacity:.6; }
-#w1 .fb-link,#w3 .fb-link,#w4 .fb-link { background:var(--ink); color:var(--paper); }
-#w1 .fb-link:hover,#w3 .fb-link:hover,#w4 .fb-link:hover { transform:translateX(2px); background:var(--paper); color:var(--ink); }
-#w2 .fb-link { background:var(--paper); color:var(--ink); }
-#w2 .fb-link:hover { transform:translateX(2px); background:var(--yellow); }
-
-    /* ══════════ GRID VIEW — loose photos on the table ══════════ */
+        /* ══════════ GRID VIEW — loose photos on the table ══════════ */
     #gv { background:var(--inkblue); transition:background .45s ease; }
     #gv .tcap { color:rgba(244,242,233,.62); }
     #gv .run { color:rgba(244,242,233,.62) !important; }
@@ -398,6 +363,9 @@
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <filter id="rough"><feTurbulence type="turbulence" baseFrequency="0.026" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs></svg>
   <div class="grain" aria-hidden="true"></div>
   <div id="paw" aria-hidden="true">
     <img src="data:image/png;base64,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" width="46" height="47" alt="">
@@ -413,127 +381,74 @@
   <div id="view-single">
   <!-- ═══ PROJECT 01 · UPHOLD ═══ -->
       <section class="pg" id="w1">
-    <span class="tcap">Work 01 / 04</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 01</span>
-        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
-          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
-        </div>
-        <div class="fb-scrim"></div>
-        <span class="fb-label">Nº 01 · Ed Tech · 2025</span>
-        <h2 class="fb-title">UP<span class="fb-t2">HOLD</span></h2>
-      </div>
-      <div class="rp">
-        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <div class="fb-rp">
-          <div>
-            <span class="fb-kick">Uphold — Mentorship platform</span>
-            <p class="fb-lead">A portfolio is a poor teacher: it tells you what you made, never whether you were right.</p>
+        <span class="tcap">Work 01 / 04</span>
+        <div class="book rv"><div class="gut"></div>
+          <div class="lp">
+            <h2 class="cv-hero">Uphold</h2>
+            <p class="cv-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+            <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
+            <span class="cv-yl">2025</span>
           </div>
-          <div>
-            <p class="fb-note">Uphold pairs new designers with mentors who mark up the real files and name <em>one concrete fix</em> before any praise.</p>
-            <a class="fb-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
+          <div class="rp">
+            <p class="cv-rtag">Mentorship platform — new designers paired with working mentors who review the real files and name one concrete fix before any praise.</p>
+            <img class="cv-feat" src="img/hero-tiger.jpg" alt="Uphold — case study">
+            <a class="cv-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View on Behance ↗</a>
+            <span class="cv-yr">2025</span>
           </div>
         </div>
-        <span class="pno">115</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PROJECT 02 · REVIBE ═══ -->
+      </section>
       <section class="pg" id="w2">
-    <span class="tcap">Work 02 / 04</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 02</span>
-        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
-          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
-        </div>
-        <div class="fb-scrim"></div>
-        <span class="fb-label">Nº 02 · Fashion / Commerce · 2025</span>
-        <h2 class="fb-title">RE<span class="fb-t2">VIBE</span></h2>
-      </div>
-      <div class="rp">
-        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <div class="fb-rp">
-          <div>
-            <span class="fb-kick">Revibe — Resale marketplace</span>
-            <p class="fb-lead">Secondhand isn't a discount aisle. It's a different way of shopping.</p>
+        <span class="tcap">Work 02 / 04</span>
+        <div class="book rv"><div class="gut"></div>
+          <div class="lp">
+            <h2 class="cv-hero">Revibe</h2>
+            <img class="cv-leftimg" src="img/hero-tiger.jpg" alt="Revibe">
+            <p class="cv-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+            <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
+            <span class="cv-yl">2025</span>
           </div>
-          <div>
-            <p class="fb-note">The AI reads a garment's real measurements against your <em>own closet,</em> and a sell flow ships a listing in under a minute.</p>
-            <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View case study ↗</a>
+          <div class="rp">
+            <span class="cv-tags">D2C, B2C, Resale, Fashion, Sustainability, AI</span>
+            <p class="cv-desc">A Resale Marketplace Where AI Reads A Garment’s Real Measurements Against Your Closet And Tells You The Truth When Nothing Fits. Secondhand Isn’t A Discount Aisle — It’s A Different Way To Shop, And A Creative Playground For Thrift, Upcycling And Emerging Designers.</p>
+            <a class="cv-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View case study ↗</a>
+            <span class="cv-yr">2025</span>
           </div>
         </div>
-        <span class="pno">117</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PROJECT 03 · INSIGHT ═══ -->
+      </section>
       <section class="pg" id="w3">
-    <span class="tcap">Work 03 / 04</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 03</span>
-        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
-          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
-        </div>
-        <div class="fb-scrim"></div>
-        <span class="fb-label">Nº 03 · SaaS / Research · 2025</span>
-        <h2 class="fb-title">IN<span class="fb-t2">SIGHT</span></h2>
-      </div>
-      <div class="rp">
-        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <div class="fb-rp">
-          <div>
-            <span class="fb-kick">Insight — Research recruiting</span>
-            <p class="fb-lead">Research participants for teams that can't expense a $20k recruiting tool.</p>
+        <span class="tcap">Work 03 / 04</span>
+        <div class="book rv"><div class="gut"></div>
+          <div class="lp">
+            <h2 class="cv-hero">Insight</h2>
+            <p class="cv-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+            <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
+            <span class="cv-yl">2025</span>
           </div>
-          <div>
-            <p class="fb-note">A screener that flags its own <em>contradictions</em> before you send it, and a ledger that quietly downranks the people who flake.</p>
-            <a class="fb-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
+          <div class="rp">
+            <p class="cv-rtag">Research recruiting — real participants for teams that can’t expense a $20k tool; a screener that flags contradicting criteria, a ledger that downranks no-shows.</p>
+            <img class="cv-feat" src="img/hero-tiger.jpg" alt="Insight — case study">
+            <a class="cv-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View case study ↗</a>
+            <span class="cv-yr">2025</span>
           </div>
         </div>
-        <span class="pno">119</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PROJECT 04 · VEJEEZ! ═══ -->
+      </section>
       <section class="pg" id="w4">
-    <span class="tcap">Work 04 / 04</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <div class="lp">
-        <span class="run" style="left:3rem;">Blue Tiger — Selected Work · Nº 04</span>
-        <div class="fb-img" role="img" aria-label="Project image placeholder — a tiger cub running through snow">
-          <img class="fb-photo" loading="lazy" src="img/hero-tiger.jpg" alt="Project image placeholder — a tiger cub running through snow">
-        </div>
-        <div class="fb-scrim"></div>
-        <span class="fb-label">Nº 04 · Food / Marketplace · 2024</span>
-        <h2 class="fb-title">VEJ<span class="fb-t2">EEZ!</span></h2>
-      </div>
-      <div class="rp">
-        <span class="run" style="right:3rem;"><a href="about.html">About</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="index.html#cn">Connect</a></span>
-        <div class="fb-rp">
-          <div>
-            <span class="fb-kick">Vejeez! — Vegan marketplace</span>
-            <p class="fb-lead">Most vegan products read as a chore, not a craving.</p>
+        <span class="tcap">Work 04 / 04</span>
+        <div class="book rv"><div class="gut"></div>
+          <div class="lp">
+            <h2 class="cv-hero">Vejeez!</h2>
+            <p class="cv-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
+            <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
+            <span class="cv-yl">2024</span>
           </div>
-          <div>
-            <p class="fb-note">Vejeez! treats vegan as an <em>appetite:</em> listings lead with what shoppers scan for, and hidden additives surface up front, not buried in tags.</p>
-            <a class="fb-link dis">Case study soon</a>
+          <div class="rp">
+            <p class="cv-rtag">Vegan marketplace — brand, voice and storefront as one hand; hidden animal-derived additives surface up front, not buried in tags.</p>
+            <img class="cv-feat" src="img/hero-tiger.jpg" alt="Vejeez! — case study">
+            <a class="cv-link dis">Case study soon</a>
+            <span class="cv-yr">2024</span>
           </div>
         </div>
-        <span class="pno">121</span>
-      </div>
-    </div>
-  </section>
+      </section>
 
   </div>
 
