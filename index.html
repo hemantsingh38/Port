@@ -295,6 +295,9 @@
       color:rgba(21,17,14,.16);
     }
     /* cover colour pages + centred cub (cub is a CSS bg — graceful if file absent) */
+    .cv-aka { font-family:var(--sans); text-transform:uppercase; letter-spacing:.03em;
+      font-size:var(--t-caption); line-height:1.4; margin:1rem 0 .2rem; color:var(--bg-ink); }
+    .cv-aka b { font-weight:700; }
     #cv .cv-l {
       background:var(--table) url("img/hero-tiger.jpg") 62% center / cover no-repeat;
     }
@@ -672,7 +675,6 @@
       *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
     }
   
-      #cv .cv-r .cv-brand { filter:url(#rough); }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
@@ -714,6 +716,7 @@
             <span class="cv-whatido-label">What I do</span>
             <p>Product and interaction design — plus the brand and strategy around it. <em>Bold enough to ship, playful enough to keep it fun.</em></p>
           </div>
+          <p class="cv-aka">AKA<br><b>Hemant Singh</b></p>
           <div class="cv-folio">01</div>
         </div>
       </div>
