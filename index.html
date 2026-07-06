@@ -50,7 +50,8 @@
       --ease-out: cubic-bezier(.23,1,.32,1);
     }
 
-    html,body { overflow:hidden; height:100%; }
+    html { scroll-behavior:smooth; scroll-snap-type:y proximity; }
+    body { min-height:100vh; }
     body { background:radial-gradient(130% 130% at 50% 28%, #1d1d23 0%, #101015 47%, #060608 100%); color:var(--ink); font-family:var(--sans);
            cursor:none; }
     img,video { display:block; }
@@ -137,16 +138,15 @@
     .fnav,.fn,.fd,.fl,.fline { display:none; }
 
     /* ── page index tabs (bottom centre, like physical book tabs) ── */
-    .tabs { position:fixed; left:50%; bottom:0; transform:translateX(-50%);
-            display:flex; gap:.4rem; z-index:960; align-items:flex-end; }
-    .tab { font-family:var(--sans); font-size:var(--t-label); font-weight:500;
-           letter-spacing:.03em; text-transform:uppercase; text-decoration:none;
-           color:rgba(21,17,14,.62); padding:.5rem 1.05rem 1.1rem;
-           border-radius:0; transform:translateY(46%);
-           box-shadow:0 -6px 16px rgba(0,0,0,.32);
-           transition:transform .28s cubic-bezier(.22,1,.36,1), color .25s; }
-    .tab:hover { transform:translateY(14%); color:var(--ink); }
-    .tab.on { transform:translateY(10%); color:var(--ink); }
+    .tabs { position:fixed; top:1.1rem; right:1.4rem; z-index:960;
+            display:flex; gap:.4rem; align-items:center; }
+    .tab { font-family:var(--sans); font-size:var(--t-label); font-weight:600;
+           letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
+           color:var(--bg-ink); padding:.5rem .95rem; border-radius:2px;
+           box-shadow:0 3px 12px rgba(0,0,0,.22);
+           transition:transform .2s ease, color .2s; }
+    .tab:hover { transform:translateY(-2px); }
+    .tab.on { transform:none; }
     .tab-home  { background:var(--yellow); }
     .tab-work  { background:var(--blue); }
     .tab-about { background:var(--pink); }
@@ -154,7 +154,7 @@
     /* ── background video ── */
 
     /* ── page flip stack ── */
-    .pg { position:fixed; inset:0; z-index:1; overflow:hidden; }
+    .pg { position:relative; min-height:100vh; overflow:hidden; scroll-snap-align:start; }
     .pg.pg-active { z-index:10; }
 
     /* each page half carries its own background so only the flipping half disappears.
@@ -191,18 +191,10 @@
 
     /* ── the book frame ── */
     .book {
-      position:absolute; top:9vmin; bottom:9vmin; left:11vmin; right:11vmin;
-      background:transparent;          /* pages supply their own bg so the flip reveals cleanly */
+      position:absolute; inset:0; background:transparent;
       display:grid; grid-template-columns:1fr 1fr;
-      box-shadow:0 40px 90px rgba(0,0,0,.55), 0 6px 22px rgba(0,0,0,.45),
-                 4px 4px 0 -1px #FEFEFB, 6px 6px 0 -1px #E9E5DC,
-                 9px 8px 0 -1px #FEFEFB, 11px 10px 0 -1px #DFDACE;
     }
-    .book::before {
-      content:''; position:absolute; left:-11px; top:5px; bottom:-7px; width:22px;
-      background:var(--spine, var(--blue)); z-index:-1;
-      box-shadow:0 10px 30px rgba(0,0,0,.4);
-    }
+    .book::before { display:none; }
     /* only the active page's book casts a shadow — stacked hidden books
        would otherwise pile identical shadows and darken the margins */
     .pg:not(.pg-active) .book,
@@ -974,144 +966,16 @@
       if (e.target.closest(HOVER_SEL)) paw.classList.remove('hover');
     });
 
-    /* ── book page flip ── */
+    /* ── scroll reveal (flip removed — normal scrolling site) ── */
     (function () {
-      const pgs  = [...document.querySelectorAll('.pg')];
-      const FLIP = 700;   /* flip animation ms */
-      const FADE = 460;   /* crossfade ms (non-book sections) */
-      let cur = 0, busy = false;
-
-      function reveal(sec) {
-        sec.querySelectorAll('.rv:not(.on)').forEach(el => {
-          el.style.transition = 'none';
-          el.classList.add('on');
-          requestAnimationFrame(() => { el.style.transition = ''; });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          [...en.target.querySelectorAll('.rv')].forEach((el, i) => setTimeout(() => el.classList.add('on'), i * 90));
+          io.unobserve(en.target);
         });
-      }
-
-      pgs[0].classList.add('pg-active');
-      const firstRv = [...pgs[0].querySelectorAll('.rv')];
-      requestAnimationFrame(() => {
-        firstRv.forEach((el, i) => setTimeout(() => el.classList.add('on'), 140 + i * 110));
-      });
-
-      function go(n) {
-        if (busy || n === cur || n < 0 || n >= pgs.length) return;
-        busy = true;
-
-        const out  = pgs[cur];
-        const into = pgs[n];
-        const dir  = n > cur ? 1 : -1;
-
-        reveal(into);
-
-        const outBook = out.querySelector('.book');
-
-        if (outBook) {
-          /* ── 3-D page flip ── */
-          into.style.zIndex = '9'; /* behind out (z:10); shows through transparent gaps */
-
-          const kids     = [...outBook.children].filter(c => !c.classList.contains('gut'));
-          const flipPage = dir > 0 ? kids[kids.length - 1] : kids[0];
-          const stayPage = dir > 0 ? kids[0]               : kids[kids.length - 1];
-
-          outBook.style.perspective       = '1200px';
-          outBook.style.perspectiveOrigin = dir > 0 ? '65% 50%' : '35% 50%';
-
-          flipPage.style.backfaceVisibility       = 'hidden';
-          flipPage.style.webkitBackfaceVisibility = 'hidden';
-          flipPage.style.transformOrigin          = dir > 0 ? '0% 50%' : '100% 50%';
-          flipPage.style.willChange               = 'transform';
-          flipPage.style.transition               = `transform ${FLIP}ms cubic-bezier(.645,.045,.355,1)`;
-          flipPage.style.transform                = dir > 0 ? 'rotateY(-180deg)' : 'rotateY(180deg)';
-          flipPage.classList.add(dir > 0 ? 'flip-shade-fwd' : 'flip-shade-back');
-
-          /* stay page fades near end — reveals incoming left page cleanly */
-          setTimeout(() => {
-            stayPage.style.transition = 'opacity 130ms ease-in';
-            stayPage.style.opacity    = '0';
-          }, FLIP - 110);
-
-          setTimeout(() => {
-            out.classList.remove('pg-active');
-            out.style.zIndex = '';
-            outBook.style.perspective       = '';
-            outBook.style.perspectiveOrigin = '';
-            flipPage.style.backfaceVisibility       = '';
-            flipPage.style.webkitBackfaceVisibility = '';
-            flipPage.style.transformOrigin          = '';
-            flipPage.style.willChange               = '';
-            flipPage.style.transition               = '';
-            flipPage.style.transform                = '';
-            flipPage.classList.remove('flip-shade-fwd','flip-shade-back');
-            stayPage.style.transition = '';
-            stayPage.style.opacity    = '';
-            into.classList.add('pg-active');
-            into.style.zIndex = '';
-            cur = n; busy = false;
-          }, FLIP + 80);
-
-        } else {
-          /* ── crossfade for non-book sections (#fc, #cn) ── */
-          into.style.zIndex  = '11';
-          into.style.opacity = '0';
-          void into.offsetHeight;
-          out.style.transition  = `opacity ${FADE}ms ease`;
-          out.style.opacity     = '0';
-          into.style.transition = `opacity ${FADE}ms ease`;
-          into.style.opacity    = '1';
-
-          setTimeout(() => {
-            out.classList.remove('pg-active');
-            out.style.opacity = ''; out.style.transition = ''; out.style.zIndex = '';
-            into.classList.add('pg-active');
-            into.style.opacity = ''; into.style.transition = ''; into.style.zIndex = '';
-            cur = n; busy = false;
-          }, FADE + 60);
-        }
-      }
-
-      /* ── scroll / trackpad ── */
-      let wCool = false;
-      window.addEventListener('wheel', e => {
-        e.preventDefault();
-        if (wCool) return;
-        wCool = true;
-        setTimeout(() => wCool = false, 860);
-        go(cur + (e.deltaY > 0 ? 1 : -1));
-      }, { passive: false });
-
-      /* ── keyboard ── */
-      window.addEventListener('keydown', e => {
-        if (['ArrowDown', 'ArrowRight', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
-        if (['ArrowUp',   'ArrowLeft'       ].includes(e.key)) { e.preventDefault(); go(cur - 1); }
-      });
-
-      /* ── touch / swipe ── */
-      let ty0 = 0;
-      window.addEventListener('touchstart', e => { ty0 = e.touches[0].clientY; }, { passive: true });
-      window.addEventListener('touchend',   e => {
-        const dy = ty0 - e.changedTouches[0].clientY;
-        if (Math.abs(dy) > 48) go(cur + (dy > 0 ? 1 : -1));
-      }, { passive: true });
-
-      /* ── corner click zones: left edge = back, right edge = forward ── */
-      document.addEventListener('click', e => {
-        const pg = pgs[cur];
-        if (!pg) return;
-        const bk = pg.querySelector('.book');
-        if (!bk) return; /* only on book spreads */
-        const x = e.clientX, w = window.innerWidth;
-        if (x < w * 0.12) go(cur - 1);       /* left 12% → back */
-        else if (x > w * 0.88) go(cur + 1);  /* right 12% → forward */
-      });
-
-      /* ── home tab returns to cover ── */
-      document.querySelector('.tab-home')?.addEventListener('click', e => {
-        if (window.location.pathname.includes('index') || window.location.pathname === '/') {
-          e.preventDefault(); go(0);
-        }
-      });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.pg').forEach(pg => io.observe(pg));
     })();
   </script>
 </body>
