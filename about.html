@@ -158,6 +158,23 @@
       font-weight:600; font-size:.62rem; letter-spacing:.22em; text-transform:uppercase;
       color:rgba(58,12,5,.6); z-index:1; }
     /* side tabs = section nav */
+    /* extra file scraps — all draggable */
+    .fd-scrap { position:absolute; z-index:4; touch-action:none;
+      transform:translate(var(--dx,0px),var(--dy,0px)) rotate(var(--r,0deg));
+      box-shadow:0 8px 18px rgba(0,0,0,.35); }
+    .fd-scrap.fd-drag { z-index:9; box-shadow:0 20px 40px rgba(0,0,0,.5); }
+    .fd-note { left:35%; top:23%; --r:-3deg; width:8.6rem; padding:.9rem .9rem 1.2rem;
+      background:#FCFF64; font-family:'Another Monday',cursive; font-size:1.35rem;
+      line-height:1.15; color:#212020; }
+    .fd-ticket { right:24%; top:40%; --r:2deg; width:13.5rem; background:#F6F3EA;
+      display:flex; border-radius:4px; overflow:hidden; }
+    .fd-ticket div { padding:.7rem .8rem; font-family:'Commissioner',Helvetica,sans-serif;
+      font-weight:700; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase;
+      line-height:1.7; color:#212020; }
+    .fd-ticket div + div { border-left:2px dashed rgba(33,32,32,.35); white-space:nowrap; }
+    .fd-ticket b { display:block; font-size:.78rem; letter-spacing:.06em; }
+    .fd-chip { left:16%; top:50%; --r:-5deg; font-family:'Another Monday',cursive;
+      font-size:1.35rem; color:#141414; background:#62D8FA; padding:.02em .55em .18em; }
     .fd-tabs { position:absolute; right:-2.45rem; top:11%; display:flex; flex-direction:column;
       gap:1.1rem; z-index:0; }
     .fd-tab { writing-mode:vertical-rl; background:var(--tc,#FCFF64); color:#212020; text-decoration:none;
@@ -175,214 +192,6 @@
         flex-direction:row; gap:.7rem; }
       .fd-tab { writing-mode:horizontal-tb; border-radius:0 0 10px 10px; padding:.5rem .9rem; }
     }
-
-    /* ═══ about section #upclose ═══ */
-/* ============================================================
-   UP CLOSE — 90s skate-mag contact-sheet spread  (#upclose, .uc-)
-   B&W + red only. Commissioner only. Scoped. CSS-only motion.
-   ============================================================ */
-
-.uc-spread{
-  min-height:100vh;
-  background:#F3F7F9;
-  color:#212020;
-  font-family:'Commissioner',Helvetica,Arial,sans-serif;
-  padding:clamp(4.5rem,9vw,8rem) clamp(1.25rem,4.5vw,4rem) clamp(3rem,6vw,5rem);
-  overflow:hidden;
-}
-.uc-inner{
-  max-width:1480px;
-  margin:0 auto;
-  border-top:4px solid #212020;
-  padding-top:1.1rem;
-}
-
-/* --- screen-reader heading --- */
-.uc-sr{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
-}
-
-/* --- kicker strip --- */
-.uc-kicker{
-  display:flex;justify-content:space-between;align-items:baseline;
-  flex-wrap:wrap;gap:.5rem 2rem;
-  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;
-  margin-bottom:clamp(1.5rem,3vw,2.5rem);
-}
-.uc-kicker strong{color:#DE2537;font-weight:800;}
-.uc-dot{
-  color:#DE2537;display:inline-block;
-  animation:uc-blink 1.4s steps(2,start) infinite;
-}
-
-/* --- giant display words --- */
-.uc-word{
-  display:block;
-  font-weight:800;
-  line-height:.78;
-  letter-spacing:-2px;
-  text-transform:uppercase;
-  color:#DE2537;
-  mix-blend-mode:multiply;      /* red inks into the B&W frames, litho-style */
-  position:relative;z-index:3;
-  pointer-events:none;user-select:none;
-}
-.uc-word--up{
-  font-size:clamp(6rem,25vw,21rem);
-  text-align:right;
-  margin-bottom:-.40em;         /* overlaps down onto the top-right frames */
-  margin-right:-.02em;
-}
-.uc-word--close{
-  font-size:clamp(4.25rem,17vw,15rem);
-  margin-top:-.42em;            /* overlaps up onto the bottom row */
-  margin-left:-.03em;
-}
-.uc-word--close .uc-stop{color:#212020;}
-
-/* --- band: rotated rail + sequence grid + playhead --- */
-.uc-band{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:clamp(.9rem,2vw,1.6rem);
-  position:relative;z-index:1;
-}
-.uc-rail{
-  writing-mode:vertical-rl;
-  margin:0;
-  font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;
-  line-height:1.8;
-  color:#DE2537;
-  max-height:100%;
-  padding-bottom:clamp(3rem,10vw,7.5rem);  /* keeps text clear of CLOSE overlap */
-}
-.uc-rail em{font-style:normal;color:#212020;}
-
-.uc-frames{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:6px;
-}
-.uc-frame{
-  position:relative;margin:0;background:#212020;
-}
-.uc-frame img{
-  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
-  filter:grayscale(1) contrast(1.07);
-  transition:filter .25s ease;
-}
-.uc-frame:hover img{filter:grayscale(1) contrast(1.2);}
-.uc-frame:hover{outline:2px solid #DE2537;outline-offset:-2px;}
-.uc-fno{
-  position:absolute;top:6px;left:6px;
-  background:#212020;color:#F3F7F9;
-  font-size:9px;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;
-  line-height:1;padding:3px 6px;
-}
-.uc-frame--pick{box-shadow:0 0 0 3px #DE2537;z-index:2;}
-.uc-frame--pick .uc-fno{background:#DE2537;}
-
-/* filmstrip stagger — rides the site .rv reveal */
-.uc-frames .uc-frame:nth-child(2){transition-delay:.05s}
-.uc-frames .uc-frame:nth-child(3){transition-delay:.10s}
-.uc-frames .uc-frame:nth-child(4){transition-delay:.15s}
-.uc-frames .uc-frame:nth-child(5){transition-delay:.20s}
-.uc-frames .uc-frame:nth-child(6){transition-delay:.25s}
-.uc-frames .uc-frame:nth-child(7){transition-delay:.30s}
-.uc-frames .uc-frame:nth-child(8){transition-delay:.35s}
-.uc-frames .uc-frame:nth-child(9){transition-delay:.40s}
-.uc-frames .uc-frame:nth-child(10){transition-delay:.45s}
-.uc-frames .uc-frame:nth-child(11){transition-delay:.50s}
-.uc-frames .uc-frame:nth-child(12){transition-delay:.55s}
-
-/* --- frame-advance playhead --- */
-.uc-play{
-  grid-column:2;
-  justify-self:end;
-  width:min(300px,40%);
-  margin-top:10px;
-}
-.uc-track{
-  position:relative;height:8px;overflow:hidden;
-  background:linear-gradient(#212020,#212020) 0 50%/100% 1px no-repeat;
-}
-.uc-track::before{
-  content:"";position:absolute;top:0;bottom:0;left:0;
-  width:calc(100% / 12);
-  background:#DE2537;
-  animation:uc-advance 7.2s steps(12,end) infinite;
-}
-.uc-playlabel{
-  margin:8px 0 0;text-align:right;
-  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
-}
-
-/* --- foot: body block + credits --- */
-.uc-foot{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:2.5rem;
-  margin-top:clamp(2.5rem,5vw,4rem);
-}
-.uc-who{max-width:430px;}
-.uc-slug{
-  margin:0 0 .8rem;
-  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:-0.5px;
-  color:#DE2537;
-}
-.uc-body{
-  margin:0;
-  font-size:15px;font-weight:400;line-height:1.65;letter-spacing:-0.5px;
-  text-align:justify;hyphens:auto;
-}
-.uc-body::first-letter{
-  color:#DE2537;font-weight:800;font-size:3.2em;line-height:.85;
-  float:left;padding:2px 8px 0 0;
-}
-.uc-credits{
-  margin:0;
-  display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;
-  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
-}
-.uc-credits dt{color:#DE2537;font-weight:800;}
-.uc-credits dd{margin:0;}
-
-/* --- folio --- */
-.uc-folio{
-  margin:clamp(2.5rem,5vw,3.5rem) 0 0;text-align:center;
-  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
-}
-
-/* --- motion --- */
-@keyframes uc-advance{to{transform:translateX(1200%);}}
-@keyframes uc-blink{50%{opacity:0;}}
-
-@media (prefers-reduced-motion: reduce){
-  .uc-dot,
-  .uc-track::before{animation:none;}
-  .uc-frames .uc-frame{transition-delay:0s !important;}
-  .uc-frame img{transition:none;}
-}
-
-/* --- responsive --- */
-@media (max-width:960px){
-  .uc-frames{grid-template-columns:repeat(4,1fr);}
-}
-@media (max-width:640px){
-  .uc-band{grid-template-columns:1fr;}
-  .uc-rail{
-    writing-mode:horizontal-tb;
-    max-height:none;padding-bottom:0;
-    border-left:3px solid #DE2537;padding-left:10px;
-    line-height:1.6;margin-bottom:4px;
-  }
-  .uc-frames{grid-template-columns:repeat(3,1fr);gap:4px;}
-  .uc-play{grid-column:1;width:62%;}
-  .uc-word--up{margin-bottom:-.34em;}
-  .uc-word--close{margin-top:-.36em;}
-  .uc-foot{flex-direction:column;align-items:flex-start;gap:2rem;}
-  .uc-body{font-size:14px;}
-}
 
     /* ═══ about section #funfolder ═══ */
 /* ==================================================================
@@ -646,6 +455,9 @@
       <h2 class="fd-title rv">the cub files ✱<small><span class="fd-paren">(</span> off the clock <span class="fd-paren">)</span></small></h2>
       <div class="fd-ghost" aria-hidden="true">raw &amp; unfiled</div>
       <div class="fd-clip" aria-hidden="true"></div>
+      <div class="fd-scrap fd-note rv">ship it friday ✔<br>feed the cub<br>call mom back</div>
+      <div class="fd-scrap fd-ticket rv"><div><b>Blue Tiger Air</b>DEL → Anywhere<br>Boarding: Whenever</div><div>Seat 4A<br>Cub Class</div></div>
+      <div class="fd-scrap fd-chip rv">certified cub ✓</div>
       <figure class="fd-ph fd-p1 rv"><img src="img/ramen.jpg" alt="Ramen, moments from vanishing"><figcaption>broth therapy</figcaption></figure>
       <figure class="fd-ph fd-p2 rv"><img src="img/mountains.jpg" alt="Mountains, earned"><figcaption>up there</figcaption></figure>
       <figure class="fd-ph fd-p3 rv"><img src="img/gym.jpg" alt="Gym mirror check-in"><figcaption>gym… again</figcaption></figure>
@@ -654,7 +466,6 @@
       <p class="fd-copy">Copyright © 2026 Blue Tiger Cub. All rights reserved. Drag the photos, they don't mind.</p>
       <nav class="fd-tabs" aria-label="About sections">
         <a class="fd-tab" href="#intro" style="--tc:#FCFF64">Intro</a>
-        <a class="fd-tab" href="#upclose" style="--tc:#62D8FA">Up Close</a>
         <a class="fd-tab" href="#funfolder" style="--tc:#F898FB">Just For Fun</a>
         <a class="fd-tab" href="index.html" style="--tc:#EAFACE">Home</a>
       </nav>
@@ -665,60 +476,6 @@
 <!-- ============================================================
      UP CLOSE — the contact sheet  (paste below the opener spread)
      ============================================================ -->
-<section class="uc-spread" id="upclose" aria-labelledby="uc-title">
-  <div class="uc-inner">
-    <h2 class="uc-sr" id="uc-title">Up close — the contact sheet</h2>
-
-    <header class="uc-kicker rv">
-      <span><strong>The Contact Sheet</strong> · Pages 04–05</span>
-      <span><span class="uc-dot" aria-hidden="true">●</span> Rec — Subject: H. Singh · 12 expressions · no direction given</span>
-    </header>
-
-    <span class="uc-word uc-word--up rv" aria-hidden="true">UP</span>
-
-    <div class="uc-band">
-      <p class="uc-rail rv">Moves on sheet — Nose Scrunch · The Decider · Chin Rest 900 · Bedhead Grind · Slow-Blink Nosegrab · Smirk to Fakie. <em>All landed first try. No helmet.</em></p>
-
-      <div class="uc-frames">
-        <figure class="uc-frame rv"><img src="img/cs-01.jpg" alt="Frame 01 — Hemant agreeing to just one photo" loading="lazy"><span class="uc-fno">01</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-02.jpg" alt="Frame 02 — warming up" loading="lazy"><span class="uc-fno">02</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-03.jpg" alt="Frame 03 — the nose scrunch" loading="lazy"><span class="uc-fno">03</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-04.jpg" alt="Frame 04 — an opinion forming" loading="lazy"><span class="uc-fno">04</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-05.jpg" alt="Frame 05 — the decider" loading="lazy"><span class="uc-fno">05</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-06.jpg" alt="Frame 06 — chin rest 900" loading="lazy"><span class="uc-fno">06</span></figure>
-        <figure class="uc-frame uc-frame--pick rv"><img src="img/cs-07.jpg" alt="Frame 07 — the keeper, marked in red" loading="lazy"><span class="uc-fno">07 · The One</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-08.jpg" alt="Frame 08 — smirk to fakie" loading="lazy"><span class="uc-fno">08</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-09.jpg" alt="Frame 09 — slow-blink nosegrab" loading="lazy"><span class="uc-fno">09</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-10.jpg" alt="Frame 10 — bedhead grind" loading="lazy"><span class="uc-fno">10</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-11.jpg" alt="Frame 11 — art direction begins" loading="lazy"><span class="uc-fno">11</span></figure>
-        <figure class="uc-frame rv"><img src="img/cs-12.jpg" alt="Frame 12 — firing the photographer, himself" loading="lazy"><span class="uc-fno">12</span></figure>
-      </div>
-
-      <div class="uc-play" aria-hidden="true">
-        <div class="uc-track"></div>
-        <p class="uc-playlabel">Playback · 12 fps — faces per shoot</p>
-      </div>
-    </div>
-
-    <span class="uc-word uc-word--close rv" aria-hidden="true">CLOSE<span class="uc-stop">.</span></span>
-
-    <footer class="uc-foot">
-      <div class="uc-who rv">
-        <p class="uc-slug">The subject, up close —</p>
-        <p class="uc-body">Twelve frames, zero direction. Frame 01 is a product designer from New Delhi agreeing to “just one photo.” By frame 04 an opinion is forming; by frame 05 it has won. Frame 07 is the keeper — marked in red, non-negotiable. And by frame 12 he is art-directing the shoot he’s in: warmer light, tighter crop, fire the photographer (himself). None of this was posed, which is rather the point. Up close, the face works like the designer — every expression is a draft, and he ships all twelve.</p>
-      </div>
-
-      <dl class="uc-credits rv">
-        <dt>Shot on</dt><dd>one very patient front camera</dd>
-        <dt>Location</dt><dd>the nearest honest wall, New Delhi</dd>
-        <dt>Retouching</dt><dd>none — we offered, he refused</dd>
-        <dt>Blinks</dt><dd>kept in, they’re load-bearing</dd>
-      </dl>
-    </footer>
-
-    <p class="uc-folio rv">04 · Blue Tiger Cub — Issue Nº 01 · 05</p>
-  </div>
-</section>
 
 <!-- ============================================================
      JUST FOR FUN — desktop-icons spread
@@ -800,7 +557,7 @@
     document.addEventListener('mouseout',  e => { if (e.target.closest('a,button')) paw.classList.remove('hover'); });
     /* drag the folder photos */
     let fdz = 10;
-    document.querySelectorAll('.fd-ph').forEach(el => {
+    document.querySelectorAll('.fd-ph, .fd-scrap').forEach(el => {
       let sx, sy, ox, oy, drag = false;
       el.addEventListener('pointerdown', e => { drag = true; el.setPointerCapture(e.pointerId);
         sx = e.clientX; sy = e.clientY;
