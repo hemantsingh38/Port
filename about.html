@@ -13,6 +13,7 @@
       --comm:'Commissioner','Helvetica Neue',Arial,sans-serif;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     html,body { min-height:100vh; }
     body { background:var(--bg-ink); font-family:var(--comm); cursor:none; }
     a,button,[role="button"] { cursor:none !important; }
@@ -69,6 +70,11 @@
     }
     #paw.click { transform:translate(-10px,-8px) scale(1.0) rotate(-8deg); }
 
+    .rv { opacity:0; transform:translateY(.7rem);
+          transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .rv.on { opacity:1; transform:none; }
+    @media (prefers-reduced-motion:reduce){ .rv { opacity:1; transform:none; transition:none; } }
+
     /* ═══ ABOUT SPREAD — photo left / red right (Commissioner 38 / -2px) ═══ */
     .ab { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
     .ab-ph { position:relative; overflow:hidden; background:#e9e7e4; }
@@ -95,6 +101,614 @@
       .ab-ph { min-height:58vh; }
       .ab-body { margin-top:3rem; letter-spacing:-1px; }
     }
+
+    /* ═══ about section #collage ═══ */
+/* ============================================================
+   #collage — "OFF THE CLOCK" dark photo-collage spread (.cl-)
+   Zine photo dump: warm-dark ground, butted/overlapping matte
+   photos, slight rotations, edge crops via overflow:hidden.
+   Reveal: .rv sits on the wrapper (.cl-ph), rotation lives on
+   the inner img — the global .rv transform never clobbers it.
+   Stagger comes from the page's IntersectionObserver (90ms per
+   .rv in DOM order) — no CSS transition-delay needed on top.
+   ============================================================ */
+
+.cl-collage{
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+  background:#2a211c;
+  color:#F3F7F9;
+  font-family:'Commissioner',Helvetica,Arial,sans-serif;
+  padding:0 0 clamp(3rem,5vw,5.5rem);
+}
+
+/* printed-scratch texture over the paste-up, under the type */
+.cl-collage::after{
+  content:"";
+  position:absolute; inset:0;
+  background:url("img/meet-texture.png") center/cover no-repeat;
+  opacity:.14;
+  pointer-events:none;
+  z-index:5;
+}
+
+/* ---- the paste-board ---- */
+.cl-board{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:clamp(64px,7.2vw,120px);
+  width:100%;
+}
+
+/* photo wrappers: grid placement + bleed offsets + reveal (.rv) */
+.cl-ph{ position:relative; }
+.cl-im{
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+  transform:rotate(var(--r,0deg));
+  filter:saturate(.95) contrast(1.04);
+}
+
+/* placements — negative offsets bleed past the section edges */
+.cl-p1{ grid-column:1/6;   grid-row:1/5;   --r:-2.2deg; left:-3vw;   top:-2.5vw; z-index:1; }
+.cl-p2{ grid-column:8/11;  grid-row:1/6;   --r:1.8deg;  top:-2vw;                z-index:1; }
+.cl-p3{ grid-column:11/13; grid-row:1/5;   --r:-1.6deg; left:2.5vw;  top:-1.5vw; z-index:2; }
+.cl-p4{ grid-column:4/7;   grid-row:4/9;   --r:1.4deg;                            z-index:3; }
+.cl-p5{ grid-column:6/9;   grid-row:5/10;  --r:-2.4deg;                           z-index:4; }
+.cl-p6{ grid-column:10/13; grid-row:5/10;  --r:2deg;    left:2vw;                z-index:2; }
+.cl-p7{ grid-column:1/4;   grid-row:6/11;  --r:-2.8deg; left:-2.5vw;             z-index:2; }
+.cl-p8{ grid-column:5/8;   grid-row:8/12;  --r:1.8deg;  top:1vw;                 z-index:3; }
+
+/* ---- type ---- */
+.cl-folio{
+  grid-column:6/8; grid-row:1/2;
+  align-self:center; justify-self:center;
+  margin:0;
+  font-size:10.5px; font-weight:600;
+  letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(243,247,249,.55);
+  z-index:6;
+}
+
+.cl-head{
+  grid-column:9/13; grid-row:10/13;
+  position:relative;
+  align-self:start;
+  padding:1.5vw 4vw 0 0;
+  z-index:6;
+}
+.cl-title{
+  margin:0 0 .55em;
+  font-weight:700;
+  font-size:clamp(2.2rem,3.6vw,3.4rem);
+  letter-spacing:-2px;
+  line-height:.95;
+  text-transform:lowercase;
+  color:#F3F7F9;
+}
+.cl-dot{ color:#DE2537; }
+.cl-dek{
+  margin:0;
+  max-width:34ch;
+  font-size:clamp(.9rem,1.05vw,1rem);
+  font-weight:400;
+  letter-spacing:-.5px;
+  line-height:1.6;
+  color:rgba(243,247,249,.66);
+}
+
+/* martini cut-out perched over the headline gap */
+.cl-cut{
+  position:absolute;
+  width:clamp(90px,10vw,160px);
+  top:calc(-1 * clamp(76px,8.5vw,136px));
+  right:8%;
+  transform:rotate(6deg);
+  pointer-events:none;
+}
+
+/* one yellow sticker, taped on the ramen shot */
+.cl-chip{
+  position:absolute;
+  left:-.9rem; bottom:2.4rem;
+  transform:rotate(-5deg);
+  background:#FCFF64; color:#212020;
+  font-weight:700; font-size:10.5px;
+  letter-spacing:.14em; text-transform:uppercase;
+  padding:.55em .9em;
+  z-index:2;
+  white-space:nowrap;
+}
+
+/* vertical spine credit — soft shadow keeps it legible over photos */
+.cl-spine{
+  position:absolute;
+  left:1.1rem; top:52%;
+  margin:0;
+  writing-mode:vertical-rl;
+  transform:translateY(-50%) rotate(180deg);
+  font-size:10px; font-weight:600;
+  letter-spacing:.3em; text-transform:uppercase;
+  color:rgba(243,247,249,.7);
+  text-shadow:0 1px 6px rgba(0,0,0,.4);
+  z-index:6;
+}
+.cl-cyan{ color:#00DDFF; }
+
+/* ---- motion (guarded) ---- */
+@media (prefers-reduced-motion: no-preference){
+  .cl-im{ transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+  .cl-ph:hover .cl-im{ transform:rotate(0deg) scale(1.012); } /* straightens like you picked it up */
+  .cl-cut{ animation:cl-sway 7s ease-in-out infinite alternate; }
+}
+@keyframes cl-sway{
+  from{ transform:rotate(4deg) translateY(0); }
+  to{   transform:rotate(8deg) translateY(-8px); }
+}
+
+/* ---- mobile ---- */
+@media (max-width:720px){
+  .cl-collage{ padding-bottom:4.5rem; }
+  .cl-board{ grid-template-columns:repeat(6,1fr); grid-auto-rows:13vw; }
+  .cl-p1{ grid-column:1/5; grid-row:1/6;   left:-4vw; top:-4vw; }
+  .cl-p2{ grid-column:4/7; grid-row:4/10;  left:3vw;  top:0; }
+  .cl-p3, .cl-p6{ display:none; }
+  .cl-p4{ grid-column:1/4; grid-row:8/14;  left:-2vw; }
+  .cl-p5{ grid-column:3/7; grid-row:12/18; left:3vw; }
+  .cl-p7{ grid-column:1/5; grid-row:16/21; left:-4vw; }
+  .cl-p8{ grid-column:3/7; grid-row:19/24; left:2vw;  top:0; }
+  .cl-folio{ grid-column:5/7; grid-row:1/2; justify-self:end; padding-right:4vw; font-size:9.5px; }
+  .cl-head{ grid-column:1/7; grid-row:24/29; padding:9vw 7vw 4vw; }
+  .cl-title{ font-size:clamp(2rem,9vw,2.6rem); }
+  .cl-cut{ width:26vw; top:-16vw; right:6vw; }
+  .cl-chip{ font-size:9.5px; left:.5rem; bottom:1.6rem; }
+  .cl-spine{
+    writing-mode:horizontal-tb;
+    top:auto; bottom:.9rem; left:50%;
+    transform:translateX(-50%);
+    white-space:nowrap; font-size:9px;
+    text-shadow:none;
+  }
+}
+
+    /* ═══ about section #upclose ═══ */
+/* ============================================================
+   UP CLOSE — 90s skate-mag contact-sheet spread  (#upclose, .uc-)
+   B&W + red only. Commissioner only. Scoped. CSS-only motion.
+   ============================================================ */
+
+.uc-spread{
+  min-height:100vh;
+  background:#F3F7F9;
+  color:#212020;
+  font-family:'Commissioner',Helvetica,Arial,sans-serif;
+  padding:clamp(4.5rem,9vw,8rem) clamp(1.25rem,4.5vw,4rem) clamp(3rem,6vw,5rem);
+  overflow:hidden;
+}
+.uc-inner{
+  max-width:1480px;
+  margin:0 auto;
+  border-top:4px solid #212020;
+  padding-top:1.1rem;
+}
+
+/* --- screen-reader heading --- */
+.uc-sr{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* --- kicker strip --- */
+.uc-kicker{
+  display:flex;justify-content:space-between;align-items:baseline;
+  flex-wrap:wrap;gap:.5rem 2rem;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;
+  margin-bottom:clamp(1.5rem,3vw,2.5rem);
+}
+.uc-kicker strong{color:#DE2537;font-weight:800;}
+.uc-dot{
+  color:#DE2537;display:inline-block;
+  animation:uc-blink 1.4s steps(2,start) infinite;
+}
+
+/* --- giant display words --- */
+.uc-word{
+  display:block;
+  font-weight:800;
+  line-height:.78;
+  letter-spacing:-2px;
+  text-transform:uppercase;
+  color:#DE2537;
+  mix-blend-mode:multiply;      /* red inks into the B&W frames, litho-style */
+  position:relative;z-index:3;
+  pointer-events:none;user-select:none;
+}
+.uc-word--up{
+  font-size:clamp(6rem,25vw,21rem);
+  text-align:right;
+  margin-bottom:-.40em;         /* overlaps down onto the top-right frames */
+  margin-right:-.02em;
+}
+.uc-word--close{
+  font-size:clamp(4.25rem,17vw,15rem);
+  margin-top:-.42em;            /* overlaps up onto the bottom row */
+  margin-left:-.03em;
+}
+.uc-word--close .uc-stop{color:#212020;}
+
+/* --- band: rotated rail + sequence grid + playhead --- */
+.uc-band{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:clamp(.9rem,2vw,1.6rem);
+  position:relative;z-index:1;
+}
+.uc-rail{
+  writing-mode:vertical-rl;
+  margin:0;
+  font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:-0.5px;
+  line-height:1.8;
+  color:#DE2537;
+  max-height:100%;
+  padding-bottom:clamp(3rem,10vw,7.5rem);  /* keeps text clear of CLOSE overlap */
+}
+.uc-rail em{font-style:normal;color:#212020;}
+
+.uc-frames{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:6px;
+}
+.uc-frame{
+  position:relative;margin:0;background:#212020;
+}
+.uc-frame img{
+  display:block;width:100%;aspect-ratio:3/4;object-fit:cover;
+  filter:grayscale(1) contrast(1.07);
+  transition:filter .25s ease;
+}
+.uc-frame:hover img{filter:grayscale(1) contrast(1.2);}
+.uc-frame:hover{outline:2px solid #DE2537;outline-offset:-2px;}
+.uc-fno{
+  position:absolute;top:6px;left:6px;
+  background:#212020;color:#F3F7F9;
+  font-size:9px;font-weight:700;letter-spacing:-0.5px;text-transform:uppercase;
+  line-height:1;padding:3px 6px;
+}
+.uc-frame--pick{box-shadow:0 0 0 3px #DE2537;z-index:2;}
+.uc-frame--pick .uc-fno{background:#DE2537;}
+
+/* filmstrip stagger — rides the site .rv reveal */
+.uc-frames .uc-frame:nth-child(2){transition-delay:.05s}
+.uc-frames .uc-frame:nth-child(3){transition-delay:.10s}
+.uc-frames .uc-frame:nth-child(4){transition-delay:.15s}
+.uc-frames .uc-frame:nth-child(5){transition-delay:.20s}
+.uc-frames .uc-frame:nth-child(6){transition-delay:.25s}
+.uc-frames .uc-frame:nth-child(7){transition-delay:.30s}
+.uc-frames .uc-frame:nth-child(8){transition-delay:.35s}
+.uc-frames .uc-frame:nth-child(9){transition-delay:.40s}
+.uc-frames .uc-frame:nth-child(10){transition-delay:.45s}
+.uc-frames .uc-frame:nth-child(11){transition-delay:.50s}
+.uc-frames .uc-frame:nth-child(12){transition-delay:.55s}
+
+/* --- frame-advance playhead --- */
+.uc-play{
+  grid-column:2;
+  justify-self:end;
+  width:min(300px,40%);
+  margin-top:10px;
+}
+.uc-track{
+  position:relative;height:8px;overflow:hidden;
+  background:linear-gradient(#212020,#212020) 0 50%/100% 1px no-repeat;
+}
+.uc-track::before{
+  content:"";position:absolute;top:0;bottom:0;left:0;
+  width:calc(100% / 12);
+  background:#DE2537;
+  animation:uc-advance 7.2s steps(12,end) infinite;
+}
+.uc-playlabel{
+  margin:8px 0 0;text-align:right;
+  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
+}
+
+/* --- foot: body block + credits --- */
+.uc-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:2.5rem;
+  margin-top:clamp(2.5rem,5vw,4rem);
+}
+.uc-who{max-width:430px;}
+.uc-slug{
+  margin:0 0 .8rem;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:-0.5px;
+  color:#DE2537;
+}
+.uc-body{
+  margin:0;
+  font-size:15px;font-weight:400;line-height:1.65;letter-spacing:-0.5px;
+  text-align:justify;hyphens:auto;
+}
+.uc-body::first-letter{
+  color:#DE2537;font-weight:800;font-size:3.2em;line-height:.85;
+  float:left;padding:2px 8px 0 0;
+}
+.uc-credits{
+  margin:0;
+  display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;
+  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
+}
+.uc-credits dt{color:#DE2537;font-weight:800;}
+.uc-credits dd{margin:0;}
+
+/* --- folio --- */
+.uc-folio{
+  margin:clamp(2.5rem,5vw,3.5rem) 0 0;text-align:center;
+  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:-0.5px;
+}
+
+/* --- motion --- */
+@keyframes uc-advance{to{transform:translateX(1200%);}}
+@keyframes uc-blink{50%{opacity:0;}}
+
+@media (prefers-reduced-motion: reduce){
+  .uc-dot,
+  .uc-track::before{animation:none;}
+  .uc-frames .uc-frame{transition-delay:0s !important;}
+  .uc-frame img{transition:none;}
+}
+
+/* --- responsive --- */
+@media (max-width:960px){
+  .uc-frames{grid-template-columns:repeat(4,1fr);}
+}
+@media (max-width:640px){
+  .uc-band{grid-template-columns:1fr;}
+  .uc-rail{
+    writing-mode:horizontal-tb;
+    max-height:none;padding-bottom:0;
+    border-left:3px solid #DE2537;padding-left:10px;
+    line-height:1.6;margin-bottom:4px;
+  }
+  .uc-frames{grid-template-columns:repeat(3,1fr);gap:4px;}
+  .uc-play{grid-column:1;width:62%;}
+  .uc-word--up{margin-bottom:-.34em;}
+  .uc-word--close{margin-top:-.36em;}
+  .uc-foot{flex-direction:column;align-items:flex-start;gap:2rem;}
+  .uc-body{font-size:14px;}
+}
+
+    /* ═══ about section #funfolder ═══ */
+/* ==================================================================
+   JUST FOR FUN — desktop-icons spread  (#funfolder, scope .ff-)
+   White page, sparse objects, flat cyan folder centrepiece.
+   Commissioner only. CSS-only motion, reduced-motion guarded.
+   ================================================================== */
+
+.ff-fun{
+  position:relative;
+  min-height:100vh;
+  background:#FFFFFF;
+  color:#212020;
+  font-family:'Commissioner',Helvetica,Arial,sans-serif;
+  padding:clamp(2rem,4vw,3.5rem) clamp(1.25rem,5vw,5rem) 6rem;
+  overflow:hidden;
+}
+
+/* ---- top bar: kicker left, dry Finder joke right ---- */
+.ff-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  max-width:1400px;
+  margin:0 auto;
+}
+.ff-kicker{
+  font-size:.78rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+.ff-star{ color:#DE2537; }
+.ff-view{
+  font-size:.72rem;
+  font-weight:400;
+  letter-spacing:-.2px;
+  opacity:.5;
+}
+
+/* ---- the desk: a relative canvas, items pinned like icons ---- */
+.ff-desk{
+  position:relative;
+  max-width:1400px;
+  margin:1rem auto 0;
+  min-height:max(84vh,800px);
+}
+
+.ff-item{
+  position:absolute;
+  width:9rem;
+  text-align:center;
+}
+
+/* scatter — varied heights, nothing aligned, nothing touching */
+.ff-i1{ left:10%; top:10%; }   /* Cooking            */
+.ff-i2{ left:72%; top:6%;  }   /* Pickleball_noobie  */
+.ff-i3{ left:6%;  top:52%; }   /* Gardening          */
+.ff-i4{ left:78%; top:46%; }   /* Gym… Again         */
+.ff-i5{ left:22%; top:72%; }   /* Late Shows         */
+.ff-i6{ left:64%; top:74%; }   /* Moodboarding       */
+
+.ff-thumb{
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:8px;   /* icon-corner soft, no border, no frame */
+}
+.ff-cap{
+  display:inline-block;
+  margin-top:.55rem;
+  padding:.1rem .45rem;
+  border-radius:4px;
+  font-size:.72rem;
+  font-weight:400;
+  letter-spacing:-.2px;
+  color:#212020;
+}
+
+/* ---- centrepiece: the folder — flat cyan + ink, drawn in CSS.
+       Centred with inset+auto margins, NOT transform: the site's
+       .rv.on { transform:none } would wipe a translateX(-50%). ---- */
+.ff-ifolder{
+  left:0;
+  right:0;
+  margin-inline:auto;
+  top:34%;
+  width:16rem;
+  z-index:2;
+}
+.ff-folder{
+  position:relative;
+  width:13.5rem;
+  height:9.25rem;
+  margin:0 auto;
+  perspective:800px;
+  filter:drop-shadow(10px 10px 0 rgba(33,32,32,.15)); /* hard, zero-blur */
+}
+.ff-folder-back{
+  position:absolute;
+  left:0; right:0; top:14px; bottom:0;
+  border-radius:14px;
+  background:#212020;
+}
+.ff-folder-back::before{           /* the tab, slanted right edge */
+  content:"";
+  position:absolute;
+  top:-14px; left:10px;
+  width:40%; height:26px;
+  border-radius:8px 8px 0 0;
+  background:#212020;
+  clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 100%, 0 100%);
+}
+.ff-folder-paper{                  /* sheet that peeks out on hover */
+  position:absolute;
+  left:8%; right:8%; top:20px;
+  height:42%;
+  border-radius:6px 6px 0 0;
+  background:#F3F7F9;
+  transform:translateY(12px);
+}
+.ff-folder-front{
+  position:absolute;
+  left:0; right:0; top:34px; bottom:0;
+  border-radius:12px;
+  background:#00DDFF;
+  transform-origin:50% 100%;
+}
+.ff-folder-label{
+  margin:1rem auto 0;
+  max-width:15rem;
+  font-size:.95rem;
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:-.5px;
+}
+.ff-sel{
+  padding:.05em .3em;
+  border-radius:4px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.ff-folder-meta{
+  margin-top:.4rem;
+  font-size:.68rem;
+  font-weight:400;
+  letter-spacing:-.2px;
+  opacity:.5;
+}
+
+/* ---- footnote, paired with the kicker's asterisk.
+       Same transform-free centring as the folder. ---- */
+.ff-note{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2rem;
+  margin-inline:auto;
+  width:max-content;
+  max-width:90%;
+  text-align:center;
+  font-size:.7rem;
+  font-weight:400;
+  letter-spacing:-.2px;
+  opacity:.55;
+}
+
+/* ---- selection states: state, not motion — live outside the guard.
+       Label lights up like a selected file: brand red, not system blue. ---- */
+.ff-item:hover .ff-cap,
+.ff-ifolder:hover .ff-sel{ background:#DE2537; color:#F3F7F9; }
+
+/* ---- motion: hover + reveal stagger, all guarded ---- */
+@media (prefers-reduced-motion: no-preference){
+  .ff-thumb{ transition:transform .3s cubic-bezier(.2,.7,.25,1.2); }
+  .ff-cap, .ff-sel{ transition:background-color .2s ease, color .2s ease; }
+  .ff-folder-front{ transition:transform .35s ease; }
+  .ff-folder-paper{ transition:transform .35s ease; }
+
+  .ff-item:hover .ff-thumb{ transform:rotate(-2.4deg) scale(1.04); }
+  .ff-item:nth-of-type(even):hover .ff-thumb{ transform:rotate(2.4deg) scale(1.04); }
+
+  /* folder opens a crack; the sheet inside rises */
+  .ff-ifolder:hover .ff-folder-front{ transform:rotateX(-16deg); }
+  .ff-ifolder:hover .ff-folder-paper{ transform:translateY(-6px); }
+
+  /* reveal stagger (rides on the existing .rv / .rv.on system) */
+  .ff-ifolder.rv{ transition-delay:.05s; }
+  .ff-i1.rv{ transition-delay:.12s; }
+  .ff-i2.rv{ transition-delay:.18s; }
+  .ff-i3.rv{ transition-delay:.24s; }
+  .ff-i4.rv{ transition-delay:.30s; }
+  .ff-i5.rv{ transition-delay:.36s; }
+  .ff-i6.rv{ transition-delay:.42s; }
+  .ff-note.rv{ transition-delay:.5s; }
+}
+
+/* ---- mobile: the desk becomes a tidy two-column tray ---- */
+@media (max-width:720px){
+  .ff-fun{ padding-bottom:4rem; }
+  .ff-desk{
+    min-height:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2.5rem 1rem;
+    justify-items:center;
+    padding-top:1.5rem;
+  }
+  .ff-item{ position:static; width:8.5rem; }
+  .ff-item:nth-of-type(even){ margin-top:1.5rem; }  /* keep the icon jitter */
+  .ff-ifolder{
+    grid-column:1 / -1;
+    width:100%;
+    margin:0 0 .5rem;
+  }
+  .ff-folder{
+    width:11.5rem;
+    height:8rem;
+    filter:drop-shadow(7px 7px 0 rgba(33,32,32,.15));
+  }
+  .ff-note{
+    position:static;
+    display:block;
+    margin:3rem auto 0;
+    max-width:30ch;
+  }
+}
   </style>
 </head>
 <body>
@@ -103,7 +717,8 @@
     <img src="data:image/png;base64,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" width="46" height="47" alt="">
   </div>
 
-  <main class="ab">
+  <main>
+  <section class="ab" id="intro">
     <div class="ab-ph">
       <img src="img/cs-02.jpg" alt="Hemant Singh — black and white portrait">
     </div>
@@ -116,6 +731,175 @@
         The Blue Tiger Cub New Tricks.</p>
       <a class="ab-home" href="index.html">← Home</a>
     </div>
+  </section>
+
+<section class="cl-collage" id="collage" aria-label="Off the clock — a photo collage">
+  <div class="cl-board">
+
+    <p class="cl-folio rv">Exhibit B — proof of life</p>
+
+    <div class="cl-ph cl-p1 rv">
+      <img class="cl-im" src="img/mountains.jpg" alt="A mountain ridgeline, earned the hard way" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p2 rv">
+      <img class="cl-im" src="img/hydrangeas.jpg" alt="Hydrangeas, photographed like they pay rent" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p3 rv">
+      <img class="cl-im" src="img/bar-glass.jpg" alt="A cocktail under close supervision" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p4 rv">
+      <img class="cl-im" src="img/ramen.jpg" alt="A bowl of ramen, seconds before it vanished" loading="lazy" decoding="async">
+      <span class="cl-chip">No thoughts, just broth</span>
+    </div>
+
+    <div class="cl-ph cl-p5 rv">
+      <img class="cl-im" src="img/gym.jpg" alt="Mid-set at the gym, negotiating with gravity" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p6 rv">
+      <img class="cl-im" src="img/pickleball.jpg" alt="Pickleball, taken far too seriously" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p7 rv">
+      <img class="cl-im" src="img/moon-talk.jpg" alt="A late-night conversation with the moon" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-ph cl-p8 rv">
+      <img class="cl-im" src="img/bar-look.jpg" alt="The bar fit, duly documented" loading="lazy" decoding="async">
+    </div>
+
+    <div class="cl-head rv">
+      <img class="cl-cut" src="img/meet-martini.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <h2 class="cl-title">off the clock<span class="cl-dot">.</span></h2>
+      <p class="cl-dek">The day job is pixels and “quick calls.” The rest looks like this — ramen hunted, sets logged, moons consulted, and exactly one very serious martini.</p>
+    </div>
+
+  </div>
+
+  <p class="cl-spine">Shot on a Tuesday <span class="cl-cyan">·</span> Collage by the Cub</p>
+</section>
+
+<!-- ============================================================
+     UP CLOSE — the contact sheet  (paste below the opener spread)
+     ============================================================ -->
+<section class="uc-spread" id="upclose" aria-labelledby="uc-title">
+  <div class="uc-inner">
+    <h2 class="uc-sr" id="uc-title">Up close — the contact sheet</h2>
+
+    <header class="uc-kicker rv">
+      <span><strong>The Contact Sheet</strong> · Pages 04–05</span>
+      <span><span class="uc-dot" aria-hidden="true">●</span> Rec — Subject: H. Singh · 12 expressions · no direction given</span>
+    </header>
+
+    <span class="uc-word uc-word--up rv" aria-hidden="true">UP</span>
+
+    <div class="uc-band">
+      <p class="uc-rail rv">Moves on sheet — Nose Scrunch · The Decider · Chin Rest 900 · Bedhead Grind · Slow-Blink Nosegrab · Smirk to Fakie. <em>All landed first try. No helmet.</em></p>
+
+      <div class="uc-frames">
+        <figure class="uc-frame rv"><img src="img/cs-01.jpg" alt="Frame 01 — Hemant agreeing to just one photo" loading="lazy"><span class="uc-fno">01</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-02.jpg" alt="Frame 02 — warming up" loading="lazy"><span class="uc-fno">02</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-03.jpg" alt="Frame 03 — the nose scrunch" loading="lazy"><span class="uc-fno">03</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-04.jpg" alt="Frame 04 — an opinion forming" loading="lazy"><span class="uc-fno">04</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-05.jpg" alt="Frame 05 — the decider" loading="lazy"><span class="uc-fno">05</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-06.jpg" alt="Frame 06 — chin rest 900" loading="lazy"><span class="uc-fno">06</span></figure>
+        <figure class="uc-frame uc-frame--pick rv"><img src="img/cs-07.jpg" alt="Frame 07 — the keeper, marked in red" loading="lazy"><span class="uc-fno">07 · The One</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-08.jpg" alt="Frame 08 — smirk to fakie" loading="lazy"><span class="uc-fno">08</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-09.jpg" alt="Frame 09 — slow-blink nosegrab" loading="lazy"><span class="uc-fno">09</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-10.jpg" alt="Frame 10 — bedhead grind" loading="lazy"><span class="uc-fno">10</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-11.jpg" alt="Frame 11 — art direction begins" loading="lazy"><span class="uc-fno">11</span></figure>
+        <figure class="uc-frame rv"><img src="img/cs-12.jpg" alt="Frame 12 — firing the photographer, himself" loading="lazy"><span class="uc-fno">12</span></figure>
+      </div>
+
+      <div class="uc-play" aria-hidden="true">
+        <div class="uc-track"></div>
+        <p class="uc-playlabel">Playback · 12 fps — faces per shoot</p>
+      </div>
+    </div>
+
+    <span class="uc-word uc-word--close rv" aria-hidden="true">CLOSE<span class="uc-stop">.</span></span>
+
+    <footer class="uc-foot">
+      <div class="uc-who rv">
+        <p class="uc-slug">The subject, up close —</p>
+        <p class="uc-body">Twelve frames, zero direction. Frame 01 is a product designer from New Delhi agreeing to “just one photo.” By frame 04 an opinion is forming; by frame 05 it has won. Frame 07 is the keeper — marked in red, non-negotiable. And by frame 12 he is art-directing the shoot he’s in: warmer light, tighter crop, fire the photographer (himself). None of this was posed, which is rather the point. Up close, the face works like the designer — every expression is a draft, and he ships all twelve.</p>
+      </div>
+
+      <dl class="uc-credits rv">
+        <dt>Shot on</dt><dd>one very patient front camera</dd>
+        <dt>Location</dt><dd>the nearest honest wall, New Delhi</dd>
+        <dt>Retouching</dt><dd>none — we offered, he refused</dd>
+        <dt>Blinks</dt><dd>kept in, they’re load-bearing</dd>
+      </dl>
+    </footer>
+
+    <p class="uc-folio rv">04 · Blue Tiger Cub — Issue Nº 01 · 05</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     JUST FOR FUN — desktop-icons spread
+     Paste below the previous about.html section.
+     ============================================================ -->
+<section class="ff-fun" id="funfolder" aria-labelledby="ff-title">
+
+  <header class="ff-bar rv">
+    <p class="ff-kicker" id="ff-title">Just for fun<span class="ff-star">*</span></p>
+    <p class="ff-view">view: as icons ✓</p>
+  </header>
+
+  <div class="ff-desk">
+
+    <!-- centrepiece: the folder -->
+    <div class="ff-item ff-ifolder rv">
+      <div class="ff-folder" aria-hidden="true">
+        <span class="ff-folder-back"></span>
+        <span class="ff-folder-paper"></span>
+        <span class="ff-folder-front"></span>
+      </div>
+      <p class="ff-folder-label"><span class="ff-sel">Things I(d) Like To Do Just For Fun</span></p>
+      <p class="ff-folder-meta">6 items · 0 deadlines</p>
+    </div>
+
+    <!-- the loose files -->
+    <figure class="ff-item ff-i1 rv">
+      <img class="ff-thumb" src="img/ramen.jpg" alt="A bowl of homemade ramen, broth made from scratch" loading="lazy">
+      <figcaption class="ff-cap">Cooking</figcaption>
+    </figure>
+
+    <figure class="ff-item ff-i2 rv">
+      <img class="ff-thumb" src="img/pickleball.jpg" alt="A pickleball court, scene of many humbling defeats" loading="lazy">
+      <figcaption class="ff-cap">Pickleball_noobie</figcaption>
+    </figure>
+
+    <figure class="ff-item ff-i3 rv">
+      <img class="ff-thumb" src="img/hydrangeas.jpg" alt="Blue hydrangeas in bloom" loading="lazy">
+      <figcaption class="ff-cap">Gardening</figcaption>
+    </figure>
+
+    <figure class="ff-item ff-i4 rv">
+      <img class="ff-thumb" src="img/gym.jpg" alt="The gym, visited in optimistic bursts" loading="lazy">
+      <figcaption class="ff-cap">Gym… Again</figcaption>
+    </figure>
+
+    <figure class="ff-item ff-i5 rv">
+      <img class="ff-thumb" src="img/moon-talk.jpg" alt="A late-night talk show glowing on a screen" loading="lazy">
+      <figcaption class="ff-cap">Late Shows</figcaption>
+    </figure>
+
+    <figure class="ff-item ff-i6 rv">
+      <img class="ff-thumb" src="img/moodboard.jpg" alt="A moodboard in progress, pins and clippings" loading="lazy">
+      <figcaption class="ff-cap">Moodboarding</figcaption>
+    </figure>
+
+  </div>
+
+  <p class="ff-note rv"><span class="ff-star">*</span>All six pursued with more enthusiasm than skill.</p>
+
+</section>
   </main>
 
   <script>
@@ -134,6 +918,10 @@
     }
     document.addEventListener('mouseover', e => { if (e.target.closest('a,button')) paw.classList.add('hover'); });
     document.addEventListener('mouseout',  e => { if (e.target.closest('a,button')) paw.classList.remove('hover'); });
+    const io = new IntersectionObserver((es) => { es.forEach(en => { if (!en.isIntersecting) return;
+      [...en.target.querySelectorAll('.rv')].forEach((el,i)=>setTimeout(()=>el.classList.add('on'), i*90));
+      io.unobserve(en.target); }); }, { threshold:.15 });
+    document.querySelectorAll('section').forEach(s => io.observe(s));
   </script>
 </body>
 </html>
