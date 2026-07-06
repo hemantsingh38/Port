@@ -47,7 +47,7 @@
       --bg-pink-bright:#F898FB; --bg-cyan:#00DDFF; --bg-magenta:#F161C3;
       --text-blue:#1D45FA; --text-magenta:#F161C3; --text-azure:#0073FF; --text-plum:#B50489; --text-green:#009860;
       /* fonts + scale (unchanged) */
-      --sans:  'Helvetica','Helvetica Neue',Arial,sans-serif;
+      --sans:  'Commissioner','Helvetica Neue',Arial,sans-serif;
       --scrib: 'Caveat',cursive;
       --display: 'Bacasime Antique',Georgia,'Times New Roman',serif;
       --t-display:2.5rem; --t-lead:1.5rem; --t-body:1.5rem; --t-caption:.875rem; --t-label:.75rem;
@@ -696,26 +696,31 @@
     .hero-sub { position:absolute; top:55%; left:7.2%; width:min(62%,16em); margin:0; z-index:3;
       font-family:var(--sans); font-weight:800; letter-spacing:-.02em;
       font-size:clamp(1.5rem,3.3vw,3.1rem); line-height:1.12; color:#212020; }
-    /* retro mobile keypad keys (Nokia 6310 style — convex metallic pills) */
-    .keypad { position:absolute; bottom:5%; left:50%; transform:translateX(-50%); z-index:5;
-      display:flex; gap:1.7rem; }
-    .key { font-family:var(--sans); font-weight:700; font-size:.82rem; letter-spacing:.05em;
-      text-transform:uppercase; text-decoration:none; color:#26282C; text-align:center;
-      min-width:5.4rem; padding:.62rem 1.35rem; border-radius:999px;
-      background:linear-gradient(180deg,#FDFEFF 0%,#E8EBEF 34%,#C7CCD3 64%,#F1F3F6 100%);
-      box-shadow:0 6px 12px rgba(0,25,70,.38),
-                 inset 0 2px 2px rgba(255,255,255,.95),
-                 inset 0 -4px 7px rgba(40,50,70,.28),
-                 inset 2px 0 3px rgba(255,255,255,.5),
-                 inset -2px 0 3px rgba(120,130,150,.22);
-      text-shadow:0 1px 0 rgba(255,255,255,.65);
-      transition:transform .12s ease, box-shadow .12s ease; }
+    /* retro mobile keypad — silver housing tray + convex Nokia keys */
+    .keypad { position:absolute; bottom:4.5%; left:50%; transform:translateX(-50%); z-index:5;
+      display:flex; gap:.55rem; padding:.72rem .82rem; border-radius:1.9rem;
+      background:linear-gradient(180deg,#E3E7EC 0%,#BCC1C9 55%,#D6DAE0 100%);
+      box-shadow:0 12px 26px rgba(0,25,70,.38),
+                 inset 0 1px 2px rgba(255,255,255,.9),
+                 inset 0 -2px 5px rgba(55,65,85,.38); }
+    .key { position:relative; font-family:'Commissioner',var(--sans); font-weight:700; font-size:.8rem;
+      letter-spacing:.05em; text-transform:uppercase; text-decoration:none; color:#33363C;
+      text-align:center; min-width:5.6rem; padding:.78rem 1.5rem .95rem;
+      border-radius:2.6rem / 2.1rem;
+      background:linear-gradient(180deg,#FBFCFE 0%,#DDE1E7 42%,#B6BCC5 80%,#EDEFF3 100%);
+      box-shadow:0 3px 6px rgba(20,30,50,.38),
+                 inset 0 2px 3px rgba(255,255,255,.95),
+                 inset 0 -3px 5px rgba(50,60,80,.35);
+      text-shadow:0 1px 0 rgba(255,255,255,.7);
+      transition:transform .1s ease, box-shadow .1s ease, background .1s ease; }
+    .key::after { content:""; position:absolute; left:26%; right:26%; bottom:.42rem; height:.34rem;
+      border-bottom:2px solid rgba(70,78,92,.35); border-radius:0 0 100% 100%; }
     .key:hover { transform:translateY(1px); }
     .key:active, .key.on {
-      background:linear-gradient(180deg,#D4D8DD 0%,#C2C7CE 40%,#CDD2D8 100%);
-      box-shadow:0 2px 5px rgba(0,25,70,.3),
-                 inset 0 3px 6px rgba(40,50,70,.35),
-                 inset 0 -1px 2px rgba(255,255,255,.55); }
+      background:linear-gradient(180deg,#C7CBD2 0%,#B4B9C1 45%,#C9CDD4 100%);
+      box-shadow:0 1px 3px rgba(20,30,50,.3),
+                 inset 0 3px 6px rgba(40,50,70,.4),
+                 inset 0 -1px 2px rgba(255,255,255,.5); }
     @media (max-width:720px){
       .keypad { gap:.8rem; flex-wrap:wrap; justify-content:center; left:50%; width:92%; }
       .hero-sub { width:86%; }
@@ -1008,6 +1013,9 @@
       .abt-ph { min-height:58vh; }
       .abt-body { margin-top:3rem; letter-spacing:-1px; }
     }
+
+    /* one font in the rack — Commissioner everywhere in #covers */
+    #covers [class^="cr-"], #covers [class*=" cr-"] { font-family:'Commissioner',var(--sans); }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
