@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    @font-face { font-family:'Another Monday'; src:url('font/another-monday.otf') format('opentype');
+                 font-weight:400; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Another Monday'; src:url('font/another-monday-italic.otf') format('opentype');
+                 font-weight:400; font-style:italic; font-display:swap; }
     *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
     :root {
@@ -687,7 +691,7 @@
       font-weight:700; text-transform:uppercase; letter-spacing:.02em;
       font-size:clamp(.95rem,1.5vw,1.45rem); color:#1D1D1B; }
     .hero-script { position:absolute; top:21%; left:7%; right:5%; margin:0; z-index:3;
-      font-family:var(--scrib),cursive; font-weight:700; color:#0E0E0E;
+      font-family:'Another Monday',var(--scrib),cursive; font-weight:400; color:#0E0E0E;
       font-size:clamp(4.2rem,14vw,13rem); line-height:.95; letter-spacing:-.01em; }
     .hero-sub { position:absolute; top:55%; left:7.2%; width:min(62%,16em); margin:0; z-index:3;
       font-family:var(--sans); font-weight:800; letter-spacing:-.02em;
