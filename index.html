@@ -874,6 +874,40 @@
       .wk-txt { padding:0 0 2rem; } .wk-body { padding-top:2.4rem; }
     }
 
+    /* ═══ hero v2 — masthead ticker · living wordmark · paw trail · tagline sticker ═══ */
+    .hero::before { content:""; position:absolute; left:-10%; top:-20%; width:75%; aspect-ratio:1;
+      background:radial-gradient(closest-side, rgba(255,255,255,.35), transparent 70%); pointer-events:none; }
+    .hh-tick { position:absolute; top:0; left:0; right:0; height:2.3rem; display:flex; align-items:center;
+      overflow:hidden; border-bottom:1.5px solid #121212; z-index:4; }
+    .hh-track { display:flex; width:max-content; animation:hh-tick 30s linear infinite; }
+    .hh-track span { white-space:nowrap; font-family:'Commissioner',var(--sans); font-weight:700;
+      font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:#121212; }
+    @keyframes hh-tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .hero-no { position:absolute; top:12.5%; right:7.2%; z-index:3; font-family:'Commissioner',var(--sans);
+      font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+      font-size:clamp(.95rem,1.5vw,1.45rem); color:#1D1D1B; }
+    .hero-script { transform:rotate(-1.6deg); }
+    .hw { display:inline-block; transition:transform .28s cubic-bezier(.34,1.56,.64,1); }
+    .hw:hover { transform:rotate(-5deg) translateY(-.08em); }
+    .hw:nth-child(2):hover { transform:rotate(4deg) translateY(-.06em); }
+    .hw-star { color:#DE2537; font-size:.42em; vertical-align:.9em; margin-left:.12em; }
+    .hero-tag { position:absolute; top:70%; left:7.4%; z-index:4;
+      font-family:'Another Monday',var(--scrib),cursive; font-size:clamp(1.3rem,2.3vw,1.9rem);
+      color:#141414; background:#FCFF64; padding:.02em .55em .18em; transform:rotate(-4deg);
+      box-shadow:2px 3px 0 rgba(0,0,0,.28); }
+    .hero-paw { position:absolute; z-index:2; width:clamp(24px,2.6vw,34px); pointer-events:none;
+      filter:brightness(0) saturate(0); opacity:.32; }
+    .hero-spine { position:absolute; left:1.1rem; bottom:8rem; z-index:3; margin:0;
+      writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Commissioner',var(--sans);
+      font-weight:600; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(18,18,18,.55); }
+    .hero-cue { position:absolute; right:7.2%; bottom:7.5rem; z-index:3; font-family:'Commissioner',var(--sans);
+      font-weight:700; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:#121212; }
+    @media (prefers-reduced-motion:no-preference){
+      .hero-cue { animation:hh-bob 2.2s ease-in-out infinite; } }
+    @keyframes hh-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    @media (prefers-reduced-motion:reduce){ .hh-track{animation:none} .hw{transition:none} }
+    @media (max-width:720px){ .hero-no,.hero-spine{display:none} .hero-tag{top:66%}
+      .hero-cue{bottom:9rem} }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
@@ -888,9 +922,21 @@
 
   <!-- ═══ HERO — the only section for now (Figma 0-324) ═══ -->
   <section class="pg hero" id="hero">
+    <div class="hh-tick" aria-hidden="true"><div class="hh-track">
+      <span>Unique ★ Bold ★ Playful ★ Blue Tiger Cub ★ Portfolio Vol. 01 ★ New Delhi ★&nbsp;</span>
+      <span>Unique ★ Bold ★ Playful ★ Blue Tiger Cub ★ Portfolio Vol. 01 ★ New Delhi ★&nbsp;</span>
+    </div></div>
     <span class="hero-eyebrow rv">Hemant Singh Portfolio</span>
-    <h1 class="hero-script rv">Blue tiger cub</h1>
+    <span class="hero-no rv">Nº 01 — 2026</span>
+    <h1 class="hero-script rv"><span class="hw">Blue</span> <span class="hw">tiger</span> <span class="hw">cub</span><b class="hw-star">✱</b></h1>
+    <span class="hero-tag rv">a cub with claws ✦</span>
     <p class="hero-sub rv">I Make Creative Solutions, Bold Strategies, Fun Interactions</p>
+    <img class="hero-paw" src="img/Group 1.png" alt="" style="left:56%; top:56%; transform:rotate(14deg);">
+    <img class="hero-paw" src="img/Group 1.png" alt="" style="left:64%; top:63%; transform:rotate(-12deg);">
+    <img class="hero-paw" src="img/Group 1.png" alt="" style="left:72%; top:57%; transform:rotate(18deg);">
+    <img class="hero-paw" src="img/Group 1.png" alt="" style="left:80%; top:65%; transform:rotate(-8deg);">
+    <p class="hero-spine">Printed in the browser · New Delhi</p>
+    <span class="hero-cue" aria-hidden="true">Scroll ↓</span>
     <nav class="keypad" aria-label="Pages">
       <a class="key on" href="#work">Work</a>
       <a class="key" href="#about">About</a>
