@@ -697,12 +697,13 @@
       font-family:var(--sans); font-weight:800; letter-spacing:-.02em;
       font-size:clamp(1.5rem,3.3vw,3.1rem); line-height:1.12; color:#212020; }
     /* retro mobile keypad — silver housing tray + convex Nokia keys */
-    .keypad { position:absolute; bottom:4.5%; left:50%; transform:translateX(-50%); z-index:5;
+    .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:5;
       display:flex; gap:.55rem; padding:.72rem .82rem; border-radius:1.9rem;
       background:linear-gradient(180deg,#E3E7EC 0%,#BCC1C9 55%,#D6DAE0 100%);
       box-shadow:0 12px 26px rgba(0,25,70,.38),
                  inset 0 1px 2px rgba(255,255,255,.9),
                  inset 0 -2px 5px rgba(55,65,85,.38); }
+    .key { background-image:url('img/key.png'); background-size:100% 100%; }
     .key { position:relative; font-family:'Commissioner',var(--sans); font-weight:700; font-size:.8rem;
       letter-spacing:.05em; text-transform:uppercase; text-decoration:none; color:#33363C;
       text-align:center; min-width:5.6rem; padding:.78rem 1.5rem .95rem;
@@ -841,6 +842,38 @@
     .hand { position:absolute; z-index:6; font-family:'Another Monday',var(--scrib),cursive;
       font-size:clamp(1.25rem,2.1vw,1.8rem); color:#141414; background:#62D8FA;
       padding:.02em .5em .18em; transform:rotate(-3deg); box-shadow:2px 3px 0 rgba(0,0,0,.28); }
+    /* ═══ #work — editorial rows (art left/right alternating, scroll-tint) ═══ */
+    #work { background:#EFEAF6; transition:background .8s ease; }
+    @media (prefers-reduced-motion:reduce){ #work { transition:none; } }
+    .wk-row { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center;
+      gap:clamp(2rem,6vw,6rem); padding:clamp(4rem,10vh,7rem) clamp(1.6rem,8vw,8rem);
+      max-width:1440px; margin:0 auto; }
+    .wk-row.flip .wk-art { order:2; } .wk-row.flip .wk-txt { order:1; }
+    .wk-art { position:relative; width:100%; max-width:31rem; aspect-ratio:1/1.05; justify-self:center;
+      overflow:hidden; background:#0C0C0E; box-shadow:0 26px 60px rgba(20,20,40,.25);
+      transition:transform .35s cubic-bezier(.2,.8,.25,1); }
+    .wk-art:hover { transform:rotate(-1deg) scale(1.02); }
+    .wk-art img { width:100%; height:100%; object-fit:cover; display:block; }
+    .wk-art-light { background:#FDFDFB; }
+    /* magazine hierarchy: bold-but-modest title · quiet sub · long silence · tiny body */
+    .wk-txt { display:flex; flex-direction:column; align-self:stretch;
+      padding:clamp(2rem,8vh,5rem) 0; max-width:26rem; }
+    .wk-txt h2 { margin:0; font-family:'Commissioner',var(--sans); font-weight:800;
+      letter-spacing:-1px; font-size:clamp(1.5rem,2.2vw,2.1rem); line-height:1.1; color:#212020; }
+    .wk-cat { margin:.45rem 0 0; font-weight:400; font-size:1rem; letter-spacing:-.2px;
+      color:rgba(33,32,32,.55); }
+    .wk-body { margin:auto 0 0; padding-top:5rem; max-width:36ch; font-weight:400;
+      font-size:.84rem; line-height:1.7; letter-spacing:-.1px; color:rgba(33,32,32,.82); }
+    .wk-link { align-self:flex-start; margin-top:1.6rem; font-family:'Commissioner',var(--sans);
+      font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+      text-decoration:none; color:#212020; border-bottom:2px solid #212020; padding-bottom:.15rem; }
+    .wk-link.dis { opacity:.5; pointer-events:none; }
+    @media (max-width:860px){
+      .wk-row { grid-template-columns:1fr; gap:2rem; }
+      .wk-row.flip .wk-art { order:1; } .wk-row.flip .wk-txt { order:2; }
+      .wk-txt { padding:0 0 2rem; } .wk-body { padding-top:2.4rem; }
+    }
+
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
@@ -859,7 +892,7 @@
     <h1 class="hero-script rv">Blue tiger cub</h1>
     <p class="hero-sub rv">I Make Creative Solutions, Bold Strategies, Fun Interactions</p>
     <nav class="keypad" aria-label="Pages">
-      <a class="key on" href="#covers">Work</a>
+      <a class="key on" href="#work">Work</a>
       <a class="key" href="#about">About</a>
       <a class="key" href="#">Fun</a>
       <a class="key" href="mailto:hgusain307@gmail.com">Deal</a>
@@ -879,6 +912,45 @@
       <a class="key abt-more" href="about.html">More About Me →</a>
     </div>
   </section>
+
+  <div id="work">
+  <section class="pg wk-row" data-bg="#DFF6FB" id="work-1">
+    <div class="wk-art rv"><img src="img/art-pegasus.png" alt="Uphold — neon pegasus"></div>
+    <div class="wk-txt">
+      <h2 class="rv">Uphold.</h2>
+      <span class="wk-cat rv">Mentorship platform — Ed Tech, 2025</span>
+      <p class="wk-body rv">New designers paired with working mentors who mark up the real files — not the polished case study — and name one concrete fix before any praise. Because “looks great” teaches nothing.</p>
+      <a class="wk-link rv" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View On Behance ↗</a>
+    </div>
+  </section>
+  <section class="pg wk-row flip" data-bg="#FBE3EA" id="work-2">
+    <div class="wk-art wk-art-light rv"><img src="img/art-claws.png" alt="Revibe — pink leopard claw marks"></div>
+    <div class="wk-txt">
+      <h2 class="rv">Revibe.</h2>
+      <span class="wk-cat rv">Resale marketplace — Fashion / AI, 2025</span>
+      <p class="wk-body rv">AI reads a garment’s real measurements against your closet and tells you the truth when nothing fits. Secondhand isn’t a discount aisle — it’s a different way to shop.</p>
+      <a class="wk-link rv" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View Case Study ↗</a>
+    </div>
+  </section>
+  <section class="pg wk-row" data-bg="#E6E3FC" id="work-3">
+    <div class="wk-art rv"><img src="img/art-horse.png" alt="Insight — chrome horse"></div>
+    <div class="wk-txt">
+      <h2 class="rv">Insight.</h2>
+      <span class="wk-cat rv">Research recruiting — B2B SaaS, 2025</span>
+      <p class="wk-body rv">Real participants for teams that can’t expense a $20k tool. A screener that flags contradicting criteria before you send, and a no-show ledger that quietly downranks the flakes.</p>
+      <a class="wk-link rv" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View Case Study ↗</a>
+    </div>
+  </section>
+  <section class="pg wk-row flip" data-bg="#E3E9FE" id="work-4">
+    <div class="wk-art rv"><img src="img/art-panther.png" alt="Vejeez! — chrome panther"></div>
+    <div class="wk-txt">
+      <h2 class="rv">Vejeez!</h2>
+      <span class="wk-cat rv">Vegan marketplace — Brand + UX, 2024</span>
+      <p class="wk-body rv">Vegan as an appetite, not a verdict. Hidden animal-derived additives surface up front — not buried in tags — and the empty search suggests a swap instead of apologizing.</p>
+      <a class="wk-link dis rv">Case Study Soon</a>
+    </div>
+  </section>
+  </div>
 
 
 <section class="pg ns" id="covers">
@@ -968,6 +1040,13 @@
         });
       }, { threshold: 0.15 });
       document.querySelectorAll('.pg').forEach(pg => io.observe(pg));
+      const wk = document.getElementById('work');
+      if (wk) {
+        const tint = new IntersectionObserver((es) => { es.forEach(en => {
+          if (en.isIntersecting && en.target.dataset.bg) wk.style.background = en.target.dataset.bg;
+        }); }, { threshold: 0.5 });
+        wk.querySelectorAll('[data-bg]').forEach(s => tint.observe(s));
+      }
     })();
   </script>
 </body>

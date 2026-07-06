@@ -93,42 +93,19 @@
       overflow:hidden; box-shadow:0 26px 60px rgba(20,20,40,.28);
       transition:transform .35s cubic-bezier(.2,.8,.25,1); }
     .wk-art:hover { transform:rotate(-1deg) scale(1.02); }
-    .wk-txt h2 { font-weight:800; letter-spacing:-2px; font-size:clamp(2rem,3.6vw,3.2rem); line-height:1.05; }
-    .wk-cat { display:block; margin:.5rem 0 2.6rem; font-weight:600; font-size:1rem;
-      color:rgba(33,32,32,.55); letter-spacing:-.3px; }
-    .wk-body { max-width:38ch; font-weight:600; font-size:.98rem; line-height:1.55; letter-spacing:-.2px;
-      color:rgba(33,32,32,.78); }
-    .wk-link { display:inline-block; margin-top:2.2rem; font-weight:700; font-size:.78rem;
-      letter-spacing:.06em; text-transform:uppercase; text-decoration:none; color:#26282C;
-      padding:.62rem 1.35rem; border-radius:999px;
-      background:linear-gradient(180deg,#FBFCFE 0%,#DDE1E7 42%,#B6BCC5 80%,#EDEFF3 100%);
-      box-shadow:0 3px 6px rgba(20,30,50,.35), inset 0 2px 3px rgba(255,255,255,.95),
-                 inset 0 -3px 5px rgba(50,60,80,.35);
-      text-shadow:0 1px 0 rgba(255,255,255,.7); transition:transform .12s ease; }
-    .wk-link:hover { transform:translateY(1px); }
-    .wk-link.dis { opacity:.55; pointer-events:none; }
+    .wk-art { background:#0C0C0E; }
+    .wk-art img { width:100%; height:100%; object-fit:cover; display:block; }
+    .wk-art-light { background:#FDFDFB; }
+    .wk-txt { display:flex; flex-direction:column; align-self:stretch; padding:clamp(2rem,8vh,5rem) 0; max-width:26rem; }
+    .wk-txt h2 { margin:0; font-weight:800; letter-spacing:-1px; font-size:clamp(1.5rem,2.2vw,2.1rem); line-height:1.1; }
+    .wk-cat { display:block; margin:.45rem 0 0; font-weight:400; font-size:1rem; color:rgba(33,32,32,.55); letter-spacing:-.2px; }
+    .wk-body { margin:auto 0 0; padding-top:5rem; max-width:36ch; font-weight:400; font-size:.84rem; line-height:1.7; letter-spacing:-.1px; color:rgba(33,32,32,.82); }
+    .wk-link { display:inline-block; align-self:flex-start; margin-top:1.6rem; font-weight:700; font-size:.68rem;
+      letter-spacing:.08em; text-transform:uppercase; text-decoration:none; color:#212020;
+      background:none; box-shadow:none; padding:0 0 .15rem; border-radius:0; border-bottom:2px solid #212020; text-shadow:none; }
+    .wk-link:hover { transform:none; opacity:.7; }
+    .wk-link.dis { opacity:.5; pointer-events:none; }
 
-    /* art tiles */
-    .wk-a1 { background:#0C0C0E; display:grid; place-items:end center; }
-    .wk-a1 img { height:88%; filter:drop-shadow(0 0 22px rgba(0,221,255,.55)); }
-    .wk-a1::after { content:""; position:absolute; inset:1rem; border:1.5px solid rgba(0,221,255,.6); pointer-events:none; }
-    .wk-a2 { background:#FDFDFB; }
-    .wk-claw { position:absolute; top:8%; width:16%; height:84%;
-      background:#F898FB radial-gradient(circle 5px at 30% 22%, #17171a 0 4px, transparent 5px),
-                 radial-gradient(circle 4px at 68% 48%, #17171a 0 3px, transparent 4px),
-                 radial-gradient(circle 5px at 40% 74%, #17171a 0 4px, transparent 5px);
-      background-color:#F898FB;
-      clip-path:polygon(38% 0, 62% 2%, 88% 30%, 74% 62%, 55% 100%, 40% 96%, 18% 60%, 12% 28%);
-      transform:rotate(18deg); }
-    .wk-c1 { left:8%; } .wk-c2 { left:30%; top:11%; transform:rotate(21deg); }
-    .wk-c3 { left:52%; top:6%; } .wk-c4 { left:74%; top:13%; transform:rotate(24deg); }
-    .wk-a3 { background:linear-gradient(180deg,#060D3A 0%,#1D45FA 120%); display:grid; place-items:center; }
-    .wk-a3 img { width:64%; aspect-ratio:3/4; object-fit:cover; filter:grayscale(1) contrast(1.15) brightness(1.05);
-      mix-blend-mode:screen; }
-    .wk-a4 { background:#101010; display:grid; place-items:end center; }
-    .wk-a4 img { width:100%; object-fit:contain; }
-    .wk-a4 b { position:absolute; top:9%; left:0; right:0; text-align:center; font-weight:800;
-      letter-spacing:-2px; font-size:clamp(2.6rem,5vw,4rem); color:#FCFF64; }
 
     /* fixed keypad nav */
     .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:960;
@@ -136,6 +113,7 @@
       background:linear-gradient(180deg,#E3E7EC 0%,#BCC1C9 55%,#D6DAE0 100%);
       box-shadow:0 12px 26px rgba(0,25,70,.38), inset 0 1px 2px rgba(255,255,255,.9),
                  inset 0 -2px 5px rgba(55,65,85,.38); }
+    .key { background-image:url('img/key.png'); background-size:100% 100%; }
     .key { position:relative; font-family:var(--comm); font-weight:700; font-size:.8rem;
       letter-spacing:.05em; text-transform:uppercase; text-decoration:none; color:#33363C;
       text-align:center; min-width:5rem; padding:.78rem 1.3rem .95rem; border-radius:2.6rem / 2.1rem;
@@ -167,7 +145,7 @@
   </header>
 
   <section class="wk-row" data-bg="#DFF6FB" id="w1">
-    <div class="wk-art wk-a1 rv"><img src="img/meet-flex.png" alt="Uphold — art tile"></div>
+    <div class="wk-art rv"><img src="img/art-pegasus.png" alt="Uphold — neon pegasus"></div>
     <div class="wk-txt">
       <h2 class="rv">Uphold.</h2>
       <span class="wk-cat rv">Mentorship platform · Ed Tech · 2025</span>
@@ -177,10 +155,7 @@
   </section>
 
   <section class="wk-row flip" data-bg="#FBE3EA" id="w2">
-    <div class="wk-art wk-a2 rv" aria-label="Revibe — tiger claw scratches">
-      <span class="wk-claw wk-c1"></span><span class="wk-claw wk-c2"></span>
-      <span class="wk-claw wk-c3"></span><span class="wk-claw wk-c4"></span>
-    </div>
+    <div class="wk-art wk-art-light rv"><img src="img/art-claws.png" alt="Revibe — pink leopard claw marks"></div>
     <div class="wk-txt">
       <h2 class="rv">Revibe.</h2>
       <span class="wk-cat rv">Resale marketplace · Fashion / AI · 2025</span>
@@ -190,7 +165,7 @@
   </section>
 
   <section class="wk-row" data-bg="#FBE4F9" id="w3">
-    <div class="wk-art wk-a3 rv"><img src="img/cs-07.jpg" alt="Insight — art tile"></div>
+    <div class="wk-art rv"><img src="img/art-horse.png" alt="Insight — chrome horse"></div>
     <div class="wk-txt">
       <h2 class="rv">Insight.</h2>
       <span class="wk-cat rv">Research recruiting · B2B SaaS · 2025</span>
@@ -200,7 +175,7 @@
   </section>
 
   <section class="wk-row flip" data-bg="#E3E9FE" id="w4">
-    <div class="wk-art wk-a4 rv"><b>VEJEEZ!</b><img src="img/meet-ramen.png" alt="Vejeez — art tile"></div>
+    <div class="wk-art rv"><img src="img/art-panther.png" alt="Vejeez! — chrome panther"></div>
     <div class="wk-txt">
       <h2 class="rv">Vejeez!</h2>
       <span class="wk-cat rv">Vegan marketplace · Brand + UX · 2024</span>
