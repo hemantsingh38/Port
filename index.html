@@ -1017,6 +1017,11 @@
 
     /* one font in the rack — Commissioner everywhere in #covers */
     #covers [class^="cr-"], #covers [class*=" cr-"] { font-family:'Commissioner',var(--sans); }
+
+    /* handwritten sky stickers — the Blue-tiger rawness, carried through */
+    .hand { position:absolute; z-index:6; font-family:'Another Monday',var(--scrib),cursive;
+      font-size:clamp(1.25rem,2.1vw,1.8rem); color:#141414; background:#62D8FA;
+      padding:.02em .5em .18em; transform:rotate(-3deg); box-shadow:2px 3px 0 rgba(0,0,0,.28); }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
@@ -1044,7 +1049,7 @@
 
   <!-- ═══ ABOUT — Commissioner red split spread ═══ -->
   <section class="pg abt" id="about">
-    <div class="abt-ph"><img src="img/cs-02.jpg" alt="Hemant Singh — black and white portrait"></div>
+    <div class="abt-ph"><img src="img/cs-02.jpg" alt="Hemant Singh — black and white portrait"><span class="hand rv" style="left:6%; bottom:7%;">that’s me, deciding →</span></div>
     <div class="abt-r">
       <span class="abt-name rv">Hemant Singh</span>
       <p class="abt-body rv">Product Designer From New Delhi.
@@ -1058,6 +1063,7 @@
 
 
 <section class="pg cr-rack" id="covers">
+    <span class="hand rv" style="right:6%; top:8%; transform:rotate(3deg);">fresh off the rack !</span>
 
   <header class="cr-head rv">
     <p class="cr-eyebrow">PART 02 · FROM THE RACK</p>
