@@ -681,6 +681,41 @@
     .mc-feat { position:absolute; left:1.9rem; right:1.9rem; top:4.6rem; bottom:1.9rem; z-index:2; object-fit:cover; background:var(--bg-ink); }
     /* rough/eroded texture on every title (4px dynamic-stroke look) */
     .mc-hero, .sv-big, .cn-hed, .col-word { filter:url(#rough); }
+    /* ═══ HERO (Figma 0-324) — sky blue, handwritten wordmark, retro-Nokia keypad nav ═══ */
+    .hero { background:#62D8FA; }
+    .hero-eyebrow { position:absolute; top:12.5%; left:7.2%; z-index:3; font-family:var(--sans);
+      font-weight:700; text-transform:uppercase; letter-spacing:.02em;
+      font-size:clamp(.95rem,1.5vw,1.45rem); color:#1D1D1B; }
+    .hero-script { position:absolute; top:21%; left:7%; right:5%; margin:0; z-index:3;
+      font-family:var(--scrib),cursive; font-weight:700; color:#0E0E0E;
+      font-size:clamp(4.2rem,14vw,13rem); line-height:.95; letter-spacing:-.01em; }
+    .hero-sub { position:absolute; top:55%; left:7.2%; width:min(62%,16em); margin:0; z-index:3;
+      font-family:var(--sans); font-weight:800; letter-spacing:-.02em;
+      font-size:clamp(1.5rem,3.3vw,3.1rem); line-height:1.12; color:#212020; }
+    /* retro mobile keypad keys (Nokia 6310 style — convex metallic pills) */
+    .keypad { position:absolute; bottom:5%; left:50%; transform:translateX(-50%); z-index:5;
+      display:flex; gap:1.7rem; }
+    .key { font-family:var(--sans); font-weight:700; font-size:.82rem; letter-spacing:.05em;
+      text-transform:uppercase; text-decoration:none; color:#26282C; text-align:center;
+      min-width:5.4rem; padding:.62rem 1.35rem; border-radius:999px;
+      background:linear-gradient(180deg,#FDFEFF 0%,#E8EBEF 34%,#C7CCD3 64%,#F1F3F6 100%);
+      box-shadow:0 6px 12px rgba(0,25,70,.38),
+                 inset 0 2px 2px rgba(255,255,255,.95),
+                 inset 0 -4px 7px rgba(40,50,70,.28),
+                 inset 2px 0 3px rgba(255,255,255,.5),
+                 inset -2px 0 3px rgba(120,130,150,.22);
+      text-shadow:0 1px 0 rgba(255,255,255,.65);
+      transition:transform .12s ease, box-shadow .12s ease; }
+    .key:hover { transform:translateY(1px); }
+    .key:active, .key.on {
+      background:linear-gradient(180deg,#D4D8DD 0%,#C2C7CE 40%,#CDD2D8 100%);
+      box-shadow:0 2px 5px rgba(0,25,70,.3),
+                 inset 0 3px 6px rgba(40,50,70,.35),
+                 inset 0 -1px 2px rgba(255,255,255,.55); }
+    @media (max-width:720px){
+      .keypad { gap:.8rem; flex-wrap:wrap; justify-content:center; left:50%; width:92%; }
+      .hero-sub { width:86%; }
+    }
   </style>
   <link rel="stylesheet" href="css/pop-magazine.css">
 </head>
@@ -693,251 +728,17 @@
     <img src="data:image/png;base64,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" width="46" height="47" alt="">
   </div>
 
-  <nav class="tabs" aria-label="Pages">
-    <a class="tab tab-home on" href="index.html">Home</a>
-    <a class="tab tab-work" href="work.html">Work</a>
-    <a class="tab tab-about" href="about.html">About</a>
-  </nav>
-
-  <!-- ═══ COVER ═══ -->
-  <section class="pg" id="cv">
-    <span class="tcap">i / vii — cover</span>
-    <div class="book rv"><div class="gut"></div>
-      <div class="mc-l">
-        <h1 class="mc-hero">Blue tiger</h1>
-        <p class="mc-tagline">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
-        <p class="mc-aka">AKA<br><b>Hemant Singh</b></p>
-        <span class="mc-yl">2025</span>
-      </div>
-      <div class="mc-r">
-        <p class="mc-rtag">I Aspire To Create Solutions That Are Unique, Bold, Playful</p>
-        <span class="mc-yr">2025</span>
-        <img class="mc-feat" src="img/hero-tiger.jpg" alt="Blue Tiger — the snow cub">
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══ WORK TEASER · PHOTO BOOK ═══ -->
-  <section class="pg" id="wk">
-    <span class="tcap">ii / vii — selected work</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <!-- left page: two full-width plates -->
-      <div class="wkp">
-        <span class="run" style="left:2.6rem;">Blue Tiger — Selected Work</span>
-        <p class="wk-intro">Proof, not promises. Products I've shaped, calls I'd make again, and a few experiments I couldn't leave alone.</p>
-
-        <a href="work.html#w1" class="wk-plate">
-          <div class="wk-plate-img">
-            <img src="https://images.pexels.com/photos/18004648/pexels-photo-18004648.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Uphold — film camera by a window">
-          </div>
-          <div class="wk-plate-info">
-            <div class="wk-plate-left">
-              <span class="wk-plate-title">Uphold</span>
-              <span class="wk-plate-desc">Mentorship matching</span>
-            </div>
-            <div class="wk-plate-meta">Nº 01 · Ed Tech · 2025<b>View case study ↗</b></div>
-          </div>
-        </a>
-
-        <a href="work.html#w2" class="wk-plate">
-          <div class="wk-plate-img">
-            <img src="https://images.pexels.com/photos/10873805/pexels-photo-10873805.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Revibe — footprints in winter fog">
-          </div>
-          <div class="wk-plate-info">
-            <div class="wk-plate-left">
-              <span class="wk-plate-title">Revibe</span>
-              <span class="wk-plate-desc">Resale, AI-assisted</span>
-            </div>
-            <div class="wk-plate-meta">Nº 02 · Thrift &amp; AI · 2025<b>View case study ↗</b></div>
-          </div>
-        </a>
-
-        <span class="pno">02</span>
-      </div>
-
-      <!-- right page: two full-width plates -->
-      <div class="wkp">
-        <span class="run" style="right:2.6rem;"><a href="work.html">All work</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="about.html">About</a></span>
-
-        <a href="work.html#w3" class="wk-plate">
-          <div class="wk-plate-img">
-            <img src="https://images.pexels.com/photos/14731564/pexels-photo-14731564.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Insight — foggy town with lights">
-          </div>
-          <div class="wk-plate-info">
-            <div class="wk-plate-left">
-              <span class="wk-plate-title">Insight</span>
-              <span class="wk-plate-desc">B2B prospecting</span>
-            </div>
-            <div class="wk-plate-meta">Nº 03 · B2B SaaS · 2025<b>View case study ↗</b></div>
-          </div>
-        </a>
-
-        <a href="work.html#w4" class="wk-plate">
-          <div class="wk-plate-img">
-            <img src="https://images.pexels.com/photos/27562879/pexels-photo-27562879.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Vejeez — snowy path between trees">
-          </div>
-          <div class="wk-plate-info">
-            <div class="wk-plate-left">
-              <span class="wk-plate-title">Vejeez</span>
-              <span class="wk-plate-desc">Vegan marketplace</span>
-            </div>
-            <div class="wk-plate-meta">Nº 04 · Marketplace · 2024<b>View case study ↗</b></div>
-          </div>
-        </a>
-
-        <span class="pno">03</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SERVICES ═══ -->
-  <section class="pg" id="sv">
-    <span class="tcap">iii / vii — services</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <!-- left page (cream): intro + the three services -->
-      <div class="sv-lp">
-        <div class="sv-eyebrow rv"><span>Blue Tiger</span><span>Services</span></div>
-        <div class="sv-body rv" style="transition-delay:.1s">
-          <p class="sv-lead">Product and interaction design at the center: how a thing works and feels. Brand and strategy around it: what it is and why it wins. <em>I go deep, then zoom out.</em></p>
-          <dl class="sv-list">
-            <dt>Product &amp; Interaction Design</dt>
-            <dd>How it works, how it feels, how it holds together.</dd>
-            <dt>Branding</dt>
-            <dd>What it is, how it sounds, how it looks.</dd>
-            <dt>Strategy</dt>
-            <dd>Why it wins, and where it goes next.</dd>
-          </dl>
-        </div>
-        <div class="sv-folio rv" style="transition-delay:.18s">04</div>
-      </div>
-      <!-- right page: blue color-block with the big line -->
-      <div class="sv-rp on-dark">
-        <div class="sv-rp-eyebrow rv"><span>Blue Tiger</span><span>Soft paws. Sharp claws.</span></div>
-        <div class="sv-rp-body rv" style="transition-delay:.12s">
-          <p class="sv-big">Soft paws.<br>Sharp claws.</p>
-          <p class="sv-tag">Blue Tiger — &ldquo;a cub with claws.&rdquo;</p>
-        </div>
-        <div class="sv-folio-r rv" style="transition-delay:.2s">05</div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══ FILLER 2 · bloom / photo ═══ -->
-  <section class="pg" id="f2">
-    <span class="tcap">v / vii — influences</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <div class="fq-page" style="background:var(--pink);">
-        <div class="fq fq-ink" style="left:20%; top:40%;">
-          Good design is as little design as possible. Less, but better —
-          for it concentrates on the essential aspects, and the products
-          are not burdened with non-essentials.
-          <small>Dieter Rams / Ten Principles</small>
-        </div>
-        <div class="fq thru fq-ink" style="left:28%; bottom:14%; width:44%;">
-          less, but better — but warmer.
-        </div>
-        <span class="pno" style="color:rgba(27,25,22,.32); left:auto; right:1.6rem; transform:none;">08</span>
-      </div>
-      <div class="fq-page" style="background:var(--inkblue);">
-        <img class="fp-img" src="img/hydrangeas.jpg" alt="Blue hydrangeas on a hillside stairway after rain">
-        <div class="fp-cap"><b>■ Influences</b> — Norman, Rams, cinema, print.</div>
-        <span class="pno" style="color:rgba(254,254,251,.85); z-index:3; top:1.1rem; bottom:auto; left:auto; right:1.6rem; transform:none;">09</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ ABOUT ═══ -->
-  <section class="pg" id="ab">
-    <span class="tcap">vi / vii — about</span>
-    <div class="book rv">
-      <div class="gut"></div>
-
-      <!-- left: the voice page — lead-led, no heading -->
-      <div class="ab-lp">
-        <div class="ab-eyebrow rv"><span>Blue Tiger</span><span>About</span></div>
-        <div class="ab-voice rv" style="transition-delay:.1s">
-          <p class="ab-lead">It started as a tattoo — <em>a blue tiger cub.</em></p>
-          <p class="ab-bio">The tiger because design takes nerve: opinions, hard calls, work that holds up. The cub because the best work stays curious, a little reckless, never bored. I shape products — how they work, how they feel, how they fit together — and the brand and strategy around them: <em>decisive where it counts, free everywhere else.</em></p>
-          <a class="scrib" href="about.html" style="display:inline-block; margin-top:1.3rem; font-size:1.4rem; transform:rotate(-2deg);">read the whole story →</a>
-        </div>
-        <div class="ab-folio rv" style="transition-delay:.18s">10</div>
-      </div>
-
-      <!-- right (Direction 1 · Portrait): full-bleed photo + overlaid metadata -->
-      <div class="ab-rp">
-        <div class="ab-photo-full rv">
-          <img src="img/bar-look.jpg"
-               alt="Hemant in a dim wood-panelled bar, looking at the camera">
-        </div>
-        <div class="ab-eyebrow-r rv"><span>The Designer</span><span>New Delhi</span></div>
-        <div class="ab-rp-foot rv" style="transition-delay:.16s">
-          <dl class="ab-meta">
-            <dt>Role</dt><dd>Product &amp; Interaction Designer</dd>
-            <dt>Practice</dt><dd>3.5 years</dd>
-            <dt>Sectors</dt><dd>Ed Tech, Fintech, Commerce, B2B SaaS</dd>
-            <dt>Status</dt><dd>Open to new work</dd>
-          </dl>
-          <div class="ab-folio-r">11</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══ CONNECT spread ═══ -->
-  <section class="pg" id="cn">
-    <span class="tcap">vii / vii — contact</span>
-    <div class="book rv">
-      <div class="gut"></div>
-      <!-- left: contact text on cream page -->
-      <div class="cn-lp">
-        <div class="cn-lp-top">
-          <span>Blue Tiger</span>
-          <span>Issue Nº 01</span>
-        </div>
-        <div class="cn-lp-body">
-          <span class="cn-label">Contact</span>
-          <h2 class="cn-hed">Let's<br><em>talk.</em></h2>
-          <a href="mailto:hgusain307@gmail.com" class="cn-mail">
-            hgusain307@gmail.com
-          </a>
-        </div>
-        <div class="cn-lp-foot">
-          <div class="cn-lp-foot-meta">
-            <span>Blue Tiger — 2025</span>
-            <span>New Delhi, India</span>
-          </div>
-          <span class="pno" style="position:static;transform:none;">12</span>
-        </div>
-      </div>
-      <!-- right: blue accent page with links -->
-      <div class="cn-rp on-dark">
-        <div class="cn-rp-head">
-          <p class="cn-rp-hed">Find<br>me<br>here.</p>
-          <p class="cn-rp-invite">Got something that needs both claws and curiosity? Tell me what you're making and where it falls apart — I'll say, straight, how I'd fix it and whether I'm the right person to.</p>
-        </div>
-        <div class="cn-rp-links">
-          <a href="https://findingyouhemant.framer.website" target="_blank" rel="noopener" class="cn-link">
-            <span class="cn-link-label">Portfolio</span>
-            <span class="cn-link-name">Framer ↗</span>
-          </a>
-          <a href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)" target="_blank" rel="noopener" class="cn-link">
-            <span class="cn-link-label">Case studies</span>
-            <span class="cn-link-name">Behance ↗</span>
-          </a>
-          <a href="mailto:hgusain307@gmail.com" class="cn-link">
-            <span class="cn-link-label">Email</span>
-            <span class="cn-link-name">Write me ↗</span>
-          </a>
-          <span class="folio" style="align-self:flex-end;margin-top:1.4rem;color:rgba(254,254,251,.4);">13</span>
-        </div>
-      </div>
-    </div>
+  <!-- ═══ HERO — the only section for now (Figma 0-324) ═══ -->
+  <section class="pg hero" id="hero">
+    <span class="hero-eyebrow rv">Hemant Singh Portfolio</span>
+    <h1 class="hero-script rv">Blue tiger cub</h1>
+    <p class="hero-sub rv">I Make Creative Solutions, Bold Strategies, Fun Interactions</p>
+    <nav class="keypad" aria-label="Pages">
+      <a class="key on" href="work.html">Work</a>
+      <a class="key" href="about.html">About</a>
+      <a class="key" href="#">Fun</a>
+      <a class="key" href="mailto:hgusain307@gmail.com">Deal</a>
+    </nav>
   </section>
 
   <script>
