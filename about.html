@@ -77,6 +77,13 @@
     .rv.on { opacity:1; transform:none; }
     @media (prefers-reduced-motion:reduce){ .rv { opacity:1; transform:none; transition:none; } }
 
+    /* ── masthead bar (site-wide, per Figma STAGECREW header) ── */
+    .hb { display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      font-family:'Commissioner','Helvetica Neue',Arial,sans-serif; font-weight:600; font-size:.66rem;
+      letter-spacing:.18em; text-transform:uppercase; color:#212020; background:#F7FDFF;
+      padding:1.15rem clamp(1.4rem,4vw,3rem); border-bottom:1px solid rgba(33,32,32,.16);
+      position:relative; z-index:5; }
+    @media (max-width:720px){ .hb-mid { display:none; } }
     /* ═══ ABOUT SPREAD — photo left / red right (Commissioner 38 / -2px) ═══ */
     .ab { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
     .ab-ph { position:relative; overflow:hidden; background:#e9e7e4; }
@@ -429,6 +436,12 @@
   </div>
 
   <main>
+  <header class="hb rv">
+    <span>Hemant Singh</span>
+    <span class="hb-mid">Off The Clock — Vol. 01</span>
+    <span>New Delhi, 2026</span>
+  </header>
+
   <section class="ab" id="intro">
     <div class="ab-ph">
       <img src="img/cs-02.jpg" alt="Hemant Singh — black and white portrait">
