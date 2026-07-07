@@ -696,27 +696,15 @@
     .hero-sub { position:absolute; top:55%; left:7.2%; width:min(62%,16em); margin:0; z-index:3;
       font-family:var(--sans); font-weight:800; letter-spacing:-.02em;
       font-size:clamp(1.5rem,3.3vw,3.1rem); line-height:1.12; color:#212020; }
-    /* retro mobile keypad — silver housing tray + convex Nokia keys */
-    .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:5;
-      display:flex; gap:.55rem; padding:.72rem .82rem; border-radius:1.9rem;
-      background:linear-gradient(180deg,#E3E7EC 0%,#BCC1C9 55%,#D6DAE0 100%);
-      box-shadow:0 12px 26px rgba(0,25,70,.38),
-                 inset 0 1px 2px rgba(255,255,255,.9),
-                 inset 0 -2px 5px rgba(55,65,85,.38); }
-    .key { position:relative; font-family:'Commissioner',var(--sans); font-weight:700; font-size:.8rem;
-      letter-spacing:.05em; text-transform:uppercase; text-decoration:none; color:#33363C;
-      text-align:center; min-width:5.6rem; padding:.78rem 1.5rem .95rem;
-      border-radius:2.6rem / 2.1rem;
-      background:linear-gradient(180deg,#FBFCFE 0%,#DDE1E7 42%,#B6BCC5 80%,#EDEFF3 100%);
-      box-shadow:0 3px 6px rgba(20,30,50,.38),
-                 inset 0 2px 3px rgba(255,255,255,.95),
-                 inset 0 -3px 5px rgba(50,60,80,.35);
-      text-shadow:0 1px 0 rgba(255,255,255,.7);
-      transition:transform .1s ease, box-shadow .1s ease, background .1s ease; }
-    .key::after { content:""; position:absolute; left:26%; right:26%; bottom:.42rem; height:.34rem;
-      border-bottom:2px solid rgba(70,78,92,.35); border-radius:0 0 100% 100%; }
+    /* keypad — real key images on a white tray */
+    .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:960;
+      display:flex; align-items:center; gap:.45rem; padding:.55rem .75rem; border-radius:1.7rem;
+      background:#FFFFFF; box-shadow:0 12px 30px rgba(20,20,40,.28), 0 2px 6px rgba(20,20,40,.15); }
+    .key { display:block; line-height:0; transition:transform .1s ease; }
+    .key img { display:block; height:46px; width:auto; }
     .key:hover { transform:translateY(1px); }
-    .key { background-image:url('img/key.png'); background-size:100% 100%; background-repeat:no-repeat; }
+    .key:active { transform:translateY(2px) scale(.97); }
+    @media (max-width:720px){ .key img { height:38px; } }
     .key:active, .key.on {
       background:linear-gradient(180deg,#C7CBD2 0%,#B4B9C1 45%,#C9CDD4 100%);
       box-shadow:0 1px 3px rgba(20,30,50,.3),
@@ -727,96 +715,6 @@
       .hero-sub { width:86%; }
     }
 
-    /* ═══ section #covers — BTC NEWSSTAND (sky wall · photo-led covers · shelf) ═══ */
-    .ns { position:relative; min-height:100vh; background:#17171A; overflow:hidden;
-      padding:clamp(4rem,9vh,7rem) clamp(1.2rem,5vw,5rem) 0; }
-    .ns-hed { margin:0 0 1.2rem; font-family:'Commissioner',var(--sans); font-weight:800;
-      font-size:clamp(2.6rem,6vw,4.8rem); line-height:1.02; letter-spacing:-2px;
-      color:#F3F7F9; max-width:14ch; }
-    .ns-hed b { color:#DE2537; font-weight:800; }
-    .ns-meta { margin:0 0 clamp(2.5rem,6vh,4.5rem); font-family:'Commissioner',var(--sans);
-      font-weight:600; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(243,247,249,.62); }
-    .ns-stamp { position:absolute; top:clamp(1.4rem,4vh,3rem); right:clamp(1.4rem,4vw,4rem);
-      width:8.6rem; height:8.6rem; border:2px dashed #F3F7F9; border-radius:50%;
-      display:grid; place-items:center; text-align:center; font-family:'Commissioner',var(--sans);
-      font-weight:700; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:#F3F7F9;
-      line-height:1.8; transform:rotate(8deg); }
-    @media (prefers-reduced-motion:no-preference){ .ns-stamp { animation:ns-spin 70s linear infinite; } }
-    @keyframes ns-spin { to { transform:rotate(368deg); } }
-    .ns-wallnote { position:absolute; z-index:6; font-family:'Another Monday',var(--scrib),cursive;
-      font-size:clamp(1.25rem,2.1vw,1.8rem); color:#141414; background:#FCFF64;
-      padding:.02em .5em .18em; transform:rotate(3deg); box-shadow:2px 3px 0 rgba(0,0,0,.28);
-      right:9%; top:26%; }
-    /* the rack */
-    .ns-rack { position:relative; display:flex; flex-wrap:wrap; justify-content:center;
-      align-items:flex-end; gap:clamp(1.2rem,3vw,2.6rem); perspective:1400px; padding-bottom:0; }
-    .ns-mag { position:relative; width:clamp(14.5rem,20vw,18.5rem); aspect-ratio:3/4.15;
-      overflow:hidden; border-radius:2px; text-decoration:none; display:block;
-      transform:rotate(var(--tilt,0deg));
-      box-shadow:0 18px 30px rgba(10,20,40,.35), 0 4px 8px rgba(10,20,40,.25);
-      transition:transform .3s cubic-bezier(.2,.8,.25,1), box-shadow .3s ease; }
-    .ns-mag:hover { transform:translateY(-16px) rotate(0deg) rotateY(-8deg) scale(1.045); z-index:5;
-      box-shadow:0 34px 54px rgba(10,20,40,.45), 0 8px 14px rgba(10,20,40,.3); }
-    @media (prefers-reduced-motion:reduce){ .ns-mag, .ns-stamp { transition:none; animation:none; } }
-    .ns-mag::after { content:""; position:absolute; right:0; top:1.5%; bottom:1.5%; width:7px;
-      background:repeating-linear-gradient(to bottom,#ffffff 0 2px,#d8d8d2 2px 4px); opacity:.9; }
-    .ns-mag::before { content:""; position:absolute; left:0; top:0; bottom:0; width:12px; z-index:8;
-      background:linear-gradient(90deg,rgba(0,0,0,.28),transparent); }
-    .ns-m1 { background:#00DDFF; --tilt:-1.3deg; }
-    .ns-m2 { background:#DE2537; --tilt:.9deg; }
-    .ns-m3 { background:#F898FB; --tilt:-.6deg; }
-    .ns-m4 { background:#1D45FA; --tilt:1.4deg; }
-    /* cover anatomy */
-    .ns-issue { position:absolute; top:.9rem; left:1.1rem; right:1.1rem; z-index:3; display:flex;
-      justify-content:space-between; font-family:'Commissioner',var(--sans); font-weight:700;
-      font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
-      border-bottom:1.5px solid currentColor; padding-bottom:.45rem; }
-    .ns-mast { position:absolute; top:2.6rem; left:1rem; right:1rem; z-index:1; margin:0;
-      font-family:'Commissioner',var(--sans); font-weight:800; letter-spacing:-2px;
-      font-size:clamp(2.5rem,3.6vw,3.3rem); line-height:1; }
-    .ns-lines { position:absolute; top:6.4rem; left:1.1rem; z-index:3; max-width:72%; margin:0;
-      font-family:'Commissioner',var(--sans); font-weight:700; font-size:.86rem; line-height:1.35;
-      letter-spacing:-.2px; }
-    .ns-cut { position:absolute; z-index:2; bottom:-2%; right:-5%; height:66%; pointer-events:none;
-      filter:drop-shadow(-6px 8px 12px rgba(0,0,0,.3)); }
-    .ns-cut-wide { height:48%; right:0; left:0; width:100%; object-fit:contain; object-position:bottom center; }
-    .ns-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-      filter:grayscale(1) contrast(1.05); z-index:0; }
-    .ns-tint { position:absolute; inset:0; background:#F898FB; mix-blend-mode:multiply; opacity:.8; z-index:0; }
-    .ns-price { position:absolute; left:1.1rem; bottom:1rem; z-index:3; border:1.5px dashed currentColor;
-      padding:.4em .6em; font-family:'Commissioner',var(--sans); font-weight:700; font-size:.58rem;
-      letter-spacing:.14em; text-transform:uppercase; line-height:1.6; }
-    .ns-bar { position:absolute; right:1.1rem; bottom:1rem; z-index:3; background:#fff; padding:.3rem .4rem .12rem; }
-    .ns-bar i { display:block; width:4.6rem; height:1.5rem;
-      background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 4px),
-                 repeating-linear-gradient(90deg,#111 0 1px,transparent 1px 7px); }
-    .ns-bar span { display:block; font-family:'Commissioner',var(--sans); font-weight:600;
-      font-size:.5rem; letter-spacing:.22em; color:#111; text-align:center; padding-top:.12rem; }
-    .ns-burst { position:absolute; top:5.2rem; right:.9rem; z-index:4; width:5.4rem; height:5.4rem;
-      background:#FCFF64; color:#121212; display:grid; place-items:center; transform:rotate(12deg);
-      font-family:'Commissioner',var(--sans); font-weight:800; font-size:.85rem; letter-spacing:.02em;
-      clip-path:polygon(50% 0%,60% 12%,75% 5%,78% 21%,94% 20%,88% 35%,100% 44%,88% 55%,95% 70%,79% 71%,76% 87%,61% 79%,50% 92%,39% 79%,24% 87%,21% 71%,5% 70%,12% 55%,0% 44%,12% 35%,6% 20%,22% 21%,25% 5%,40% 12%); }
-    .ns-sold { position:absolute; top:44%; left:-8%; right:-8%; z-index:4; text-align:center;
-      transform:rotate(-11deg); border-top:2.5px solid #F3F7F9; border-bottom:2.5px solid #F3F7F9;
-      font-family:'Commissioner',var(--sans); font-weight:800; font-size:1rem; letter-spacing:.3em;
-      text-transform:uppercase; color:#F3F7F9; padding:.35rem 0; opacity:.92; }
-    .ns-pick { position:absolute; left:.8rem; bottom:4.2rem; z-index:4;
-      font-family:'Another Monday',var(--scrib),cursive; font-size:1.35rem; color:#141414;
-      background:#62D8FA; padding:.02em .5em .18em; transform:rotate(-4deg);
-      box-shadow:2px 3px 0 rgba(0,0,0,.28); }
-    /* the shelf they stand on */
-    .ns-shelf { position:relative; margin:0 calc(-1 * clamp(1.2rem,5vw,5rem)); height:1rem;
-      background:linear-gradient(180deg,#3a3a41,#232327); border-top:1px solid rgba(243,247,249,.22);
-      box-shadow:0 12px 26px rgba(0,0,0,.55); }
-    .ns-shelf::after { content:""; position:absolute; left:0; right:0; top:100%; height:2.2rem;
-      background:linear-gradient(180deg,rgba(20,20,23,.28),transparent); }
-    .ns-below { height:clamp(2.5rem,7vh,5rem); }
-    @media (max-width:900px){
-      .ns-hed { font-size:clamp(2.6rem,10vw,3.4rem); }
-      .ns-stamp { display:none; }
-      .ns-wallnote { position:static; display:inline-block; margin-bottom:1.6rem; }
-      .ns-mag { width:min(74vw,17rem); }
-    }
     /* ═══ section #about — Commissioner red split spread ═══ */
     .abt { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
     .abt-ph { position:relative; overflow:hidden; background:#e9e7e4; }
@@ -973,11 +871,11 @@
     <p class="hero-spine">Printed in the browser · New Delhi</p>
     <span class="hero-cue" aria-hidden="true">Scroll ↓</span>
     <nav class="keypad" aria-label="Pages">
-      <a class="key on" href="#work">Work</a>
-      <a class="key" href="#about">About</a>
-      <a class="key" href="#">Fun</a>
-      <a class="key" href="mailto:hgusain307@gmail.com">Deal</a>
-    </nav>
+    <a class="key" href="index.html"><img src="img/key-home.png" alt="Home"></a>
+    <a class="key" href="#work"><img src="img/key-work.png" alt="Work"></a>
+    <a class="key" href="about.html"><img src="img/key-fun.png" alt="Fun"></a>
+    <a class="key" href="mailto:hgusain307@gmail.com"><img src="img/key-connect.png" alt="Connect"></a>
+  </nav>
   </section>
 
   <!-- ═══ ABOUT — Commissioner red split spread ═══ -->
@@ -996,10 +894,10 @@
 
   <div id="work" class="wks">
     <div class="wks-imgs">
-      <figure class="wks-im" data-i="0" data-bg="#DFF6FB"><img src="img/art-pegasus.png" alt="Uphold — neon pegasus" loading="lazy"><figcaption class="wks-cap"><h2>Uphold.</h2><span class="wks-cat">Mentorship platform — Ed Tech, 2025</span><p class="wks-body">New designers paired with working mentors who mark up the real files — not the polished case study — and name one concrete fix before any praise. Because “looks great” teaches nothing.</p><a class="wks-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View On Behance ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="1" data-bg="#FBE3EA"><img src="img/art-claws.png" alt="Revibe — pink leopard claw marks" loading="lazy"><figcaption class="wks-cap"><h2>Revibe.</h2><span class="wks-cat">Resale marketplace — Fashion / AI, 2025</span><p class="wks-body">AI reads a garment’s real measurements against your closet and tells you the truth when nothing fits. Secondhand isn’t a discount aisle — it’s a different way to shop.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View Case Study ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="2" data-bg="#E6E3FC"><img src="img/art-horse.png" alt="Insight — chrome horse" loading="lazy"><figcaption class="wks-cap"><h2>Insight.</h2><span class="wks-cat">Research recruiting — B2B SaaS, 2025</span><p class="wks-body">Real participants for teams that can’t expense a $20k tool. A screener that flags contradicting criteria before you send, and a no-show ledger that quietly downranks the flakes.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View Case Study ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="3" data-bg="#E3E9FE"><img src="img/art-panther.png" alt="Vejeez! — chrome panther" loading="lazy"><figcaption class="wks-cap"><h2>Vejeez!</h2><span class="wks-cat">Vegan marketplace — Brand + UX, 2024</span><p class="wks-body">Vegan as an appetite, not a verdict. Hidden animal-derived additives surface up front — not buried in tags — and the empty search suggests a swap instead of apologizing.</p><a class="wks-link dis">Case Study Soon</a></figcaption></figure>
+      <figure class="wks-im" data-i="0" data-bg="#DFF0FE"><img src="img/art-rabbit.jpg" alt="Uphold — glowing rabbit" loading="lazy"><figcaption class="wks-cap"><h2>Uphold.</h2><span class="wks-cat">Mentorship platform — Ed Tech, 2025</span><p class="wks-body">New designers paired with working mentors who mark up the real files — not the polished case study — and name one concrete fix before any praise. Because “looks great” teaches nothing.</p><a class="wks-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View On Behance ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="1" data-bg="#FBE3F2"><img src="img/art-panther.jpg" alt="Revibe — panther on pink" loading="lazy"><figcaption class="wks-cap"><h2>Revibe.</h2><span class="wks-cat">Resale marketplace — Fashion / AI, 2025</span><p class="wks-body">AI reads a garment’s real measurements against your closet and tells you the truth when nothing fits. Secondhand isn’t a discount aisle — it’s a different way to shop.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View Case Study ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="2" data-bg="#E6E3FC"><img src="img/art-flies.jpg" alt="Insight — neon butterflies" loading="lazy"><figcaption class="wks-cap"><h2>Insight.</h2><span class="wks-cat">Research recruiting — B2B SaaS, 2025</span><p class="wks-body">Real participants for teams that can’t expense a $20k tool. A screener that flags contradicting criteria before you send, and a no-show ledger that quietly downranks the flakes.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View Case Study ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="3" data-bg="#FBE3EA"><img src="img/art-deer.jpg" alt="Vejeez! — pink deer" loading="lazy"><figcaption class="wks-cap"><h2>Vejeez!</h2><span class="wks-cat">Vegan marketplace — Brand + UX, 2024</span><p class="wks-body">Vegan as an appetite, not a verdict. Hidden animal-derived additives surface up front — not buried in tags — and the empty search suggests a swap instead of apologizing.</p><a class="wks-link dis">Case Study Soon</a></figcaption></figure>
     </div>
     <div class="wks-side">
       <div class="wks-panel">
@@ -1027,52 +925,6 @@
     </div>
   </div>
 
-  <section class="pg ns" id="covers">
-  <div class="ns-stamp" aria-hidden="true">BTC<br>Newsstand<br>· Take One ·</div>
-  <h2 class="ns-hed rv">judge these by their <b>covers.</b></h2>
-  <p class="ns-meta rv">04 of 06 titles on the rack · circulation: 1 (you) · tap a cover to read the full issue →</p>
-  <span class="ns-wallnote rv">fresh off the rack !</span>
-  <div class="ns-rack">
-    <a class="ns-mag ns-m1 rv" href="work.html" aria-label="Uphold — read the case study">
-      <span class="ns-issue" style="color:#0f2c33;"><span>Issue Nº 01</span><span>— 2025</span></span>
-      <h3 class="ns-mast" style="color:#121212;">Uphold</h3>
-      <p class="ns-lines" style="color:#0f2c33;">The Mentorship Issue —<br>real files, real feedback,<br>zero “looks great”.</p>
-      <img class="ns-cut" src="img/meet-flex.png" alt="">
-      <span class="ns-price" style="color:#0f2c33;">₹0 · Priceless<br>Display Until Forever</span>
-      <span class="ns-bar"><i></i><span>8 902025 000114</span></span>
-    </a>
-    <a class="ns-mag ns-m2 rv" href="work.html" aria-label="Revibe — read the case study">
-      <span class="ns-issue" style="color:#F3F7F9;"><span>Issue Nº 02</span><span>— 2025</span></span>
-      <h3 class="ns-mast" style="color:#F3F7F9;">Revibe</h3>
-      <p class="ns-lines" style="color:#FACEF3;">Secondhand, first choice.<br>The thrift-that-fits issue.</p>
-      <span class="ns-burst">NEW!</span>
-      <img class="ns-cut" src="img/meet-martini.png" alt="">
-      <span class="ns-price" style="color:#F3F7F9;">₹0 · Priceless<br>Display Until Forever</span>
-      <span class="ns-bar"><i></i><span>8 902025 000229</span></span>
-    </a>
-    <a class="ns-mag ns-m3 rv" href="work.html" aria-label="Insight — read the case study">
-      <img class="ns-photo" src="img/cs-07.jpg" alt="">
-      <span class="ns-tint" aria-hidden="true"></span>
-      <span class="ns-issue" style="color:#3d0a2e;"><span>Issue Nº 03</span><span>— 2025</span></span>
-      <h3 class="ns-mast" style="color:#B50489;">Insight</h3>
-      <p class="ns-lines" style="color:#F3F7F9;">Eight users by Thursday.<br>The research issue.</p>
-      <span class="ns-pick">editor’s pick ✓</span>
-      <span class="ns-price" style="color:#F3F7F9;">₹0 · Priceless<br>Display Until Forever</span>
-      <span class="ns-bar"><i></i><span>8 902025 000336</span></span>
-    </a>
-    <a class="ns-mag ns-m4 rv" href="work.html" aria-label="Vejeez! — read the case study">
-      <span class="ns-issue" style="color:#EAFACE;"><span>Issue Nº 04</span><span>— 2024</span></span>
-      <h3 class="ns-mast" style="color:#FCFF64;">Vejeez!</h3>
-      <p class="ns-lines" style="color:#EAFACE;">Vegan, but make it fun.<br>The appetite issue.</p>
-      <span class="ns-sold">Almost Sold Out</span>
-      <img class="ns-cut ns-cut-wide" src="img/meet-ramen.png" alt="">
-      <span class="ns-price" style="color:#EAFACE;">₹0 · Priceless<br>Display Until Forever</span>
-      <span class="ns-bar"><i></i><span>8 902025 000442</span></span>
-    </a>
-  </div>
-  <div class="ns-shelf" aria-hidden="true"></div>
-  <div class="ns-below" aria-hidden="true"></div>
-</section>
 
 <!-- ============ SCRAPBOOK / ABOUT-TEASER ============ -->
 

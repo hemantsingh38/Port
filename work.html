@@ -107,23 +107,15 @@
     .wk-link.dis { opacity:.5; pointer-events:none; }
 
 
-    /* fixed keypad nav */
+    /* keypad — real key images on a white tray */
     .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:960;
-      display:flex; gap:.55rem; padding:.72rem .82rem; border-radius:1.9rem;
-      background:linear-gradient(180deg,#E3E7EC 0%,#BCC1C9 55%,#D6DAE0 100%);
-      box-shadow:0 12px 26px rgba(0,25,70,.38), inset 0 1px 2px rgba(255,255,255,.9),
-                 inset 0 -2px 5px rgba(55,65,85,.38); }
-    .key { position:relative; font-family:var(--comm); font-weight:700; font-size:.8rem;
-      letter-spacing:.05em; text-transform:uppercase; text-decoration:none; color:#33363C;
-      text-align:center; min-width:5rem; padding:.78rem 1.3rem .95rem; border-radius:2.6rem / 2.1rem;
-      background:linear-gradient(180deg,#FBFCFE 0%,#DDE1E7 42%,#B6BCC5 80%,#EDEFF3 100%);
-      box-shadow:0 3px 6px rgba(20,30,50,.38), inset 0 2px 3px rgba(255,255,255,.95),
-                 inset 0 -3px 5px rgba(50,60,80,.35);
-      text-shadow:0 1px 0 rgba(255,255,255,.7); transition:transform .1s ease; }
-    .key::after { content:""; position:absolute; left:26%; right:26%; bottom:.42rem; height:.34rem;
-      border-bottom:2px solid rgba(70,78,92,.35); border-radius:0 0 100% 100%; }
+      display:flex; align-items:center; gap:.45rem; padding:.55rem .75rem; border-radius:1.7rem;
+      background:#FFFFFF; box-shadow:0 12px 30px rgba(20,20,40,.28), 0 2px 6px rgba(20,20,40,.15); }
+    .key { display:block; line-height:0; transition:transform .1s ease; }
+    .key img { display:block; height:46px; width:auto; }
     .key:hover { transform:translateY(1px); }
-    .key { background-image:url('img/key.png'); background-size:100% 100%; background-repeat:no-repeat; }
+    .key:active { transform:translateY(2px) scale(.97); }
+    @media (max-width:720px){ .key img { height:38px; } }
 
     @media (max-width:860px) {
       .wk-row { grid-template-columns:1fr; gap:2.2rem; padding-top:4rem; }
@@ -181,10 +173,10 @@
 
   <div id="work" class="wks">
     <div class="wks-imgs">
-      <figure class="wks-im" data-i="0" data-bg="#DFF6FB"><img src="img/art-pegasus.png" alt="Uphold — neon pegasus" loading="lazy"><figcaption class="wks-cap"><h2>Uphold.</h2><span class="wks-cat">Mentorship platform — Ed Tech, 2025</span><p class="wks-body">New designers paired with working mentors who mark up the real files — not the polished case study — and name one concrete fix before any praise. Because “looks great” teaches nothing.</p><a class="wks-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View On Behance ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="1" data-bg="#FBE3EA"><img src="img/art-claws.png" alt="Revibe — pink leopard claw marks" loading="lazy"><figcaption class="wks-cap"><h2>Revibe.</h2><span class="wks-cat">Resale marketplace — Fashion / AI, 2025</span><p class="wks-body">AI reads a garment’s real measurements against your closet and tells you the truth when nothing fits. Secondhand isn’t a discount aisle — it’s a different way to shop.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View Case Study ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="2" data-bg="#E6E3FC"><img src="img/art-horse.png" alt="Insight — chrome horse" loading="lazy"><figcaption class="wks-cap"><h2>Insight.</h2><span class="wks-cat">Research recruiting — B2B SaaS, 2025</span><p class="wks-body">Real participants for teams that can’t expense a $20k tool. A screener that flags contradicting criteria before you send, and a no-show ledger that quietly downranks the flakes.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View Case Study ↗</a></figcaption></figure>
-      <figure class="wks-im" data-i="3" data-bg="#E3E9FE"><img src="img/art-panther.png" alt="Vejeez! — chrome panther" loading="lazy"><figcaption class="wks-cap"><h2>Vejeez!</h2><span class="wks-cat">Vegan marketplace — Brand + UX, 2024</span><p class="wks-body">Vegan as an appetite, not a verdict. Hidden animal-derived additives surface up front — not buried in tags — and the empty search suggests a swap instead of apologizing.</p><a class="wks-link dis">Case Study Soon</a></figcaption></figure>
+      <figure class="wks-im" data-i="0" data-bg="#DFF0FE"><img src="img/art-rabbit.jpg" alt="Uphold — glowing rabbit" loading="lazy"><figcaption class="wks-cap"><h2>Uphold.</h2><span class="wks-cat">Mentorship platform — Ed Tech, 2025</span><p class="wks-body">New designers paired with working mentors who mark up the real files — not the polished case study — and name one concrete fix before any praise. Because “looks great” teaches nothing.</p><a class="wks-link" target="_blank" rel="noopener" href="https://www.behance.net/gallery/220593565/Uphold-(mentorship-from-industry-experts)">View On Behance ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="1" data-bg="#FBE3F2"><img src="img/art-panther.jpg" alt="Revibe — panther on pink" loading="lazy"><figcaption class="wks-cap"><h2>Revibe.</h2><span class="wks-cat">Resale marketplace — Fashion / AI, 2025</span><p class="wks-body">AI reads a garment’s real measurements against your closet and tells you the truth when nothing fits. Secondhand isn’t a discount aisle — it’s a different way to shop.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/page">View Case Study ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="2" data-bg="#E6E3FC"><img src="img/art-flies.jpg" alt="Insight — neon butterflies" loading="lazy"><figcaption class="wks-cap"><h2>Insight.</h2><span class="wks-cat">Research recruiting — B2B SaaS, 2025</span><p class="wks-body">Real participants for teams that can’t expense a $20k tool. A screener that flags contradicting criteria before you send, and a no-show ledger that quietly downranks the flakes.</p><a class="wks-link" target="_blank" rel="noopener" href="https://findingyouhemant.framer.website/insight">View Case Study ↗</a></figcaption></figure>
+      <figure class="wks-im" data-i="3" data-bg="#FBE3EA"><img src="img/art-deer.jpg" alt="Vejeez! — pink deer" loading="lazy"><figcaption class="wks-cap"><h2>Vejeez!</h2><span class="wks-cat">Vegan marketplace — Brand + UX, 2024</span><p class="wks-body">Vegan as an appetite, not a verdict. Hidden animal-derived additives surface up front — not buried in tags — and the empty search suggests a swap instead of apologizing.</p><a class="wks-link dis">Case Study Soon</a></figcaption></figure>
     </div>
     <div class="wks-side">
       <div class="wks-panel">
@@ -213,9 +205,10 @@
   </div>
 
   <nav class="keypad" aria-label="Pages">
-    <a class="key" href="index.html">Home</a>
-    <a class="key" href="about.html">About</a>
-    <a class="key" href="mailto:hgusain307@gmail.com">Deal</a>
+    <a class="key" href="index.html"><img src="img/key-home.png" alt="Home"></a>
+    <a class="key" href="work.html"><img src="img/key-work.png" alt="Work"></a>
+    <a class="key" href="about.html"><img src="img/key-fun.png" alt="Fun"></a>
+    <a class="key" href="mailto:hgusain307@gmail.com"><img src="img/key-connect.png" alt="Connect"></a>
   </nav>
 
   <script>
