@@ -109,13 +109,12 @@
 
     /* keypad — real key images on a white tray */
     .keypad { position:fixed; bottom:1.1rem; left:50%; transform:translateX(-50%); z-index:960;
-      display:flex; align-items:center; gap:.45rem; padding:.55rem .75rem; border-radius:1.7rem;
-      background:#FFFFFF; box-shadow:0 12px 30px rgba(20,20,40,.28), 0 2px 6px rgba(20,20,40,.15); }
+      display:flex; align-items:center; gap:.5rem; }
     .key { display:block; line-height:0; transition:transform .1s ease; }
-    .key img { display:block; height:46px; width:auto; }
+    .key img { display:block; height:72px; width:auto; filter:drop-shadow(0 8px 16px rgba(20,20,40,.35)); }
     .key:hover { transform:translateY(1px); }
     .key:active { transform:translateY(2px) scale(.97); }
-    @media (max-width:720px){ .key img { height:38px; } }
+    @media (max-width:720px){ .key img { height:56px; } }
 
     @media (max-width:860px) {
       .wk-row { grid-template-columns:1fr; gap:2.2rem; padding-top:4rem; }
