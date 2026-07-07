@@ -122,7 +122,7 @@
       .wk-art { max-width:100%; }
     }
     /* ═══ #work — sticky scrollytelling (images scroll · text swaps) ═══ */
-    .wks { display:grid; grid-template-columns:1fr 1fr; background:#EFEAF6; transition:background .8s ease; }
+    .wks { display:grid; grid-template-columns:1fr 1fr; background:#fff; }
     @media (prefers-reduced-motion:reduce){ .wks { transition:none; } }
     .wks-imgs { min-width:0; }
     .wks-im { margin:0; }
@@ -238,7 +238,6 @@
         if (!en.isIntersecting) return;
         const i = en.target.dataset.i;
         txts.forEach(tx => tx.classList.toggle('on', tx.dataset.i === i));
-        if (en.target.dataset.bg) wks.style.background = en.target.dataset.bg;
       }); }, { threshold: 0.5 });
       wks.querySelectorAll('.wks-im').forEach(im => act.observe(im));
     }

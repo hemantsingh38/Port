@@ -740,7 +740,7 @@
       font-size:clamp(1.25rem,2.1vw,1.8rem); color:#141414; background:#62D8FA;
       padding:.02em .5em .18em; transform:rotate(-3deg); box-shadow:2px 3px 0 rgba(0,0,0,.28); }
     /* ═══ #work — editorial rows (art left/right alternating, scroll-tint) ═══ */
-    #work { background:#EFEAF6; transition:background .8s ease; }
+    #work { background:#fff; }
     @media (prefers-reduced-motion:reduce){ #work { transition:none; } }
     .wk-row { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center;
       gap:clamp(2rem,6vw,6rem); padding:clamp(4rem,10vh,7rem) clamp(1.6rem,8vw,8rem);
@@ -829,6 +829,10 @@
       border-radius:999px; vertical-align:-.03em;
       transition:width .5s cubic-bezier(.2,.8,.25,1); }
     .hm-h:hover .hm-pill { width:2.1em; }
+    .hm-h .hm-star { font-size:.38em; vertical-align:.9em; margin-left:.06em; }
+    .hm-sub { margin:clamp(1.1rem,2.6vh,1.8rem) 0 0; max-width:40ch; font-family:'Commissioner',var(--sans);
+      font-weight:600; font-size:clamp(.95rem,1.3vw,1.15rem); line-height:1.45; letter-spacing:-.01em;
+      color:rgba(33,32,32,.72); }
     .hf-sig { font-family:'Another Monday',var(--scrib),cursive; font-weight:400;
       font-size:1.4rem; letter-spacing:0; text-transform:none; transform:rotate(-2deg); }
     .hf-sig .hm-star { font-size:.55em; vertical-align:.8em; margin-left:.08em; }
@@ -840,7 +844,7 @@
       .hf { margin-bottom:7.4rem; }  /* clear the fixed keypad */
     }
     /* ═══ #work — sticky scrollytelling (images scroll · text swaps) ═══ */
-    .wks { display:grid; grid-template-columns:1fr 1fr; background:#EFEAF6; transition:background .8s ease; }
+    .wks { display:grid; grid-template-columns:1fr 1fr; background:#fff; }
     @media (prefers-reduced-motion:reduce){ .wks { transition:none; } }
     .wks-imgs { min-width:0; }
     .wks-im { margin:0; }
@@ -895,10 +899,11 @@
     </header>
     <div class="hm">
       <p class="hm-kick rv"><b class="hm-star">✱</b>Product &amp; Interaction Designer</p>
-      <h1 class="hm-h rv">Creative solutions,<br>bold strategies &amp;<br><img class="hm-pill" src="img/art-city.jpg" alt=""> <em>fun</em> interactions.</h1>
+      <h1 class="hm-h rv">Blue tiger<br><img class="hm-pill" src="img/art-city.jpg" alt=""> <em>cub</em><b class="hm-star">✱</b></h1>
+      <p class="hm-sub rv">Creative solutions, bold strategies &amp; fun interactions.</p>
     </div>
     <footer class="hf rv">
-      <span class="hf-sig">blue tiger cub<b class="hm-star">✱</b></span>
+      <span class="hf-sig">a cub with claws ✦</span>
       <span class="hf-cue" aria-hidden="true">Scroll ↓</span>
     </footer>
     <nav class="keypad" aria-label="Pages">
@@ -1004,7 +1009,6 @@
           if (!en.isIntersecting) return;
           const i = en.target.dataset.i;
           txts.forEach(tx => tx.classList.toggle('on', tx.dataset.i === i));
-          if (en.target.dataset.bg) wks.style.background = en.target.dataset.bg;
         }); }, { threshold: 0.5 });
         wks.querySelectorAll('.wks-im').forEach(im => act.observe(im));
       }
